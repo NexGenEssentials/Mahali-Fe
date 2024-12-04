@@ -1,0 +1,14 @@
+import Image from "next/image";
+import { ReactNode } from "react";
+import Navbar from "./components/navbar/navbar";
+import Footer from "./components/footer/footer";
+
+export default function LandingPage({ children }: { children: ReactNode }) {
+  return (
+    <div className="">
+      <Navbar />
+      <main className=" mx-auto">{children}</main>
+      <Footer />
+    </div>
+  );
+}

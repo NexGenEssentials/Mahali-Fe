@@ -14,6 +14,9 @@
     "next": "14.2.18",
     "react": "^18",
     "react-dom": "^18",
+    "react-element-popper": "^2.1.7",
+    "react-multi-date-picker": "^4.5.2",
+    "sharp": "^0.33.5",
     "swiper": "^11.1.15"
   },
   "devDependencies": {
