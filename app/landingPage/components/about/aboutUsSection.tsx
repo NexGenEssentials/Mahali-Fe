@@ -1,12 +1,20 @@
+"use client";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import Image from "next/image";
+import { motion } from "motion/react";
 import React from "react";
+import GalerrySection from "./gallery";
 
 const AboutUsSection = () => {
   return (
     <section className="max-w-[1750px] mx-auto p-8 ">
-      <div className="flex max-lgflex-wrap gap-4 w-full">
-        <div className="flex flex-col gap-4 w-full md:w-3/5">
+      <div className="flex max-lg max-lg:flex-wrap gap-4 w-full overflow-hidden">
+        <motion.div
+          initial={{ x: -300, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="flex flex-col gap-4 w-full lg:w-1/2"
+        >
           <div className="text-defaultGreen flex items-center gap-2">
             <h2 className="font-semibold text-lg leading-8 tracking-normal">
               ABOUT US
@@ -33,6 +41,15 @@ const AboutUsSection = () => {
               such as witnessing the Big Five on safari and exploring vibrant
               marketplaces, making them a top choice for African travel.
             </span>
+            <span className="w-full grid place-content-center">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.8 }}
+                className="p-2 my-2 text-center hover:bg-primaryGreen hover:text-primaryWhite mx-auto rounded-md border border-defaultGreen text-xs font-medium"
+              >
+                Read More ...
+              </motion.button>
+            </span>
           </p>
           <div className="flex items-start gap-4 max-lg:flex-wrap">
             <div className="flex gap-2 items-start ">
@@ -45,10 +62,9 @@ const AboutUsSection = () => {
                 />
               </span>
               <span>
-                <h3 className="font-semibold text-sm">Competitive Pricing</h3>{" "}
+                <h3 className="font-semibold text-sm">Affordability</h3>{" "}
                 <p className="text-xs">
-                  Delivering quality at cost-effective rates to attract and
-                  retain customers.
+                  Providing excellence at affordable prices.
                 </p>
               </span>
             </div>
@@ -64,7 +80,7 @@ const AboutUsSection = () => {
               <span>
                 <h3 className="font-semibold text-sm">Best Services</h3>{" "}
                 <p className="text-xs">
-                  Exceptional support with a focus on customer satisfaction.
+                  Superior assistance with a commitment to customer delight.
                 </p>
               </span>
             </div>
@@ -80,21 +96,24 @@ const AboutUsSection = () => {
               <span>
                 <h3 className="font-semibold text-sm">Africa Coverage</h3>{" "}
                 <p className="text-xs">
-                  Extensive reach across Africa, offering diverse and unique
-                  travel experiences.
+                  Extensive African reach with unique travel experiences.
                 </p>
               </span>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col justify-center-center gap-4 w-2/5">
+        </motion.div>
+        <motion.div
+          initial={{ scale: 0.5, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="flex flex-col justify-center-center gap-4 w-full lg:w-1/2"
+        >
           <h1 className="w-full font-semibold text-lg leading-8 tracking-normal text-primaryGreen text-center">
-            Gallery
+            Our Gallery
           </h1>
-          <div className="relative w-full h-[300px] border p-4 rounded-md">
-            <Image src={'/images/nyungwe3.jpg'} alt='nyungwe park' fill={true} className="object-cover rounded-md" />
-          </div>
-        </div>
+          <GalerrySection />
+        </motion.div>
       </div>
     </section>
   );
