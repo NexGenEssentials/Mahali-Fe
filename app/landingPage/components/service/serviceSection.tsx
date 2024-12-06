@@ -20,7 +20,7 @@ const ServiceSection = () => {
         </div>
         <h1 className="text-4xl font-bold ">Tours & Travel Services</h1>
       </div>
-      <div className="py-8 ">
+      <div className="pt-8 ">
         <Swiper
           pagination={{
             type: "fraction",

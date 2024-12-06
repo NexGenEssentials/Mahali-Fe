@@ -4,6 +4,8 @@ import PromotionSection from "./landingPage/components/hero/promotionSection";
 import AboutUsSection from "./landingPage/components/about/aboutUsSection";
 import ServiceSection from "./landingPage/components/service/serviceSection";
 import DestinationSection from "./landingPage/components/destination/destinationSection";
+import PackageSection from "./landingPage/components/package/packageSection";
+import TestimonialSection from "./landingPage/components/testimonial/testimonialSection";
 
 export default function Home() {
   return (
@@ -14,6 +16,8 @@ export default function Home() {
       <AboutUsSection/>
       <DestinationSection/>
       <ServiceSection/>
+      <PackageSection/>
+      <TestimonialSection/>
       </section>
     </LandingPage>
   );

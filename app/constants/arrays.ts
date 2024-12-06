@@ -138,3 +138,82 @@ export const ServiceList = [
       "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
   },
 ];
+
+export const PackageList = [
+  {
+    location: "Rwanda",
+    package: [
+      {
+        image: akagera2,
+        days: 1,
+        people: "1-6",
+        rate: 3,
+        name: "Scenic Akagera Game Drive",
+        route: "Kigali-Kayonza",
+      },
+      {
+        image: gorilla1,
+        days: 3,
+        people: "6",
+        rate: 4,
+        name: "Mountain Gorilla Expedition",
+        route: "Kigali-Musanze",
+      },
+      {
+        image: nyungwe3,
+        days: 5,
+        people: "25",
+        rate: 5,
+        name: "Nyungwe Wilderness Encounter",
+        route: "Kigali-Nyamasheke",
+      },
+    ],
+  },
+  {
+    location: "Tanzania",
+    package: [
+      {
+        image: tanzania,
+        days: 10,
+        people: "1-6",
+        rate: 5,
+        name: "Combine Kenya Safari and Zanzibar Beach Holiday",
+        route: "ABERDARE, LAKE NAKURU, MASAI MARA, ZANZIBAR",
+      },
+    ],
+  },
+  {
+    location: "Kenya",
+    package: [
+      {
+        image: kenya,
+        days: 3,
+        people: "1-5",
+        rate: 2,
+        name: "Combine Kenya Safari and Zanzibar Beach Holiday",
+        route: "Nairobi",
+      },
+    ],
+  },
+  {
+    location: "Uganda",
+    package: [
+      {
+        image: uganda,
+        days: 3,
+        people: "1-5",
+        rate: 2,
+        name: "Combine Kenya Safari and Zanzibar Beach Holiday",
+        route: "Kampala",
+      },
+    ],
+  },
+  {
+    location: "DRC",
+    package: [],
+  },
+  {
+    location: "Burundi",
+    package: [],
+  },
+];
