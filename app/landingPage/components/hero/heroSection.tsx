@@ -30,7 +30,7 @@ const HeroSection = () => {
             key={index}
             className="w-full bg-black h-fit grid place-content-center"
           >
-            <div className="relative w-full h-[80vh] 2xl:h-[600px]">
+            <div className="relative w-full h-screen 2xl:h-[800px]">
               <Image
                 src={item.image}
                 alt={item.title}
@@ -42,7 +42,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, x: -50, overflow: "hidden" }}
                 animate={{ opacity: 1, x: 50 }}
                 transition={{ duration: 1, ease: "backInOut" }}
-                className="max-w-[1750px] mx-auto  absolute top-1/4 right-1/3 px-8 py-4 text-white flex flex-col gap-6 w-3/4 lg:w-1/2"
+                className="max-w-[1750px] mx-auto  absolute top-1/3 right-1/3 px-8 py-4 text-white flex flex-col gap-6 w-3/4 lg:w-[40%]"
               >
                 <h1 className="text-4xl font-bold">{item.title}</h1>
                 <p className="text-sm italic">

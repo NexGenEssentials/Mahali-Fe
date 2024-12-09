@@ -119,7 +119,7 @@ const PromotionSection = () => {
               whileTap={{ scale: 0.8 }}
               className="bg-primaryBlue px-6 py-3 rounded-md text-primaryWhite text-sm hover:text-opacity-60 font-semibold"
             >
-              Book Now
+              Search now
             </motion.button>
           </form>
         </div>
