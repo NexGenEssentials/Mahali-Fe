@@ -11,7 +11,7 @@ import { AboutArray, AboutService } from "@/app/constants/arrays";
 import ServiceSection from "../components/service/serviceSection";
 import guide from "@/public/images/guide2.webp";
 import Link from "next/link";
-const Array = [1, 2, 3, 4];
+const Array = ["Paul Mugisha", "Joe Smith", "Luke Otota", "Jackson Emma"];
 const About = () => {
   const [active, setActive] = useState("What We Do");
   return (
@@ -185,7 +185,7 @@ const About = () => {
                 </div>
                 <span className="p-8">
                   <h2 className="w-full text-center text-lg text-black opacity-60">
-                    Wilbrord Ibyimana
+                    {item}
                   </h2>
                 </span>
               </div>
