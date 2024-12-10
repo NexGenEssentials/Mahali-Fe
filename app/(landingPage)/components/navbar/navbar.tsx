@@ -8,8 +8,8 @@ export const NavItems = [
   { item: "Home", link: "" },
   { item: "About", link: "about" },
   { item: "Service", link: "service" },
-  { item: "Destinations", link: "#" },
-  { item: "Packages", link: "#" },
+  { item: "Destinations", link: "destination" },
+  { item: "Packages", link: "packages" },
   { item: "Contact Us", link: "#contacts" },
 ];
 
@@ -143,6 +143,7 @@ const Navbar = () => {
             </div>
           )}
         </div>
+
         {/* Mobile Menu */}
         {menuOpen && isMobile && (
           <motion.div
@@ -157,7 +158,13 @@ const Navbar = () => {
 
       {/* Fixed Navbar */}
       {showFixedNav && !hideFixedNav && (
-        <nav className="fixed top-0 right-0 left-0 z-50 bg-white shadow-md">
+        <nav
+          className={`fixed top-0 right-0 left-0 z-50 bg-white shadow-md transition-transform duration-1000 ${
+            showFixedNav && !hideFixedNav
+              ? "translate-y-0"
+              : "-translate-y-full"
+          }`}
+        >
           <div className="max-w-[1750px] mx-auto text-black text-sm font-semibold flex-wrap flex items-center justify-between px-8 py-3">
             <div className="flex items-center justify-between w-full lg:w-auto">
               <Link href={"/"}>
@@ -216,6 +223,17 @@ const Navbar = () => {
               </div>
             )}
           </div>
+
+          {/* Mobile Menu */}
+          {menuOpen && isMobile && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              className="bg-gray-100 lg:hidden"
+            >
+              {renderNavLinks()}
+            </motion.div>
+          )}
         </nav>
       )}
     </>

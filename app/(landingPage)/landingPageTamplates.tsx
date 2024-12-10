@@ -5,9 +5,9 @@ import Footer from "./components/footer/footer";
 
 export default function LandingPage({ children }: { children: ReactNode }) {
   return (
-    <div className="relative">
+    <div className="">
       <Navbar />
-      <main className=" mx-auto">{children}</main>
+      <main className="">{children}</main>
       <Footer />
     </div>
   );

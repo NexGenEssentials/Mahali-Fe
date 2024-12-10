@@ -8,6 +8,7 @@ import "swiper/css/effect-fade";
 import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 
 import Image from "next/image";
+import Link from "next/link";
 const Parks = [1];
 const TestimonialSection = () => {
   return (
@@ -33,7 +34,9 @@ const TestimonialSection = () => {
               lifetime. Your African dream vacation starts here!
             </p>
             <div className="text-primaryWhite">
-              <Button name="Read More" />
+              <Link href={"/about"}>
+                <Button name="Read More" />
+              </Link>
             </div>
           </div>
         </div>

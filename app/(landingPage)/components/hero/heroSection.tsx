@@ -9,6 +9,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { Parks } from "@/app/constants/arrays";
 import Button from "../buttons/button";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -48,7 +49,9 @@ const HeroSection = () => {
                 <p className="text-sm italic">
                   &quot; {item.description} &quot;
                 </p>
+                <Link href={'/service'}>
                 <Button name="Explore More" />
+                </Link>
               </motion.div>
             </div>
           </SwiperSlide>

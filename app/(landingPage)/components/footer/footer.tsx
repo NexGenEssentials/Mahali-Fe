@@ -4,16 +4,11 @@ import Image from "next/image";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { NavItems } from "../navbar/navbar";
 
-export const Quicklinks = [
-  { item: "Home", link: "" },
-  { item: "About", link: "about" },
-  { item: "Service", link: "service" },
-  { item: "Destinations", link: "#" },
-  { item: "Packages", link: "#" },
-  { item: "Contact Us", link: "#contacts" },
-];
+
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <motion.div
       initial={{ y: 100, opacity: 0 }}
@@ -72,7 +67,7 @@ const Footer = () => {
           <div>
             <h1 className="font-bold text-base pb-4">Quick Links</h1>
             <ul className="flex flex-col gap-2 items-start justify-start">
-              {Quicklinks.map((link, index) => (
+              {NavItems.map((link, index) => (
                 <Link key={index} href={`/${link.link}`}>
                   <li className="flex items-center gap-3 hover:text-primaryGreen icon">
                     <Icon icon="uil:angle-right" width="24" height="24" />
@@ -141,7 +136,7 @@ const Footer = () => {
         </div>
         <div className="grid place-content-center border-t border-t-defaultGreen text-primaryGreen font-light text-xs p-4">
           {" "}
-          &copy;2024 mahali africa
+          &copy;{currentYear} mahali africa
         </div>
       </div>
     </motion.div>

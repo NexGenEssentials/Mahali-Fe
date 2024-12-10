@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import PackageCard from "./packageCard";
 import { PackageList } from "@/app/constants/arrays";
 import Button from "../buttons/button";
+import Link from "next/link";
 
 const navnarArr = ["Rwanda", "Tanzania", "Kenya", "Uganda", "Burundi", "DRC"];
 const PackageSection = () => {
@@ -62,7 +63,9 @@ const PackageSection = () => {
         </div>
       ))}
       <div className="text-white w-full flex items-center justify-center">
+        <Link href={'/packages'}>
         <Button name={"View All Tours"} />
+        </Link>
       </div>
     </div>
   );

@@ -80,59 +80,69 @@ export const ServiceList = [
   {
     icon: "octicon:package-16",
     title: "Holiday & Tour Packages",
+    image: akagera1,
     description:
       "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
   },
   {
     icon: "tabler:trekking",
     title: "Gorilla & Chimpanzee Trekking",
+    image: akagera3,
     description:
-      "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
+      " offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
   },
   {
     icon: "ri:hotel-line",
     title: "Accomodation Booking",
+    image: akagera2,
     description:
       "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
   },
   {
     icon: "mingcute:car-3-fill",
     title: "Car Rentals",
+    image: nyungwe1,
     description:
       "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
   },
   {
     icon: "healthicons:truck-driver",
     title: "Game Drive Safaris",
+    image: akagera2,
     description:
       "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
   },
   {
     icon: "fa6-solid:ticket",
     title: "Air Ticket",
+    image: akagera2,
     description:
       "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
   },
   {
     icon: "majesticons:airplane",
     title: "Airport transfers",
+    image: akagera2,
     description:
       "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
   },
   {
     icon: "fa:cc-visa",
     title: "Visa Application",
+    image: akagera2,
     description:
       "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
   },
   {
     icon: "mdi:events-check",
     title: "Events Management",
+    image: akagera2,
     description:
       "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
   },
   {
     icon: "gg:camera",
+    image: akagera2,
     title: "Photo & Video Coverage",
     description:
       "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
@@ -215,5 +225,61 @@ export const PackageList = [
   {
     location: "Burundi",
     package: [],
+  },
+];
+
+export const AboutArray = [
+  {
+    title: "What We Do",
+    description:
+      "Mahali Africa Adventures, located in the heart of Rwanda’s Kigali, is a leading travel and tour agency dedicated to creating immersive and unforgettable experiences.",
+  },
+  {
+    title: "Our Vision",
+    description:
+      "To become a gateway to East Africa’s beauty and rich cultural heritage.",
+  },
+  {
+    title: "Our Mission",
+    description:
+      "To blend responsible tourism, making meaningful connections and community empowerment, preserving East Africa’s beauty and wellbeing.",
+  },
+  {
+    title: "Our Uniqueness",
+    description:
+      "We lead in events planning, sustainable travel, offering unforgettable adventures that benefit both travelers and local communities.",
+  },
+];
+
+export const AboutService = [
+  {
+    title: "Well-Established",
+    description:
+      "We are a well-established business founded in 2009 Dan Rwiyamirira [Managing Director] who worked as a tour guide and driver before founding the company.",
+  },
+  {
+    title: "Locally Owned",
+    description:
+      "We are locally owned and based in Rwanda. We employ 100% Rwandans for all your ground-services.",
+  },
+  {
+    title: "24/7 Customer Service",
+    description:
+      "We provide 24/7 customer service support. We provide briefing upon arrival and ensure you are well taken-cared of until your flight departure.​",
+  },
+  {
+    title: "Acclaimed Recognition",
+    description:
+      "Awarded the Tripadvisor Certificate of Excellence since 2015 and winners of the World Travel Awards among others.",
+  },
+  {
+    title: "Wide Range of Tours",
+    description:
+      "Offering safari tours, including wedding packages, Kilimanjaro climbs, Zanzibar holidays, Great Migration adventures, and trips across East and Southern Africa.​",
+  },
+  {
+    title: "Growing Reputation",
+    description:
+      "Mahali is humbly earning praise through thousands of positive reviews on TripAdvisor, Google, and Trustpilot, notably for our Serengeti Great Migration itineraries.​",
   },
 ];

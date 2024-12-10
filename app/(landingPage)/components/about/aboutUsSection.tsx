@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { motion } from "motion/react";
 import React from "react";
 import GalerrySection from "./gallery";
+import Link from "next/link";
 
 const AboutUsSection = () => {
   return (
@@ -42,13 +43,14 @@ const AboutUsSection = () => {
               marketplaces, making them a top choice for African travel.
             </span>
             <span className="w-full grid place-content-center">
-              <motion.button
+             <Link href={'/about'}> <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.8 }}
                 className="p-2 my-2 text-center hover:bg-primaryGreen hover:text-primaryWhite mx-auto rounded-md border border-defaultGreen text-xs font-medium"
               >
                 Read More ...
               </motion.button>
+              </Link>
             </span>
           </p>
           <div className="flex items-start gap-4 max-lg:flex-wrap">
