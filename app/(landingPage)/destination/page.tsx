@@ -7,7 +7,7 @@ const Destination = () => {
   return (
     <LandingPage>
       <div className="">
-        <PageHero image={gorilla} title="Contact-Us" />
+        <PageHero image={gorilla} title="Destination" />
       </div>
     </LandingPage>
   );
