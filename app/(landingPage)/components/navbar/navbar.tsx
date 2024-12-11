@@ -88,12 +88,15 @@ const Navbar = () => {
         <div className="max-w-[1750px] mx-auto text-white text-sm font-semibold flex-wrap flex items-center justify-between px-8 py-3">
           <div className="flex items-center justify-between w-full lg:w-auto">
             <Link href={"/"}>
+              <div className="h-20 w-20 rounded-full  bg-white flex items-center justify-center">
               <Image
-                src={"/images/logoWhite.jpg"}
+                src={"/images/logo.png"}
                 alt="mahali africa"
-                height={60}
-                width={60}
-              />
+                height={70}
+                width={70}
+                className="object-cover"
+                />
+                </div>
             </Link>
             {isMobile && (
               <button
@@ -122,9 +125,9 @@ const Navbar = () => {
             )}
           </div>
           {!isMobile && (
-            <div className="flex items-center gap-4 text-white">
+            <div className="flex items-center gap-4 text-white text-base">
               {renderNavLinks()}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 text-sm">
                 <motion.button
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.8 }}

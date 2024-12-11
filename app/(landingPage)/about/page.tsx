@@ -7,13 +7,14 @@ import mahali from "@/public/images/logo.png";
 import Image from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import HeaderSection from "../components/headers/header";
-import { AboutArray, AboutService } from "@/app/constants/arrays";
+import { AboutArray, AboutService, StaffList } from "@/app/constants/arrays";
 import ServiceSection from "../components/service/serviceSection";
-import guide from "@/public/images/guide2.webp";
+import guide from "@/public/images/profile.png";
 import Link from "next/link";
-const Array = ["Paul Mugisha", "Joe Smith", "Luke Otota", "Jackson Emma"];
+
 const About = () => {
   const [active, setActive] = useState("What We Do");
+  const [category, setCategory] = useState("Board Of Directors");
   return (
     <LandingPage>
       <div className="">
@@ -135,59 +136,102 @@ const About = () => {
           </div>
         </div>
         <ServiceSection />
-        <div className="max-w-[1750px] mx-auto w-full bg-slate-100 bg-opacity-20 p-8 flex flex-col gap-8">
-          <HeaderSection title="Guides" subtitle="Our Travel Guides" />
-          <div className="w-full flex items-center justify-center gap-4">
-            {Array.map((item) => (
-              <div key={item} className="relative group w-fit drop-shadow-lg rounded-lg bg-white">
-                <div className="relative w-[250px] h-[250px] overflow-hidden">
-                  <Image
-                    src={guide}
-                    alt="our tour guide"
-                    className="object-cover w-full h-full group-hover:scale-105 duration-300 rounded-lg"
-                  />
+        <div className="max-w-[1750px] mx-auto w-full bg-slate-100 bg-opacity-20 p-8 flex flex-col gap-4">
+          <HeaderSection title="Staff" subtitle="Our Team" />
+          <div className="flex flex-col gap-8 ">
+            <ul className="w-4/5 md:w-1/3 mx-auto flex items-center justify-evenly gap-2">
+              {/* <li
+                onClick={() => setCategory("All")}
+                className={`${
+                  category === "All" ? "border-b-2 border-b-defaultGreen" : ""
+                } text-base text-center font-bold text-defaultGreen py-1 cursor-pointer`}
+              >
+                {"All"}
+              </li> */}
+              {StaffList.map((cat, index) => (
+                <li
+                  onClick={() => setCategory(cat.category)}
+                  className={`${
+                    category === cat.category
+                      ? "border-b-2 border-b-defaultGreen"
+                      : ""
+                  } text-base text-center font-bold text-defaultGreen py-1 cursor-pointer`}
+                  key={index}
+                >
+                  {cat.category}
+                </li>
+              ))}
+            </ul>
 
-                  <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-50 duration-300"></div>
-                </div>
-                <div className="absolute top-1/3 w-full hidden group-hover:flex gap-2 items-center text-primaryWhite justify-center duration-300">
-                  <Link href="https://www.instagram.com/mahaliafrica/">
-                    <Icon
-                      icon="ri:instagram-fill"
-                      width="35"
-                      height="35"
-                      className="hover:text-primaryGreen icon"
-                    />
-                  </Link>
-                  <Link href="https://www.facebook.com/profile.php?id=61551684126148">
-                    <Icon
-                      icon="ic:baseline-facebook"
-                      width="35"
-                      height="35"
-                      className="hover:text-primaryGreen icon"
-                    />
-                  </Link>
-                  <Link href="#">
-                    <Icon
-                      icon="prime:twitter"
-                      width="35"
-                      height="35"
-                      className="hover:text-primaryGreen icon"
-                    />
-                  </Link>
-                  <Link href="https://www.linkedin.com/company/mahaliafrica/?viewAsMember=true">
-                    <Icon
-                      icon="mingcute:linkedin-fill"
-                      width="35"
-                      height="35"
-                      className="hover:text-primaryGreen icon"
-                    />
-                  </Link>
-                </div>
-                <span className="p-8">
-                  <h2 className="w-full text-center text-lg text-black opacity-60">
-                    {item}
-                  </h2>
-                </span>
+            {StaffList.map((item, index) => (
+              <div
+                key={index}
+                className={`${ item.category === category ?"w-full flex items-center flex-wrap justify-center gap-4":"hidden"}`}
+              >
+                {item.category === category  && (
+                  <>
+                    {item.list.map((staff, index) => (
+                      <div
+                        key={index}
+                        className="relative group w-fit drop-shadow-lg rounded-lg bg-white"
+                      >
+                        <div className="relative w-[250px] h-[250px] overflow-hidden">
+                          <Image
+                            src={guide}
+                            alt="our tour guide"
+                            className="object-cover w-full h-full group-hover:scale-105 duration-300 rounded-lg"
+                          />
+
+                          <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-50 duration-300"></div>
+                        </div>
+
+                        <div className="absolute top-1/3 w-full hidden group-hover:flex gap-2 items-center text-white justify-center duration-300">
+                          <Link href="https://www.instagram.com/mahaliafrica/">
+                            <Icon
+                              icon="ri:instagram-fill"
+                              width="35"
+                              height="35"
+                              className="hover:text-primaryGreen icon"
+                            />
+                          </Link>
+                          <Link href="https://www.facebook.com/profile.php?id=61551684126148">
+                            <Icon
+                              icon="ic:baseline-facebook"
+                              width="35"
+                              height="35"
+                              className="hover:text-primaryGreen icon"
+                            />
+                          </Link>
+                          <Link href="#">
+                            <Icon
+                              icon="prime:twitter"
+                              width="35"
+                              height="35"
+                              className="hover:text-primaryGreen icon"
+                            />
+                          </Link>
+                          <Link href="https://www.linkedin.com/company/mahaliafrica/?viewAsMember=true">
+                            <Icon
+                              icon="mingcute:linkedin-fill"
+                              width="35"
+                              height="35"
+                              className="hover:text-primaryGreen icon"
+                            />
+                          </Link>
+                        </div>
+
+                        <span className="p-4 flex flex-col items-center">
+                          <h2 className="w-full text-center text-lg text-primaryBlue opacity-60">
+                            {staff.name}
+                          </h2>
+                          <p className="text-black opacity-50 text-sm text-wrap">
+                            {staff.title}
+                          </p>
+                        </span>
+                      </div>
+                    ))}
+                  </>
+                )}
               </div>
             ))}
           </div>

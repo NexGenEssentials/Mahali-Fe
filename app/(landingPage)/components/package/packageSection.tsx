@@ -4,10 +4,15 @@ import PackageCard from "./packageCard";
 import { PackageList } from "@/app/constants/arrays";
 import Button from "../buttons/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-const navnarArr = ["Rwanda", "Tanzania", "Kenya", "Uganda", "Burundi", "DRC"];
+export const navnarArr = ["Rwanda", "Tanzania", "Kenya", "Uganda", "Burundi", "DRC"];
 const PackageSection = () => {
   const [active, setActive] = useState("Rwanda");
+  const router = useRouter();
+  const handleNavigation = (location: string) => {
+    router.push(`/destination?location=${location}`);
+  };
   return (
     <div className="max-w-[1750px] mx-auto p-8 w-full bg-slate-100 bg-opacity-20 ">
       <div className="w-full flex flex-col gap-4 justify-center items-center">
@@ -63,9 +68,9 @@ const PackageSection = () => {
         </div>
       ))}
       <div className="text-white w-full flex items-center justify-center">
-        <Link href={'/packages'}>
+        <div onClick={() => handleNavigation(active)} >
         <Button name={"View All Tours"} />
-        </Link>
+        </div>
       </div>
     </div>
   );

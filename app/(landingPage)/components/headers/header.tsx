@@ -1,6 +1,6 @@
 import React from 'react'
 
-const HeaderSection = ({title, subtitle}:{title:string, subtitle:string}) => {
+const HeaderSection = ({title, subtitle, description}:{title:string, subtitle:string, description?:string}) => {
   return (
     <div className="w-full flex flex-col gap-4 justify-center items-center">
         {title && <div className="text-defaultGreen flex items-center gap-2">
@@ -11,6 +11,7 @@ const HeaderSection = ({title, subtitle}:{title:string, subtitle:string}) => {
           <span className="h-[2px] w-12 block bg-defaultGreen"></span>
         </div>}
         <h1 className="text-4xl font-bold ">{subtitle}</h1>
+        <p className='w-full md:w-2/4 mx-auto flex items-center justify-center text-sm text-slate-400 text-center'>{description}</p>
       </div>
   )
 }
