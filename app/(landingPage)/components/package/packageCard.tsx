@@ -1,6 +1,8 @@
+"use client"
 import React from "react";
 import Image, { StaticImageData } from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { useRouter } from "next/navigation";
 
 interface packageType {
   image:StaticImageData;
@@ -9,8 +11,15 @@ interface packageType {
   rate: number;
   name: string;
   route: string;
+  location?:string
 }
-const PackageCard = ({days,image,name,people,rate,route}:packageType) => {
+const PackageCard = ({days,image,name,people,rate,route, location}:packageType) => {
+  const router = useRouter();
+    const handleNavigation = (name: string) => {
+      const query = `?name=${encodeURIComponent(name)}&location=${encodeURIComponent(location || '')}`;
+      router.push(`/packages${query}`);
+    };
+
   return (
     <div className="w-[400px] max-w-md min-w-[300px] h-auto drop-shadow-md border border-opacity-25 bg-gray-100 bg-opacity-20">
       <div className="relative h-[200px] w-full flex items-end justify-center ">
@@ -67,7 +76,7 @@ const PackageCard = ({days,image,name,people,rate,route}:packageType) => {
               />
             ))}
         </div>
-        <span className="text-xl font-semibold">{name}</span>
+        <span onClick={() => handleNavigation(name)} className="text-xl font-semibold hover:text-primaryGreen cursor-pointer">{name}</span>
         <span className="flex items-center gap-1 text-sm text-black text-opacity-50">
           {" "}
           <Icon

@@ -6,7 +6,7 @@ import aboutImage from "@/public/images/kenya.jpg";
 import mahali from "@/public/images/logo.png";
 import Image from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import HeaderSection from "../components/headers/header";
+import {HeaderSection} from "../components/headers/header";
 import { AboutArray, AboutService, StaffList } from "@/app/constants/arrays";
 import ServiceSection from "../components/service/serviceSection";
 import guide from "@/public/images/profile.png";

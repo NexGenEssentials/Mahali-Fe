@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import LandingPage from "../landingPageTamplates";
 import PageHero from "../components/hero/pageHero";
 import gorilla from "@/public/images/Gorilla2.jpg";
-import HeaderSection from "../components/headers/header";
+import {HeaderSection} from "../components/headers/header";
 import { navnarArr } from "../components/package/packageSection";
 import SingleDestination from "../components/destination/singleDestination";
 import { useSearchParams } from "next/navigation";

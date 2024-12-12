@@ -57,6 +57,7 @@ const PackageSection = () => {
             item.package.map((pack, index) => (
               <PackageCard
                 key={index}
+                location={active}
                 days={pack.days}
                 image={pack.image}
                 people={pack.people}

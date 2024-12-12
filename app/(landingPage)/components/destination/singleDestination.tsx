@@ -1,7 +1,7 @@
 import { DestinationCountry } from "@/app/constants/arrays";
 import React, { useState } from "react";
 import PackageCard from "../package/packageCard";
-import HeaderSection from "../headers/header";
+import {HeaderSection} from "../headers/header";
 import Image from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
@@ -79,6 +79,7 @@ const SingleDestination = ({ country }: { country: string }) => {
                 item.package.map((pack, index) => (
                   <PackageCard
                     key={index}
+                    location={item.location}
                     days={pack.days}
                     image={pack.image}
                     people={pack.people}

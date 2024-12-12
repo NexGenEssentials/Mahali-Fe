@@ -1,6 +1,6 @@
 import React from 'react'
 
-const HeaderSection = ({title, subtitle, description}:{title:string, subtitle:string, description?:string}) => {
+export const HeaderSection = ({title, subtitle, description}:{title:string, subtitle:string, description?:string}) => {
   return (
     <div className="w-full flex flex-col gap-4 justify-center items-center">
         {title && <div className="text-defaultGreen flex items-center gap-2">
@@ -16,4 +16,15 @@ const HeaderSection = ({title, subtitle, description}:{title:string, subtitle:st
   )
 }
 
-export default HeaderSection
+export const SingleHeaderSection = ({title}:{title:string}) => {
+  return (
+    <div className="w-full">
+       <div className="text-defaultGreen flex items-center gap-2">
+          <span className="h-[5px] w-8 block bg-defaultGreen"></span>
+          <h2 className="font-semibold text-4xl tracking-normal">
+            {title}
+          </h2>
+        </div>
+      </div>
+  )
+}

@@ -155,11 +155,50 @@ export const PackageList = [
     package: [
       {
         image: akagera2,
-        days: 1,
+        days: 3,
         people: "1-6",
         rate: 3,
         name: "Scenic Akagera Game Drive",
         route: "Kigali-Kayonza",
+        desc:"Come and enjoy a lifetime experience of tracking the endangered Silver-back Gorillas. This trek will take place in Volcanoes National Park through the tropical rainforest in search for some of the only mountain gorillas that are left in the whole world. This national park is also outstanding for great sight views and you will enjoy the environment along with the wealth of bird life which adds to the beauty of the forest.",
+        period:'June-Sept / Dec-Feb',
+        activity:[
+         {
+          title:"Kigali",
+          desc:"Upon arrival at Kigali International Airport, you will be met by our tours representative, outside the airport arrivals section. After a short briefing, you will embark on your safari. Enjoy a City Tour of Kigali. (Cost of city tour included)",
+          inclusion:'Breakfast, Lunch and Dinner',
+          accom:"Virunga Lodge, Mountain Gorilla View Lodge",
+          image:[rwanda]
+        },
+         {
+          title:"Kigali / Volcanoes National Park - Gorilla Trek",
+          desc:"Once the trekkers are put into groups, each group’s Lead Guide briefs the trekkers of the trekking procedures as well as the “do’s and don’ts” while in the presence of gorillas. After the briefing, trekkers return to their respective vehicles for the drive up the mountain to the starting point.",
+          inclusion:'Breakfast, Lunch and Dinner',
+          accom:"Virunga Lodge/Sabyinyo Silverback Lodge/Mountain Gorilla View Lodge",
+          image:[gorilla2]
+        },
+         {
+          title:"Depart",
+          desc:"After breakfast at the lodge, depart from foothills of the volcanoes and drive on a scenic drive to Kigali. Everything and everywhere, sheer green and hanging on the hills; Rwanda truly – land of a thousand fertile green hills. (2.5hrs).",
+          inclusion:'',
+          accom:""
+        },
+        ],
+        inclusion:["All activities (unless labeled as optional)",
+          "All accommodation as stated in the itinerary",
+          "A professional driver/guide",
+          "All transportation (unless labeled as optional)",
+          "Roundtrip airport transfer",
+          "Drinking water on all days"],
+        exclusion:[
+          "All Meals (as specified in the day-by-day section)",
+          "International flights (from/to home)",
+          "Tips (tipping guideline US$20.00 pp per day)",
+          "Personal items (souvenirs, travel insurance, visa fees, etc.)",
+          "Alcoholic drinks",
+          "Services not mentioned in the program",
+          "Items of a personal nature",
+        ]
       },
       {
         image: gorilla1,
