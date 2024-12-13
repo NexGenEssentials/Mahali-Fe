@@ -942,7 +942,7 @@ export const StaffList = [
   {
     category: "Management",
     list: [
-      { name: "Giselle K. Bigabiro", title: "Guide", image: "" },
+      { name: "Giselle K. Bigabiro", title: "Sales and Marketing", image: "" },
       { name: "Vanessa Kanangire Ukeye", title: "General Manager", image: "" },
       { name: "Patience Ntaganzwa", title: "Travel and Tour Manager", image: "",},
     ],
