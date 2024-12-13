@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import DatePicker, { DateObject, Value } from "react-multi-date-picker";
 import { Select, Space } from "antd";
+import { useRouter } from "next/navigation";
 
 export const AccomodationForm = () => {
   const [dateSelected, setDateSelected] = useState<DateObject[]>([
@@ -103,9 +104,15 @@ export const PackagesForm = () => {
     { value: "Kenya" },
     { value: "Uganda" },
   ];
+  const router = useRouter();
+  const [location, setLocation] = useState("");
+  const handleNavigation = () => {
+    router.push(`/destination?location=${location}`);
+  };
   return (
     <form
-      action="/service"
+      action={`/destination?location=${location}`}
+      onSubmit={() => handleNavigation()}
       className="flex gap-4 items-end flex-wrap text-primaryBlue"
     >
       <div className="flex flex-col gap-1">
@@ -119,6 +126,7 @@ export const PackagesForm = () => {
           <Select
             defaultValue="All"
             size="large"
+            onChange={(value) => setLocation(value)}
             options={Destination}
             className="w-full min-w-40"
           />
@@ -168,6 +176,7 @@ export const PackagesForm = () => {
       </div>
 
       <motion.button
+        onClick={() => handleNavigation()}
         type="submit"
         whileTap={{ scale: 0.8 }}
         className="bg-primaryGreen border-2 border-white px-4 py-2 rounded-md text-white text-sm hover:border-opacity-60 hover:text-opacity-60 font-medium"

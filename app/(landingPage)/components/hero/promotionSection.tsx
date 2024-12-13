@@ -5,7 +5,7 @@ import { ServiceOptions } from "@/app/constants/arrays";
 import { AccomodationForm, CarRenTalForm, EventsManagementForm, PackagesForm } from "./forms/servicesForm";
 
 const PromotionSection = () => {
-  const [selectedService, setSelectedService] = useState("Accomodation Booking");
+  const [selectedService, setSelectedService] = useState("Holiday & Tour Packages");
   const handleChange = (value: string) => {
     setSelectedService(value);
   };
@@ -32,7 +32,7 @@ const PromotionSection = () => {
             </label>
             <Space wrap>
               <Select
-                defaultValue="Accomodation Booking"
+                defaultValue="Holiday & Tour Packages"
                 size="large"
                 onChange={handleChange}
                 options={ServiceOptions}
@@ -42,7 +42,9 @@ const PromotionSection = () => {
           </div>
           {selectedService === "Accomodation Booking" && <AccomodationForm />}
           {selectedService === "Holiday & Tour Packages" && <PackagesForm />}
-          {selectedService === "Gorilla & Chimpanzee Trekking" && <PackagesForm />}
+          {selectedService === "Gorilla & Chimpanzee Trekking" && (
+            <PackagesForm />
+          )}
           {selectedService === "Car Rentals" && <CarRenTalForm />}
           {selectedService === "Events Management" && <EventsManagementForm />}
         </div>
