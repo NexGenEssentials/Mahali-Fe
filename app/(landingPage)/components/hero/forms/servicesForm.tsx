@@ -88,14 +88,13 @@ export const AccomodationForm = () => {
       <motion.button
         type="submit"
         whileTap={{ scale: 0.8 }}
-        className="bg-primaryBlue px-6 py-3 rounded-md text-primaryWhite text-sm hover:text-opacity-60 font-semibold"
+        className="bg-primaryGreen border-2 border-white px-4 py-2 rounded-md text-white text-sm hover:border-opacity-60 hover:text-opacity-60 font-medium"
       >
         Search now
       </motion.button>
     </form>
   );
 };
-
 export const PackagesForm = () => {
   const Destination = [
     { value: "Rwanda" },
@@ -171,14 +170,13 @@ export const PackagesForm = () => {
       <motion.button
         type="submit"
         whileTap={{ scale: 0.8 }}
-        className="bg-primaryBlue px-6 py-3 rounded-md text-primaryWhite text-sm hover:text-opacity-60 font-semibold"
+        className="bg-primaryGreen border-2 border-white px-4 py-2 rounded-md text-white text-sm hover:border-opacity-60 hover:text-opacity-60 font-medium"
       >
         Search now
       </motion.button>
     </form>
   );
 };
-
 export const CarRenTalForm = () => {
   const [dateSelected, setDateSelected] = useState<DateObject[]>([
     new DateObject(),
@@ -218,12 +216,17 @@ export const CarRenTalForm = () => {
             defaultValue="All"
             size="large"
             options={[
-              { value: "Toyota Rav4" },
-              { value: "Land Cruiser Prado" },
-              { value: "Safari Land Cruiser" },
-              { value: "Safari Van" },
-              { value: "Coaster Bus" },
-              { value: "Self Drive" },
+              { value: "Sedan" },
+              { value: "Hatchback" },
+              { value: "SUV" },
+              { value: "Mini Van" },
+              { value: " Van" },
+              { value: "Wagon" },
+              { value: "Coupe" },
+              { value: "Bus" },
+              { value: "Mini Bus" },
+              { value: "Convertible" },
+              { value: "Others" },
             ]}
             className="w-full min-w-40"
           />
@@ -254,7 +257,7 @@ export const CarRenTalForm = () => {
       <motion.button
         type="submit"
         whileTap={{ scale: 0.8 }}
-        className="bg-primaryBlue px-6 py-3 rounded-md text-primaryWhite text-sm hover:text-opacity-60 font-semibold"
+        className="bg-primaryGreen border-2 border-white px-4 py-2 rounded-md text-white text-sm hover:border-opacity-60 hover:text-opacity-60 font-medium"
       >
         Search now
       </motion.button>
@@ -349,7 +352,7 @@ export const EventsManagementForm = () => {
       <motion.button
         type="submit"
         whileTap={{ scale: 0.8 }}
-        className="bg-primaryBlue px-6 py-3 rounded-md text-primaryWhite text-sm hover:text-opacity-60 font-semibold"
+        className="bg-primaryGreen border-2 border-white px-4 py-2 rounded-md text-white text-sm hover:border-opacity-60 hover:text-opacity-60 font-medium"
       >
         Search now
       </motion.button>

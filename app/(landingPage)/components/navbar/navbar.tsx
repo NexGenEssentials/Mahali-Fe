@@ -7,9 +7,9 @@ import React, { useEffect, useState } from "react";
 export const NavItems = [
   { item: "Home", link: "" },
   { item: "About", link: "about" },
-  { item: "Service", link: "service" },
+  { item: "Service", link: "#service" },
   { item: "Destinations", link: "destination" },
-  { item: "Packages", link: "packages" },
+  { item: "Packages", link: "#package" },
   { item: "Contact Us", link: "#contacts" },
 ];
 

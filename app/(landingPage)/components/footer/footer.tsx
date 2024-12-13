@@ -6,7 +6,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { NavItems } from "../navbar/navbar";
 
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
@@ -16,11 +15,12 @@ const Footer = () => {
       transition={{ duration: 1 }}
       viewport={{ once: true }}
       className="bg-primaryBlue "
+      id="contacts"
     >
       <div className="max-w-[1750px] mx-auto  text-primaryWhite text-sm font-light">
         <div className="flex p-8 gap-8 flex-wrap items-start justify-center lg:justify-between">
           <div className="flex flex-col gap-4 items-center justify-center">
-            <div className="relative w-[250px] h-[200px] object-cover">
+            <div className="relative w-[100px] h-[70px] object-cover">
               <Image src={"/images/logo.png"} alt="mahali africa" fill={true} />
             </div>
             <div className="flex gap-4">
@@ -67,24 +67,38 @@ const Footer = () => {
           <div>
             <h1 className="font-bold text-base pb-4">Quick Links</h1>
             <ul className="flex flex-col gap-2 items-start justify-start">
-              {NavItems.map((link, index) => (
-                <Link key={index} href={`/${link.link}`}>
-                  <li className="flex items-center gap-3 hover:text-primaryGreen icon">
-                    <Icon icon="uil:angle-right" width="24" height="24" />
-                    <span>{link.item}</span>
-                  </li>
-                </Link>
-              ))}
+              <div className="flex gap-4 justify-between">
+                <ul className="flex flex-col gap-1">
+                  {NavItems.slice(0, 3).map((link, index) => (
+                    <Link key={index} href={`/${link.link}`}>
+                      <li className="flex items-center hover:text-primaryGreen icon">
+                        <Icon icon="uil:angle-right" width="24" height="24" />
+                        <span>{link.item}</span>
+                      </li>
+                    </Link>
+                  ))}
+                </ul>
+                <ul className="flex flex-col gap-1">
+                  {NavItems.slice(3).map((link, index) => (
+                    <Link key={index + 3} href={`/${link.link}`}>
+                      <li className="flex items-center hover:text-primaryGreen icon">
+                        <Icon icon="uil:angle-right" width="24" height="24" />
+                        <span>{link.item}</span>
+                      </li>
+                    </Link>
+                  ))}
+                </ul>
+              </div>
             </ul>
           </div>
           <div>
             <h1 className="font-bold text-base pb-4"> Contact Info</h1>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
               <div className="flex gap-2 items-center">
                 <Icon
                   icon="line-md:phone-add"
-                  width="24"
-                  height="24"
+                  width="20"
+                  height="20"
                   className="text-primaryGreen icon"
                 />
                 <span>+250793898790</span>
@@ -92,8 +106,8 @@ const Footer = () => {
               <div className="flex gap-2 items-center">
                 <Icon
                   icon="entypo:email"
-                  width="24"
-                  height="24"
+                  width="20"
+                  height="20"
                   className="text-primaryGreen icon"
                 />
                 <span>info@mahaliafrica.com</span>
@@ -101,8 +115,8 @@ const Footer = () => {
               <div className="flex gap-2 items-center">
                 <Icon
                   icon="mdi:address-marker-outline"
-                  width="24"
-                  height="24"
+                  width="20"
+                  height="20"
                   className="text-primaryGreen icon"
                 />
                 <span>KG 180 AVE, Kigali Rwanda</span>

@@ -20,8 +20,8 @@ export const SingleHeaderSection = ({title}:{title:string}) => {
   return (
     <div className="w-full">
        <div className="text-defaultGreen flex items-center gap-2">
-          <span className="h-[5px] w-8 block bg-defaultGreen"></span>
-          <h2 className="font-semibold text-4xl tracking-normal">
+          <span className="h-[3px] w-8 block bg-defaultGreen"></span>
+          <h2 className="font-semibold text-2xl tracking-normal">
             {title}
           </h2>
         </div>

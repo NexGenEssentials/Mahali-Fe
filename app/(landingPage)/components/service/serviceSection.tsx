@@ -9,7 +9,10 @@ import { Navigation } from "swiper/modules";
 
 const ServiceSection = () => {
   return (
-    <div className="max-w-[1750px] mx-auto p-8 w-full bg-slate-100 bg-opacity-20">
+    <div
+      id="service"
+      className="max-w-[1750px] mx-auto p-8 w-full bg-slate-100 bg-opacity-20"
+    >
       <div className="w-full flex flex-col gap-4 justify-center items-center">
         <div className="text-defaultGreen flex items-center gap-2">
           <span className="h-[2px] w-12 block bg-defaultGreen"></span>

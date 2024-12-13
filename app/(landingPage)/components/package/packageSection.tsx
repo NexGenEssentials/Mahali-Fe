@@ -14,7 +14,10 @@ const PackageSection = () => {
     router.push(`/destination?location=${location}`);
   };
   return (
-    <div className="max-w-[1750px] mx-auto p-8 w-full bg-slate-100 bg-opacity-20 ">
+    <div
+      id="package"
+      className="max-w-[1750px] mx-auto p-8 w-full bg-slate-100 bg-opacity-20 flex flex-col gap-8"
+    >
       <div className="w-full flex flex-col gap-4 justify-center items-center">
         <div className="text-defaultGreen flex items-center gap-2">
           <span className="h-[2px] w-12 block bg-defaultGreen"></span>
@@ -49,7 +52,7 @@ const PackageSection = () => {
           key={index}
           className={`${
             active === item.location
-              ? "flex flex-wrap gap-8 items-start  justify-center py-6 "
+              ? "flex flex-wrap gap-8 items-stretch  justify-center py-6 "
               : "hidden"
           } `}
         >
@@ -69,8 +72,8 @@ const PackageSection = () => {
         </div>
       ))}
       <div className="text-white w-full flex items-center justify-center">
-        <div onClick={() => handleNavigation(active)} >
-        <Button name={"View All Tours"} />
+        <div onClick={() => handleNavigation(active)}>
+          <Button name={"View All Tours"} />
         </div>
       </div>
     </div>

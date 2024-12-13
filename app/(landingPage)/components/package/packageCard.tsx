@@ -3,6 +3,7 @@ import React from "react";
 import Image, { StaticImageData } from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useRouter } from "next/navigation";
+import { motion } from "motion/react";
 
 interface packageType {
   image:StaticImageData;
@@ -21,14 +22,12 @@ const PackageCard = ({days,image,name,people,rate,route, location}:packageType) 
     };
 
   return (
-    <div className="w-[400px] max-w-md min-w-[300px] h-auto drop-shadow-md border border-opacity-25 bg-gray-100 bg-opacity-20">
+    <motion.div whileHover={{scale:0.97}} transition={{duration:0.2}}
+      onClick={() => handleNavigation(name)}
+      className="group w-[400px] max-w-md min-w-[300px] cursor-pointer h-auto drop-shadow-md border border-opacity-25 bg-gray-100 bg-opacity-20"
+    >
       <div className="relative h-[200px] w-full flex items-end justify-center ">
-        <Image
-          src={image}
-          alt={name}
-          fill={true}
-          className="object-cover"
-        />
+        <Image src={image} alt={name} fill={true} className="object-cover" />
         <div className="absolute text-sm -bottom-5 grow w-full lg:w-[90%] drop-shadow-md bg-white p-4 flex justify-evenly items-center gap-2">
           <span className="flex items-center gap-1 ">
             {" "}
@@ -76,7 +75,12 @@ const PackageCard = ({days,image,name,people,rate,route, location}:packageType) 
               />
             ))}
         </div>
-        <span onClick={() => handleNavigation(name)} className="text-xl font-semibold hover:text-primaryGreen cursor-pointer">{name}</span>
+        <span
+          onClick={() => handleNavigation(name)}
+          className="text-xl font-semibold group-hover:text-primaryGreen cursor-pointer"
+        >
+          {name}
+        </span>
         <span className="flex items-center gap-1 text-sm text-black text-opacity-50">
           {" "}
           <Icon
@@ -88,7 +92,7 @@ const PackageCard = ({days,image,name,people,rate,route, location}:packageType) 
           {route}
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
