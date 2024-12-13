@@ -4,23 +4,24 @@ import Button from "../buttons/button";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade";
-import { Autoplay, EffectFade, Pagination } from "swiper/modules";
+import "swiper/css/autoplay";
+import "swiper/css/keyboard"
+import { Autoplay, Keyboard, Pagination } from "swiper/modules";
 
 import Image from "next/image";
 import Link from "next/link";
-const Parks = [1];
+import { Testimonial } from "@/app/constants/arrays";
 const TestimonialSection = () => {
   return (
     <div className="w-full bg-slate-100 bg-opacity-20">
-      <div className="max-w-[1750px] w-full mx-auto p-8 flex max-lg:flex-wrap items-center justify-between gap-4">
-        <div className="w-full lg:w-1/2 p-8 grow gap-4 flex flex-col items-start justify-center ">
+      <div className="max-w-[1750px] w-full mx-auto p-4 sm:p-8 flex max-lg:flex-wrap items-start justify-between gap-4">
+        <div className="w-full lg:w-1/2 p-8 gap-4 flex flex-col items-start justify-center ">
           <div className="text-defaultGreen flex items-center gap-2">
             <span className="h-[2px] w-6 block bg-defaultGreen bg-opacity-20"></span>
             <h2 className=" text-sm leading-8 tracking-normal">Service</h2>
             <span className="h-[2px] w-6 block bg-defaultGreen bg-opacity-20"></span>
           </div>
-          <h1 className="text-3xl font-bold text-defaultGreen ">
+          <h1 className="text-2xl font-bold text-defaultGreen ">
             Why Choose Us?
           </h1>
           <div className="flex-col flex gap-4">
@@ -40,51 +41,53 @@ const TestimonialSection = () => {
             </div>
           </div>
         </div>
-
-        <div className="w-full max-h-full lg:w-1/2 p-8 grow gap-4 flex flex-col items-start justify-center ">
+        <div className="w-full lg:w-1/2 p-8 gap-4 flex flex-col items-start justify-center ">
           <div className="text-defaultGreen flex items-center gap-2">
             <span className="h-[2px] w-6 block bg-defaultGreen bg-opacity-20"></span>
             <h2 className=" text-sm leading-8 tracking-normal">Testimony</h2>
             <span className="h-[2px] w-6 block bg-defaultGreen bg-opacity-20"></span>
           </div>
-          <h1 className="text-3xl font-bold text-defaultGreen ">
+          <h1 className="text-2xl font-bold text-defaultGreen ">
             Our Guests Says
           </h1>
+          <div className="w-full mt-4">
           <Swiper
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
+          autoplay={{
+            delay: 5000,
+            pauseOnMouseEnter:true,
+          }}
+            slidesPerView={1}
+            spaceBetween={30}
             loop={true}
-            effect="fade"
+            keyboard={{
+              enabled: true,
+            }}
             pagination={{ clickable: true }}
             speed={500}
-            modules={[Pagination, Autoplay, EffectFade]}
+            modules={[Pagination, Autoplay, Keyboard]}
             className="mySwiper"
           >
-            {Parks.map((item, index) => (
-              <SwiperSlide key={index} className="bg-white p-8">
-                <div className=" flex items-start justify-center gap-4  text-sm rounded-md drop-shadow-lg">
+            {Testimonial.map((item, index) => (
+              <SwiperSlide key={index} className="bg-white rounded-lg p-4">
+                <div className="flex items-start justify-center gap-4 p-4 text-sm rounded-md ">
                   <div className="h-[100px] w-[100px] rounded-full relative overflow-hidden">
                     <Image
-                      src="/images/rwanda.jpeg"
-                      alt="hello"
+                      src={item.image}
+                      alt={item.comment}
                       layout="fill"
-                      objectFit="cover"
+                      className="object-cover"
+                      
                     />
                   </div>
 
-                  <div className="w-3/4">
-                    <p className=" text-black text-opacity-50 italic text-wrap">
-                      Far far away, behind the word mountains, far from the
-                      countries Vokalia and Consonantia, there live the blind
-                      texts. Separated they live in Bookmarksgrove right at the
-                      coast of the Semantics, a large language ocean.
+                  <div className="w-4/5">
+                    <p className=" text-black  text-opacity-50 italic text-wrap">
+                     {item.comment}
                     </p>
                     <div className="flex flex-col mt-3">
-                      <span className="font-semibold">William Gram{item}</span>
+                      <span className="font-semibold">{item.name}</span>
                       <span className="font-light text-xs">
-                        Guest From Kenya
+                        {item.position}
                       </span>
                     </div>
                   </div>
@@ -92,6 +95,7 @@ const TestimonialSection = () => {
               </SwiperSlide>
             ))}
           </Swiper>
+        </div>
         </div>
       </div>
     </div>

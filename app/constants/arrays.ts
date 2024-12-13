@@ -15,6 +15,10 @@ import burundi from "@/public/images/burundi.jpg";
 import serengeti2 from "@/public/images/serengeti.jpg"; 
 import serengeti1 from "@/public/images/serengeti1.jpg"; 
 import ngorongoro from "@/public/images/ngorongoro.jpg"; 
+import profile1 from '@/public/images/guide1.jpg';
+import profile2 from '@/public/images/guide2.webp';
+import profile3 from '@/public/images/guide3.webp';
+
 
 export const Parks = [
   {
@@ -957,4 +961,35 @@ export const StaffList = [
     ],
   },
 
+];
+
+export const Testimonial = [
+  {
+    name: "John Doe",
+    position: "CEO, GreenTech Solutions",
+    comment:
+      "Our experience was simply outstanding! The team's attention to detail and commitment to excellence made our trip unforgettable.",
+    image:profile1 ,
+  },
+  {
+    name: "Jane Smith",
+    position: "Travel Blogger",
+    comment:
+      "The best travel experience I've ever had! From start to finish, everything was smooth and well-organized.",
+    image:profile2 ,
+  },
+  {
+    name: "Samuel Lee",
+    position: "Adventurer",
+    comment:
+      "A fantastic journey full of adventures and memories that will last a lifetime. Highly recommend their services!",
+    image:profile3 ,
+  },
+  {
+    name: "Emily Brown",
+    position: "Photographer",
+    comment:
+      "An amazing team that made sure every moment of our trip was perfect. Their expertise and passion truly shine through.",
+    image:profile2 ,
+  },
 ];

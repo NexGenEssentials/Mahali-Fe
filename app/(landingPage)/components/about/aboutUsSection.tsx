@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const AboutUsSection = () => {
   return (
-    <section className="max-w-[1750px] mx-auto p-8 ">
+    <section className="max-w-[1750px] mx-auto p-2 md:p-8 ">
       <div className="flex max-lg max-lg:flex-wrap gap-4 w-full overflow-hidden">
         <motion.div
           initial={{ x: -300, opacity: 0 }}

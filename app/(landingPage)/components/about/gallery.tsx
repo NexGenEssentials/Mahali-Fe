@@ -6,25 +6,28 @@ import "swiper/css";
 import "swiper/css/effect-cards";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/keyboard"
 
-import { EffectCards, Pagination } from "swiper/modules";
+import { EffectCards, Keyboard, Pagination } from "swiper/modules";
 import { Gallery } from "@/app/constants/arrays";
-import { motion } from "motion/react";
 
 export default function GalerrySection() {
   return (
     <section
       
-      className="flex items-center justify-center"
+      className="w-full flex items-center justify-center"
     >
       <Swiper
         effect={"cards"}
         grabCursor={true}
         centeredSlides={true}
         slidesPerView={'auto'}
+        keyboard={{
+          enabled: true,
+        }}
         pagination={{ clickable: true }}
-        modules={[EffectCards, Pagination]}
-        className="mySwiper w-3/5 overflow-hidden"
+        modules={[EffectCards, Pagination, Keyboard]}
+        className="mySwiper w-[90%] md:w-3/5 overflow-hidden"
       >
         {Gallery.map((image, index) => (
           <SwiperSlide key={index} className="flex items-center justify-center">

@@ -5,6 +5,7 @@ import { PackageList } from "@/app/constants/arrays";
 import Button from "../buttons/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { HeaderSection } from "../headers/header";
 
 export const navnarArr = ["Rwanda", "Tanzania", "Kenya", "Uganda", "Burundi", "DRC"];
 const PackageSection = () => {
@@ -19,19 +20,9 @@ const PackageSection = () => {
       className="max-w-[1750px] mx-auto p-8 w-full bg-slate-100 bg-opacity-20 flex flex-col gap-8"
     >
       <div className="w-full flex flex-col gap-4 justify-center items-center">
-        <div className="text-defaultGreen flex items-center gap-2">
-          <span className="h-[2px] w-12 block bg-defaultGreen"></span>
-          <h2 className="font-semibold text-lg leading-8 tracking-normal">
-            Special Offers
-          </h2>
-          <span className="h-[2px] w-12 block bg-defaultGreen"></span>
-        </div>
-        <h1 className="text-4xl font-bold ">Pefect Tour Packages</h1>
-        <p className="text-sm text-slate-400">
-          Discover Africa’s wonders with our expertly crafted tours. Experience
-          captivating landscapes and vibrant cultures on unforgettable journeys.
-        </p>
-        <ul className="flex gap-8 items-center justify-evenly ">
+        <HeaderSection subtitle="Pefect Tour Packages" title="Special Offers" description="Discover Africa’s wonders with our expertly crafted tours. Experience
+          captivating landscapes and vibrant cultures on unforgettable journeys."/>
+        <ul className="flex max-md:space-y-2 md:gap-8 items-end flex-wrap justify-evenly ">
           {navnarArr.map((location, index) => (
             <li
               onClick={() => setActive(location)}
