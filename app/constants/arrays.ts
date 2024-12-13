@@ -85,70 +85,70 @@ export const ServiceList = [
     title: "Holiday & Tour Packages",
     image: akagera1,
     description:
-      "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
+      "Discover expertly crafted holiday and tour packages that cater to your dream adventures. From cultural explorations to nature retreats, we create experiences you'll cherish forever.",
   },
   {
     icon: "tabler:trekking",
     title: "Gorilla & Chimpanzee Trekking",
     image: akagera3,
     description:
-      " offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
+      "Embark on unforgettable treks to encounter the majestic mountain gorillas and playful chimpanzees in their natural habitats. A rare and awe-inspiring wildlife experience awaits.",
   },
   {
     icon: "ri:hotel-line",
-    title: "Accomodation Booking",
+    title: "Accommodation Booking",
     image: akagera2,
     description:
-      "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
+      "Find and book the perfect accommodations for your travels, from luxury resorts to budget-friendly stays, tailored to provide comfort and convenience throughout your journey.",
   },
   {
     icon: "mingcute:car-3-fill",
     title: "Car Rentals",
     image: nyungwe1,
     description:
-      "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
+      "Enjoy the freedom to explore with our reliable car rental services. Choose from a range of vehicles that suit your travel needs, ensuring a smooth and hassle-free journey.",
   },
   {
     icon: "healthicons:truck-driver",
     title: "Game Drive Safaris",
     image: akagera2,
     description:
-      "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
+      "Experience the thrill of guided game drives through stunning landscapes, offering close encounters with diverse wildlife in some of the world's most beautiful national parks.",
   },
   {
     icon: "fa6-solid:ticket",
     title: "Air Ticket",
     image: akagera2,
     description:
-      "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
+      "Simplify your travel planning with our air ticket services. Whether for business or leisure, we ensure seamless booking and competitive fares for your flights.",
   },
   {
     icon: "majesticons:airplane",
-    title: "Airport transfers",
+    title: "Airport Transfers",
     image: akagera2,
     description:
-      "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
+      "Start and end your journey with ease through our reliable airport transfer services, ensuring timely and comfortable rides to and from your destination.",
   },
   {
     icon: "fa:cc-visa",
     title: "Visa Application",
     image: akagera2,
     description:
-      "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
+      "Navigate the visa process with confidence. Our visa application services offer guidance and support, making international travel more accessible and stress-free.",
   },
   {
     icon: "mdi:events-check",
     title: "Events Management",
     image: akagera2,
     description:
-      "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
+      "Bring your vision to life with our professional events management services. From planning to execution, we ensure every detail is covered for unforgettable events.",
   },
   {
     icon: "gg:camera",
-    image: akagera2,
     title: "Photo & Video Coverage",
+    image: akagera2,
     description:
-      "Tailored holiday and tour packages offering unforgettable experiences, from thrilling adventures to serene getaways, designed to suit every traveler’s preference.",
+      "Capture the moments that matter with our professional photo and video coverage services. Perfect for events, travel, and memories that deserve to be preserved beautifully.",
   },
 ];
 
@@ -512,32 +512,32 @@ export const AboutService = [
   {
     title: "Well-Established",
     description:
-      "We are a well-established business founded in 2009 Dan Rwiyamirira [Managing Director] who worked as a tour guide and driver before founding the company.",
+      "With roots dating back to 2009, our journey began with Dan Rwiyamirira [Managing Director], whose passion for exploration as a tour guide and driver inspired the founding of our company. Over the years, we've grown into a trusted name in travel, delivering unforgettable experiences.",
   },
   {
     title: "Locally Owned",
     description:
-      "We are locally owned and based in Rwanda. We employ 100% Rwandans for all your ground-services.",
+      "Proudly based in Rwanda, we are a 100% locally-owned business. Our team is composed entirely of talented Rwandans who ensure your journey is seamless and authentic, showcasing the very best of our culture and landscapes.",
   },
   {
     title: "24/7 Customer Service",
     description:
-      "We provide 24/7 customer service support. We provide briefing upon arrival and ensure you are well taken-cared of until your flight departure.​",
+      "Your comfort and satisfaction are our priorities. With 24/7 customer support, we are by your side from the moment you arrive to your departure. Expect personalized briefings and attentive care throughout your adventure.",
   },
   {
     title: "Acclaimed Recognition",
     description:
-      "Awarded the Tripadvisor Certificate of Excellence since 2015 and winners of the World Travel Awards among others.",
+      "Our excellence has been recognized worldwide, with accolades such as the Tripadvisor Certificate of Excellence since 2015 and prestigious wins at the World Travel Awards, affirming our commitment to delivering unparalleled travel experiences.",
   },
   {
     title: "Wide Range of Tours",
     description:
-      "Offering safari tours, including wedding packages, Kilimanjaro climbs, Zanzibar holidays, Great Migration adventures, and trips across East and Southern Africa.​",
+      "Explore a world of possibilities with our diverse offerings, from thrilling safari tours and romantic wedding packages to Kilimanjaro climbs, Zanzibar retreats, Great Migration adventures, and unforgettable journeys across East and Southern Africa.",
   },
   {
     title: "Growing Reputation",
     description:
-      "Mahali is humbly earning praise through thousands of positive reviews on TripAdvisor, Google, and Trustpilot, notably for our Serengeti Great Migration itineraries.​",
+      "Our reputation speaks volumes, with thousands of glowing reviews on platforms like TripAdvisor, Google, and Trustpilot. Guests consistently praise our expertly curated Serengeti Great Migration itineraries and our dedication to creating extraordinary travel memories.",
   },
 ];
 
