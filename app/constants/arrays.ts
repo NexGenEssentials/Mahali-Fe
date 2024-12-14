@@ -18,6 +18,7 @@ import ngorongoro from "@/public/images/ngorongoro.jpg";
 import profile1 from '@/public/images/guide1.jpg';
 import profile2 from '@/public/images/guide2.webp';
 import profile3 from '@/public/images/guide3.webp';
+import profile4 from '@/public/images/profile.png'
 
 
 export const Parks = [
@@ -87,6 +88,7 @@ export const ServiceList = [
   {
     icon: "octicon:package-16",
     title: "Holiday & Tour Packages",
+    link:"/destination",
     image: akagera1,
     description:
       "Discover expertly crafted holiday and tour packages that cater to your dream adventures. From cultural explorations to nature retreats, we create experiences you'll cherish forever.",
@@ -94,6 +96,7 @@ export const ServiceList = [
   {
     icon: "tabler:trekking",
     title: "Gorilla & Chimpanzee Trekking",
+    link:"/destination",
     image: akagera3,
     description:
       "Embark on unforgettable treks to encounter the majestic mountain gorillas and playful chimpanzees in their natural habitats. A rare and awe-inspiring wildlife experience awaits.",
@@ -101,6 +104,7 @@ export const ServiceList = [
   {
     icon: "ri:hotel-line",
     title: "Accommodation Booking",
+    link:"/service/accomodation",
     image: akagera2,
     description:
       "Find and book the perfect accommodations for your travels, from luxury resorts to budget-friendly stays, tailored to provide comfort and convenience throughout your journey.",
@@ -108,6 +112,7 @@ export const ServiceList = [
   {
     icon: "mingcute:car-3-fill",
     title: "Car Rentals",
+    link:"/service",
     image: nyungwe1,
     description:
       "Enjoy the freedom to explore with our reliable car rental services. Choose from a range of vehicles that suit your travel needs, ensuring a smooth and hassle-free journey.",
@@ -115,6 +120,7 @@ export const ServiceList = [
   {
     icon: "healthicons:truck-driver",
     title: "Game Drive Safaris",
+    link:"/service",
     image: akagera2,
     description:
       "Experience the thrill of guided game drives through stunning landscapes, offering close encounters with diverse wildlife in some of the world's most beautiful national parks.",
@@ -122,6 +128,7 @@ export const ServiceList = [
   {
     icon: "fa6-solid:ticket",
     title: "Air Ticket",
+    link:"/service",
     image: akagera2,
     description:
       "Simplify your travel planning with our air ticket services. Whether for business or leisure, we ensure seamless booking and competitive fares for your flights.",
@@ -129,6 +136,7 @@ export const ServiceList = [
   {
     icon: "majesticons:airplane",
     title: "Airport Transfers",
+    link:"/service",
     image: akagera2,
     description:
       "Start and end your journey with ease through our reliable airport transfer services, ensuring timely and comfortable rides to and from your destination.",
@@ -136,6 +144,7 @@ export const ServiceList = [
   {
     icon: "fa:cc-visa",
     title: "Visa Application",
+    link:"/service",
     image: akagera2,
     description:
       "Navigate the visa process with confidence. Our visa application services offer guidance and support, making international travel more accessible and stress-free.",
@@ -143,12 +152,14 @@ export const ServiceList = [
   {
     icon: "mdi:events-check",
     title: "Events Management",
+    link:"/service",
     image: akagera2,
     description:
       "Bring your vision to life with our professional events management services. From planning to execution, we ensure every detail is covered for unforgettable events.",
   },
   {
     icon: "gg:camera",
+    link:"/service",
     title: "Photo & Video Coverage",
     image: akagera2,
     description:
@@ -990,6 +1001,6 @@ export const Testimonial = [
     position: "Photographer",
     comment:
       "An amazing team that made sure every moment of our trip was perfect. Their expertise and passion truly shine through.",
-    image:profile2 ,
+    image:profile4 ,
   },
 ];

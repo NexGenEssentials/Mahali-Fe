@@ -75,7 +75,7 @@ const Navbar = () => {
       {/* Default Navbar */}
       <nav className="absolute top-0 right-0 left-0 z-50">
         {close && (
-          <div className="bg-defaultGreen">
+          <div className="max-md:hidden bg-defaultGreen">
             <div className="max-w-[1750px] mx-auto text-white text-sm font-medium gap-4 flex-wrap flex justify-between items-center px-8 py-3">
               <span>+250793898790</span>
               <span>Get 50% off By selecting a package | Book now</span>

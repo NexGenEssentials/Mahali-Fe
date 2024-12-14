@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/keyboard";
 import { Keyboard, Navigation } from "swiper/modules";
 import { HeaderSection } from "../headers/header";
+import Link from "next/link";
 
 const ServiceSection = () => {
   return (
@@ -52,6 +53,7 @@ const ServiceSection = () => {
           <div className="flex gap-4 items-stretch justify-center mx-4 ">
             {ServiceList.map((service, index) => (
               <SwiperSlide key={index} className="py-4 mb-4">
+                <Link href={service.link}>
                 <div className="bg-white hover:scale-95 hover:duration-500 drop-shadow-md group cursor-pointer p-6 border rounded-md flex flex-col items-center justify-center gap-2">
                   <div className="p-2 group-hover:bg-primaryGreen group-hover:duration-500 border-2 border-primaryGreen">
                     <Icon
@@ -68,6 +70,7 @@ const ServiceSection = () => {
                     {service.description}
                   </span>
                 </div>
+                </Link>
               </SwiperSlide>
             ))}
           </div>
