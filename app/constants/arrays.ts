@@ -19,6 +19,12 @@ import profile1 from '@/public/images/guide1.jpg';
 import profile2 from '@/public/images/guide2.webp';
 import profile3 from '@/public/images/guide3.webp';
 import profile4 from '@/public/images/profile.png'
+import carImage1 from '@/public/images/car1.avif'
+import carImage2 from '@/public/images/car2.jpg'
+import carImage3 from '@/public/images/car3.jpg'
+import carImage4 from '@/public/images/car4.avif'
+import carImage5 from '@/public/images/car5.webp'
+import carImage6 from '@/public/images/car6.jpg'
 
 
 export const Parks = [
@@ -112,7 +118,7 @@ export const ServiceList = [
   {
     icon: "mingcute:car-3-fill",
     title: "Car Rentals",
-    link:"/service",
+    link:"/service/car-rental",
     image: nyungwe1,
     description:
       "Enjoy the freedom to explore with our reliable car rental services. Choose from a range of vehicles that suit your travel needs, ensuring a smooth and hassle-free journey.",
@@ -1003,4 +1009,122 @@ export const Testimonial = [
       "An amazing team that made sure every moment of our trip was perfect. Their expertise and passion truly shine through.",
     image:profile4 ,
   },
+];
+
+export const CarHero=[
+  {
+    icon:"gis:route",
+    desc:"Choose Your Pickup Location",
+  },
+  {
+    icon:"game-icons:shaking-hands",
+    desc:"Select the Best Deal",
+  },
+  {
+    icon:"map:car-rental",
+    desc:"Reserve Your Rental Car",
+  },
+]
+export const CarService=[
+  {
+    icon:"raphael:car",
+    desc:"Wedding Ceremony",
+  },
+  {
+    icon:"streamline:arrow-roadmap-solid",
+    desc:"City Transfer",
+  },
+  {
+    icon:"mdi:airport-shuttle",
+    desc:"Airport Transfer",
+  },
+  {
+    icon:"mdi:train-car",
+    desc:"Whole City Tour",
+  },
+]
+
+export const CarDetails = [
+  {
+    car: carImage1,
+    name: 'Toyota Corolla',
+    category: 'Sedan',
+    price: '$50',
+    period: 'Hour',
+    transmission: 'Automatic',
+  },
+  {
+    car: carImage2,
+    name: 'Land Rover Defender',
+    category: 'SUV',
+    price: '$120',
+    period: 'Hour',
+    transmission: 'Manual',
+  },
+  {
+    car: carImage3,
+    name: 'Mercedes-Benz E-Class',
+    category: 'Luxury',
+    price: '$200',
+    period: 'Day',
+    transmission: 'Automatic',
+  },
+  {
+    car: carImage4,
+    name: 'Honda Civic',
+    category: 'Compact',
+    price: '$40',
+    period: 'Day',
+    transmission: 'Automatic',
+  },
+  {
+    car: carImage5,
+    name: 'Jeep Wrangler',
+    category: 'Off-Road',
+    price: '$100',
+    period: 'Day',
+    transmission: 'Manual',
+  },
+  {
+    car: carImage6,
+    name: 'Tesla Model 3',
+    category: 'Electric',
+    price: '$80',
+    period: 'Hour',
+    transmission: 'Automatic',
+  },
+];
+
+export const Columns = [
+  {
+    title: 'Cars',
+    dataIndex: 'car',
+    key: 'car',
+  },
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+      title: 'Category',
+      dataIndex: 'category',
+      key: 'category',
+    },
+  {
+    title: 'Price',
+    dataIndex: 'price',
+    key: 'price',
+  },
+  {
+    title: 'Period',
+    dataIndex: 'period',
+    key: 'period',
+  },
+  {
+    title: 'Transmission',
+    dataIndex: 'transmission',
+    key: 'transmission',
+  },
+ 
 ];

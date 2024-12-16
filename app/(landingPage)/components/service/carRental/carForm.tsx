@@ -4,10 +4,13 @@ import React, { useState } from "react";
 import DatePicker, { DateObject, Value } from "react-multi-date-picker";
 
 const CarRentalForm = () => {
-  const [dateSelected, setDateSelected] = useState<Value>(new DateObject());
+    const [dateSelected, setDateSelected] = useState<DateObject[]>([
+        new DateObject(),
+        new DateObject().add(1, "days"),
+      ]);
   return (
     <form
-      action={""}
+      action={"#"}
       className="px-4 p-8 flex flex-col gap-4 text-black text-opacity-75 w-full"
     >
       <div className="w-full flex-col gap-2">
@@ -15,77 +18,65 @@ const CarRentalForm = () => {
           type="text"
           name=""
           id=""
-          placeholder="Enter full name"
+          placeholder="Pick-up location"
           min={0}
           className="p-3 w-full text-sm  rounded-md outline-none"
         />
       </div>
       <div className="w-full flex-col gap-2">
         <input
-          type="email"
+          type="text"
           name=""
           id=""
-          placeholder="Enter your email"
+          placeholder="Drop-off location"
           min={0}
           className="p-3 w-full text-sm  rounded-md outline-none"
         />
       </div>
-      <div className="w-full flex-col gap-2">
-        <input
-          type="number"
-          name=""
-          id=""
-          placeholder="Enter your phone number"
-          min={0}
-          className="p-3 w-full text-sm  rounded-md outline-none"
-        />
-      </div>
-      <div>
-        <input
-          type="number"
-          name=""
-          id=""
-          placeholder="People"
-          min={0}
-          className="p-3 w-full text-sm  rounded-lg outline-none"
-        />
-      </div>
-
       <DatePicker
-        value={dateSelected}
-        onChange={setDateSelected}
-        format="DD/MM/YYYY"
-        inputClass="p-3 min-w-48 text-sm rounded-lg outline-none"
-      />
-
-      <Space wrap>
-        <Select
-          defaultValue="Duration"
-          size="large"
-          options={[
-            { value: "1-3 Days" },
-            { value: "4-6 Days" },
-            { value: "7-8 Days" },
-            { value: "9+ Days" },
-          ]}
-          className="w-full min-w-48"
+          range
+          rangeHover
+          dateSeparator=" to "
+          value={dateSelected}
+          onChange={setDateSelected}
+          format="DD/MM/YYYY"
+          inputClass="p-2 w-full max-w-60 text-sm rounded-lg outline-none"
         />
-      </Space>
-      <div>
-        <textarea
+      <Space wrap>
+          <Select
+            defaultValue="All"
+            size="large"
+            options={[
+              { value: "Sedan" },
+              { value: "Hatchback" },
+              { value: "SUV" },
+              { value: "Mini Van" },
+              { value: " Van" },
+              { value: "Wagon" },
+              { value: "Coupe" },
+              { value: "Bus" },
+              { value: "Mini Bus" },
+              { value: "Convertible" },
+              { value: "Others" },
+            ]}
+            className="w-full min-w-60"
+          />
+        </Space>
+        <div className="w-full flex-col gap-2">
+        <input
+          type="time"
           name=""
           id=""
-          placeholder="Your inquiry"
-          rows={3}
-          cols={6}
-          className="p-2 w-full text-sm  rounded-lg outline-none"
+          placeholder='Time'
+          min={0}
+          className="p-3 w-full text-sm max-w-60 rounded-md outline-none"
         />
       </div>
       <button
         type="submit"
         className="p-2 bg-primaryGreen text-white font-semibold rounded-md"
       >
-        Send
+        Rent a Car
       </button>
     </form>
   );
