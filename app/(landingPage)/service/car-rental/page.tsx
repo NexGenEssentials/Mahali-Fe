@@ -55,7 +55,9 @@ const CarRental = () => {
                 ))}
               </div>
               <div className="text-white">
+              <Link href={'/service/car-rental/all'}>
                 <Button name="Reserver Your Perfect Car" />
+                </Link>
               </div>
             </div>
           </div>
@@ -93,7 +95,9 @@ const CarRental = () => {
                 today and drive with confidence wherever your journey takes you!
               </p>
               <div className="text-white border rounded-md w-fit mt-4">
+              <Link href={'/service/car-rental/all'}>
                 <Button name="Choose a Vehicle" />
+                </Link>
               </div>
             </div>
           </div>

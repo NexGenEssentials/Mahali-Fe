@@ -1,5 +1,6 @@
 "use client";
 import { Space, Select } from "antd";
+import Link from "next/link";
 import React, { useState } from "react";
 import DatePicker, { DateObject, Value } from "react-multi-date-picker";
 
@@ -10,7 +11,7 @@ const CarRentalForm = () => {
       ]);
   return (
     <form
-      action={"#"}
+      action={"/service/car-rental/all"}
       className="px-4 p-8 flex flex-col gap-4 text-black text-opacity-75 w-full"
     >
       <div className="w-full flex-col gap-2">
@@ -72,12 +73,14 @@ const CarRentalForm = () => {
           className="p-3 w-full text-sm max-w-60 rounded-md outline-none"
         />
       </div>
+      <Link href={'/service/car-rental/all'}>
       <button
         type="submit"
         className="p-2 bg-primaryGreen text-white font-semibold rounded-md"
       >
         Rent a Car
       </button>
+      </Link>
     </form>
   );
 };
