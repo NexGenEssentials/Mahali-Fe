@@ -1089,7 +1089,7 @@ export const CarDetails = [
   },
   {
     car: carImage1,
-    name: "Toyota",
+    name: "Toyota Sedan",
     category: "Sedan",
     price: "$50",
     period: "Hour",

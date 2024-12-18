@@ -145,6 +145,3 @@ const CarRental = () => {
 
 export default CarRental;
 
-
-// All cars and pricing table and customer review
-// single car with its details
