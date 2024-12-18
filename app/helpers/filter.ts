@@ -1,4 +1,4 @@
-import { PackageList } from "../constants/arrays";
+import { CarDetails, PackageList } from "../constants/arrays";
 
 export const filterPackages = (data: typeof PackageList, filters: { location: string; packageName: string }) => {
   const matchingLocation = data.find(item => item.location.toLowerCase() === filters.location.toLowerCase()); 
@@ -12,4 +12,8 @@ export const filterPackages = (data: typeof PackageList, filters: { location: st
   }
 
   return null; 
+};
+
+export const getCarByName = (carName: string) => {
+  return CarDetails.find(car => car.name.toLowerCase() === carName.toLowerCase());
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "motion/react";
+import Link from "next/link";
 interface Props {
   car: StaticImageData;
   name: string;
@@ -19,6 +20,7 @@ const CarCard = ({
   transimission,
 }: Props) => {
   return (
+    <Link href={`/service/car-rental/${name}`}>
     <div className="bg-white drop-shadow-lg w-full flex flex-col rounded-lg cursor-pointer">
       <div className="relative h-[200px] w-full flex items-end rounded-lg justify-center overflow-hidden ">
         <Image
@@ -50,6 +52,7 @@ const CarCard = ({
         </motion.button>
       </div>
     </div>
+    </Link>
   );
 };
 

@@ -3,15 +3,59 @@ import ServicePageHero from "@/app/(landingPage)/components/service/serviceHeroS
 import LandingPage from "@/app/(landingPage)/landingPageTamplates";
 import React, { useState } from "react";
 import car from "@/public/images/car2.jpg";
-import { CarDetails, Columns } from "@/app/constants/arrays";
+import { CarDetails } from "@/app/constants/arrays";
 import CarCard from "@/app/(landingPage)/components/service/carRental/carCard";
 import Link from "next/link";
 import { Table } from "antd";
+import Image from "next/image";
+
 const CarNav = ["All Cars", "Pricing", "Reviews"];
+const Columns = [
+  {
+    title: "Cars",
+    key: "car",
+    render: (record: (typeof CarDetails)[0]) => {
+      return (
+        <Image
+          src={record.car}
+          alt="car image"
+          height={100}
+          width={200}
+          className="object-contain"
+        />
+      );
+    },
+  },
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
+  },
+  {
+    title: "Category",
+    dataIndex: "category",
+    key: "category",
+  },
+  {
+    title: "Price",
+    dataIndex: "price",
+    key: "price",
+  },
+  {
+    title: "Period",
+    dataIndex: "period",
+    key: "period",
+  },
+  {
+    title: "Transmission",
+    dataIndex: "transmission",
+    key: "transmission",
+  },
+];
+
 const AllCars = () => {
   const [service, setService] = useState("All Cars");
-  
-  
+
   return (
     <LandingPage>
       <div>
@@ -40,7 +84,7 @@ const AllCars = () => {
             {service === "All Cars" && (
               <div className="w-full flex gap-4 items-center flex-wrap justify-center  my-8 ">
                 {CarDetails.map((car, index) => (
-                  <Link className="w-full md:w-[30%]" key={index} href={"#"}>
+                  <div className="w-full md:w-[30%]" key={index}>
                     <CarCard
                       car={car.car}
                       name={car.name}
@@ -49,15 +93,15 @@ const AllCars = () => {
                       period={car.period}
                       transimission={car.transmission}
                     />
-                  </Link>
+                  </div>
                 ))}
               </div>
             )}
 
-            {service === 'Pricing' && (
-                <div className="w-full   my-8 ">
-                    <Table  dataSource={CarDetails} columns={Columns} />
-                </div>
+            {service === "Pricing" && (
+              <div className="w-full   my-8 ">
+                <Table dataSource={CarDetails} columns={Columns} />
+              </div>
             )}
           </div>
         </div>

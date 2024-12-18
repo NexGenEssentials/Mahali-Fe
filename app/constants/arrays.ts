@@ -12,20 +12,37 @@ import kenya from "@/public/images/kenya.jpg";
 import tanzania from "@/public/images/tanzania.jpg";
 import drc from "@/public/images/congo.jpeg";
 import burundi from "@/public/images/burundi.jpg";
-import serengeti2 from "@/public/images/serengeti.jpg"; 
-import serengeti1 from "@/public/images/serengeti1.jpg"; 
-import ngorongoro from "@/public/images/ngorongoro.jpg"; 
-import profile1 from '@/public/images/guide1.jpg';
-import profile2 from '@/public/images/guide2.webp';
-import profile3 from '@/public/images/guide3.webp';
-import profile4 from '@/public/images/profile.png'
-import carImage1 from '@/public/images/car1.avif'
-import carImage2 from '@/public/images/car2.jpg'
-import carImage3 from '@/public/images/car3.jpg'
-import carImage4 from '@/public/images/car4.avif'
-import carImage5 from '@/public/images/car5.webp'
-import carImage6 from '@/public/images/car6.jpg'
-
+import serengeti2 from "@/public/images/serengeti.jpg";
+import serengeti1 from "@/public/images/serengeti1.jpg";
+import ngorongoro from "@/public/images/ngorongoro.jpg";
+import profile1 from "@/public/images/guide1.jpg";
+import profile2 from "@/public/images/guide2.webp";
+import profile3 from "@/public/images/guide3.webp";
+import profile4 from "@/public/images/profile.png";
+import carImage1 from "@/public/images/car1.avif";
+import carImage2 from "@/public/images/car2.jpg";
+import carImage3 from "@/public/images/car3.jpg";
+import carImage4 from "@/public/images/car4.avif";
+import carImage5 from "@/public/images/car5.webp";
+import carImage6 from "@/public/images/car6.jpg";
+import toyota1 from "@/public/images/toyota1.avif"
+import toyota2 from "@/public/images/toyota2.avif"
+import toyota3 from "@/public/images/toyota3.avif"
+import toyota4 from "@/public/images/toyota4.avif"
+import toyota5 from "@/public/images/toyota5.avif"
+import toyota6 from "@/public/images/toyota6.avif"
+import landRover1 from "@/public/images/landRover1.webp"
+import landRover2 from "@/public/images/landRover2.webp"
+import landRover3 from "@/public/images/landRover3.webp"
+import landRover4 from "@/public/images/landRover4.webp"
+import landRover5 from "@/public/images/landRover5.webp"
+import landRover6 from "@/public/images/landRover6.webp"
+import landRover7 from "@/public/images/landRover7.webp"
+import benzi1 from "@/public/images/benz1.jpg"
+import benzi2 from "@/public/images/benz2.jpg"
+import benzi3 from "@/public/images/benz3.jpg"
+import benzi4 from "@/public/images/benz4.jpg"
+import benzi5 from "@/public/images/benz5.jpg"
 
 export const Parks = [
   {
@@ -94,7 +111,7 @@ export const ServiceList = [
   {
     icon: "octicon:package-16",
     title: "Holiday & Tour Packages",
-    link:"/destination",
+    link: "/destination",
     image: akagera1,
     description:
       "Discover expertly crafted holiday and tour packages that cater to your dream adventures. From cultural explorations to nature retreats, we create experiences you'll cherish forever.",
@@ -102,7 +119,7 @@ export const ServiceList = [
   {
     icon: "tabler:trekking",
     title: "Gorilla & Chimpanzee Trekking",
-    link:"/destination",
+    link: "/destination",
     image: akagera3,
     description:
       "Embark on unforgettable treks to encounter the majestic mountain gorillas and playful chimpanzees in their natural habitats. A rare and awe-inspiring wildlife experience awaits.",
@@ -110,7 +127,7 @@ export const ServiceList = [
   {
     icon: "ri:hotel-line",
     title: "Accommodation Booking",
-    link:"/service/accomodation",
+    link: "/service/accomodation",
     image: akagera2,
     description:
       "Find and book the perfect accommodations for your travels, from luxury resorts to budget-friendly stays, tailored to provide comfort and convenience throughout your journey.",
@@ -118,7 +135,7 @@ export const ServiceList = [
   {
     icon: "mingcute:car-3-fill",
     title: "Car Rentals",
-    link:"/service/car-rental",
+    link: "/service/car-rental",
     image: nyungwe1,
     description:
       "Enjoy the freedom to explore with our reliable car rental services. Choose from a range of vehicles that suit your travel needs, ensuring a smooth and hassle-free journey.",
@@ -126,7 +143,7 @@ export const ServiceList = [
   {
     icon: "healthicons:truck-driver",
     title: "Game Drive Safaris",
-    link:"/service",
+    link: "/service",
     image: akagera2,
     description:
       "Experience the thrill of guided game drives through stunning landscapes, offering close encounters with diverse wildlife in some of the world's most beautiful national parks.",
@@ -134,7 +151,7 @@ export const ServiceList = [
   {
     icon: "fa6-solid:ticket",
     title: "Air Ticket",
-    link:"/service",
+    link: "/service",
     image: akagera2,
     description:
       "Simplify your travel planning with our air ticket services. Whether for business or leisure, we ensure seamless booking and competitive fares for your flights.",
@@ -142,7 +159,7 @@ export const ServiceList = [
   {
     icon: "majesticons:airplane",
     title: "Airport Transfers",
-    link:"/service",
+    link: "/service",
     image: akagera2,
     description:
       "Start and end your journey with ease through our reliable airport transfer services, ensuring timely and comfortable rides to and from your destination.",
@@ -150,7 +167,7 @@ export const ServiceList = [
   {
     icon: "fa:cc-visa",
     title: "Visa Application",
-    link:"/service",
+    link: "/service",
     image: akagera2,
     description:
       "Navigate the visa process with confidence. Our visa application services offer guidance and support, making international travel more accessible and stress-free.",
@@ -158,14 +175,14 @@ export const ServiceList = [
   {
     icon: "mdi:events-check",
     title: "Events Management",
-    link:"/service",
+    link: "/service",
     image: akagera2,
     description:
       "Bring your vision to life with our professional events management services. From planning to execution, we ensure every detail is covered for unforgettable events.",
   },
   {
     icon: "gg:camera",
-    link:"/service",
+    link: "/service",
     title: "Photo & Video Coverage",
     image: akagera2,
     description:
@@ -953,11 +970,15 @@ export const StaffList = [
   {
     category: "Board Of Directors",
     list: [
-      {  name: "Carolyne Mziray Lawrence",  title: "Chairperson of the Board",  image:""},
-      {  name: "Jackson Mugumya",  title: "Board Member",  image:""},
-      {  name: "Daniella Rusamaza",  title: "Board Member",  image:""},
-      {  name: "Egide Rucyaha",  title: "Board Member",  image:""},
-      {  name: "Dan Rwiyamira",  title: "Secretary to the Board",  image:""},
+      {
+        name: "Carolyne Mziray Lawrence",
+        title: "Chairperson of the Board",
+        image: "",
+      },
+      { name: "Jackson Mugumya", title: "Board Member", image: "" },
+      { name: "Daniella Rusamaza", title: "Board Member", image: "" },
+      { name: "Egide Rucyaha", title: "Board Member", image: "" },
+      { name: "Dan Rwiyamira", title: "Secretary to the Board", image: "" },
     ],
   },
   {
@@ -965,7 +986,11 @@ export const StaffList = [
     list: [
       { name: "Giselle K. Bigabiro", title: "Sales and Marketing", image: "" },
       { name: "Vanessa Kanangire Ukeye", title: "General Manager", image: "" },
-      { name: "Patience Ntaganzwa", title: "Travel and Tour Manager", image: "",},
+      {
+        name: "Patience Ntaganzwa",
+        title: "Travel and Tour Manager",
+        image: "",
+      },
     ],
   },
   {
@@ -977,7 +1002,6 @@ export const StaffList = [
       { name: "Jackson Emma", title: "Guide", image: "" },
     ],
   },
-
 ];
 
 export const Testimonial = [
@@ -986,145 +1010,192 @@ export const Testimonial = [
     position: "CEO, GreenTech Solutions",
     comment:
       "Our experience was simply outstanding! The team's attention to detail and commitment to excellence made our trip unforgettable.",
-    image:profile1 ,
+    image: profile1,
   },
   {
     name: "Jane Smith",
     position: "Travel Blogger",
     comment:
       "The best travel experience I've ever had! From start to finish, everything was smooth and well-organized.",
-    image:profile2 ,
+    image: profile2,
   },
   {
     name: "Samuel Lee",
     position: "Adventurer",
     comment:
       "A fantastic journey full of adventures and memories that will last a lifetime. Highly recommend their services!",
-    image:profile3 ,
+    image: profile3,
   },
   {
     name: "Emily Brown",
     position: "Photographer",
     comment:
       "An amazing team that made sure every moment of our trip was perfect. Their expertise and passion truly shine through.",
-    image:profile4 ,
+    image: profile4,
   },
 ];
 
-export const CarHero=[
+export const CarHero = [
   {
-    icon:"gis:route",
-    desc:"Choose Your Pickup Location",
+    icon: "gis:route",
+    desc: "Choose Your Pickup Location",
   },
   {
-    icon:"game-icons:shaking-hands",
-    desc:"Select the Best Deal",
+    icon: "game-icons:shaking-hands",
+    desc: "Select the Best Deal",
   },
   {
-    icon:"map:car-rental",
-    desc:"Reserve Your Rental Car",
+    icon: "map:car-rental",
+    desc: "Reserve Your Rental Car",
   },
-]
-export const CarService=[
+];
+export const CarService = [
   {
-    icon:"raphael:car",
-    desc:"Wedding Ceremony",
-  },
-  {
-    icon:"streamline:arrow-roadmap-solid",
-    desc:"City Transfer",
+    icon: "raphael:car",
+    desc: "Wedding Ceremony",
   },
   {
-    icon:"mdi:airport-shuttle",
-    desc:"Airport Transfer",
+    icon: "streamline:arrow-roadmap-solid",
+    desc: "City Transfer",
   },
   {
-    icon:"mdi:train-car",
-    desc:"Whole City Tour",
+    icon: "mdi:airport-shuttle",
+    desc: "Airport Transfer",
   },
-]
+  {
+    icon: "mdi:train-car",
+    desc: "Whole City Tour",
+  },
+];
 
 export const CarDetails = [
   {
+    car: toyota1,
+    name: "Toyota Corolla",
+    category: "Sedan",
+    price: "$70",
+    period: "Day",
+    transmission: "Automatic",
+    description: "The Toyota Corolla is a reliable and fuel-efficient sedan, celebrated for its practicality and value. Known for its sleek design and comfortable interior, it offers ample space and advanced safety features, making it ideal for daily commutes and family trips. With a reputation for reliability and longevity, it’s a perfect companion for everyday needs.",
+    gallery: [toyota1, toyota2, toyota3, toyota4, toyota5, toyota6],
+    spec: [
+      { icon: "bi:speedometer2", name: "Mileage", value: "40,000" },
+      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Manual" },
+      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol" },
+      { icon: "bi:luggage-fill", name: "Luggage", value: "4 bags" },
+      { icon: "carbon:hybrid-networking", name: "Hybrid", value: "Yes" },
+    ],
+  },
+  {
     car: carImage1,
-    name: 'Toyota Corolla',
-    category: 'Sedan',
-    price: '$50',
-    period: 'Hour',
-    transmission: 'Automatic',
+    name: "Toyota",
+    category: "Sedan",
+    price: "$50",
+    period: "Hour",
+    transmission: "Automatic",
+    description: "This Toyota sedan is a perfect blend of comfort and efficiency. It offers a smooth ride, modern interior features, and excellent fuel economy, making it suitable for both city drives and long journeys. It’s the perfect choice for those who value reliability and versatility.",
+    gallery: [toyota1, toyota2, toyota3, toyota4, toyota5, toyota6],
+    spec: [
+      { icon: "bi:speedometer2", name: "Mileage", value: "25,000" },
+      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Automatic" },
+      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol" },
+      { icon: "bi:luggage-fill", name: "Luggage", value: "3 bags" },
+      { icon: "carbon:hybrid-networking", name: "Hybrid", value: "Yes" },
+    ],
   },
   {
-    car: carImage2,
-    name: 'Land Rover Defender',
-    category: 'SUV',
-    price: '$120',
-    period: 'Hour',
-    transmission: 'Manual',
+    car: landRover1,
+    name: "Land Rover Defender",
+    category: "SUV",
+    price: "$120",
+    period: "Hour",
+    transmission: "Manual",
+    description: "The Land Rover Defender is a rugged SUV designed for off-road adventures. With its robust build, advanced four-wheel-drive capabilities, and luxurious interior, it excels on rough terrain while providing a comfortable driving experience. Whether conquering mountains or city roads, the Defender stands out with unmatched versatility.",
+    gallery: [landRover1, landRover2, landRover3, landRover4, landRover5, landRover6, landRover7],
+    spec: [
+      { icon: "bi:speedometer2", name: "Mileage", value: "15,000" },
+      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Manual" },
+      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "7 Adults" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Diesel" },
+      { icon: "bi:luggage-fill", name: "Luggage", value: "6 bags" },
+      { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
+    ],
   },
   {
-    car: carImage3,
-    name: 'Mercedes-Benz E-Class',
-    category: 'Luxury',
-    price: '$200',
-    period: 'Day',
-    transmission: 'Automatic',
+    car: benzi1,
+    name: "Mercedes-Benz E-Class",
+    category: "Luxury",
+    price: "$200",
+    period: "Day",
+    transmission: "Automatic",
+    description: "The Mercedes-Benz E-Class is a symbol of luxury, performance, and innovation. Renowned for its sophisticated design, this premium sedan combines cutting-edge technology with unparalleled comfort and advanced safety features. Whether for business or pleasure, the E-Class offers a prestigious driving experience.",
+    gallery: [benzi1, benzi2, benzi3, benzi4, benzi5],
+    spec: [
+      { icon: "bi:speedometer2", name: "Mileage", value: "10,000" },
+      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Automatic" },
+      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol" },
+      { icon: "bi:luggage-fill", name: "Luggage", value: "4 bags" },
+      { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
+    ],
   },
   {
     car: carImage4,
-    name: 'Honda Civic',
-    category: 'Compact',
-    price: '$40',
-    period: 'Day',
-    transmission: 'Automatic',
+    name: "Honda Civic",
+    category: "Compact",
+    price: "$40",
+    period: "Day",
+    transmission: "Automatic",
+    description: "The Honda Civic is a compact car known for its stylish design, excellent fuel economy, and reliable performance. It provides a comfortable ride with a well-equipped interior, making it ideal for urban commuting and everyday use. With a reputation for innovation, it continues to impress drivers globally.",
+    gallery: [carImage4, carImage2],
+    spec: [
+      { icon: "bi:speedometer2", name: "Mileage", value: "35,000" },
+      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Automatic" },
+      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol" },
+      { icon: "bi:luggage-fill", name: "Luggage", value: "3 bags" },
+      { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
+    ],
   },
   {
     car: carImage5,
-    name: 'Jeep Wrangler',
-    category: 'Off-Road',
-    price: '$100',
-    period: 'Day',
-    transmission: 'Manual',
+    name: "Jeep Wrangler",
+    category: "Off-Road",
+    price: "$100",
+    period: "Day",
+    transmission: "Manual",
+    description: "The Jeep Wrangler is an iconic off-road SUV built for adventure. With its durable construction, powerful engine, and unmatched off-road capabilities, it is perfect for exploring rugged terrains and tackling challenging trails. The Wrangler’s bold design ensures it stands out on and off the road.",
+    gallery: [carImage5, carImage3],
+    spec: [
+      { icon: "bi:speedometer2", name: "Mileage", value: "20,000" },
+      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Manual" },
+      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "4 Adults" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Diesel" },
+      { icon: "bi:luggage-fill", name: "Luggage", value: "5 bags" },
+      { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
+    ],
   },
   {
     car: carImage6,
-    name: 'Tesla Model 3',
-    category: 'Electric',
-    price: '$80',
-    period: 'Hour',
-    transmission: 'Automatic',
+    name: "Tesla Model 3",
+    category: "Electric",
+    price: "$80",
+    period: "Hour",
+    transmission: "Automatic",
+    description: "The Tesla Model 3 is an electric sedan that combines cutting-edge technology with sustainability. It offers a sleek design, exceptional performance, and advanced autonomous driving features, making it a top choice for eco-conscious drivers. With zero emissions and an impressive range, it redefines modern driving.",
+    gallery: [carImage6],
+    spec: [
+      { icon: "bi:speedometer2", name: "Mileage", value: "10,000" },
+      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Automatic" },
+      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Electric" },
+      { icon: "bi:luggage-fill", name: "Luggage", value: "2 bags" },
+      { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
+    ],
   },
 ];
 
-export const Columns = [
-  {
-    title: 'Cars',
-    dataIndex: 'car',
-    key: 'car',
-  },
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-      title: 'Category',
-      dataIndex: 'category',
-      key: 'category',
-    },
-  {
-    title: 'Price',
-    dataIndex: 'price',
-    key: 'price',
-  },
-  {
-    title: 'Period',
-    dataIndex: 'period',
-    key: 'period',
-  },
-  {
-    title: 'Transmission',
-    dataIndex: 'transmission',
-    key: 'transmission',
-  },
- 
-];
+
+
