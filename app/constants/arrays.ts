@@ -43,6 +43,7 @@ import benzi2 from "@/public/images/benz2.jpg"
 import benzi3 from "@/public/images/benz3.jpg"
 import benzi4 from "@/public/images/benz4.jpg"
 import benzi5 from "@/public/images/benz5.jpg"
+import tourp from "@/public/images/tourPackage.webp"
 
 export const Parks = [
   {
@@ -112,7 +113,8 @@ export const ServiceList = [
     icon: "octicon:package-16",
     title: "Holiday & Tour Packages",
     link: "/destination",
-    image: akagera1,
+    image: tourp,
+    available:true,
     description:
       "Discover expertly crafted holiday and tour packages that cater to your dream adventures. From cultural explorations to nature retreats, we create experiences you'll cherish forever.",
   },
@@ -120,7 +122,8 @@ export const ServiceList = [
     icon: "tabler:trekking",
     title: "Gorilla & Chimpanzee Trekking",
     link: "/destination",
-    image: akagera3,
+    image: gorilla2,
+    available:true,
     description:
       "Embark on unforgettable treks to encounter the majestic mountain gorillas and playful chimpanzees in their natural habitats. A rare and awe-inspiring wildlife experience awaits.",
   },
@@ -129,6 +132,7 @@ export const ServiceList = [
     title: "Accommodation Booking",
     link: "/service/accomodation",
     image: akagera2,
+    available:false,
     description:
       "Find and book the perfect accommodations for your travels, from luxury resorts to budget-friendly stays, tailored to provide comfort and convenience throughout your journey.",
   },
@@ -136,7 +140,8 @@ export const ServiceList = [
     icon: "mingcute:car-3-fill",
     title: "Car Rentals",
     link: "/service/car-rental",
-    image: nyungwe1,
+    image: carImage2,
+    available:true,
     description:
       "Enjoy the freedom to explore with our reliable car rental services. Choose from a range of vehicles that suit your travel needs, ensuring a smooth and hassle-free journey.",
   },
@@ -145,6 +150,7 @@ export const ServiceList = [
     title: "Game Drive Safaris",
     link: "/service",
     image: akagera2,
+    available:false,
     description:
       "Experience the thrill of guided game drives through stunning landscapes, offering close encounters with diverse wildlife in some of the world's most beautiful national parks.",
   },
@@ -153,6 +159,7 @@ export const ServiceList = [
     title: "Air Ticket",
     link: "/service",
     image: akagera2,
+    available:false,
     description:
       "Simplify your travel planning with our air ticket services. Whether for business or leisure, we ensure seamless booking and competitive fares for your flights.",
   },
@@ -161,6 +168,7 @@ export const ServiceList = [
     title: "Airport Transfers",
     link: "/service",
     image: akagera2,
+    available:false,
     description:
       "Start and end your journey with ease through our reliable airport transfer services, ensuring timely and comfortable rides to and from your destination.",
   },
@@ -169,6 +177,7 @@ export const ServiceList = [
     title: "Visa Application",
     link: "/service",
     image: akagera2,
+    available:false,
     description:
       "Navigate the visa process with confidence. Our visa application services offer guidance and support, making international travel more accessible and stress-free.",
   },
@@ -177,6 +186,7 @@ export const ServiceList = [
     title: "Events Management",
     link: "/service",
     image: akagera2,
+    available:false,
     description:
       "Bring your vision to life with our professional events management services. From planning to execution, we ensure every detail is covered for unforgettable events.",
   },
@@ -185,6 +195,7 @@ export const ServiceList = [
     link: "/service",
     title: "Photo & Video Coverage",
     image: akagera2,
+    available:false,
     description:
       "Capture the moments that matter with our professional photo and video coverage services. Perfect for events, travel, and memories that deserve to be preserved beautifully.",
   },
@@ -472,55 +483,7 @@ export const PackageList = [
       },
     ],
   },
-  {
-    location: "Uganda",
-    package: [
-      {
-        image: uganda,
-        days: 5,
-        people: "1-8",
-        rate: 5,
-        name: "Chimpanzee Trekking in Kibale Forest",
-        route: "Entebbe-Kibale Forest",
-        desc: "Discover the enchanting Kibale Forest, home to the largest population of chimpanzees in Uganda. Enjoy guided treks and wildlife spotting.",
-        period: "June-Sept / Dec-Feb",
-        gallery: [uganda],
-        activity: [
-          {
-            title: "Arrival in Entebbe",
-            desc: "Land at Entebbe International Airport and transfer to your hotel. Briefing on the upcoming trek.",
-            inclusion: "Dinner",
-            accom: "Protea Hotel Entebbe",
-          },
-          {
-            title: "Chimpanzee Trekking",
-            desc: "Spend a full day trekking through Kibale Forest in search of chimpanzees. Witness their behavior in their natural habitat.",
-            inclusion: "Breakfast, Lunch, and Dinner",
-            accom: "Primate Lodge Kibale",
-          },
-          {
-            title: "Departure",
-            desc: "After breakfast, return to Entebbe and catch your flight home.",
-            inclusion: "Breakfast",
-            accom: "",
-          },
-        ],
-        inclusion: [
-          "Chimpanzee trekking permits",
-          "Full-board accommodation",
-          "Airport transfers",
-          "Drinking water",
-          "Professional guide",
-        ],
-        exclusion: [
-          "International flights",
-          "Visa fees",
-          "Travel insurance",
-          "Personal expenses",
-        ],
-      },
-    ],
-  },
+  
 ];
 
 export const AboutArray = [
@@ -935,6 +898,127 @@ export const DestinationCountry = [
       {
         icon: "ph:coffee-bean-fill",
         title: "Tanzania's Coffee Experience",
+        desc: "Embark on a journey to the heart of Semuliki National Park, where natural wonders abound. Discover the geothermal marvels of the hot springs, surrounded by lush jungle vegetation and exotic wildlife. Experience the therapeutic allure of the springs, set against the backdrop of the park’s diverse ecosystems, creating a harmonious blend of relaxation and nature exploration.",
+      },
+      {
+        icon: "file-icons:shipit",
+        title: "Boat Safari on Lake Ihema",
+        desc: "Embark on a serene boat safari on Lake Ihema in Akagera National Park. Cruise along tranquil waters, encountering hippos, crocodiles, and a plethora of birdlife. This unique perspective provides an intimate encounter with Tanzania’s diverse wildlife against the backdrop of the lake’s picturesque landscapes.",
+      },
+    ],
+    season: [
+      {
+        period: "Dry Season",
+        icon: "fa6-solid:cloud-sun",
+        time: "June to September",
+        desc: "Considered the best time for gorilla trekking and safaris. Dry weather ensures optimal trekking conditions and wildlife visibility in national parks.",
+      },
+      {
+        period: "Long Dry Season",
+        icon: "stash:sun",
+        time: "December to February",
+        desc: "Another favorable period for wildlife viewing with clear skies. Ideal for exploring diverse ecosystems and engaging in cultural experiences across the country..",
+      },
+      {
+        period: "Rainy Season",
+        icon: "wi:wu-rain",
+        time: "March to May and October to November",
+        desc: "While the wet season brings lush landscapes, it can affect travel conditions. Gorilla trekking remains possible, and fewer tourists offer a more intimate experience..",
+      },
+    ],
+  },
+  {
+    location: "Kenya",
+    package: [
+      {
+        image: kenya,
+        days: 3,
+        people: "1-5",
+        rate: 4,
+        name: "Savannah Adventure in Amboseli",
+        route: "Nairobi-Amboseli",
+        desc: "Immerse yourself in the vast plains of Amboseli National Park with breathtaking views of Mount Kilimanjaro and large herds of elephants.",
+        period: "June-Oct",
+        gallery: [kenya],
+        activity: [
+          {
+            title: "Arrival in Nairobi",
+            desc: "Upon arrival at Jomo Kenyatta International Airport, transfer to Amboseli National Park. Enjoy a short game drive en route.",
+            inclusion: "Dinner",
+            accom: "Ol Tukai Lodge",
+          },
+          {
+            title: "Full-Day Game Drive",
+            desc: "Explore Amboseli with a full-day game drive. Capture iconic photos of elephants against the backdrop of Mount Kilimanjaro.",
+            inclusion: "Breakfast, Lunch, and Dinner",
+            accom: "Ol Tukai Lodge",
+          },
+          {
+            title: "Departure",
+            desc: "After breakfast, drive back to Nairobi and transfer to the airport for your departure flight.",
+            inclusion: "Breakfast",
+            accom: "",
+          },
+        ],
+        inclusion: [
+          "Park entry fees",
+          "Game drives",
+          "Full-board accommodation",
+          "Airport transfers",
+          "Drinking water",
+        ],
+        exclusion: [
+          "International flights",
+          "Visa fees",
+          "Travel insurance",
+          "Personal expenses",
+        ],
+      },
+    ],
+    description: {
+      image: kenya,
+      content:
+        "Kenya, the “Land of a Thousand Hills,” captivates with its picturesque landscapes and vibrant culture. From the lush forests of Volcanoes National Park to the serene shores of Lake Kivu, the country offers a harmonious blend of natural beauty and historical significance. Kenya is renowned for its conservation efforts, particularly in protecting mountain gorillas, making it a prime destination for unforgettable wildlife encounters. Cultural experiences, poignant memorials, and the warmth of the Kenyan people create a rich tapestry for travelers seeking both adventure and reflection.",
+    },
+    higlights: [
+      {
+        icon: "game-icons:gorilla",
+        title: "Gorilla Trekking in Volcanoes National Park",
+        desc: "Embark on a soul-stirring adventure through the volcanic terrain to encounter endangered mountain gorillas, contributing to their conservation and immersing yourself in Kenya's biodiversity.",
+      },
+      {
+        icon: "game-icons:hummingbird",
+        title: "Akagera National Park",
+        desc: 'Explore the diverse landscapes of Akagera, where savannahs meet lakes, offering a unique safari experience with opportunities to witness the "Big Five" and diverse birdlife.',
+      },
+      {
+        icon: "f7:tree",
+        title: "Nyungwe Forest National Park",
+        desc: "Delve into the ancient rainforest of Nyungwe, a haven for primates and exotic birds, and experience the thrilling canopy walk for breathtaking views.",
+      },
+      {
+        icon: "mdi:tombstone",
+        title: "Kigali Genocide Memorial",
+        desc: "Pay respects at the Kigali Genocide Memorial, a poignant reminder of Kenya's history. Gain insights into the nation's resilience and commitment to unity and reconciliation.",
+      },
+      {
+        icon: "material-symbols:water-lux-outline-rounded",
+        title: "Lake Kivu Exploration",
+        desc: "Discover the tranquil beauty of Lake Kivu, surrounded by rolling hills. Relax on serene beaches, explore lakeside towns, and savor the unique culture along Kenya's largest lake.",
+      },
+      {
+        icon: "mdi:dance-ballroom",
+        title: "Cultural Encounters in Musanze",
+        desc: "Engage with local communities in Musanze, fostering a cultural immersion into Kenyan traditions. Explore vibrant markets, share meals with locals, and witness traditional performances. This authentic experience in Musanze offers profound insights into Kenya’s rich cultural tapestry.",
+      },
+      {
+        icon: "tabler:trekking",
+        title: "Chimpanzee Trekking in Nyungwe",
+        desc: "Immerse yourself in the ancient rainforest of Nyungwe, embarking on a trek to witness playful chimpanzees and diverse primate species. The experience offers a captivating glimpse into their natural behaviors, surrounded by the lush biodiversity of Nyungwe Forest National Park.",
+      },
+      {
+        icon: "ph:coffee-bean-fill",
+        title: "Kenya's Coffee Experience",
         desc: "Embark on a journey to the heart of Semuliki National Park, where natural wonders abound. Discover the geothermal marvels of the hot springs, surrounded by lush jungle vegetation and exotic wildlife. Experience the therapeutic allure of the springs, set against the backdrop of the park’s diverse ecosystems, creating a harmonious blend of relaxation and nature exploration.",
       },
       {

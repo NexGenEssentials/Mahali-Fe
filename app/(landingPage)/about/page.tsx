@@ -35,9 +35,9 @@ const About = () => {
                     onClick={() => setActive(content.title)}
                     className={`${
                       active === content.title
-                        ? "border-b-2 border-b-defaultGreen"
-                        : ""
-                    } text-base text-center font-bold text-defaultGreen py-1 cursor-pointer`}
+                        ? "border-b-2 border-b-defaultGreen text-defaultGreen"
+                        : " text-slate-400"
+                    } text-base text-center font-bold  py-1 cursor-pointer hover:text-defaultGreen`}
                     key={index}
                   >
                     {content.title}
@@ -153,9 +153,9 @@ const About = () => {
                   onClick={() => setCategory(cat.category)}
                   className={`${
                     category === cat.category
-                      ? "border-b-2 border-b-defaultGreen"
-                      : ""
-                  } text-base text-center font-bold text-defaultGreen py-1 cursor-pointer`}
+                      ? "border-b-2 border-b-defaultGreen text-defaultGreen"
+                      : "text-slate-400"
+                  } text-base text-center font-bold hover:text-defaultGreen py-1 cursor-pointer`}
                   key={index}
                 >
                   {cat.category}
