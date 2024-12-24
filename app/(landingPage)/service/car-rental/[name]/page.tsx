@@ -66,6 +66,18 @@ const CarDetails = async ({ params }: { params: { name: string } }) => {
             </div>
           </div>
         </div>
+        <div className="flex flex-col items-center justify-center w-full">
+        <HeaderSection subtitle="" title="Features" />
+        <div className="w-2/3 flex flex-wrap gap-2 ">
+          {
+             carInfo?.features?.map((feat, index)=>(
+              <div key={index} className={`${feat.available ? 'bg-primaryGreen text-white' : 'bg-white text-slate-400'}  rounded-md text-xs border p-2`}>
+               {feat.feature}
+              </div>
+             ))
+          }
+        </div>
+        </div>
         <div>
           <HeaderSection subtitle="Related Cars" title="Choose Car" />
           <CarTypes />
