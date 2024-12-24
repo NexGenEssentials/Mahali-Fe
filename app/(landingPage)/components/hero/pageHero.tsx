@@ -10,7 +10,7 @@ type Props = {
 const PageHero = ({ image, title }: Props) => {
   return (
     <div className=" w-full">
-      <div className="relative max-md:h-[300px] h-screen 2xl:h-[800px] w-full  text-primaryWhite bg-black">
+      <div className="relative max-md:h-[250px] h-[400px] w-full  text-primaryWhite bg-black">
         <Image
           src={image}
           alt={title}

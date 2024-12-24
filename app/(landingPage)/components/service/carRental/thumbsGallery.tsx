@@ -28,7 +28,7 @@ const ThumbsGallery: React.FC<ThumbsGalleryProps> = ({ images }) => {
         }}
         modules={[FreeMode, Navigation, Thumbs]}
         className='h-80 w-full rounded-lg'
-        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // Track active index
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
       >
         {images?.map((image, index) => (
           <SwiperSlide key={index}>

@@ -15,9 +15,9 @@ export default function Home() {
       <HeroSection/>
       <PromotionSection/>
       <AboutUsSection/>
-      <DestinationSection/>
       <ServiceSection/>
       <PackageSection/>
+      <DestinationSection/>
       <TestimonialSection/>
       </section>
     </LandingPage>

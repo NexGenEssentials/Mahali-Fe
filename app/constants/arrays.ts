@@ -1133,6 +1133,7 @@ export const CarHero = [
     desc: "Reserve Your Rental Car",
   },
 ];
+
 export const CarService = [
   {
     icon: "raphael:car",
@@ -1166,7 +1167,7 @@ export const CarDetails = [
       { icon: "bi:speedometer2", name: "Mileage", value: "40,000" },
       { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Manual" },
       { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol: 10 Km/L" },
       { icon: "bi:luggage-fill", name: "Luggage", value: "4 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "Yes" },
     ],
@@ -1184,7 +1185,7 @@ export const CarDetails = [
       { icon: "bi:speedometer2", name: "Mileage", value: "25,000" },
       { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Automatic" },
       { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol: 15 Km/L" },
       { icon: "bi:luggage-fill", name: "Luggage", value: "3 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "Yes" },
     ],
@@ -1202,7 +1203,7 @@ export const CarDetails = [
       { icon: "bi:speedometer2", name: "Mileage", value: "15,000" },
       { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Manual" },
       { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "7 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Diesel" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Diesel: 20 Km/L" },
       { icon: "bi:luggage-fill", name: "Luggage", value: "6 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
     ],
@@ -1220,7 +1221,7 @@ export const CarDetails = [
       { icon: "bi:speedometer2", name: "Mileage", value: "10,000" },
       { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Automatic" },
       { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol: 60 Km/L" },
       { icon: "bi:luggage-fill", name: "Luggage", value: "4 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
     ],
@@ -1238,7 +1239,7 @@ export const CarDetails = [
       { icon: "bi:speedometer2", name: "Mileage", value: "35,000" },
       { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Automatic" },
       { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol: 35 Km/L" },
       { icon: "bi:luggage-fill", name: "Luggage", value: "3 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
     ],
@@ -1256,7 +1257,7 @@ export const CarDetails = [
       { icon: "bi:speedometer2", name: "Mileage", value: "20,000" },
       { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Manual" },
       { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "4 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Diesel" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Diesel: 25 Km/L" },
       { icon: "bi:luggage-fill", name: "Luggage", value: "5 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
     ],
@@ -1274,11 +1275,101 @@ export const CarDetails = [
       { icon: "bi:speedometer2", name: "Mileage", value: "10,000" },
       { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Automatic" },
       { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Electric" },
+      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Electric: 8hrs" },
       { icon: "bi:luggage-fill", name: "Luggage", value: "2 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
     ],
   },
+];
+
+export const TourPackages = [
+  {
+    name: "Akagera National Park",
+    details: "A journey to explore Akagera National Park, renowned for its wildlife and savannah landscapes.",
+    prices: [
+      { persons: 1, rate: "$250 per person" },
+      { persons: 2, rate: "$200 per person" },
+      { persons: 3, rate: "$180 per person" },
+      { persons: "4+", rate: "$150 per person" }
+    ],
+    inclusions: [
+      "Park entry fees",
+      "Guided safari drives",
+      "Transportation within the park"
+    ],
+    exclusions: [
+      "Meals and drinks",
+      "Personal expenses",
+      "Travel insurance"
+    ],
+    activities: [
+      "Game drives",
+      "Birdwatching",
+      "Boat trips on Lake Ihema"
+    ],
+    itinerary: [
+      "Day 1: Arrival at Akagera, evening game drive",
+      "Day 2: Morning safari, optional boat ride, departure"
+    ]
+  },
+  {
+    name: "Volcanoes National Park",
+    details: "Home to mountain gorillas, this park offers a rich trekking experience.",
+    prices: [
+      { persons: 1, rate: "$600 per person" },
+      { persons: 2, rate: "$550 per person" },
+      { persons: 3, rate: "$500 per person" },
+      { persons: "4+", rate: "$450 per person" }
+    ],
+    inclusions: [
+      "Gorilla trekking permits",
+      "Local guides",
+      "Transportation to/from the park"
+    ],
+    exclusions: [
+      "Accommodation",
+      "Meals and drinks",
+      "Personal expenses"
+    ],
+    activities: [
+      "Gorilla trekking",
+      "Nature walks",
+      "Cultural visits to local communities"
+    ],
+    itinerary: [
+      "Day 1: Arrival and orientation",
+      "Day 2: Gorilla trekking and cultural visit"
+    ]
+  },
+  {
+    name: "Nyungwe National Park",
+    details: "A visit to Nyungwe's rainforests, known for its biodiversity and primate species.",
+    prices: [
+      { persons: 1, rate: "$350 per person" },
+      { persons: 2, rate: "$300 per person" },
+      { persons: 3, rate: "$270 per person" },
+      { persons: "4+", rate: "$250 per person" }
+    ],
+    inclusions: [
+      "Chimpanzee tracking permits",
+      "Canopy walk experience",
+      "Guided tours"
+    ],
+    exclusions: [
+      "Meals",
+      "Accommodation",
+      "Travel insurance"
+    ],
+    activities: [
+      "Chimpanzee tracking",
+      "Canopy walks",
+      "Birdwatching"
+    ],
+    itinerary: [
+      "Day 1: Arrival and canopy walk",
+      "Day 2: Morning primate tracking, departure"
+    ]
+  }
 ];
 
 

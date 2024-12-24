@@ -11,7 +11,7 @@ type Props = {
 const ServicePageHero = ({ image,service,  title, desc }: Props) => {
   return (
     <div className="w-full">
-      <div className="relative h-[600px] md:h-[100vh] 2xl:h-[800px] w-full  text-primaryWhite bg-black">
+      <div className="relative h-[500px] w-full  text-primaryWhite bg-black">
         <Image
           src={image}
           alt={title}
@@ -26,8 +26,8 @@ const ServicePageHero = ({ image,service,  title, desc }: Props) => {
             <Icon icon="uim:angle-double-left" width="24" height="24" rotate={90} />
             <span className="opacity-70">{service}</span>
           </div>
-          <div className="text-2xl lg:text-6xl text-center italic stroke-black font-bold font-mono">{title}</div>
-          <p className="w-full md:w-1/2 text-center uppercase tracking-wider lg:text-lg font-semibold">{desc}</p>
+          <div className="text-2xl lg:text-4xl text-center italic stroke-black font-bold font-mono">{title}</div>
+          <p className="w-full md:w-1/2 text-center uppercase tracking-wider lg:text-base font-semibold">{desc}</p>
           
         </div>
       </div>
