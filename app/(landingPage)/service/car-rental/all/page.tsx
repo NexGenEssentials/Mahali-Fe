@@ -64,7 +64,7 @@ const AllCars = () => {
   const [carCategory, setCategory] = useState("");
   const [carPrice, setCarPrice] = useState("");
   const [show, setShow] = useState(false);
-  const [refresh, setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState(0);
   const onSearch: SearchProps["onSearch"] = (value) => {
     value.length > 0 && setShow(true);
     setCarName(value);
@@ -88,7 +88,7 @@ const AllCars = () => {
         />
         <div className="max-w-[1750px] mx-auto w-full  flex flex-col gap-8 p-8">
           <div className="flex flex-col  items-center justify-center w-full">
-            <ul className="w-1/2 flex items-center justify-center gap-8 p-4 border-b">
+            <ul className=" w-full md:w-1/2 flex items-center justify-center gap-8 p-4 border-b">
               {CarNav.map((title, index) => (
                 <li
                   onClick={() => setService(title)}
@@ -105,7 +105,7 @@ const AllCars = () => {
             {service === "All Cars" && (
               <div className="my-8 w-full flex flex-col gap-8 justify-center ">
                 <div className="bg-primaryGreen p-8 w-full flex items-center justify-center rounded-lg ">
-                  <div key={refresh ? Math.random():""} className="flex gap-4 items-end flex-wrap text-primaryBlue">
+                  <div key={refresh} className="flex gap-4 items-end flex-wrap text-primaryBlue">
                     <div className="flex flex-col gap-1">
                       <Search
                         placeholder="search by car name"
@@ -195,7 +195,7 @@ const AllCars = () => {
                           setCarPrice("");
                           setCategory("");
                           setShow(false);
-                          setRefresh(true)
+                          setRefresh(Math.random())
                           setCarList(
                             searchCarDetails({
                               name: "",
@@ -230,7 +230,7 @@ const AllCars = () => {
             )}
 
             {service === "Pricing" && (
-              <div className="w-full   my-8 ">
+              <div className="w-full my-8 overflow-x-scroll ">
                 <Table dataSource={CarDetails} columns={Columns} />
               </div>
             )}
