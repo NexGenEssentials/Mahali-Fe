@@ -44,6 +44,8 @@ import benzi3 from "@/public/images/benz3.jpg"
 import benzi4 from "@/public/images/benz4.jpg"
 import benzi5 from "@/public/images/benz5.jpg"
 import tourp from "@/public/images/tourPackage.webp"
+import accom1 from '@/public/images/accom1.jpg'
+import accom2 from '@/public/images/accom2.webp'
 
 export const Parks = [
   {
@@ -131,8 +133,8 @@ export const ServiceList = [
     icon: "ri:hotel-line",
     title: "Accommodation Booking",
     link: "/service/accomodation",
-    image: akagera2,
-    available:false,
+    image: accom1,
+    available:true,
     description:
       "Find and book the perfect accommodations for your travels, from luxury resorts to budget-friendly stays, tailored to provide comfort and convenience throughout your journey.",
   },
@@ -1630,6 +1632,206 @@ export const TourPackages = [
     ]
   }
 ];
+
+export const Accommodations = [
+  {
+    category: "Hotels",
+    details: [
+      {
+        name: "Kigali Marriott Hotel",
+        rating: 4.9,
+        reviews: 7,
+        location: "Kigali, Rwanda",
+        description: "Experience Rwanda's capital from Kigali Marriott Hotel, conveniently located near the Nyarugenge.",
+        price: "$15",
+        gallery: [
+          accom1,
+          accom2,
+          accom1
+        ],
+        isPopular: true
+      },
+      {
+        name: "Hôtel des Mille Collines",
+        rating: 4.8,
+        reviews: 10,
+        location: "Kigali, Rwanda",
+        description: "Iconic hotel with a rich history and modern luxury in the heart of Kigali.",
+        price: "$20",
+        gallery: [
+          accom1,
+          accom2,
+          accom1
+        ],
+        isPopular: true
+      },
+      {
+        name: "The Retreat by Heaven",
+        rating: 4.9,
+        reviews: 12,
+        location: "Kigali, Rwanda",
+        description: "Boutique hotel offering eco-friendly luxury and exquisite dining.",
+        price: "$30",
+        gallery: [
+          accom1,
+          accom2,
+          accom1
+        ],
+        isPopular: false
+      }
+    ]
+  },
+  {
+    category: "Resorts",
+    details: [
+      {
+        name: "Lake Kivu Serena Resort",
+        rating: 4.8,
+        reviews: 12,
+        location: "Gisenyi, Rwanda",
+        description: "Relax by the serene Lake Kivu with luxurious amenities and breathtaking views.",
+        price: "$20",
+        gallery: [
+          accom1,
+          accom2,
+          accom1
+        ],
+        isPopular: true
+      },
+      {
+        name: "Nyungwe House",
+        rating: 4.9,
+        reviews: 9,
+        location: "Nyungwe Forest, Rwanda",
+        description: "A luxury resort in the heart of the rainforest, perfect for nature lovers.",
+        price: "$35",
+        gallery: [
+          accom1,
+          accom2,
+          accom1
+        ],
+        isPopular: false
+      },
+      {
+        name: "Akagera Game Lodge",
+        rating: 4.7,
+        reviews: 8,
+        location: "Akagera National Park, Rwanda",
+        description: "Enjoy stunning wildlife views and comfortable stays.",
+        price: "$25",
+        gallery: [
+          accom1,
+          accom2,
+          accom1
+        ],
+        isPopular: false
+      }
+    ]
+  },
+  {
+    category: "Motels",
+    details: [
+      {
+        name: "Sunset Motel",
+        rating: 4.5,
+        reviews: 9,
+        location: "Kigali, Rwanda",
+        description: "Affordable and cozy stays with easy access to the city center.",
+        price: "$10",
+        gallery: [
+          accom1,
+          accom2,
+          accom1
+        ],
+        isPopular: true
+      },
+      {
+        name: "Rainbow Motel",
+        rating: 4.3,
+        reviews: 6,
+        location: "Huye, Rwanda",
+        description: "A simple and clean option for budget-conscious travelers.",
+        price: "$8",
+        gallery: [
+          accom1,
+          accom2,
+          accom1
+        ],
+        isPopular: false
+      }
+    ]
+  },
+  {
+    category: "Hostels",
+    details: [
+      {
+        name: "Backpackers Hostel",
+        rating: 4.7,
+        reviews: 15,
+        location: "Kigali, Rwanda",
+        description: "Perfect for solo travelers and groups, offering budget-friendly stays.",
+        price: "$5",
+        gallery: [
+          accom1,
+          accom2,
+          accom1
+        ],
+        isPopular: true
+      },
+      {
+        name: "Explore Rwanda Hostel",
+        rating: 4.5,
+        reviews: 10,
+        location: "Musanze, Rwanda",
+        description: "A welcoming and social place for adventurers.",
+        price: "$7",
+        gallery: [
+          accom1,
+          accom2,
+          accom1
+        ],
+        isPopular: false
+      }
+    ]
+  },
+  {
+    category: "Bed and Breakfasts",
+    details: [
+      {
+        name: "Rwanda Charm B&B",
+        rating: 4.6,
+        reviews: 8,
+        location: "Musanze, Rwanda",
+        description: "Wake up to stunning mountain views and delicious local breakfasts.",
+        price: "$12",
+        gallery: [
+          accom1,
+          accom2,
+          accom1
+        ],
+        isPopular: true
+      },
+      {
+        name: "Hilltop B&B",
+        rating: 4.8,
+        reviews: 11,
+        location: "Kigali, Rwanda",
+        description: "Charming accommodations with personalized service.",
+        price: "$14",
+        gallery: [
+          accom1,
+          accom2,
+          accom1
+        ],
+        isPopular: false
+      }
+    ]
+  }
+];
+
+
+
+
 
 
 

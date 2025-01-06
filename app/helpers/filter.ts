@@ -1,4 +1,4 @@
-import { CarDetails, PackageList } from "../constants/arrays";
+import { Accommodations, CarDetails, PackageList } from "../constants/arrays";
 
 export const filterPackages = (data: typeof PackageList, filters: { location: string; packageName: string }) => {
   const matchingLocation = data.find(item => item.location.toLowerCase() === filters.location.toLowerCase()); 
@@ -40,3 +40,8 @@ const isPriceInRange = (carPrice:string, priceRange:string) => {
     return carPriceValue === exactPrice;
   }
 };
+
+export const  getPopularAccommodations =()=> {
+  return Accommodations.flatMap(category => category.details)
+  .filter(detail => detail.isPopular);
+}

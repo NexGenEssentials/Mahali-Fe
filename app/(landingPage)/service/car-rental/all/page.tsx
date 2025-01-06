@@ -234,6 +234,12 @@ const AllCars = () => {
                 <Table dataSource={CarDetails} columns={Columns} />
               </div>
             )}
+            
+            {service === 'Reviews' && (
+              <div className="my-8 w-full flex flex-col gap-8 justify-center text-center">
+                 <h1 className="text-primaryGreen font-bold text-2xl p-4">Reviews are not available</h1>
+              </div>
+            )}
           </div>
         </div>
       </div>
