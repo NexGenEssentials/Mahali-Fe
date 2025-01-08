@@ -12,6 +12,7 @@ import AccomGalleryCard from "../../components/service/accomodation/accomGallery
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Accommodations } from "@/app/constants/arrays";
 import { getPopularAccommodations } from "@/app/helpers/filter";
+import Link from "next/link";
 
 const AccomodationService = () => {
   const onSearch: SearchProps["onSearch"] = (value) => {
@@ -60,6 +61,7 @@ const AccomodationService = () => {
           />
           <div className=" bg-slate-50 p-8 rounded-md flex gap-4 flex-wrap items-center justify-center">
             {Accommodations.map((category, index) => (
+              <Link href={`/service/accomodation/${category.category}`}>
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -71,6 +73,7 @@ const AccomodationService = () => {
                   {category.details.length}
                 </span>
               </motion.div>
+              </Link>
             ))}
           </div>
         </div>
@@ -87,11 +90,11 @@ const AccomodationService = () => {
                 className="md:w-[25%] w-full flex flex-col gap-2"
               >
                 <AccomGalleryCard
-                  Gallery={[accom, accom1, accom, accom1, accom, accom1]}
+                  Gallery={accomodation.gallery}
                 />
                 <div className="flex flex-col gap-2 text-sm cursor-pointer">
                   <div className="flex justify-between items-center gap-2 ">
-                    <span className="font-bold uppercase text-base text-primaryGreen">
+                    <span className="font-bold hover:text-opacity-70 hover:duration-500 uppercase text-base text-primaryGreen">
                       {accomodation.name}
                     </span>
                     <span className="flex ">

@@ -1,8 +1,7 @@
-import Image from "next/image";
 import { ReactNode } from "react";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
-
+import "antd/dist/reset.css";
 export default function LandingPage({ children }: { children: ReactNode }) {
   return (
     <div className="">

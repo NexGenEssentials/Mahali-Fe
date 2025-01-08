@@ -45,3 +45,8 @@ export const  getPopularAccommodations =()=> {
   return Accommodations.flatMap(category => category.details)
   .filter(detail => detail.isPopular);
 }
+
+export const filterByCategory = (category: string) => {
+  const foundCategory = Accommodations.find((accommodation) => accommodation.category.toLowerCase() === category.toLowerCase());
+  return foundCategory ? foundCategory.details : [];
+};

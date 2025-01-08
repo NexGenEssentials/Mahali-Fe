@@ -46,6 +46,20 @@ import benzi5 from "@/public/images/benz5.jpg"
 import tourp from "@/public/images/tourPackage.webp"
 import accom1 from '@/public/images/accom1.jpg'
 import accom2 from '@/public/images/accom2.webp'
+import accom3 from '@/public/images/accom3.jpg'
+import mario1 from '@/public/images/mario1.avif'
+import mario2 from '@/public/images/mario2.avif'
+import mario3 from '@/public/images/mario3.avif'
+import mario4 from '@/public/images/mario4.avif'
+import mille1 from '@/public/images/mille1.jpg'
+import mille2 from '@/public/images/mille2.avif'
+import mille3 from '@/public/images/mille3.jpg'
+import mille4 from '@/public/images/mille4.jpg'
+import ret1 from '@/public/images/ret1.jpg'
+import ret2 from '@/public/images/ret2.jpg'
+import ret3 from '@/public/images/ret3.jpg'
+import ret4 from '@/public/images/ret4.jpg'
+
 
 export const Parks = [
   {
@@ -1639,45 +1653,52 @@ export const Accommodations = [
     details: [
       {
         name: "Kigali Marriott Hotel",
-        rating: 4.9,
-        reviews: 7,
+        rating: 5,
+        reviews: 218,
         location: "Kigali, Rwanda",
         description: "Experience Rwanda's capital from Kigali Marriott Hotel, conveniently located near the Nyarugenge.",
-        price: "$15",
+        price: "$150",
         gallery: [
-          accom1,
-          accom2,
-          accom1
+          mario1,
+          mario2,
+          mario3,
+          mario4,
         ],
-        isPopular: true
+        isPopular: true,
+        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna']
       },
       {
         name: "Hôtel des Mille Collines",
-        rating: 4.8,
-        reviews: 10,
+        rating: 4.5,
+        reviews: 100,
         location: "Kigali, Rwanda",
-        description: "Iconic hotel with a rich history and modern luxury in the heart of Kigali.",
+        description: "Iconic hotel with a rich history and modern luxury in the heart of Kigali. ",
+        
         price: "$20",
         gallery: [
-          accom1,
-          accom2,
-          accom1
+          mille1,
+          mille2,
+          mille3,
+          mille4
         ],
+        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
         isPopular: true
       },
       {
         name: "The Retreat by Heaven",
-        rating: 4.9,
-        reviews: 12,
+        rating: 4.3,
+        reviews: 120,
         location: "Kigali, Rwanda",
         description: "Boutique hotel offering eco-friendly luxury and exquisite dining.",
         price: "$30",
         gallery: [
-          accom1,
-          accom2,
-          accom1
+          ret1,
+          ret2,
+          ret3,
+          ret4
         ],
-        isPopular: false
+        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
+        isPopular: true
       }
     ]
   },
@@ -1692,11 +1713,12 @@ export const Accommodations = [
         description: "Relax by the serene Lake Kivu with luxurious amenities and breathtaking views.",
         price: "$20",
         gallery: [
-          accom1,
+          accom3,
           accom2,
           accom1
         ],
-        isPopular: true
+        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
+        isPopular: false
       },
       {
         name: "Nyungwe House",
@@ -1707,9 +1729,10 @@ export const Accommodations = [
         price: "$35",
         gallery: [
           accom1,
-          accom2,
-          accom1
+          accom3,
+          accom2
         ],
+        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
         isPopular: false
       },
       {
@@ -1720,10 +1743,11 @@ export const Accommodations = [
         description: "Enjoy stunning wildlife views and comfortable stays.",
         price: "$25",
         gallery: [
-          accom1,
           accom2,
-          accom1
+          accom1,
+          accom3,
         ],
+        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
         isPopular: false
       }
     ]
@@ -1739,10 +1763,11 @@ export const Accommodations = [
         description: "Affordable and cozy stays with easy access to the city center.",
         price: "$10",
         gallery: [
+          accom3,
           accom1,
-          accom2,
-          accom1
+          accom2
         ],
+        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
         isPopular: true
       },
       {
@@ -1757,6 +1782,7 @@ export const Accommodations = [
           accom2,
           accom1
         ],
+        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
         isPopular: false
       }
     ]
@@ -1776,6 +1802,7 @@ export const Accommodations = [
           accom2,
           accom1
         ],
+        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
         isPopular: true
       },
       {
@@ -1790,6 +1817,7 @@ export const Accommodations = [
           accom2,
           accom1
         ],
+        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
         isPopular: false
       }
     ]
@@ -1805,10 +1833,11 @@ export const Accommodations = [
         description: "Wake up to stunning mountain views and delicious local breakfasts.",
         price: "$12",
         gallery: [
-          accom1,
           accom2,
+          accom3,
           accom1
         ],
+        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
         isPopular: true
       },
       {
@@ -1823,7 +1852,8 @@ export const Accommodations = [
           accom2,
           accom1
         ],
-        isPopular: false
+        isPopular: false,
+        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna']
       }
     ]
   }
