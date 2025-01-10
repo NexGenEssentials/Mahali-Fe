@@ -5,7 +5,7 @@ import DatePicker, { DateObject, Value } from "react-multi-date-picker";
 import { Select, Space } from "antd";
 import { useRouter } from "next/navigation";
 
-export const AccomodationForm = () => {
+export const AccommodationForm = () => {
   const [dateSelected, setDateSelected] = useState<DateObject[]>([
     new DateObject(),
     new DateObject().add(1, "days"),

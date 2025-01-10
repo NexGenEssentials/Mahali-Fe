@@ -25,41 +25,40 @@ import carImage3 from "@/public/images/car3.jpg";
 import carImage4 from "@/public/images/car4.avif";
 import carImage5 from "@/public/images/car5.webp";
 import carImage6 from "@/public/images/car6.jpg";
-import toyota1 from "@/public/images/toyota1.avif"
-import toyota2 from "@/public/images/toyota2.avif"
-import toyota3 from "@/public/images/toyota3.avif"
-import toyota4 from "@/public/images/toyota4.avif"
-import toyota5 from "@/public/images/toyota5.avif"
-import toyota6 from "@/public/images/toyota6.avif"
-import landRover1 from "@/public/images/landRover1.webp"
-import landRover2 from "@/public/images/landRover2.webp"
-import landRover3 from "@/public/images/landRover3.webp"
-import landRover4 from "@/public/images/landRover4.webp"
-import landRover5 from "@/public/images/landRover5.webp"
-import landRover6 from "@/public/images/landRover6.webp"
-import landRover7 from "@/public/images/landRover7.webp"
-import benzi1 from "@/public/images/benz1.jpg"
-import benzi2 from "@/public/images/benz2.jpg"
-import benzi3 from "@/public/images/benz3.jpg"
-import benzi4 from "@/public/images/benz4.jpg"
-import benzi5 from "@/public/images/benz5.jpg"
-import tourp from "@/public/images/tourPackage.webp"
-import accom1 from '@/public/images/accom1.jpg'
-import accom2 from '@/public/images/accom2.webp'
-import accom3 from '@/public/images/accom3.jpg'
-import mario1 from '@/public/images/mario1.avif'
-import mario2 from '@/public/images/mario2.avif'
-import mario3 from '@/public/images/mario3.avif'
-import mario4 from '@/public/images/mario4.avif'
-import mille1 from '@/public/images/mille1.jpg'
-import mille2 from '@/public/images/mille2.avif'
-import mille3 from '@/public/images/mille3.jpg'
-import mille4 from '@/public/images/mille4.jpg'
-import ret1 from '@/public/images/ret1.jpg'
-import ret2 from '@/public/images/ret2.jpg'
-import ret3 from '@/public/images/ret3.jpg'
-import ret4 from '@/public/images/ret4.jpg'
-
+import toyota1 from "@/public/images/toyota1.avif";
+import toyota2 from "@/public/images/toyota2.avif";
+import toyota3 from "@/public/images/toyota3.avif";
+import toyota4 from "@/public/images/toyota4.avif";
+import toyota5 from "@/public/images/toyota5.avif";
+import toyota6 from "@/public/images/toyota6.avif";
+import landRover1 from "@/public/images/landRover1.webp";
+import landRover2 from "@/public/images/landRover2.webp";
+import landRover3 from "@/public/images/landRover3.webp";
+import landRover4 from "@/public/images/landRover4.webp";
+import landRover5 from "@/public/images/landRover5.webp";
+import landRover6 from "@/public/images/landRover6.webp";
+import landRover7 from "@/public/images/landRover7.webp";
+import benzi1 from "@/public/images/benz1.jpg";
+import benzi2 from "@/public/images/benz2.jpg";
+import benzi3 from "@/public/images/benz3.jpg";
+import benzi4 from "@/public/images/benz4.jpg";
+import benzi5 from "@/public/images/benz5.jpg";
+import tourp from "@/public/images/tourPackage.webp";
+import accom1 from "@/public/images/accom1.jpg";
+import accom2 from "@/public/images/accom2.webp";
+import accom3 from "@/public/images/accom3.jpg";
+import mario1 from "@/public/images/mario1.avif";
+import mario2 from "@/public/images/mario2.avif";
+import mario3 from "@/public/images/mario3.avif";
+import mario4 from "@/public/images/mario4.avif";
+import mille1 from "@/public/images/mille1.jpg";
+import mille2 from "@/public/images/mille2.avif";
+import mille3 from "@/public/images/mille3.jpg";
+import mille4 from "@/public/images/mille4.jpg";
+import ret1 from "@/public/images/ret1.jpg";
+import ret2 from "@/public/images/ret2.jpg";
+import ret3 from "@/public/images/ret3.jpg";
+import ret4 from "@/public/images/ret4.jpg";
 
 export const Parks = [
   {
@@ -130,7 +129,7 @@ export const ServiceList = [
     title: "Holiday & Tour Packages",
     link: "/destination",
     image: tourp,
-    available:true,
+    available: true,
     description:
       "Discover expertly crafted holiday and tour packages that cater to your dream adventures. From cultural explorations to nature retreats, we create experiences you'll cherish forever.",
   },
@@ -139,16 +138,16 @@ export const ServiceList = [
     title: "Gorilla & Chimpanzee Trekking",
     link: "/destination",
     image: gorilla2,
-    available:true,
+    available: true,
     description:
       "Embark on unforgettable treks to encounter the majestic mountain gorillas and playful chimpanzees in their natural habitats. A rare and awe-inspiring wildlife experience awaits.",
   },
   {
     icon: "ri:hotel-line",
     title: "Accommodation Booking",
-    link: "/service/accomodation",
+    link: "/service/accommodation",
     image: accom1,
-    available:true,
+    available: true,
     description:
       "Find and book the perfect accommodations for your travels, from luxury resorts to budget-friendly stays, tailored to provide comfort and convenience throughout your journey.",
   },
@@ -157,7 +156,7 @@ export const ServiceList = [
     title: "Car Rentals",
     link: "/service/car-rental",
     image: carImage2,
-    available:true,
+    available: true,
     description:
       "Enjoy the freedom to explore with our reliable car rental services. Choose from a range of vehicles that suit your travel needs, ensuring a smooth and hassle-free journey.",
   },
@@ -166,7 +165,7 @@ export const ServiceList = [
     title: "Game Drive Safaris",
     link: "/service",
     image: akagera2,
-    available:false,
+    available: false,
     description:
       "Experience the thrill of guided game drives through stunning landscapes, offering close encounters with diverse wildlife in some of the world's most beautiful national parks.",
   },
@@ -175,7 +174,7 @@ export const ServiceList = [
     title: "Air Ticket",
     link: "/service",
     image: akagera2,
-    available:false,
+    available: false,
     description:
       "Simplify your travel planning with our air ticket services. Whether for business or leisure, we ensure seamless booking and competitive fares for your flights.",
   },
@@ -184,7 +183,7 @@ export const ServiceList = [
     title: "Airport Transfers",
     link: "/service",
     image: akagera2,
-    available:false,
+    available: false,
     description:
       "Start and end your journey with ease through our reliable airport transfer services, ensuring timely and comfortable rides to and from your destination.",
   },
@@ -193,7 +192,7 @@ export const ServiceList = [
     title: "Visa Application",
     link: "/service",
     image: akagera2,
-    available:false,
+    available: false,
     description:
       "Navigate the visa process with confidence. Our visa application services offer guidance and support, making international travel more accessible and stress-free.",
   },
@@ -202,7 +201,7 @@ export const ServiceList = [
     title: "Events Management",
     link: "/service",
     image: akagera2,
-    available:false,
+    available: false,
     description:
       "Bring your vision to life with our professional events management services. From planning to execution, we ensure every detail is covered for unforgettable events.",
   },
@@ -211,7 +210,7 @@ export const ServiceList = [
     link: "/service",
     title: "Photo & Video Coverage",
     image: akagera2,
-    available:false,
+    available: false,
     description:
       "Capture the moments that matter with our professional photo and video coverage services. Perfect for events, travel, and memories that deserve to be preserved beautifully.",
   },
@@ -499,7 +498,6 @@ export const PackageList = [
       },
     ],
   },
-  
 ];
 
 export const AboutArray = [
@@ -561,7 +559,7 @@ export const AboutService = [
 export const ServiceOptions = [
   { value: "Holiday & Tour Packages" },
   { value: "Gorilla & Chimpanzee Trekking" },
-  { value: "Accomodation Booking" },
+  { value: "accommodation Booking" },
   { value: "Car Rentals" },
   { value: "Events Management" },
 ];
@@ -1177,17 +1175,30 @@ export const CarDetails = [
     price: "$70",
     period: "Day",
     transmission: "Automatic",
-    description: "The Toyota Corolla is a reliable and fuel-efficient sedan, celebrated for its practicality and value. Known for its sleek design and comfortable interior, it offers ample space and advanced safety features, making it ideal for daily commutes and family trips. With a reputation for reliability and longevity, it’s a perfect companion for everyday needs.",
+    description:
+      "The Toyota Corolla is a reliable and fuel-efficient sedan, celebrated for its practicality and value. Known for its sleek design and comfortable interior, it offers ample space and advanced safety features, making it ideal for daily commutes and family trips. With a reputation for reliability and longevity, it’s a perfect companion for everyday needs.",
     gallery: [toyota1, toyota2, toyota3, toyota4, toyota5, toyota6],
     spec: [
       { icon: "bi:speedometer2", name: "Mileage", value: "40,000" },
-      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Manual" },
-      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol: 10 Km/L" },
+      {
+        icon: "icon-park-twotone:manual-gear",
+        name: "Transmission",
+        value: "Manual",
+      },
+      {
+        icon: "icon-park-twotone:baby-car-seat",
+        name: "Seats",
+        value: "5 Adults",
+      },
+      {
+        icon: "fluent-emoji-high-contrast:fuel-pump",
+        name: "Fuel",
+        value: "Petrol: 10 Km/L",
+      },
       { icon: "bi:luggage-fill", name: "Luggage", value: "4 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "Yes" },
     ],
-   features : [
+    features: [
       { feature: "CD Player", available: true },
       { feature: "Sun Roof", available: false },
       { feature: "Leather Seat", available: false },
@@ -1223,7 +1234,7 @@ export const CarDetails = [
       { feature: "Navigation", available: false },
       { feature: "Turbo", available: false },
       { feature: "Power Slide Door", available: false },
-    ]
+    ],
   },
   {
     car: carImage1,
@@ -1232,13 +1243,26 @@ export const CarDetails = [
     price: "$50",
     period: "Hour",
     transmission: "Automatic",
-    description: "This Toyota sedan is a perfect blend of comfort and efficiency. It offers a smooth ride, modern interior features, and excellent fuel economy, making it suitable for both city drives and long journeys. It’s the perfect choice for those who value reliability and versatility.",
+    description:
+      "This Toyota sedan is a perfect blend of comfort and efficiency. It offers a smooth ride, modern interior features, and excellent fuel economy, making it suitable for both city drives and long journeys. It’s the perfect choice for those who value reliability and versatility.",
     gallery: [toyota1, toyota2, toyota3, toyota4, toyota5, toyota6],
     spec: [
       { icon: "bi:speedometer2", name: "Mileage", value: "25,000" },
-      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Automatic" },
-      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol: 15 Km/L" },
+      {
+        icon: "icon-park-twotone:manual-gear",
+        name: "Transmission",
+        value: "Automatic",
+      },
+      {
+        icon: "icon-park-twotone:baby-car-seat",
+        name: "Seats",
+        value: "5 Adults",
+      },
+      {
+        icon: "fluent-emoji-high-contrast:fuel-pump",
+        name: "Fuel",
+        value: "Petrol: 15 Km/L",
+      },
       { icon: "bi:luggage-fill", name: "Luggage", value: "3 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "Yes" },
     ],
@@ -1287,13 +1311,34 @@ export const CarDetails = [
     price: "$120",
     period: "Hour",
     transmission: "Manual",
-    description: "The Land Rover Defender is a rugged SUV designed for off-road adventures. With its robust build, advanced four-wheel-drive capabilities, and luxurious interior, it excels on rough terrain while providing a comfortable driving experience. Whether conquering mountains or city roads, the Defender stands out with unmatched versatility.",
-    gallery: [landRover1, landRover2, landRover3, landRover4, landRover5, landRover6, landRover7],
+    description:
+      "The Land Rover Defender is a rugged SUV designed for off-road adventures. With its robust build, advanced four-wheel-drive capabilities, and luxurious interior, it excels on rough terrain while providing a comfortable driving experience. Whether conquering mountains or city roads, the Defender stands out with unmatched versatility.",
+    gallery: [
+      landRover1,
+      landRover2,
+      landRover3,
+      landRover4,
+      landRover5,
+      landRover6,
+      landRover7,
+    ],
     spec: [
       { icon: "bi:speedometer2", name: "Mileage", value: "15,000" },
-      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Manual" },
-      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "7 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Diesel: 20 Km/L" },
+      {
+        icon: "icon-park-twotone:manual-gear",
+        name: "Transmission",
+        value: "Manual",
+      },
+      {
+        icon: "icon-park-twotone:baby-car-seat",
+        name: "Seats",
+        value: "7 Adults",
+      },
+      {
+        icon: "fluent-emoji-high-contrast:fuel-pump",
+        name: "Fuel",
+        value: "Diesel: 20 Km/L",
+      },
       { icon: "bi:luggage-fill", name: "Luggage", value: "6 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
     ],
@@ -1342,13 +1387,26 @@ export const CarDetails = [
     price: "$200",
     period: "Day",
     transmission: "Automatic",
-    description: "The Mercedes-Benz E-Class is a symbol of luxury, performance, and innovation. Renowned for its sophisticated design, this premium sedan combines cutting-edge technology with unparalleled comfort and advanced safety features. Whether for business or pleasure, the E-Class offers a prestigious driving experience.",
+    description:
+      "The Mercedes-Benz E-Class is a symbol of luxury, performance, and innovation. Renowned for its sophisticated design, this premium sedan combines cutting-edge technology with unparalleled comfort and advanced safety features. Whether for business or pleasure, the E-Class offers a prestigious driving experience.",
     gallery: [benzi1, benzi2, benzi3, benzi4, benzi5],
     spec: [
       { icon: "bi:speedometer2", name: "Mileage", value: "10,000" },
-      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Automatic" },
-      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol: 60 Km/L" },
+      {
+        icon: "icon-park-twotone:manual-gear",
+        name: "Transmission",
+        value: "Automatic",
+      },
+      {
+        icon: "icon-park-twotone:baby-car-seat",
+        name: "Seats",
+        value: "5 Adults",
+      },
+      {
+        icon: "fluent-emoji-high-contrast:fuel-pump",
+        name: "Fuel",
+        value: "Petrol: 60 Km/L",
+      },
       { icon: "bi:luggage-fill", name: "Luggage", value: "4 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
     ],
@@ -1388,7 +1446,7 @@ export const CarDetails = [
       { feature: "Navigation", available: true },
       { feature: "Turbo", available: false },
       { feature: "Power Slide Door", available: false },
-    ]  
+    ],
   },
   {
     car: carImage4,
@@ -1397,13 +1455,26 @@ export const CarDetails = [
     price: "$40",
     period: "Day",
     transmission: "Automatic",
-    description: "The Honda Civic is a compact car known for its stylish design, excellent fuel economy, and reliable performance. It provides a comfortable ride with a well-equipped interior, making it ideal for urban commuting and everyday use. With a reputation for innovation, it continues to impress drivers globally.",
+    description:
+      "The Honda Civic is a compact car known for its stylish design, excellent fuel economy, and reliable performance. It provides a comfortable ride with a well-equipped interior, making it ideal for urban commuting and everyday use. With a reputation for innovation, it continues to impress drivers globally.",
     gallery: [carImage4, carImage2],
     spec: [
       { icon: "bi:speedometer2", name: "Mileage", value: "35,000" },
-      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Automatic" },
-      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Petrol: 35 Km/L" },
+      {
+        icon: "icon-park-twotone:manual-gear",
+        name: "Transmission",
+        value: "Automatic",
+      },
+      {
+        icon: "icon-park-twotone:baby-car-seat",
+        name: "Seats",
+        value: "5 Adults",
+      },
+      {
+        icon: "fluent-emoji-high-contrast:fuel-pump",
+        name: "Fuel",
+        value: "Petrol: 35 Km/L",
+      },
       { icon: "bi:luggage-fill", name: "Luggage", value: "3 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
     ],
@@ -1452,13 +1523,26 @@ export const CarDetails = [
     price: "$100",
     period: "Day",
     transmission: "Manual",
-    description: "The Jeep Wrangler is an iconic off-road SUV built for adventure. With its durable construction, powerful engine, and unmatched off-road capabilities, it is perfect for exploring rugged terrains and tackling challenging trails. The Wrangler’s bold design ensures it stands out on and off the road.",
+    description:
+      "The Jeep Wrangler is an iconic off-road SUV built for adventure. With its durable construction, powerful engine, and unmatched off-road capabilities, it is perfect for exploring rugged terrains and tackling challenging trails. The Wrangler’s bold design ensures it stands out on and off the road.",
     gallery: [carImage5, carImage3],
     spec: [
       { icon: "bi:speedometer2", name: "Mileage", value: "20,000" },
-      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Manual" },
-      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "4 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Diesel: 25 Km/L" },
+      {
+        icon: "icon-park-twotone:manual-gear",
+        name: "Transmission",
+        value: "Manual",
+      },
+      {
+        icon: "icon-park-twotone:baby-car-seat",
+        name: "Seats",
+        value: "4 Adults",
+      },
+      {
+        icon: "fluent-emoji-high-contrast:fuel-pump",
+        name: "Fuel",
+        value: "Diesel: 25 Km/L",
+      },
       { icon: "bi:luggage-fill", name: "Luggage", value: "5 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
     ],
@@ -1507,13 +1591,26 @@ export const CarDetails = [
     price: "$80",
     period: "Hour",
     transmission: "Automatic",
-    description: "The Tesla Model 3 is an electric sedan that combines cutting-edge technology with sustainability. It offers a sleek design, exceptional performance, and advanced autonomous driving features, making it a top choice for eco-conscious drivers. With zero emissions and an impressive range, it redefines modern driving.",
+    description:
+      "The Tesla Model 3 is an electric sedan that combines cutting-edge technology with sustainability. It offers a sleek design, exceptional performance, and advanced autonomous driving features, making it a top choice for eco-conscious drivers. With zero emissions and an impressive range, it redefines modern driving.",
     gallery: [carImage6],
     spec: [
       { icon: "bi:speedometer2", name: "Mileage", value: "10,000" },
-      { icon: "icon-park-twotone:manual-gear", name: "Transmission", value: "Automatic" },
-      { icon: "icon-park-twotone:baby-car-seat", name: "Seats", value: "5 Adults" },
-      { icon: "fluent-emoji-high-contrast:fuel-pump", name: "Fuel", value: "Electric: 8hrs" },
+      {
+        icon: "icon-park-twotone:manual-gear",
+        name: "Transmission",
+        value: "Automatic",
+      },
+      {
+        icon: "icon-park-twotone:baby-car-seat",
+        name: "Seats",
+        value: "5 Adults",
+      },
+      {
+        icon: "fluent-emoji-high-contrast:fuel-pump",
+        name: "Fuel",
+        value: "Electric: 8hrs",
+      },
       { icon: "bi:luggage-fill", name: "Luggage", value: "2 bags" },
       { icon: "carbon:hybrid-networking", name: "Hybrid", value: "No" },
     ],
@@ -1553,98 +1650,81 @@ export const CarDetails = [
       { feature: "Navigation", available: true },
       { feature: "Turbo", available: false },
       { feature: "Power Slide Door", available: false },
-    ]    
+    ],
   },
 ];
 
 export const TourPackages = [
   {
     name: "Akagera National Park",
-    details: "A journey to explore Akagera National Park, renowned for its wildlife and savannah landscapes.",
+    details:
+      "A journey to explore Akagera National Park, renowned for its wildlife and savannah landscapes.",
     prices: [
       { persons: 1, rate: "$250 per person" },
       { persons: 2, rate: "$200 per person" },
       { persons: 3, rate: "$180 per person" },
-      { persons: "4+", rate: "$150 per person" }
+      { persons: "4+", rate: "$150 per person" },
     ],
     inclusions: [
       "Park entry fees",
       "Guided safari drives",
-      "Transportation within the park"
+      "Transportation within the park",
     ],
-    exclusions: [
-      "Meals and drinks",
-      "Personal expenses",
-      "Travel insurance"
-    ],
-    activities: [
-      "Game drives",
-      "Birdwatching",
-      "Boat trips on Lake Ihema"
-    ],
+    exclusions: ["Meals and drinks", "Personal expenses", "Travel insurance"],
+    activities: ["Game drives", "Birdwatching", "Boat trips on Lake Ihema"],
     itinerary: [
       "Day 1: Arrival at Akagera, evening game drive",
-      "Day 2: Morning safari, optional boat ride, departure"
-    ]
+      "Day 2: Morning safari, optional boat ride, departure",
+    ],
   },
   {
     name: "Volcanoes National Park",
-    details: "Home to mountain gorillas, this park offers a rich trekking experience.",
+    details:
+      "Home to mountain gorillas, this park offers a rich trekking experience.",
     prices: [
       { persons: 1, rate: "$600 per person" },
       { persons: 2, rate: "$550 per person" },
       { persons: 3, rate: "$500 per person" },
-      { persons: "4+", rate: "$450 per person" }
+      { persons: "4+", rate: "$450 per person" },
     ],
     inclusions: [
       "Gorilla trekking permits",
       "Local guides",
-      "Transportation to/from the park"
+      "Transportation to/from the park",
     ],
-    exclusions: [
-      "Accommodation",
-      "Meals and drinks",
-      "Personal expenses"
-    ],
+    exclusions: ["Accommodation", "Meals and drinks", "Personal expenses"],
     activities: [
       "Gorilla trekking",
       "Nature walks",
-      "Cultural visits to local communities"
+      "Cultural visits to local communities",
     ],
     itinerary: [
       "Day 1: Arrival and orientation",
-      "Day 2: Gorilla trekking and cultural visit"
-    ]
+      "Day 2: Gorilla trekking and cultural visit",
+    ],
   },
   {
     name: "Nyungwe National Park",
-    details: "A visit to Nyungwe's rainforests, known for its biodiversity and primate species.",
+    details:
+      "A visit to Nyungwe's rainforests, known for its biodiversity and primate species.",
     prices: [
       { persons: 1, rate: "$350 per person" },
       { persons: 2, rate: "$300 per person" },
       { persons: 3, rate: "$270 per person" },
-      { persons: "4+", rate: "$250 per person" }
+      { persons: "4+", rate: "$250 per person" },
     ],
     inclusions: [
       "Chimpanzee tracking permits",
       "Canopy walk experience",
-      "Guided tours"
+      "Guided tours",
     ],
-    exclusions: [
-      "Meals",
-      "Accommodation",
-      "Travel insurance"
-    ],
-    activities: [
-      "Chimpanzee tracking",
-      "Canopy walks",
-      "Birdwatching"
-    ],
+    exclusions: ["Meals", "Accommodation", "Travel insurance"],
+    activities: ["Chimpanzee tracking", "Canopy walks", "Birdwatching"],
     itinerary: [
       "Day 1: Arrival and canopy walk",
-      "Day 2: Morning primate tracking, departure"
-    ]
-  }
+      "Day 2: Morning primate tracking, departure",
+    ],
+  },
 ];
 
 export const Accommodations = [
@@ -1656,51 +1736,439 @@ export const Accommodations = [
         rating: 5,
         reviews: 218,
         location: "Kigali, Rwanda",
-        description: "Experience Rwanda's capital from Kigali Marriott Hotel, conveniently located near the Nyarugenge.",
+        address: "KN 3 Avenue",
+        moreDescription:
+          "Experience Rwanda's capital from Kigali Marriott Hotel, conveniently located near the Nyarugenge financial district and the Kigali Convention Center. Our impeccable luxury hotel provides spacious, modern accommodations with deluxe amenities and premium services. Make yourself comfortable in stylish rooms or lavish suites with floor-to-ceiling windows, spacious bathrooms and plush, pillow-top bedding. Additional amenities include flat-screen TVs, ergonomic workspaces and complimentary Wi-Fi access for Marriott Bonvoy members. After a long day in Kigali, relax over a delicious meal in our popular restaurants, take a refreshing dip in our outdoor pool or unwind with a massage in our hotel spa. Allow our concierge to assist you in planning excursions to the Big Five, the famous canopy walks or the home of the renowned mountain gorillas. If visiting Rwanda for business, you'll appreciate our versatile event venues and fantastic catering services. Look forward to your getaway to Kigali Marriott Hotel.",
+        description:
+          "Experience Rwanda's capital from Kigali Marriott Hotel, conveniently located near the Nyarugenge.",
         price: "$150",
-        gallery: [
-          mario1,
-          mario2,
-          mario3,
-          mario4,
-        ],
+        gallery: [mario1, mario3, mario2, mario4],
         isPopular: true,
-        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna']
+        amenality: [
+          "Breakfast",
+          "Internet",
+          "Bar",
+          "Terrace",
+          "Family rooms",
+          "Sauna",
+          "Air Conditioner (Free)",
+          "Garden",
+          "Terrace",
+          "Non-smoking rooms",
+          "Family rooms",
+          "Swimming pool",
+          "Pool table",
+          "Sauna (Free)",
+          "Hot tub/Jacuzzi (Free)",
+        ],
+        houseRules: [
+          {
+            title: "Kigali Marriott Hotel takes special requests",
+            description: "Add in the next step!",
+          },
+          {
+            title: "Check-in",
+            details: "From 15:00 to 00:00",
+          },
+          {
+            title: "Check-out",
+            details: "From 12:00 to 13:00",
+          },
+          {
+            title: "Cancellation/Prepayment",
+            details:
+              "Cancellation and prepayment policies vary according to accommodation type. Please enter the dates of your stay and check the conditions of your required option.",
+          },
+          {
+            title: "Children and Beds",
+            childPolicies: {
+              description: "Children of any age are welcome.",
+              additionalInfo:
+                "Children 12 years and above will be charged as adults at this property. To see correct prices and occupancy information, please add the number of children in your group and their ages to your search.",
+            },
+            cotAndExtraBedPolicies: [
+              {
+                ageRange: "0 - 1 year",
+                policies: [
+                  {
+                    type: "Cot",
+                    details: "Upon request",
+                    cost: "Free",
+                  },
+                ],
+              },
+              {
+                ageRange: "2 years",
+                policies: [
+                  {
+                    type: "Cot",
+                    details: "Upon request",
+                    cost: "Free",
+                  },
+                  {
+                    type: "Extra bed",
+                    details: "Upon request",
+                    cost: "US$40 per child, per night",
+                  },
+                ],
+              },
+              {
+                ageRange: "3+ years",
+                policies: [
+                  {
+                    type: "Extra bed",
+                    details: "Upon request",
+                    cost: "US$40 per person, per night",
+                  },
+                ],
+              },
+            ],
+            note: "Prices for cots and extra beds are not included in the total price and will have to be paid for separately during your stay. The number of extra beds and cots allowed is dependent on the option you choose. Please check your selected option for more information. All cots and extra beds are subject to availability.",
+          },
+          {
+            title: "No Age Restriction",
+            details: "There is no age requirement for check-in.",
+          },
+          {
+            title: "Pets",
+            details: "Pets are not allowed.",
+          },
+          {
+            title: "Accepted Payment Methods",
+            details: ["American Express", "Visa", "Mastercard", "JCB", "Cash"],
+          },
+        ],
+       rooms : [
+          {
+            type: "Double / Deluxe Double Room",
+            facilities: [
+              "Sound proof",
+              "Bathtub",
+              "Sofa bed",
+              "Air Conditioning",
+              "Wardrobe or closet",
+              "Carpeted",
+              "Walk-in closet",
+              "Private Bathroom",
+              "Sitting area",
+              "Suit press",
+              "Hardwood or parquet floors",
+              "Desk",
+              "Cleaning products",
+              "Mosquito net",
+              "Safe",
+              "Bathrobe",
+              "Hairdryer",
+              "Shared Bathroom",
+              "Shower",
+              "Slippers",
+              "Bidet",
+              "Flat-screen TV",
+              "Satellite channels",
+              "Electric kettle",
+              "Dining area",
+              "Dining table",
+              "Linens",
+              "Room service",
+              "Room is completely wheelchair accessible",
+              "Upper floors accessible by elevator",
+              "1 Living room",
+              "1 bathroom",
+            ],
+            size: "72 m2",
+            capacity: "1 adult and 1 child per Room",
+            rate: "900 USD",
+            availability: "100 room(s) left",
+          },
+          {
+            type: "Double / Deluxe Double Room (2 Adults + 1 Child)",
+            facilities: [
+              "Sound proof",
+              "Bathtub",
+              "Sofa bed",
+              "Air Conditioning",
+              "Wardrobe or closet",
+              "Carpeted",
+              "Walk-in closet",
+              "Private Bathroom",
+              "Sitting area",
+              "Suit press",
+              "Hardwood or parquet floors",
+              "Desk",
+              "Cleaning products",
+              "Mosquito net",
+              "Safe",
+              "Bathrobe",
+              "Hairdryer",
+              "Shared Bathroom",
+              "Shower",
+              "Slippers",
+              "Bidet",
+              "Flat-screen TV",
+              "Satellite channels",
+              "Electric kettle",
+              "Dining area",
+              "Dining table",
+              "Linens",
+              "Room service",
+              "Room is completely wheelchair accessible",
+              "Upper floors accessible by elevator",
+              "1 Living room",
+              "1 bathroom",
+            ],
+            size: "36 m2",
+            capacity: "2 adults and 1 child per Room",
+            rate: "950 USD",
+            availability: "30 room(s) left",
+          },
+          {
+            type: "Deluxe Room / Single Occupancy Deluxe King Room",
+            facilities: [
+              "Sound proof",
+              "Bathtub",
+              "Air Conditioning",
+              "Wardrobe or closet",
+              "Walk-in closet",
+              "Private Bathroom",
+              "Sitting area",
+              "Hardwood or parquet floors",
+              "Desk",
+              "Mosquito net",
+              "Safe",
+              "Hairdryer",
+              "Shower",
+              "Slippers",
+              "Bidet",
+              "Bathrobe",
+              "Flat-screen TV",
+              "Satellite channels",
+              "Electric kettle",
+              "Dining area",
+              "Dining table",
+              "Linens",
+              "Room service",
+              "Room is completely wheelchair accessible",
+              "Upper floors accessible by elevator",
+            ],
+            size: "45 m2",
+            capacity: "1 adult and 1 child per Room",
+            rate: "180 USD",
+            availability: "Not available",
+          },
+          {
+            type: "Deluxe Room / Single Occupancy Deluxe Twin Room",
+            facilities: [
+              "Sound proof",
+              "Bathtub",
+              "Air Conditioning",
+              "Wardrobe or closet",
+              "Walk-in closet",
+              "Private Bathroom",
+              "Sitting area",
+              "Hardwood or parquet floors",
+              "Desk",
+              "Mosquito net",
+              "Safe",
+              "Hairdryer",
+              "Shower",
+              "Slippers",
+              "Bidet",
+              "Bathrobe",
+              "Flat-screen TV",
+              "Satellite channels",
+              "Electric kettle",
+              "Dining area",
+              "Dining table",
+              "Linens",
+              "Room service",
+              "Room is completely wheelchair accessible",
+              "Upper floors accessible by elevator",
+            ],
+            size: "45 m2",
+            capacity: "2 adults and 2 children per Room",
+            rate: "210 USD",
+            availability: "80 room(s) left",
+          },
+          {
+            type: "Club Room / Single Occupancy Club King Room",
+            facilities: [
+              "Sound proof",
+              "Bathtub",
+              "Air Conditioning",
+              "Wardrobe or closet",
+              "Walk-in closet",
+              "Private Bathroom",
+              "Sitting area",
+              "Hardwood or parquet floors",
+              "Desk",
+              "Mosquito net",
+              "Safe",
+              "Hairdryer",
+              "Shower",
+              "Slippers",
+              "Bidet",
+              "Bathrobe",
+              "Flat-screen TV",
+              "Satellite channels",
+              "Electric kettle",
+              "Dining area",
+              "Dining table",
+              "Linens",
+              "Room service",
+              "Room is completely wheelchair accessible",
+              "Upper floors accessible by elevator",
+            ],
+            size: "45 m2",
+            capacity: "1 adult and 1 child per Room",
+            rate: "240 USD",
+            availability: "Not available",
+          },
+          {
+            type: "Club Room / Single Occupancy Club Twin Room",
+            facilities: [
+              "Sound proof",
+              "Bathtub",
+              "Air Conditioning",
+              "Wardrobe or closet",
+              "Walk-in closet",
+              "Private Bathroom",
+              "Sitting area",
+              "Hardwood or parquet floors",
+              "Desk",
+              "Mosquito net",
+              "Safe",
+              "Hairdryer",
+              "Shower",
+              "Slippers",
+              "Bidet",
+              "Bathrobe",
+              "Flat-screen TV",
+              "Satellite channels",
+              "Electric kettle",
+              "Dining area",
+              "Dining table",
+              "Linens",
+              "Room service",
+              "Room is completely wheelchair accessible",
+              "Upper floors accessible by elevator",
+            ],
+            size: "50 m2",
+            capacity: "1 adult and 1 child per Room",
+            rate: "270 USD",
+            availability: "15 room(s) left",
+          },
+          {
+            type: "Junior Suite / Junior Suite Single Occupancy Junior Suite",
+            facilities: [
+              "Sound proof",
+              "Bathtub",
+              "Air Conditioning",
+              "Wardrobe or closet",
+              "Walk-in closet",
+              "Private Bathroom",
+              "Sitting area",
+              "Hardwood or parquet floors",
+              "Desk",
+              "Mosquito net",
+              "Safe",
+              "Hairdryer",
+              "Shower",
+              "Slippers",
+              "Bidet",
+              "Bathrobe",
+              "Flat-screen TV",
+              "Satellite channels",
+              "Electric kettle",
+              "Dining area",
+              "Dining table",
+              "Linens",
+              "Room service",
+              "Room is completely wheelchair accessible",
+              "Upper floors accessible by elevator",
+            ],
+            size: "10 m2",
+            capacity: "1 adult and 1 child per Room",
+            rate: "350 USD",
+            availability: "Not available",
+          },
+          {
+            type: "Junior Suite / Junior Suite Double Occupancy Junior Suite",
+            facilities: [
+              "Sound proof",
+              "Bathtub",
+              "Air Conditioning",
+              "Wardrobe or closet",
+              "Walk-in closet",
+              "Private Bathroom",
+              "Sitting area",
+              "Hardwood or parquet floors",
+              "Desk",
+              "Mosquito net",
+              "Safe",
+              "Hairdryer",
+              "Shower",
+              "Slippers",
+              "Bidet",
+              "Bathrobe",
+              "Flat-screen TV",
+              "Satellite channels",
+              "Electric kettle",
+              "Dining area",
+              "Dining table",
+              "Linens",
+              "Room service",
+              "Room is completely wheelchair accessible",
+              "Upper floors accessible by elevator",
+            ],
+            size: "10 m2",
+            capacity: "1 adult and 1 child per Room",
+            rate: "380 USD",
+            availability: "5 room(s) left",
+          },
+        ]
+        
       },
       {
         name: "Hôtel des Mille Collines",
         rating: 4.5,
         reviews: 100,
         location: "Kigali, Rwanda",
-        description: "Iconic hotel with a rich history and modern luxury in the heart of Kigali. ",
-        
+        address: "KN 3 Avenue",
+        description:
+          "Iconic hotel with a rich history and modern luxury in the heart of Kigali. ",
+
         price: "$20",
-        gallery: [
-          mille1,
-          mille2,
-          mille3,
-          mille4
+        gallery: [mille1, mille2, mille3, mille4],
+        amenality: [
+          "Breakfast",
+          "Internet",
+          "Bar",
+          "Terrace",
+          "Family rooms",
+          "Sauna",
         ],
-        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
-        isPopular: true
+        isPopular: true,
       },
       {
         name: "The Retreat by Heaven",
         rating: 4.3,
         reviews: 120,
         location: "Kigali, Rwanda",
-        description: "Boutique hotel offering eco-friendly luxury and exquisite dining.",
+        description:
+          "Boutique hotel offering eco-friendly luxury and exquisite dining.",
         price: "$30",
-        gallery: [
-          ret1,
-          ret2,
-          ret3,
-          ret4
+        gallery: [ret1, ret2, ret3, ret4],
+        amenality: [
+          "Breakfast",
+          "Internet",
+          "Bar",
+          "Terrace",
+          "Family rooms",
+          "Sauna",
         ],
-        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
-        isPopular: true
-      }
-    ]
+        isPopular: true,
+      },
+    ],
   },
   {
     category: "Resorts",
@@ -1710,30 +2178,38 @@ export const Accommodations = [
         rating: 4.8,
         reviews: 12,
         location: "Gisenyi, Rwanda",
-        description: "Relax by the serene Lake Kivu with luxurious amenities and breathtaking views.",
+        description:
+          "Relax by the serene Lake Kivu with luxurious amenities and breathtaking views.",
         price: "$20",
-        gallery: [
-          accom3,
-          accom2,
-          accom1
+        gallery: [accom3, accom2, accom1],
+        amenality: [
+          "Breakfast",
+          "Internet",
+          "Bar",
+          "Terrace",
+          "Family rooms",
+          "Sauna",
         ],
-        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
-        isPopular: false
+        isPopular: false,
       },
       {
         name: "Nyungwe House",
         rating: 4.9,
         reviews: 9,
         location: "Nyungwe Forest, Rwanda",
-        description: "A luxury resort in the heart of the rainforest, perfect for nature lovers.",
+        description:
+          "A luxury resort in the heart of the rainforest, perfect for nature lovers.",
         price: "$35",
-        gallery: [
-          accom1,
-          accom3,
-          accom2
+        gallery: [accom1, accom3, accom2],
+        amenality: [
+          "Breakfast",
+          "Internet",
+          "Bar",
+          "Terrace",
+          "Family rooms",
+          "Sauna",
         ],
-        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
-        isPopular: false
+        isPopular: false,
       },
       {
         name: "Akagera Game Lodge",
@@ -1742,15 +2218,18 @@ export const Accommodations = [
         location: "Akagera National Park, Rwanda",
         description: "Enjoy stunning wildlife views and comfortable stays.",
         price: "$25",
-        gallery: [
-          accom2,
-          accom1,
-          accom3,
+        gallery: [accom2, accom1, accom3],
+        amenality: [
+          "Breakfast",
+          "Internet",
+          "Bar",
+          "Terrace",
+          "Family rooms",
+          "Sauna",
         ],
-        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
-        isPopular: false
-      }
-    ]
+        isPopular: false,
+      },
+    ],
   },
   {
     category: "Motels",
@@ -1760,32 +2239,40 @@ export const Accommodations = [
         rating: 4.5,
         reviews: 9,
         location: "Kigali, Rwanda",
-        description: "Affordable and cozy stays with easy access to the city center.",
+        description:
+          "Affordable and cozy stays with easy access to the city center.",
         price: "$10",
-        gallery: [
-          accom3,
-          accom1,
-          accom2
+        gallery: [accom3, accom1, accom2],
+        amenality: [
+          "Breakfast",
+          "Internet",
+          "Bar",
+          "Terrace",
+          "Family rooms",
+          "Sauna",
         ],
-        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
-        isPopular: true
+        isPopular: true,
       },
       {
         name: "Rainbow Motel",
         rating: 4.3,
         reviews: 6,
         location: "Huye, Rwanda",
-        description: "A simple and clean option for budget-conscious travelers.",
+        description:
+          "A simple and clean option for budget-conscious travelers.",
         price: "$8",
-        gallery: [
-          accom1,
-          accom2,
-          accom1
+        gallery: [accom1, accom2, accom1],
+        amenality: [
+          "Breakfast",
+          "Internet",
+          "Bar",
+          "Terrace",
+          "Family rooms",
+          "Sauna",
         ],
-        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
-        isPopular: false
-      }
-    ]
+        isPopular: false,
+      },
+    ],
   },
   {
     category: "Hostels",
@@ -1795,15 +2282,19 @@ export const Accommodations = [
         rating: 4.7,
         reviews: 15,
         location: "Kigali, Rwanda",
-        description: "Perfect for solo travelers and groups, offering budget-friendly stays.",
+        description:
+          "Perfect for solo travelers and groups, offering budget-friendly stays.",
         price: "$5",
-        gallery: [
-          accom1,
-          accom2,
-          accom1
+        gallery: [accom1, accom2, accom1],
+        amenality: [
+          "Breakfast",
+          "Internet",
+          "Bar",
+          "Terrace",
+          "Family rooms",
+          "Sauna",
         ],
-        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
-        isPopular: true
+        isPopular: true,
       },
       {
         name: "Explore Rwanda Hostel",
@@ -1812,15 +2303,18 @@ export const Accommodations = [
         location: "Musanze, Rwanda",
         description: "A welcoming and social place for adventurers.",
         price: "$7",
-        gallery: [
-          accom1,
-          accom2,
-          accom1
+        gallery: [accom1, accom2, accom1],
+        amenality: [
+          "Breakfast",
+          "Internet",
+          "Bar",
+          "Terrace",
+          "Family rooms",
+          "Sauna",
         ],
-        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
-        isPopular: false
-      }
-    ]
+        isPopular: false,
+      },
+    ],
   },
   {
     category: "Bed and Breakfasts",
@@ -1830,15 +2324,19 @@ export const Accommodations = [
         rating: 4.6,
         reviews: 8,
         location: "Musanze, Rwanda",
-        description: "Wake up to stunning mountain views and delicious local breakfasts.",
+        description:
+          "Wake up to stunning mountain views and delicious local breakfasts.",
         price: "$12",
-        gallery: [
-          accom2,
-          accom3,
-          accom1
+        gallery: [accom2, accom3, accom1],
+        amenality: [
+          "Breakfast",
+          "Internet",
+          "Bar",
+          "Terrace",
+          "Family rooms",
+          "Sauna",
         ],
-        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna'],
-        isPopular: true
+        isPopular: true,
       },
       {
         name: "Hilltop B&B",
@@ -1847,21 +2345,17 @@ export const Accommodations = [
         location: "Kigali, Rwanda",
         description: "Charming accommodations with personalized service.",
         price: "$14",
-        gallery: [
-          accom1,
-          accom2,
-          accom1
-        ],
+        gallery: [accom1, accom2, accom1],
         isPopular: false,
-        amenality:['Breakfast','Internet','Bar','Terrace','Family rooms','Sauna']
-      }
-    ]
-  }
+        amenality: [
+          "Breakfast",
+          "Internet",
+          "Bar",
+          "Terrace",
+          "Family rooms",
+          "Sauna",
+        ],
+      },
+    ],
+  },
 ];
-
-
-
-
-
-
-

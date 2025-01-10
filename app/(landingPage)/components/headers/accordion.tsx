@@ -69,7 +69,7 @@ const Accordion: React.FC<AccordionProps> = ({ items = [] }) => {
                         width="24"
                         height="24"
                       />{" "}
-                      <h3 className="text-sm font-semibold">Accomodation</h3>
+                      <h3 className="text-sm font-semibold">Accommodation</h3>
                     </span>
                     {item.accom}
                   </div>

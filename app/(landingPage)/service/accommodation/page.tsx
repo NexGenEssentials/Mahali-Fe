@@ -4,17 +4,17 @@ import LandingPage from "../../landingPageTamplates";
 import ServicePageHero from "../../components/service/serviceHeroSection";
 import accom from "@/public/images/accom1.jpg";
 import accom1 from "@/public/images/accom2.webp";
-import { AccomodationForm } from "../../components/hero/forms/servicesForm";
+import { AccommodationForm } from "../../components/hero/forms/servicesForm";
 import Search, { SearchProps } from "antd/es/input/Search";
 import { HeaderSection } from "../../components/headers/header";
 import { motion } from "motion/react";
-import AccomGalleryCard from "../../components/service/accomodation/accomGalleryCard";
+import AccomGalleryCard from "../../components/service/accommodation/accomGalleryCard";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Accommodations } from "@/app/constants/arrays";
 import { getPopularAccommodations } from "@/app/helpers/filter";
 import Link from "next/link";
 
-const AccomodationService = () => {
+const accommodationService = () => {
   const onSearch: SearchProps["onSearch"] = (value) => {
     console.log(value);
   };
@@ -24,7 +24,7 @@ const AccomodationService = () => {
     <LandingPage>
       <ServicePageHero
         image={accom}
-        service="Accomodation"
+        service="accommodation"
         title="Where Every Stay Is Extraordinary"
         desc="Discover the perfect blend of luxury, comfort, and convenience at Mahali. Nestled in the heart of Africa, our hotel is your gateway to an unforgettable experience."
       />
@@ -50,29 +50,31 @@ const AccomodationService = () => {
                   onSearch={onSearch}
                 />
               </div>
-              <AccomodationForm />
+              <AccommodationForm />
             </div>
           </div>
         </section>
         <div className="w-full flex flex-col">
           <HeaderSection
-            title="Accomodation"
+            title="accommodation"
             subtitle="Choose a category of your choice"
           />
           <div className=" bg-slate-50 p-8 rounded-md flex gap-4 flex-wrap items-center justify-center">
             {Accommodations.map((category, index) => (
-              <Link href={`/service/accomodation/${category.category}`}>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+              <Link
                 key={index}
-                className="cursor-pointer w-fit px-8 py-4 relative text-primaryWhite font-semibold text-base flex gap-2 bg-primaryGreen rounded-md"
+                href={`/service/accommodation/${category.category}`}
               >
-                <span className="text-nowrap">{category.category}</span>
-                <span className="bg-white text-xs text-primaryGreen w-5 h-5 flex items-center justify-center rounded-full absolute top-2 right-2">
-                  {category.details.length}
-                </span>
-              </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="cursor-pointer w-fit px-8 py-4 relative text-primaryWhite font-semibold text-base flex gap-2 bg-primaryGreen rounded-md"
+                >
+                  <span className="text-nowrap">{category.category}</span>
+                  <span className="bg-white text-xs text-primaryGreen w-5 h-5 flex items-center justify-center rounded-full absolute top-2 right-2">
+                    {category.details.length}
+                  </span>
+                </motion.div>
               </Link>
             ))}
           </div>
@@ -84,18 +86,17 @@ const AccomodationService = () => {
             description="Explore the top accommodations our guests rave about and book your favorite stay today!"
           />
           <div className="p-8 flex gap-6 flex-wrap items-start justify-center">
-            {PopulaArray.map((accomodation, index) => (
+            {PopulaArray.map((accommodation, index) => (
               <div
                 key={index}
                 className="md:w-[25%] w-full flex flex-col gap-2"
               >
-                <AccomGalleryCard
-                  Gallery={accomodation.gallery}
-                />
+                <AccomGalleryCard Gallery={accommodation.gallery} />
+                <Link href={`accommodation/${accommodation.category}/${accommodation.name}`}>
                 <div className="flex flex-col gap-2 text-sm cursor-pointer">
                   <div className="flex justify-between items-center gap-2 ">
                     <span className="font-bold hover:text-opacity-70 hover:duration-500 uppercase text-base text-primaryGreen">
-                      {accomodation.name}
+                      {accommodation.name}
                     </span>
                     <span className="flex ">
                       <Icon
@@ -104,22 +105,22 @@ const AccomodationService = () => {
                         height="20"
                         className="text-primaryGreen"
                       />
-                      {accomodation.rating}({accomodation.reviews})
+                      {accommodation.rating}({accommodation.reviews})
                     </span>
                   </div>
                   <span className="text-primaryBlue">
-                    {accomodation.location}
+                    {accommodation.location}
                   </span>
                   <span className="text-slate-500 font-light text-xs">
-                    {accomodation.description}
+                    {accommodation.description}
                   </span>
                   <div className="w-full ">
                     <span className="text-base text-primaryGreen font-semibold">
-                      {accomodation.price}
-                    </span>{" "}
-                    Night
+                      {accommodation.price}
+                    </span>/Night
                   </div>
                 </div>
+                </Link>
               </div>
             ))}
           </div>
@@ -129,4 +130,4 @@ const AccomodationService = () => {
   );
 };
 
-export default AccomodationService;
+export default accommodationService;

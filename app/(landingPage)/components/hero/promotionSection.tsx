@@ -2,10 +2,17 @@
 import React, { useState } from "react";
 import { Select, Space } from "antd";
 import { ServiceOptions } from "@/app/constants/arrays";
-import { AccomodationForm, CarRenTalForm, EventsManagementForm, PackagesForm } from "./forms/servicesForm";
+import {
+  accommodationForm,
+  CarRenTalForm,
+  EventsManagementForm,
+  PackagesForm,
+} from "./forms/servicesForm";
 
 const PromotionSection = () => {
-  const [selectedService, setSelectedService] = useState("Holiday & Tour Packages");
+  const [selectedService, setSelectedService] = useState(
+    "Holiday & Tour Packages"
+  );
   const handleChange = (value: string) => {
     setSelectedService(value);
   };
@@ -40,7 +47,7 @@ const PromotionSection = () => {
               />
             </Space>
           </div>
-          {selectedService === "Accomodation Booking" && <AccomodationForm />}
+          {selectedService === "accommodation Booking" && <accommodationForm />}
           {selectedService === "Holiday & Tour Packages" && <PackagesForm />}
           {selectedService === "Gorilla & Chimpanzee Trekking" && (
             <PackagesForm />

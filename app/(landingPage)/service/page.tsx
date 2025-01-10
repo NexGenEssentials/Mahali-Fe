@@ -42,10 +42,10 @@ const Services = () => {
               </ul>
               <div className="w-full h-[455px] flex gap-4">
                 {ServiceList.map((service, index) => (
-                  <>
+                  <section key={index}>
                     {activeService === service.title &&
                       (service.available ? (
-                        <div key={index} className="h-full w-full">
+                        <div className="h-full w-full">
                           {/* Image Container */}
                           <div className="relative w-full h-full flex ">
                             <Image
@@ -71,7 +71,7 @@ const Services = () => {
                           This Service is currently Not Available !!
                         </div>
                       ))}
-                  </>
+                  </section>
                 ))}
               </div>
             </div>

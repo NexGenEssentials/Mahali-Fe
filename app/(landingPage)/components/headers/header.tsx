@@ -21,7 +21,7 @@ export const SingleHeaderSection = ({title}:{title:string}) => {
     <div className="w-full">
        <div className="text-defaultGreen flex items-center gap-2">
           <span className="h-[3px] w-8 block bg-defaultGreen"></span>
-          <h2 className="font-semibold text-base sm:text-2xl tracking-normal">
+          <h2 className="font-semibold text-base sm:text-xl tracking-normal">
             {title}
           </h2>
         </div>

@@ -1,3 +1,4 @@
+import { StaticImageData } from "next/image";
 import { Accommodations, CarDetails, PackageList } from "../constants/arrays";
 
 export const filterPackages = (data: typeof PackageList, filters: { location: string; packageName: string }) => {
@@ -41,12 +42,46 @@ const isPriceInRange = (carPrice:string, priceRange:string) => {
   }
 };
 
-export const  getPopularAccommodations =()=> {
-  return Accommodations.flatMap(category => category.details)
-  .filter(detail => detail.isPopular);
-}
+
+export const getPopularAccommodations = () => {
+  return Accommodations.flatMap((category) =>
+    category.details
+      .filter((detail) => detail.isPopular)
+      .map((detail) => ({
+        ...detail,
+        category: category.category,
+      }))
+  );
+};
 
 export const filterByCategory = (category: string) => {
   const foundCategory = Accommodations.find((accommodation) => accommodation.category.toLowerCase() === category.toLowerCase());
   return foundCategory ? foundCategory.details : [];
+};
+ 
+export type AccommodationDetail = {
+  name: string;
+  rating: number;
+  reviews: number;
+  location: string;
+  description: string;
+  price: string;
+  gallery: StaticImageData[];
+  isPopular: boolean;
+  amenality:string[];
+  address?:string;
+  moreDescription?:string;
+
+};
+
+export const findAccommodationByName = (accommodationName: string): AccommodationDetail | undefined => {
+  for (const category of Accommodations) {
+    const foundAccommodation = category.details.find((detail) =>
+        detail.name.toLowerCase() === accommodationName.toLowerCase()
+    );
+    if (foundAccommodation) {
+      return foundAccommodation;
+    }
+  }
+  return undefined;
 };
