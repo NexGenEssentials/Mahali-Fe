@@ -71,6 +71,17 @@ export type AccommodationDetail = {
   amenality:string[];
   address?:string;
   moreDescription?:string;
+  rooms?: {
+    type: string;
+    size: string;
+    capacity: string;
+    rate: string;
+    availability: string;
+}[];
+houseRules?:({
+  title: string;
+  details: string |string[];
+})[]
 
 };
 

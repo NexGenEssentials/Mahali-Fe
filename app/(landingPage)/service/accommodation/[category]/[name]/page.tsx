@@ -1,11 +1,14 @@
 "use client";
 import { SingleHeaderSection } from "@/app/(landingPage)/components/headers/header";
+import AvailableDropdown from "@/app/(landingPage)/components/service/accommodation/dropDown/accomAvailableDropDown";
 import ServicePageHero from "@/app/(landingPage)/components/service/serviceHeroSection";
 import LandingPage from "@/app/(landingPage)/landingPageTamplates";
 import { findAccommodationByName } from "@/app/helpers/filter";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { Table } from "antd";
 import Image from "next/image";
 import React, { useState } from "react";
+import DatePicker, { DateObject } from "react-multi-date-picker";
 
 const navBar = [
   "Overview",
@@ -14,11 +17,42 @@ const navBar = [
   "House Rules",
   "Guest Reviews",
 ];
+const Columns = [
+  {
+    title: "Name",
+    dataIndex: "type",
+    key: "type",
+  },
+  {
+    title: "Number Of Guests",
+    dataIndex: "capacity",
+    key: "capacity",
+  },
+  {
+    title: "Price",
+    dataIndex: "rate",
+    key: "rate",
+  },
+  {
+    title: "Sizes",
+    dataIndex: "size",
+    key: "size",
+  },
+  {
+    title: "Availability",
+    dataIndex: "availability",
+    key: "availability",
+  },
+];
 const accommodationName = async ({ params }: { params: { name: string } }) => {
   const name = decodeURIComponent(params.name);
   const AccomDetails = findAccommodationByName(name);
   const [selectedSection, setSelectedSection] = useState("Overview");
   const [like, setLike] = useState(false);
+  const [dateSelected, setDateSelected] = useState<DateObject[]>([
+    new DateObject(),
+    new DateObject().add(2, "days"),
+  ]);
   return (
     <LandingPage>
       <ServicePageHero
@@ -45,6 +79,7 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
             </a>
           ))}
         </div>
+
         <div className="w-full flex flex-col space-y-4">
           {/* title */}
           <div className="flex items-center justify-between gap-4 py-2">
@@ -88,6 +123,7 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
               </button>
             </span>
           </div>
+
           {/* Gallery */}
           <div className="w-full h-96  flex gap-2 overflow-hidden justify-between rounded-lg cursor-pointer">
             <div className=" w-full md:w-1/2 h-full  overflow-hidden">
@@ -113,6 +149,7 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
               </div>
             </div>
           </div>
+
           {/* Description */}
           <div id="Overview" className="w-3/4 flex flex-col gap-1 ">
             <SingleHeaderSection title="Description" />
@@ -132,13 +169,81 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
               ))}
             </ul>
           </div>
+
           {/* availability */}
           <div id="Info & Prices" className="w-3/4 flex flex-col">
             <SingleHeaderSection title="Check The Availability" />
             <p className="text-xs text-slate-500 inline-flex items-end gap-1">
-            <Icon icon="si:warning-line" width="16" height="16" />
-              Select dates to see this property's availability and prices</p>
+              <Icon icon="si:warning-line" width="16" height="16" />
+              Select dates to see this property's availability and prices
+            </p>
+            <div className="flex border border-primaryGreen rounded-lg w-fit">
+              <div className="rounded-md border-r-2 pr">
+                <DatePicker
+                  range
+                  rangeHover
+                  dateSeparator=" to "
+                  value={dateSelected}
+                  onChange={setDateSelected}
+                  format="DD/MM/YYYY"
+                  inputClass="p-2 grow max-md:w-full text-sm rounded-md outline-none"
+                />
+              </div>
+              <AvailableDropdown />
+
+              <button className="inline-flex gap-2 items-center bg-primaryGreen p-2 text-white text-sm font-semibold rounded-r-md ">
+                <Icon icon="mage:reload" width="20" height="20" /> Apply Changes
+              </button>
+            </div>
+            <Table
+              dataSource={AccomDetails?.rooms}
+              columns={Columns}
+              className="mt-4 border rounded-lg"
+            />
           </div>
+
+          {/*Guest Reviews */}
+          <div id="House Rules" className="w-3/4 flex flex-col">
+            <SingleHeaderSection title="House Rules" />
+            <p className="text-xs text-slate-500 inline-flex items-end gap-1">
+              <Icon icon="si:warning-line" width="16" height="16" />
+              {AccomDetails?.name} takes special requests - add in the next
+              step!
+            </p>
+            <div className="border-t border-x rounded-lg">
+              {AccomDetails?.houseRules?.map((rule, index) => (
+                <div key={index} className="flex gap-4 p-6 border-b rounded-lg">
+                  <span className="w-1/3 font-bold text-lg text-defaultGreen">
+                    {rule.title}
+                  </span>
+                  {typeof rule.details === "string" ? (
+                    <span className="w-2/3 text-sm text-slate-600 font-medium">
+                      {rule.details}
+                    </span>
+                  ) : (
+                    <span className="w-2/3 flex gap-4">
+                      {rule.details.map((payment, index) => (
+                        <span key={index}>
+                          <Icon icon={payment} width="65" height="50" className="text-yellow-500" />
+                        </span>
+                      ))}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/*Guest Reviews */}
+          <div id="House Rules" className="w-3/4 flex flex-col">
+            <SingleHeaderSection title="Guest Reviews" />
+            <div className="flex gap-4 items-end">
+              <span className="w-8 h-8 p-2 bg-primaryGreen text-white font-bold rounded-md text-center text-sm">{AccomDetails?.rating}</span>
+              <span className="text-primaryGreen text-sm font-semibold">Fabulous</span>
+              <span className="text-slate-500 text-sm">{AccomDetails?.reviews} Reviews</span>
+            </div>
+            
+            </div>
         </div>
       </div>
     </LandingPage>
