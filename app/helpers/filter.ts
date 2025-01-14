@@ -70,6 +70,7 @@ export type AccommodationDetail = {
   isPopular: boolean;
   amenality:string[];
   address?:string;
+  map?:string;
   moreDescription?:string;
   rooms?: {
     type: string;
@@ -81,7 +82,18 @@ export type AccommodationDetail = {
 houseRules?:({
   title: string;
   details: string |string[];
-})[]
+})[],
+reviewStatus?:string,
+ratings?:{
+  category: string;
+  score: number;
+}[];
+testimonies?:{
+  name: string;
+  comment: string;
+  country: string;
+  image?: StaticImageData;
+}[]
 
 };
 

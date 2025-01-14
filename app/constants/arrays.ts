@@ -1735,12 +1735,12 @@ export const Accommodations = [
         name: "Kigali Marriott Hotel",
         rating: 5,
         reviews: 218,
+        reviewStatus:'Fabulous',
         location: "Kigali, Rwanda",
+        map:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.4990298402818!2d30.05955087405026!3d-1.9537081367178593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca4294197b1a5%3A0xafa0c46887b3a2c6!2sKigali%20Marriott%20Hotel!5e0!3m2!1sen!2srw!4v1736833677926!5m2!1sen!2srw",
         address: "KN 3 Avenue",
-        moreDescription:
-          "Experience Rwanda's capital from Kigali Marriott Hotel, conveniently located near the Nyarugenge financial district and the Kigali Convention Center. Our impeccable luxury hotel provides spacious, modern accommodations with deluxe amenities and premium services. Make yourself comfortable in stylish rooms or lavish suites with floor-to-ceiling windows, spacious bathrooms and plush, pillow-top bedding. Additional amenities include flat-screen TVs, ergonomic workspaces and complimentary Wi-Fi access for Marriott Bonvoy members. After a long day in Kigali, relax over a delicious meal in our popular restaurants, take a refreshing dip in our outdoor pool or unwind with a massage in our hotel spa. Allow our concierge to assist you in planning excursions to the Big Five, the famous canopy walks or the home of the renowned mountain gorillas. If visiting Rwanda for business, you'll appreciate our versatile event venues and fantastic catering services. Look forward to your getaway to Kigali Marriott Hotel.",
-        description:
-          "Experience Rwanda's capital from Kigali Marriott Hotel, conveniently located near the Nyarugenge.",
+        moreDescription:"Experience Rwanda's capital from Kigali Marriott Hotel, conveniently located near the Nyarugenge financial district and the Kigali Convention Center. Our impeccable luxury hotel provides spacious, modern accommodations with deluxe amenities and premium services. Make yourself comfortable in stylish rooms or lavish suites with floor-to-ceiling windows, spacious bathrooms and plush, pillow-top bedding. Additional amenities include flat-screen TVs, ergonomic workspaces and complimentary Wi-Fi access for Marriott Bonvoy members. After a long day in Kigali, relax over a delicious meal in our popular restaurants, take a refreshing dip in our outdoor pool or unwind with a massage in our hotel spa. Allow our concierge to assist you in planning excursions to the Big Five, the famous canopy walks or the home of the renowned mountain gorillas. If visiting Rwanda for business, you'll appreciate our versatile event venues and fantastic catering services. Look forward to your getaway to Kigali Marriott Hotel.",
+        description:"Experience Rwanda's capital from Kigali Marriott Hotel, conveniently located near the Nyarugenge.",
         price: "$150",
         gallery: [mario1, mario3, mario2, mario4],
         isPopular: true,
@@ -1852,7 +1852,61 @@ export const Accommodations = [
             rate: "380 USD",
             availability: "5 room(s) left",
           },
-        ]
+        ],
+        ratings : [
+          { category: "Staff", score: 8.9 },
+          { category: "Facilities", score: 5.9 },
+          { category: "Cleanliness", score: 9.2 },
+          { category: "Comfort", score: 6.2 },
+          { category: "Value for money", score: 3.2 },
+          { category: "Location", score: 9.1 },
+          { category: "Free WiFi", score: 8.7 },
+        ],
+        testimonies: [
+          {
+            image: profile1,
+            name: "Bernadette",
+            comment:
+              "The hotel is fantastic. My room was large, quiet, and very comfortable. The breakfast buffet was great. The Guest Relations Manager, Belinda, truly went above and beyond to ensure I had a fabulous stay.",
+            country: "Australia",
+          },
+          {
+            image: undefined,
+            name: "Siya",
+            comment:
+              "Chef Innocent and team took very good care of us. The facilities are great, we truly got good value for money. The front office staff were friendly and very helpful.",
+            country: "South Africa",
+          },
+          {
+            image: undefined,
+            name: "Siko",
+            comment:
+              "Gym and sauna and steam were very nice. The staff were also very good.",
+            country: "Kenya",
+          },
+          {
+            image:profile2,
+            name: "Kennie",
+            comment:
+              "I had an amazing experience! The room was spotless, the view was breathtaking, and the staff were incredibly attentive and friendly. Definitely a place I’ll visit again.",
+            country: "Canada",
+          },
+          {
+            image: undefined,
+            name: "Ahmed",
+            comment:
+              "The hotel's location is perfect, and the service exceeded my expectations. The food was delicious, and the staff ensured my stay was seamless. Highly recommended!",
+            country: "United Arab Emirates",
+          },
+          {
+            image: undefined,
+            name: "Maria",
+            comment:
+              "Such a cozy atmosphere! I loved the local dishes served at the restaurant and the relaxing spa experience. The staff were always smiling and ready to assist.",
+            country: "Spain",
+          },
+        ],
+        
         
       },
       {

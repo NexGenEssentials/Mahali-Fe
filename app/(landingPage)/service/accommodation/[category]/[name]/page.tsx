@@ -1,5 +1,6 @@
 "use client";
 import { SingleHeaderSection } from "@/app/(landingPage)/components/headers/header";
+import ReviewsPage from "@/app/(landingPage)/components/reviews/reviewsPage";
 import AvailableDropdown from "@/app/(landingPage)/components/service/accommodation/dropDown/accomAvailableDropDown";
 import ServicePageHero from "@/app/(landingPage)/components/service/serviceHeroSection";
 import LandingPage from "@/app/(landingPage)/landingPageTamplates";
@@ -80,7 +81,7 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
           ))}
         </div>
 
-        <div className="w-full flex flex-col space-y-4">
+        <div className="w-full flex flex-col space-y-8">
           {/* title */}
           <div className="flex items-center justify-between gap-4 py-2">
             <span className="flex flex-col">
@@ -224,7 +225,12 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
                     <span className="w-2/3 flex gap-4">
                       {rule.details.map((payment, index) => (
                         <span key={index}>
-                          <Icon icon={payment} width="65" height="50" className="text-yellow-500" />
+                          <Icon
+                            icon={payment}
+                            width="65"
+                            height="50"
+                            className="text-yellow-500"
+                          />
                         </span>
                       ))}
                     </span>
@@ -235,15 +241,60 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
           </div>
 
           {/*Guest Reviews */}
-          <div id="House Rules" className="w-3/4 flex flex-col">
+          <div id="House Rules" className="w-full flex flex-col gap-4">
             <SingleHeaderSection title="Guest Reviews" />
-            <div className="flex gap-4 items-end">
-              <span className="w-8 h-8 p-2 bg-primaryGreen text-white font-bold rounded-md text-center text-sm">{AccomDetails?.rating}</span>
-              <span className="text-primaryGreen text-sm font-semibold">Fabulous</span>
-              <span className="text-slate-500 text-sm">{AccomDetails?.reviews} Reviews</span>
+            <div className="flex gap-2 items-end">
+              <span className="w-8 h-8 p-2 bg-primaryGreen text-white font-bold rounded-md text-center text-sm">
+                {AccomDetails?.rating}
+              </span>
+              <span className="text-primaryGreen text-sm font-semibold">
+                {AccomDetails?.reviewStatus} 👌
+              </span>
+              <span className="text-slate-500 text-sm">
+                {AccomDetails?.reviews} Reviews
+              </span>
             </div>
+            <div>
+              <h1 className="font-semibold text-primaryGreen">Categories :</h1>
+              <div className="flex gap-x-12 gap-y-4 flex-wrap">
+                {AccomDetails?.ratings?.map((rate, index) => (
+                  <div key={index} className="w-72">
+                    <span className="w-full flex justify-between items-end space-x-2 text-sm font-bold">
+                      <h2 className="mb-0">{rate.category}</h2>
+                      <h2 className="mb-0">{rate.score}</h2>
+                    </span>
+                    <span className="w-full bg-slate-200 h-2 rounded-full block">
+                      <span
+                        style={{ width: `${rate.score * 10}%` }}
+                        className="h-2 bg-primaryGreen rounded-full block"
+                      ></span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <ReviewsPage Testimonial={AccomDetails?.testimonies!} />
+            </div>
+          </div>
+
+          <div className="w-3/4 flex flex-col">
+            <SingleHeaderSection title="Where you’ll be" />
+            <p className="text-xs text-slate-500 inline-flex items-end gap-1">
+              <Icon icon="si:warning-line" width="16" height="16" />
+              {AccomDetails?.location}
+            </p>
             
-            </div>
+              <iframe
+                src={AccomDetails?.map}
+                height="400"
+                style={{ border: 0, width:'100%' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+          
+          </div>
         </div>
       </div>
     </LandingPage>
