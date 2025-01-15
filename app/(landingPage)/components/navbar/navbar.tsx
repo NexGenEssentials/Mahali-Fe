@@ -1,4 +1,5 @@
 "use client";
+import { useAppContext } from "@/app/context";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,12 +15,12 @@ export const NavItems = [
 ];
 
 const Navbar = () => {
-  const [close, setClose] = useState(true);
   const [scrollY, setScrollY] = useState(0);
   const [showFixedNav, setShowFixedNav] = useState(false);
   const [hideFixedNav, setHideFixedNav] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const {openNavDiscount, setOpenNavDiscount} = useAppContext()
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
@@ -53,7 +54,7 @@ const Navbar = () => {
   }, []);
 
   const renderNavLinks = () => (
-    <ul className="flex flex-col lg:flex-row items-center lg:gap-8">
+    <ul className="flex flex-col lg:flex-row items-center mb-0 lg:gap-8">
       {NavItems.map((nav, index) => (
         <Link key={index} href={`/${nav.link}`}>
           <motion.li
@@ -74,12 +75,12 @@ const Navbar = () => {
     <>
       {/* Default Navbar */}
       <nav className="absolute top-0 right-0 left-0 z-50">
-        {close && (
+        {openNavDiscount && (
           <div className="max-md:hidden bg-defaultGreen">
             <div className="max-w-[1750px] mx-auto text-white text-sm font-medium gap-4 flex-wrap flex justify-between items-center px-8 py-3">
               <span>+250793898790</span>
               <span>Get 50% off By selecting a package | Book now</span>
-              <span onClick={() => setClose(false)} className="cursor-pointer">
+              <span onClick={() => setOpenNavDiscount(false)} className="cursor-pointer">
                 x
               </span>
             </div>

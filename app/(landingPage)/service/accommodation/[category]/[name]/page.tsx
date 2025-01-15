@@ -1,13 +1,16 @@
 "use client";
 import { SingleHeaderSection } from "@/app/(landingPage)/components/headers/header";
+import StickyNavbar from "@/app/(landingPage)/components/navbar/accomodationNav";
 import ReviewsPage from "@/app/(landingPage)/components/reviews/reviewsPage";
 import AvailableDropdown from "@/app/(landingPage)/components/service/accommodation/dropDown/accomAvailableDropDown";
 import ServicePageHero from "@/app/(landingPage)/components/service/serviceHeroSection";
 import LandingPage from "@/app/(landingPage)/landingPageTamplates";
+import { useAppContext } from "@/app/context";
 import { findAccommodationByName } from "@/app/helpers/filter";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Table } from "antd";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 
@@ -45,8 +48,9 @@ const Columns = [
     key: "availability",
   },
 ];
-const accommodationName = async ({ params }: { params: { name: string } }) => {
+const accommodationName = ({ params }: { params: { name: string } }) => {
   const name = decodeURIComponent(params.name);
+  const { setActiveModalId } = useAppContext();
   const AccomDetails = findAccommodationByName(name);
   const [selectedSection, setSelectedSection] = useState("Overview");
   const [like, setLike] = useState(false);
@@ -62,28 +66,16 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
         title="Where Every Stay Is Extraordinary"
         desc="Discover the perfect blend of luxury, comfort, and convenience at Mahali. Nestled in the heart of Africa, our hotel is your gateway to an unforgettable experience."
       />
-      <div className="max-w-[1750px] mx-auto flex flex-col w-full items-center gap-8 p-8">
+      <div className="max-w-[1750px] mx-auto flex flex-col w-full items-center gap-8">
         {/* navbar */}
-        <div className="w-3/4 flex items-center justify-between gap-4 border-b mx-auto">
-          {navBar.map((item, index) => (
-            <a href={`#${item}`} key={index}>
-              <div
-                onClick={() => setSelectedSection(item)}
-                className={`${
-                  selectedSection === item
-                    ? "border-b-2 border-b-primaryGreen font-bold"
-                    : ""
-                } text-sm px-8 pb-4 cursor-pointer `}
-              >
-                {item}
-              </div>
-            </a>
-          ))}
-        </div>
-
-        <div className="w-full flex flex-col space-y-8">
+        <StickyNavbar
+          navBar={navBar}
+          selectedSection={selectedSection}
+          setSelectedSection={setSelectedSection}
+        />
+        <div className="px-8">
           {/* title */}
-          <div className="flex items-center justify-between gap-4 py-2">
+          <div className=" w-full flex items-center justify-between gap-4 ">
             <span className="flex flex-col">
               <h1 className="text-lg font-semibold uppercase text-primaryGreen mb-0">
                 {AccomDetails?.name}
@@ -124,7 +116,6 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
               </button>
             </span>
           </div>
-
           {/* Gallery */}
           <div className="w-full h-96  flex gap-2 overflow-hidden justify-between rounded-lg cursor-pointer">
             <div className=" w-full md:w-1/2 h-full  overflow-hidden">
@@ -150,7 +141,9 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
               </div>
             </div>
           </div>
-
+          </div>
+          <div className="w-full flex flex-col gap-8 px-8 pb-8">
+          
           {/* Description */}
           <div id="Overview" className="w-3/4 flex flex-col gap-1 ">
             <SingleHeaderSection title="Description" />
@@ -159,6 +152,7 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
               {AccomDetails?.moreDescription}
             </p>
           </div>
+
           <div id="Facilities" className="w-3/4 flex flex-col gap-1 ">
             <SingleHeaderSection title="Most popular facilities" />
             <ul className="place-content-end lg:w-3/5 grid grid-cols-2 gap-x-4 gap-y-2 text-xs text-slate-500">
@@ -192,7 +186,10 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
               </div>
               <AvailableDropdown />
 
-              <button className="inline-flex gap-2 items-center bg-primaryGreen p-2 text-white text-sm font-semibold rounded-r-md ">
+              <button
+                onClick={() => setActiveModalId("test")}
+                className="inline-flex gap-2 items-center bg-primaryGreen p-2 text-white text-sm font-semibold rounded-r-md "
+              >
                 <Icon icon="mage:reload" width="20" height="20" /> Apply Changes
               </button>
             </div>
@@ -203,7 +200,7 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
             />
           </div>
 
-          {/*Guest Reviews */}
+          {/*House Rules */}
           <div id="House Rules" className="w-3/4 flex flex-col">
             <SingleHeaderSection title="House Rules" />
             <p className="text-xs text-slate-500 inline-flex items-end gap-1">
@@ -241,7 +238,7 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
           </div>
 
           {/*Guest Reviews */}
-          <div id="House Rules" className="w-full flex flex-col gap-4">
+          <div id="Guest Reviews" className="w-full flex flex-col gap-4">
             <SingleHeaderSection title="Guest Reviews" />
             <div className="flex gap-2 items-end">
               <span className="w-8 h-8 p-2 bg-primaryGreen text-white font-bold rounded-md text-center text-sm">
@@ -284,16 +281,15 @@ const accommodationName = async ({ params }: { params: { name: string } }) => {
               <Icon icon="si:warning-line" width="16" height="16" />
               {AccomDetails?.location}
             </p>
-            
-              <iframe
-                src={AccomDetails?.map}
-                height="400"
-                style={{ border: 0, width:'100%' }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-          
+
+            <iframe
+              src={AccomDetails?.map}
+              height="400"
+              style={{ border: 0, width: "100%" }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </div>

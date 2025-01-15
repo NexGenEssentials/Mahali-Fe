@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import ContextProvider from "./context";
+import CenterModal from "./(landingPage)/components/model/centerModel";
+import RightModal from "./(landingPage)/components/model/rightSideModel";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,7 +35,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AntdRegistry>{children}</AntdRegistry>
+        <ContextProvider>
+        <AntdRegistry>
+          {children}
+          <div>
+            <CenterModal children={<h1> I am a Model</h1>} id={"tests"} />
+            <RightModal children={<h1> I am a Model</h1>} id={"test"} />
+
+          </div>
+        </AntdRegistry>
+
+        </ContextProvider>
       </body>
     </html>
   );
