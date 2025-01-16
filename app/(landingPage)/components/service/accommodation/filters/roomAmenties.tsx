@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useState } from "react";
 import { Checkbox } from "antd";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -37,15 +37,25 @@ const RoomAmenities: React.FC = () => {
         className="flex justify-between items-center cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h3 className="text-base text-nowrap font-semibold text-primaryGreen">Room Amenities</h3>
-        <button
-          className={`px-2 py-1 text-white text-sm rounded `}
-        >
+        <h3 className="text-base text-nowrap font-semibold text-primaryGreen">
+          Room Amenities
+        </h3>
+        <button className="px-2 py-1 text-white text-sm rounded focus:outline-none">
           {isOpen ? (
-          <Icon icon="uis:angle-up" width="24" height="24" className="text-primaryGreen"/>
-        ) : (
-          <Icon icon="uis:angle-up" width="24" height="24" className="text-primaryGreen" rotate={90} />
-        )}
+            <Icon
+              icon="uis:angle-up"
+              width="24"
+              height="24"
+              className="text-primaryGreen"
+            />
+          ) : (
+            <Icon
+              icon="uis:angle-up"
+              width="24"
+              height="24"
+              className="text-primaryGreen rotate-180"
+            />
+          )}
         </button>
       </div>
 
@@ -57,7 +67,11 @@ const RoomAmenities: React.FC = () => {
               key={index}
               onChange={(e) => onCheckboxChange(amenity, e.target.checked)}
               checked={checkedList.includes(amenity)}
-              className=" text-slate-500"
+              style={{
+                color: "#667c3e", // Green text color for the label
+                borderColor: "#667c3e", // Green border for the checkbox
+              }}
+              className="text-slate-500 focus:ring-2 focus:ring-[#667c3e] checked:bg-[#667c3e] checked:border-[#667c3e]"
             >
               {amenity}
             </Checkbox>

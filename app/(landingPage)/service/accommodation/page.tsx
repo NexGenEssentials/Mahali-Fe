@@ -1,65 +1,69 @@
 "use client";
+
 import React from "react";
 import LandingPage from "../../landingPageTamplates";
 import ServicePageHero from "../../components/service/serviceHeroSection";
 import accom from "@/public/images/accom1.jpg";
-import accom1 from "@/public/images/accom2.webp";
 import { AccommodationForm } from "../../components/hero/forms/servicesForm";
 import Search, { SearchProps } from "antd/es/input/Search";
 import { HeaderSection } from "../../components/headers/header";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import AccomGalleryCard from "../../components/service/accommodation/accomGalleryCard";
-import { Icon } from "@iconify/react/dist/iconify.js";
+import { Icon } from "@iconify/react";
 import { Accommodations } from "@/app/constants/arrays";
 import { getPopularAccommodations } from "@/app/helpers/filter";
 import Link from "next/link";
 
-const accommodationService = () => {
+const AccommodationService = () => {
   const onSearch: SearchProps["onSearch"] = (value) => {
     console.log(value);
   };
 
-  const PopulaArray = getPopularAccommodations();
+  const popularAccommodations = getPopularAccommodations();
+
   return (
     <LandingPage>
+      {/* Hero Section */}
       <ServicePageHero
         image={accom}
-        service="accommodation"
+        service="Accommodation"
         title="Where Every Stay Is Extraordinary"
         desc="Discover the perfect blend of luxury, comfort, and convenience at Mahali. Nestled in the heart of Africa, our hotel is your gateway to an unforgettable experience."
       />
-      <div className="max-w-[1750px] mx-auto flex flex-col w-full gap-8">
-        <section className=" relative w-full md:px-8 flex items-center max-md:my-4 justify-center md:mb-40 z-40">
-          <div className="md:absolute flex flex-col gap-4 w-full md:w-[90%] bg-primaryGreen md:shadow-md md:shadow-slate-500 text-primaryWhite p-8 rounded-md ">
-            <div className="flex flex-col gap-4">
+
+      <div className="max-w-[1750px] mx-auto flex flex-col gap-12 px-4 md:px-8 pb-8">
+        {/* Promotion Section */}
+        <section className="relative w-full flex items-center justify-center">
+          <div className="md:absolute flex flex-col gap-6 w-full md:w-[90%] bg-primaryGreen text-primaryWhite p-8 rounded-lg shadow-md">
+            <div>
               <h1 className="text-3xl font-bold">
                 2025 Great Migration Season is Here!
               </h1>
-              <p className="text-xs w-full md:3/4 lg:w-1/2 font-extralight leading-relaxed tracking-wide">
-                Book top Mahali Africa Accommodation now at special
-                discounted rates – only available for paid reservations made by
-                February 05, 2025.
+              <p className="text-sm leading-relaxed">
+                Book top Mahali Africa Accommodation now at special discounted
+                rates – only available for paid reservations made by February
+                05, 2025.
               </p>
             </div>
-            <div className="w-full flex items-end max-md:flex-wrap gap-4">
-              <div className="flex flex-col gap-1">
-                <Search
-                  placeholder="search by location..."
-                  allowClear
-                  size="large"
-                  onSearch={onSearch}
-                />
-              </div>
+            <div className="flex flex-wrap gap-4">
+              <Search
+                placeholder="Search by location..."
+                allowClear
+                size="large"
+                onSearch={onSearch}
+              />
               <AccommodationForm />
             </div>
           </div>
         </section>
-        <div className="w-full flex flex-col">
+
+        {/* Accommodation Categories */}
+        <div>
           <HeaderSection
-            title="accommodation"
+            title="Accommodation"
             subtitle="Choose a category of your choice"
           />
-          <div className=" bg-slate-50 p-8 rounded-md flex gap-4 flex-wrap items-center justify-center">
+          <div className="bg-slate-50 p-8 rounded-lg flex gap-6 flex-wrap justify-center">
             {Accommodations.map((category, index) => (
               <Link
                 key={index}
@@ -68,10 +72,10 @@ const accommodationService = () => {
                 <motion.div
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="cursor-pointer w-fit px-8 py-4 relative text-primaryWhite font-semibold text-base flex gap-2 bg-primaryGreen rounded-md"
+                  className="cursor-pointer bg-primaryGreen text-primaryWhite px-8 py-4 rounded-lg relative flex items-center gap-2"
                 >
-                  <span className="text-nowrap">{category.category}</span>
-                  <span className="bg-white text-xs text-primaryGreen w-5 h-5 flex items-center justify-center rounded-full absolute top-2 right-2">
+                  <span>{category.category}</span>
+                  <span className="absolute top-2 right-2 bg-white text-primaryGreen text-xs w-5 h-5 flex items-center justify-center rounded-full">
                     {category.details.length}
                   </span>
                 </motion.div>
@@ -79,47 +83,49 @@ const accommodationService = () => {
             ))}
           </div>
         </div>
-        <div className="w-full">
+
+        {/* Popular Stays */}
+        <div>
           <HeaderSection
             title="Make A Reservation"
             subtitle="Most Popular Stays"
             description="Explore the top accommodations our guests rave about and book your favorite stay today!"
           />
-          <div className="p-8 flex gap-6 flex-wrap items-start justify-center">
-            {PopulaArray.map((accommodation, index) => (
+          <div className="flex gap-6 flex-wrap items-stretch justify-center">
+            {popularAccommodations.map((accommodation, index) => (
               <div
                 key={index}
-                className="md:w-[25%] w-full flex flex-col gap-2"
+                className="md:w-1/4 w-full flex flex-col gap-4 bg-white p-4 rounded-lg shadow-md"
               >
+                {/* Accommodation Image Gallery */}
                 <AccomGalleryCard Gallery={accommodation.gallery} />
-                <Link href={`accommodation/${accommodation.category}/${accommodation.name}`}>
-                <div className="flex flex-col gap-2 text-sm cursor-pointer">
-                  <div className="flex justify-between items-center gap-2 ">
-                    <span className="font-bold hover:text-opacity-70 hover:duration-500 uppercase text-base text-primaryGreen">
-                      {accommodation.name}
-                    </span>
-                    <span className="flex ">
-                      <Icon
-                        icon="material-symbols-light:star-rounded"
-                        width="20"
-                        height="20"
-                        className="text-primaryGreen"
-                      />
-                      {accommodation.rating}({accommodation.reviews})
-                    </span>
+                <Link
+                  href={`accommodation/${accommodation.category}/${accommodation.name}`}
+                >
+                  <div className="flex flex-col gap-2">
+                    {/* Title and Rating */}
+                    <div className="flex justify-between items-center">
+                      <h3 className="text-primaryGreen font-bold uppercase hover:opacity-70 transition-all">
+                        {accommodation.name}
+                      </h3>
+                      <span className="flex items-center text-primaryGreen">
+                        <Icon
+                          icon="material-symbols-light:star-rounded"
+                          width="20"
+                          height="20"
+                        />
+                        {accommodation.rating} ({accommodation.reviews})
+                      </span>
+                    </div>
+                    {/* Location */}
+                    <span className="text-primaryBlue">{accommodation.location}</span>
+                    {/* Description */}
+                    <p className="text-xs text-gray-500">{accommodation.description}</p>
+                    {/* Price */}
+                    <div className="text-primaryGreen font-semibold text-lg">
+                      {accommodation.price}/Night
+                    </div>
                   </div>
-                  <span className="text-primaryBlue">
-                    {accommodation.location}
-                  </span>
-                  <span className="text-slate-500 font-light text-xs">
-                    {accommodation.description}
-                  </span>
-                  <div className="w-full ">
-                    <span className="text-base text-primaryGreen font-semibold">
-                      {accommodation.price}
-                    </span>/Night
-                  </div>
-                </div>
                 </Link>
               </div>
             ))}
@@ -130,4 +136,4 @@ const accommodationService = () => {
   );
 };
 
-export default accommodationService;
+export default AccommodationService;
