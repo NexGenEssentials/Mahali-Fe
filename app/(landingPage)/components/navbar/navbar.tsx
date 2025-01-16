@@ -129,6 +129,7 @@ const Navbar = () => {
             <div className="flex items-center gap-4 text-white text-base">
               {renderNavLinks()}
               <div className="flex items-center gap-4 text-sm">
+                <Link href={'/login'}> 
                 <motion.button
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.8 }}
@@ -136,6 +137,8 @@ const Navbar = () => {
                 >
                   Login
                 </motion.button>
+                </Link>
+                <Link href={'/signup'}>
                 <motion.button
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.8 }}
@@ -143,6 +146,7 @@ const Navbar = () => {
                 >
                   SignUp
                 </motion.button>
+                </Link>
               </div>
             </div>
           )}
@@ -209,6 +213,7 @@ const Navbar = () => {
               <div className="flex items-center gap-4 text-defaultGreen">
                 {renderNavLinks()}
                 <div className="flex items-center text-white gap-4">
+                <Link href={'/login'}> 
                   <motion.button
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.8 }}
@@ -216,6 +221,8 @@ const Navbar = () => {
                   >
                     Login
                   </motion.button>
+                  </Link>
+                  <Link href={'/signup'}> 
                   <motion.button
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.8 }}
@@ -223,6 +230,7 @@ const Navbar = () => {
                   >
                     SignUp
                   </motion.button>
+                  </Link>
                 </div>
               </div>
             )}
