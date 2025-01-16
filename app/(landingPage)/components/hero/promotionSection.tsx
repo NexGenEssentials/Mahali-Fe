@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Select, Space } from "antd";
 import { ServiceOptions } from "@/app/constants/arrays";
 import {
-  accommodationForm,
+  AccommodationForm,
   CarRenTalForm,
   EventsManagementForm,
   PackagesForm,
@@ -26,7 +26,7 @@ const PromotionSection = () => {
           <p className="text-xs w-full md:3/4 lg:w-1/2 font-extralight leading-relaxed tracking-wide">
             Book top Mahali Africa holiday and tours package now at special
             discounted rates – only available for paid reservations made by
-            December 29, 2024.
+            February 05, 2025.
           </p>
         </div>
         <div className=" flex items-start max-md:flex-wrap gap-4">
@@ -47,7 +47,7 @@ const PromotionSection = () => {
               />
             </Space>
           </div>
-          {selectedService === "accommodation Booking" && <accommodationForm />}
+          {selectedService === "accommodation Booking" && <AccommodationForm />}
           {selectedService === "Holiday & Tour Packages" && <PackagesForm />}
           {selectedService === "Gorilla & Chimpanzee Trekking" && (
             <PackagesForm />

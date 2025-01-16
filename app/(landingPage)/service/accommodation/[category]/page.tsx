@@ -56,7 +56,7 @@ const accommodationCategory = async ({
                     <Image
                       src={accomod.gallery[0]}
                       alt={accomod.name}
-                      className="object-cover w-full h-full group-hover:scale-110 group-hover:duration-700 grayscale group-hover:grayscale-0"
+                      className="object-cover w-full h-full group-hover:scale-110 group-hover:duration-700"
                     />
                   </div>
 
