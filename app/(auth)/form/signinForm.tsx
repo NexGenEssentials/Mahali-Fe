@@ -75,7 +75,7 @@ const SignInForm = () => {
           prefix={
             <MailOutlined className="site-form-item-icon pl-1 pr-2 text-primaryGreen" />
           }
-          className="bg-textPrimaryColor bg-opacity-[4%] border-none text-xs py-3"
+          className=" bg-opacity-[4%] border-none text-xs py-3"
         />
       </Form.Item>
       <Form.Item
@@ -93,12 +93,12 @@ const SignInForm = () => {
           prefix={
             <LockOutlined className="site-form-item-icon pl-1 pr-2 text-primaryGreen" />
           }
-          className="bg-textPrimaryColor bg-opacity-[4%] border-none text-xs py-3"
+          className=" bg-opacity-[4%] border-none text-xs py-3"
         />
       </Form.Item>
       <div className="mt-6 flex justify-between flex-wrap space-y-4 items-center">
         <Link href={"/forget-password"}>
-          <span className="underline text-textTitlesColor font-bold cursor-pointer hover:opacity-60">
+          <span className="underline text-primaryGreen font-bold cursor-pointer hover:opacity-60">
             Forget Password ?
           </span>
         </Link>
@@ -106,7 +106,7 @@ const SignInForm = () => {
           <Button
             loading={loading}
             htmlType="submit"
-            className="bg-primaryGreen hover:bg-primaryGreen hover:text-black rounded-md text-black white p-5 font-extrabold text-sm"
+            className="bg-primaryGreen hover:bg-primaryGreen hover:text-white rounded-md text-white p-5 font-extrabold text-sm"
           >
             Login
             <LoginOutlined />

@@ -8,9 +8,8 @@ import LandingPage from "@/app/(landingPage)/landingPageTamplates";
 import { useAppContext } from "@/app/context";
 import { findAccommodationByName } from "@/app/helpers/filter";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Table } from "antd";
+import { Button, Table, TableColumnsType, TableProps } from "antd";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 
@@ -21,33 +20,14 @@ const navBar = [
   "House Rules",
   "Guest Reviews",
 ];
-const Columns = [
-  {
-    title: "Name",
-    dataIndex: "type",
-    key: "type",
-  },
-  {
-    title: "Number Of Guests",
-    dataIndex: "capacity",
-    key: "capacity",
-  },
-  {
-    title: "Price",
-    dataIndex: "rate",
-    key: "rate",
-  },
-  {
-    title: "Sizes",
-    dataIndex: "size",
-    key: "size",
-  },
-  {
-    title: "Availability",
-    dataIndex: "availability",
-    key: "availability",
-  },
-];
+
+interface DataType {
+  type: string;
+  size: string;
+  capacity: string;
+  rate: number;
+  availability: string;
+}
 
 const accommodationName = ({ params }: { params: { name: string } }) => {
   const name = decodeURIComponent(params.name);
@@ -59,6 +39,58 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
     new DateObject(),
     new DateObject().add(2, "days"),
   ]);
+
+  const Columns: TableColumnsType<DataType> = [
+    {
+      title: "Name",
+      dataIndex: "type",
+      key: "type",
+    },
+    {
+      title: "Number Of Guests",
+      dataIndex: "capacity",
+      key: "capacity",
+    },
+    {
+      title: "Price/USD",
+      dataIndex: "rate",
+      key: "rate",
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.rate - b.rate,
+    },
+    {
+      title: "Sizes",
+      dataIndex: "size",
+      key: "size",
+    },
+    {
+      title: "Availability",
+      dataIndex: "availability",
+      key: "availability",
+    },
+    {
+      title: "Action",
+      dataIndex: "",
+      key: "x",
+      render: () => (
+        <button
+          onClick={() => setActiveModalId("test")}
+          className="px-4 py-2 bg-primaryGreen text-white hover:bg-white hover:text-primaryGreen hover:duration-700 border rounded-md"
+        >
+          View More
+        </button>
+      ),
+    },
+  ];
+
+  const onChange: TableProps<DataType>["onChange"] = (
+    pagination,
+    filters,
+    sorter,
+    extra
+  ) => {
+    console.log("params", pagination, filters, sorter, extra);
+  };
 
   return (
     <LandingPage>
@@ -77,7 +109,7 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
         />
 
         {/* Title and Action Bar */}
-        <div className="w-full px-8 flex flex-col gap-6 md:flex-row items-start justify-between">
+        <div className="w-full px-8 flex gap-6 flex-row items-start justify-between">
           <div>
             <h1 className="text-lg font-semibold uppercase text-primaryGreen">
               {AccomDetails?.name}
@@ -131,7 +163,7 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
         {/* Description */}
         <div id="Overview" className="w-full px-8 flex flex-col gap-4">
           <SingleHeaderSection title="Description" />
-          <p className="text-slate-600 text-sm w-3/4">
+          <p className="text-slate-600 text-sm w-full md:w-3/4">
             {AccomDetails?.moreDescription}
           </p>
         </div>
@@ -149,8 +181,84 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
           </ul>
         </div>
 
+        <div className="w-3/4 px-8 flex flex-col self-start">
+          <SingleHeaderSection title="Hotel surroundings" />
+          <p className="text-xs text-slate-500 inline-flex items-end gap-1">
+            <Icon icon="si:warning-line" width="16" height="16" />
+            Guests loved walking around the neighbourhood!
+          </p>
+          <div className="flex gap-10 items-start w-full max-md:flex-wrap">
+            <div className="flex flex-col gap-2 w-full">
+              <h1 className="text-lg font-extrabold flex gap-2 items-end">
+                <Icon
+                  icon="healthicons:walking-24px"
+                  width="30"
+                  height="30"
+                  className="pb-1"
+                />
+                What's nearby
+              </h1>
+              {AccomDetails?.whatsNearby?.places.map((place, index) => (
+                <div
+                  key={index}
+                  className="flex gap-4 it justify-between w-full text-sm"
+                >
+                  <span>{place.name}</span>
+                  <span>{place.distance}</span>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-col gap-4 w-full">
+              <div className="flex flex-col gap-2 w-full">
+                <h1 className="text-lg font-extrabold flex gap-2 items-end">
+                  <Icon
+                    icon="carbon:restaurant"
+                    width="30"
+                    height="30"
+                    className="pb-1"
+                  />
+                  Restaurants & cafes
+                </h1>
+                {AccomDetails?.whatsNearby?.restaurantsAndCafes.map(
+                  (place, index) => (
+                    <div
+                      key={index}
+                      className="flex gap-4 it justify-between w-full text-sm"
+                    >
+                      <span>{place.name}</span>
+                      <span>{place.distance}</span>
+                    </div>
+                  )
+                )}
+              </div>
+              <div className="flex flex-col gap-2 w-full">
+                <h1 className="text-lg font-extrabold flex gap-2 items-end">
+                  <Icon
+                    icon="clarity:plane-solid"
+                    width="30"
+                    height="30"
+                    className="pb-1"
+                  />
+                  Closest airports
+                </h1>
+                {AccomDetails?.whatsNearby?.closestAirports.map(
+                  (place, index) => (
+                    <div
+                      key={index}
+                      className="flex gap-4 it justify-between w-full text-sm"
+                    >
+                      <span>{place.name}</span>
+                      <span>{place.distance}</span>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Availability */}
-        <div id="Info & Prices" className="w-full px-8 flex flex-col gap-6">
+        <div id="Info & Prices" className="w-full px-8 flex flex-col gap-6  ">
           <SingleHeaderSection title="Check The Availability" />
           <p className="text-xs text-slate-500 inline-flex items-end gap-1">
             <Icon icon="si:warning-line" width="16" height="16" />
@@ -167,18 +275,20 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
               inputClass="p-2 grow max-md:w-full text-sm rounded-md outline-none"
             />
             <AvailableDropdown />
-            <button
-              onClick={() => setActiveModalId("test")}
-              className="inline-flex gap-2 items-center bg-primaryGreen p-2 text-white text-sm font-semibold rounded-r-md"
-            >
+
+            <button className="inline-flex gap-2 items-center bg-primaryGreen p-2 text-white text-sm font-semibold rounded-r-md">
               <Icon icon="mage:reload" width="20" height="20" /> Apply Changes
             </button>
           </div>
-          <Table
-            dataSource={AccomDetails?.rooms}
-            columns={Columns}
-            className="mt-4 border rounded-lg"
-          />
+          <div className="overflow-x-scroll">
+            <Table
+              dataSource={AccomDetails?.rooms}
+              columns={Columns}
+              onChange={onChange}
+              showSorterTooltip={{ target: "sorter-icon" }}
+              className="mt-4 border rounded-lg"
+            />
+          </div>
         </div>
 
         {/* House Rules */}
@@ -199,12 +309,13 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
                     {rule.details}
                   </span>
                 ) : (
-                  <span className="w-2/3 flex gap-4">
+                  <span className="w-2/3 flex gap-4 items-center">
                     {rule.details.map((detail, idx) => (
-                      <p key={idx} className="text-xs text-slate-500">
-                        {detail}
-                      </p>
+                      <Icon icon={detail} width="48" height="48" />
                     ))}
+                    <span className="bg-primaryGreen h-fit px-4 py-2 font-semibold rounded-sm text-xs text-center text-white">
+                      Cash
+                    </span>
                   </span>
                 )}
               </div>

@@ -15,7 +15,7 @@ export const AccommodationForm = () => {
   const [child, setChild] = useState(0);
   return (
     <form
-      action="/service"
+      action="/service/accommodation"
       className="flex gap-4 items-end flex-wrap text-primaryBlue"
     >
       <div className="flex flex-col gap-1">
@@ -32,7 +32,7 @@ export const AccommodationForm = () => {
           value={dateSelected}
           onChange={setDateSelected}
           format="DD/MM/YYYY"
-          inputClass="p-2 grow max-md:w-full text-sm rounded-lg outline-none"
+          inputClass="p-2 grow max-md:w-full  text-sm rounded-lg outline-none text-nowrap"
         />
       </div>
       <div className="flex flex-col gap-1">

@@ -47,7 +47,7 @@ const PromotionSection = () => {
               />
             </Space>
           </div>
-          {selectedService === "accommodation Booking" && <AccommodationForm />}
+          {selectedService === "Accommodation Booking" && <AccommodationForm />}
           {selectedService === "Holiday & Tour Packages" && <PackagesForm />}
           {selectedService === "Gorilla & Chimpanzee Trekking" && (
             <PackagesForm />

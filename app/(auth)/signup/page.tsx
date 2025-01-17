@@ -3,16 +3,20 @@ import React from "react";
 import { LoginOutlined } from "@ant-design/icons";
 import SignupForm from "./form";
 import ButtonComponent from "@/app/(landingPage)/components/buttons/buttonIcon";
+import Logo from "@/app/(landingPage)/components/navbar/logo";
 
 const Signup = () => {
   return (
-    <section className="bg-slate-100 w-full h-full min-h-[calc(100vh)] py-8 flex items-center justify-center">
+    <section className="bg-slate-100 w-full h-full min-h-[calc(100vh)] p-8 flex items-center justify-center">
       <div className="w-full flex flex-col gap-4 items-center justify-center">
         <div className="w-[90%] md:w-3/4 lg:w-2/3 xl:w-1/2 max-w-screen-lg rounded-2xl bg-white flex flex-row shadow-md">
-          <div className="w-full p-8 flex flex-col">
-            <h1 className="text-textPrimaryColor font-extrabold text-2xl mb-5">
-              Register
-            </h1>
+          <div className="w-full px-8 py-4 flex flex-col">
+            <div className="flex gap-8 px-8 pb-2 items-center justify-between w-ful">
+              <Logo />
+              <h1 className="w-3/5 text-textPrimaryColor font-extrabold text-2xl self-center ">
+                Register
+              </h1>
+            </div>
             <SignupForm />
           </div>
         </div>

@@ -559,7 +559,7 @@ export const AboutService = [
 export const ServiceOptions = [
   { value: "Holiday & Tour Packages" },
   { value: "Gorilla & Chimpanzee Trekking" },
-  { value: "accommodation Booking" },
+  { value: "Accommodation Booking" },
   { value: "Car Rentals" },
   { value: "Events Management" },
 ];
@@ -1735,12 +1735,14 @@ export const Accommodations = [
         name: "Kigali Marriott Hotel",
         rating: 5,
         reviews: 218,
-        reviewStatus:'Fabulous',
+        reviewStatus: "Fabulous",
         location: "Kigali, Rwanda",
-        map:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.4990298402818!2d30.05955087405026!3d-1.9537081367178593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca4294197b1a5%3A0xafa0c46887b3a2c6!2sKigali%20Marriott%20Hotel!5e0!3m2!1sen!2srw!4v1736833677926!5m2!1sen!2srw",
+        map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.4990298402818!2d30.05955087405026!3d-1.9537081367178593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca4294197b1a5%3A0xafa0c46887b3a2c6!2sKigali%20Marriott%20Hotel!5e0!3m2!1sen!2srw!4v1736833677926!5m2!1sen!2srw",
         address: "KN 3 Avenue",
-        moreDescription:"Experience Rwanda's capital from Kigali Marriott Hotel, conveniently located near the Nyarugenge financial district and the Kigali Convention Center. Our impeccable luxury hotel provides spacious, modern accommodations with deluxe amenities and premium services. Make yourself comfortable in stylish rooms or lavish suites with floor-to-ceiling windows, spacious bathrooms and plush, pillow-top bedding. Additional amenities include flat-screen TVs, ergonomic workspaces and complimentary Wi-Fi access for Marriott Bonvoy members. After a long day in Kigali, relax over a delicious meal in our popular restaurants, take a refreshing dip in our outdoor pool or unwind with a massage in our hotel spa. Allow our concierge to assist you in planning excursions to the Big Five, the famous canopy walks or the home of the renowned mountain gorillas. If visiting Rwanda for business, you'll appreciate our versatile event venues and fantastic catering services. Look forward to your getaway to Kigali Marriott Hotel.",
-        description:"Experience Rwanda's capital from Kigali Marriott Hotel, conveniently located near the Nyarugenge.",
+        moreDescription:
+          "Experience Rwanda's capital from Kigali Marriott Hotel, conveniently located near the Nyarugenge financial district and the Kigali Convention Center. Our impeccable luxury hotel provides spacious, modern accommodations with deluxe amenities and premium services. Make yourself comfortable in stylish rooms or lavish suites with floor-to-ceiling windows, spacious bathrooms and plush, pillow-top bedding. Additional amenities include flat-screen TVs, ergonomic workspaces and complimentary Wi-Fi access for Marriott Bonvoy members. After a long day in Kigali, relax over a delicious meal in our popular restaurants, take a refreshing dip in our outdoor pool or unwind with a massage in our hotel spa. Allow our concierge to assist you in planning excursions to the Big Five, the famous canopy walks or the home of the renowned mountain gorillas. If visiting Rwanda for business, you'll appreciate our versatile event venues and fantastic catering services. Look forward to your getaway to Kigali Marriott Hotel.",
+        description:
+          "Experience Rwanda's capital from Kigali Marriott Hotel, conveniently located near the Nyarugenge.",
         price: "$150",
         gallery: [mario1, mario3, mario2, mario4],
         isPopular: true,
@@ -1771,7 +1773,7 @@ export const Accommodations = [
             details: "From 12:00 to 13:00",
           },
           {
-            title: "Cancellation/Prepayment",
+            title: "Cancellation & Prepayment",
             details:
               "Cancellation and prepayment policies vary according to accommodation type. Please enter the dates of your stay and check the conditions of your required option.",
           },
@@ -1785,75 +1787,75 @@ export const Accommodations = [
           },
           {
             title: "Accepted Payment Methods",
-            details: ["arcticons:mymtn-ng", "logos:mastercard", "logos:visa", "mdi:cash-100"],
+            details: ["arcticons:mymtn-ng", "logos:mastercard", "logos:visa"],
           },
         ],
 
-       rooms : [
+        rooms: [
           {
             type: "Double / Deluxe Double Room",
             size: "72 m2",
             capacity: "1 adult and 1 child per Room",
-            rate: "900 USD",
+            rate:900,
             availability: "100 room(s) left",
           },
           {
             type: "Double / Deluxe Double Room (2 Adults + 1 Child)",
             size: "36 m2",
             capacity: "2 adults and 1 child per Room",
-            rate: "950 USD",
+            rate:950,
             availability: "30 room(s) left",
           },
           {
             type: "Deluxe Room / Single Occupancy Deluxe King Room",
-            
+
             size: "45 m2",
             capacity: "1 adult and 1 child per Room",
-            rate: "180 USD",
+            rate:180,
             availability: "Not available",
           },
           {
             type: "Deluxe Room / Single Occupancy Deluxe Twin Room",
-            
+
             size: "45 m2",
             capacity: "2 adults and 2 children per Room",
-            rate: "210 USD",
+            rate:210,
             availability: "80 room(s) left",
           },
           {
             type: "Club Room / Single Occupancy Club King Room",
-           
+
             size: "45 m2",
             capacity: "1 adult and 1 child per Room",
-            rate: "240 USD",
+            rate:240,
             availability: "Not available",
           },
           {
             type: "Club Room / Single Occupancy Club Twin Room",
-            
+
             size: "50 m2",
             capacity: "1 adult and 1 child per Room",
-            rate: "270 USD",
+            rate:270,
             availability: "15 room(s) left",
           },
           {
             type: "Junior Suite / Junior Suite Single Occupancy Junior Suite",
-            
+
             size: "10 m2",
             capacity: "1 adult and 1 child per Room",
-            rate: "350 USD",
+            rate:350,
             availability: "Not available",
           },
           {
             type: "Junior Suite / Junior Suite Double Occupancy Junior Suite",
-            
+
             size: "10 m2",
             capacity: "1 adult and 1 child per Room",
-            rate: "380 USD",
+            rate:380,
             availability: "5 room(s) left",
           },
         ],
-        ratings : [
+        ratings: [
           { category: "Staff", score: 8.9 },
           { category: "Facilities", score: 5.9 },
           { category: "Cleanliness", score: 9.2 },
@@ -1885,7 +1887,7 @@ export const Accommodations = [
             country: "Kenya",
           },
           {
-            image:profile2,
+            image: profile2,
             name: "Kennie",
             comment:
               "I had an amazing experience! The room was spotless, the view was breathtaking, and the staff were incredibly attentive and friendly. Definitely a place I’ll visit again.",
@@ -1906,8 +1908,28 @@ export const Accommodations = [
             country: "Spain",
           },
         ],
-        
-        
+        whatsNearby: {
+          places: [
+            { name: "Belgian Peacekeepers Memorial", distance: "550 m" },
+            { name: "Kigali City Tower", distance: "1.5 km" },
+            { name: "Kandt House Natural History Museum", distance: "1.8 km" },
+            { name: "Green Square Park", distance: "3.7 km" },
+            { name: "Kigali Genocide Memorial", distance: "4.4 km" },
+            { name: "Kigali Centenary Park", distance: "5 km" },
+            { name: "Jardin du Pentagone", distance: "5 km" },
+            { name: "Parklands Garden", distance: "10 km" },
+            { name: "Presidential Palace Museum", distance: "17 km" },
+          ],
+          restaurantsAndCafes: [
+            { name: "RestaurantSoko", distance: "100 m" },
+            { name: "RestaurantWhite Horse Restaurant", distance: "650 m" },
+            { name: "RestaurantLa Sierra", distance: "600 m" },
+          ],
+          closestAirports: [
+            { name: "Kigali International Airport", distance: "10 km" },
+            { name: "Ruhengeri Airport", distance: "92 km" },
+          ],
+        },
       },
       {
         name: "Hôtel des Mille Collines",

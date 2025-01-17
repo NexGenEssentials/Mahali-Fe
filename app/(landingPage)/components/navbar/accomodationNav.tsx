@@ -24,7 +24,7 @@ const StickyNavbar = ({
 
   return (
     <div
-      className="sticky top-[67px] bg-white z-50 border-t w-full flex items-center justify-center gap-8 p-4 shadow-md"
+      className="max-sm:hidden sticky top-[67px] bg-white z-50 border-t w-full flex items-center justify-center gap-8 p-4 shadow-md overflow-x-scroll hide-scrollbar"
       style={{ transition: "box-shadow 0.3s ease-in-out " }}
     >
       {navBar.map((item, index) => (
@@ -35,7 +35,7 @@ const StickyNavbar = ({
             selectedSection === item
               ? "border-b-2 border-b-primaryGreen font-bold"
               : ""
-          } text-sm px-8 pb-4 cursor-pointer`}
+          } text-sm px-8 pb-4 cursor-pointer text-nowrap`}
         >
           {item}
         </div>

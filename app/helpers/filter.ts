@@ -68,33 +68,47 @@ export type AccommodationDetail = {
   price: string;
   gallery: StaticImageData[];
   isPopular: boolean;
-  amenality:string[];
-  address?:string;
-  map?:string;
-  moreDescription?:string;
+  amenality: string[];
+  address?: string;
+  map?: string;
+  moreDescription?: string;
   rooms?: {
     type: string;
     size: string;
     capacity: string;
-    rate: string;
+    rate: number;
     availability: string;
-}[];
-houseRules?:({
-  title: string;
-  details: string |string[];
-})[],
-reviewStatus?:string,
-ratings?:{
-  category: string;
-  score: number;
-}[];
-testimonies?:{
-  name: string;
-  comment: string;
-  country: string;
-  image?: StaticImageData;
-}[]
+  }[];
+  houseRules?: {
+    title: string;
+    details: string | string[];
+  }[];
+  reviewStatus?: string;
+  ratings?: {
+    category: string;
+    score: number;
+  }[];
+  testimonies?: {
+    name: string;
+    comment: string;
+    country: string;
+    image?: StaticImageData;
+  }[];
 
+  whatsNearby?: {
+    places: {
+      name: string;
+      distance: string;
+    }[];
+    restaurantsAndCafes: {
+      name: string;
+      distance: string;
+    }[];
+    closestAirports: {
+      name: string;
+      distance: string;
+    }[];
+  };
 };
 
 export const findAccommodationByName = (accommodationName: string): AccommodationDetail | undefined => {

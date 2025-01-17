@@ -31,9 +31,9 @@ const AccommodationService = () => {
         desc="Discover the perfect blend of luxury, comfort, and convenience at Mahali. Nestled in the heart of Africa, our hotel is your gateway to an unforgettable experience."
       />
 
-      <div className="max-w-[1750px] mx-auto flex flex-col gap-12 px-4 md:px-8 pb-8">
+      <div className="relative max-w-[1750px] mx-auto flex flex-col gap-12 px-4 md:px-8 pb-8">
         {/* Promotion Section */}
-        <section className="relative w-full flex items-center justify-center">
+        <section className="w-full flex items-center justify-center">
           <div className="md:absolute flex flex-col gap-6 w-full md:w-[90%] bg-primaryGreen text-primaryWhite p-8 rounded-lg shadow-md">
             <div>
               <h1 className="text-3xl font-bold">
@@ -45,20 +45,22 @@ const AccommodationService = () => {
                 05, 2025.
               </p>
             </div>
-            <div className="flex flex-wrap gap-4">
-              <Search
-                placeholder="Search by location..."
-                allowClear
-                size="large"
-                onSearch={onSearch}
-              />
+            <div className="w-full flex items-end max-md:flex-wrap gap-4">
+              <div className="flex flex-col gap-1">
+                <Search
+                  placeholder="search by location..."
+                  allowClear
+                  size="large"
+                  onSearch={onSearch}
+                />
+              </div>
               <AccommodationForm />
             </div>
           </div>
         </section>
 
         {/* Accommodation Categories */}
-        <div>
+        <div className="pt-10">
           <HeaderSection
             title="Accommodation"
             subtitle="Choose a category of your choice"
@@ -118,9 +120,13 @@ const AccommodationService = () => {
                       </span>
                     </div>
                     {/* Location */}
-                    <span className="text-primaryBlue">{accommodation.location}</span>
+                    <span className="text-primaryBlue">
+                      {accommodation.location}
+                    </span>
                     {/* Description */}
-                    <p className="text-xs text-gray-500">{accommodation.description}</p>
+                    <p className="text-xs text-gray-500">
+                      {accommodation.description}
+                    </p>
                     {/* Price */}
                     <div className="text-primaryGreen font-semibold text-lg">
                       {accommodation.price}/Night
