@@ -75,7 +75,7 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
       render: () => (
         <button
           onClick={() => setActiveModalId("test")}
-          className="px-4 py-2 bg-primaryGreen text-white hover:bg-white hover:text-primaryGreen hover:duration-700 border rounded-md"
+          className="px-4 py-2 bg-primaryGreen text-white font-bold hover:bg-white hover:text-primaryGreen hover:duration-700 border rounded-md"
         >
           View More
         </button>
