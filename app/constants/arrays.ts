@@ -85,7 +85,7 @@ export const Gallery = [
   akagera1,
   nyungwe1,
   gorilla1,
-  nyungwe1,
+  nyungwe2,
   akagera3,
   nyungwe3,
 ];
@@ -2158,6 +2158,112 @@ export const Accommodations = [
           "Family rooms",
           "Sauna",
         ],
+      },
+    ],
+  },
+];
+
+export const AccountSettingsMenu = [
+  {
+    category: "Payment information",
+    items: [
+      { name: "Rewards & Wallet", link: "/rewards-wallet", icon: "mdi:wallet" },
+      {
+        name: "Payment methods",
+        link: "/payment-methods",
+        icon: "mdi:credit-card-outline",
+      },
+    ],
+  },
+  {
+    category: "Manage account",
+    items: [
+      {
+        name: "Personal details",
+        link: "/personal-details",
+        icon: "mdi:account",
+      },
+      {
+        name: "Security settings",
+        link: "/security-settings",
+        icon: "mdi:shield-lock-outline",
+      },
+      {
+        name: "Other travellers",
+        link: "/other-travellers",
+        icon: "mdi:account-group-outline",
+      },
+    ],
+  },
+  {
+    category: "Preferences",
+    items: [
+      {
+        name: "Customisation preferences",
+        link: "/customisation-preferences",
+        icon: "mdi:tune",
+      },
+      {
+        name: "Email preferences",
+        link: "/email-preferences",
+        icon: "mdi:email-outline",
+      },
+    ],
+  },
+  {
+    category: "Travel activity",
+    items: [
+      {
+        name: "Trips and bookings",
+        link: "/trips-and-bookings",
+        icon: "mdi:briefcase-outline",
+      },
+      { name: "Saved lists", link: "/saved-lists", icon: "mdi:heart-outline" },
+      { name: "My reviews", link: "/my-reviews", icon: "mdi:star-outline" },
+    ],
+  },
+  {
+    category: "Help and support",
+    items: [
+      {
+        name: "Contact Customer service",
+        link: "/contact-customer-service",
+        icon: "mdi:phone-outline",
+      },
+      {
+        name: "Safety resource centre",
+        link: "/safety-resource-centre",
+        icon: "mdi:shield-check-outline",
+      },
+      {
+        name: "Dispute resolution",
+        link: "/dispute-resolution",
+        icon: "game-icons:shaking-hands",
+      },
+    ],
+  },
+  {
+    category: "Legal and privacy",
+    items: [
+      {
+        name: "Privacy and data management",
+        link: "/privacy-data-management",
+        icon: "mdi:lock-outline",
+      },
+      {
+        name: "Content guidelines",
+        link: "/content-guidelines",
+        icon: "mdi:file-document-outline",
+      },
+    ],
+  },
+  {
+    category: "Manage your property",
+    items: [
+      {
+        name: "List your property",
+        link: "/list-your-property",
+        icon: "mdi:home-outline",
       },
     ],
   },

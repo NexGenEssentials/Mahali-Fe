@@ -5,6 +5,7 @@ import { Button, Form, Input, notification } from "antd";
 import Link from "next/link";
 import { SigninUser } from "./action";
 import { useRouter } from "next/navigation";
+import { useAppContext } from "@/app/context";
 
 export interface SigninFormData {
   email: string;
@@ -13,13 +14,15 @@ export interface SigninFormData {
 
 const SignInForm = () => {
   const [loading, setLoading] = useState(false);
+  const { setIsLogin } = useAppContext();
   const route = useRouter();
 
   const onFinish = async (values: SigninFormData) => {
     setLoading(true);
+    setIsLogin(true);
     try {
       const data = await SigninUser(values);
-      console.log(data)
+      console.log(data);
       setLoading(false);
       if (data.error) {
         notification.error({
@@ -53,7 +56,11 @@ const SignInForm = () => {
   };
 
   return (
-    <Form layout="vertical" onFinish={onFinish} onFinishFailed={onFinishFailed}>
+    <Form
+      layout="vertical"
+      // onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+    >
       <Form.Item
         label="Email"
         name="email"
@@ -104,6 +111,7 @@ const SignInForm = () => {
         </Link>
         <Form.Item>
           <Button
+            onClick={() => {setIsLogin(true);route.back()}}
             loading={loading}
             htmlType="submit"
             className="bg-primaryGreen hover:bg-primaryGreen hover:text-white rounded-md text-white p-5 font-extrabold text-sm"

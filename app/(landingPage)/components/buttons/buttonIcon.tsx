@@ -9,12 +9,12 @@ interface Props {
   iconPosition?: string;
 }
 const ButtonComponent = (params: Props) => {
-  const { title, color, link, icon, iconPosition } = params;
+  const { title, link, icon, iconPosition } = params;
   return (
     <Button
       htmlType="submit"
       href={link}
-      className='bg-primaryGreen hover:bg-primaryGreen border-none rounded-lg text-white p-5 font-extrabold text-sm '
+      className='bg-primaryGreen hover:bg-primaryGreen border-none rounded-lg text-primaryGreen p-5 font-extrabold text-sm '
     >
       {iconPosition === "left" && icon}
       {title}

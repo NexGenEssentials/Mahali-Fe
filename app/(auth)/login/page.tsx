@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import SignInForm from "../form/signinForm";
@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 const Signin = () => {
   const size = "small";
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
   const router = useRouter();
   return (
     <section className="bg-slate-100 w-full py-8 min-h-[calc(100vh)] flex items-center justify-center">
@@ -20,9 +20,9 @@ const Signin = () => {
               <h1
                 className={`${
                   size === "small" ? "text-base" : "text-2xl"
-                } font-extrabold text-textPrimaryColor text-primaryGreen`}
+                } font-extrabold  text-primaryGreen`}
               >
-                Mahali Africa <br/> Adventure
+                Mahali Africa <br /> Adventure
               </h1>
               <span
                 onClick={() => router.back()}
@@ -31,7 +31,6 @@ const Signin = () => {
                 } text-primaryBlue underline text-opacity-40 mt-4 cursor-pointer hover:text-opacity-70`}
               >
                 Go Back
-              
               </span>
             </div>
             <span className="text-primaryBlue text-xs text-opacity-40">
@@ -39,7 +38,7 @@ const Signin = () => {
             </span>
           </div>
           <div className="max-sm:w-full w-1/2 p-8 flex flex-col">
-            <h1 className="text-textPrimaryColor font-extrabold text-2xl mb-5">
+            <h1 className="text-primaryGreen font-extrabold text-2xl mb-5">
               Login
             </h1>
             <SignInForm />
@@ -47,19 +46,17 @@ const Signin = () => {
         </div>
         <div className="w-[90%] md:w-3/4 lg:w-2/3 xl:w-1/2 p-8 bg-white rounded-2xl flex justify-between items-center flex-wrap gap-4 shadow-md">
           <div className="flex flex-col gap-2">
-            <span className="text-textTitlesColor font-bold text-sm">
+            <span className="text-primaryGreen font-bold text-sm">
               New Here?
             </span>
-            <span className="text-primaryBlue text-xs">
-              Create an account
-            </span>
+            <span className="text-primaryBlue text-xs">Create an account</span>
           </div>
           <ButtonComponent
             title="Register here"
             color=""
             link="/signup"
             icon={
-              <ArrowRightOutlined className="text-textDefaultGreen font-bold" />
+              <ArrowRightOutlined className="text-primaryGreen font-bold" />
             }
           />
         </div>

@@ -5,6 +5,8 @@ interface ContextValue {
     setOpenNavDiscount:(openNavDiscount:boolean)=> void;
     activeModalId: string | null;
     setActiveModalId: (id: string | null) => void;
+    isLogin:boolean;
+    setIsLogin:(isLogin:boolean)=> void
 }
 
 const AppContext = createContext<ContextValue>({} as ContextValue);
@@ -12,18 +14,21 @@ const AppContext = createContext<ContextValue>({} as ContextValue);
 function ContextProvider({ children }: PropsWithChildren) {
 const[openNavDiscount, setOpenNavDiscount] = useState<boolean>(true)
 const [activeModalId, setActiveModalId] = useState<string | null>(null);
+const [isLogin, setIsLogin]=useState(false)
 
 return (
-    <AppContext.Provider
-      value={{
-        openNavDiscount,
-         setOpenNavDiscount,
-         activeModalId, 
-         setActiveModalId
-      }}
-      >
-      {children}
-    </AppContext.Provider>
+  <AppContext.Provider
+    value={{
+      openNavDiscount,
+      setOpenNavDiscount,
+      activeModalId,
+      setActiveModalId,
+      isLogin,
+      setIsLogin,
+    }}
+  >
+    {children}
+  </AppContext.Provider>
 );
 }
 export function useAppContext() {

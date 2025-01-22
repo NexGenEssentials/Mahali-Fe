@@ -1,4 +1,5 @@
 "use client";
+import UserProfile from "@/app/(auth)/account/userProfile";
 import { useAppContext } from "@/app/context";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -20,7 +21,7 @@ const Navbar = () => {
   const [hideFixedNav, setHideFixedNav] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const {openNavDiscount, setOpenNavDiscount} = useAppContext()
+  const {openNavDiscount, setOpenNavDiscount, isLogin} = useAppContext()
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
@@ -80,7 +81,10 @@ const Navbar = () => {
             <div className="max-w-[1750px] mx-auto text-white text-sm font-medium gap-4 flex-wrap flex justify-between items-center px-8 py-3">
               <span>+250793898790</span>
               <span>Get 50% off By selecting a package | Book now</span>
-              <span onClick={() => setOpenNavDiscount(false)} className="cursor-pointer">
+              <span
+                onClick={() => setOpenNavDiscount(false)}
+                className="cursor-pointer"
+              >
                 x
               </span>
             </div>
@@ -90,14 +94,14 @@ const Navbar = () => {
           <div className="flex items-center justify-between w-full lg:w-auto">
             <Link href={"/"}>
               <div className="h-20 w-20 rounded-full  bg-white flex items-center justify-center">
-              <Image
-                src={"/images/logo.png"}
-                alt="mahali africa"
-                height={70}
-                width={70}
-                className="object-cover"
+                <Image
+                  src={"/images/logo.png"}
+                  alt="mahali africa"
+                  height={70}
+                  width={70}
+                  className="object-cover"
                 />
-                </div>
+              </div>
             </Link>
             {isMobile && (
               <button
@@ -128,26 +132,30 @@ const Navbar = () => {
           {!isMobile && (
             <div className="flex items-center gap-4 text-white text-base">
               {renderNavLinks()}
-              <div className="flex items-center gap-4 text-sm">
-                <Link href={'/login'}> 
-                <motion.button
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.8 }}
-                  className="bg-primaryGreen px-6 py-2 rounded-md"
-                >
-                  Login
-                </motion.button>
-                </Link>
-                <Link href={'/signup'}>
-                <motion.button
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.8 }}
-                  className="bg-primaryGreen px-6 py-2 rounded-md"
-                >
-                  SignUp
-                </motion.button>
-                </Link>
-              </div>
+              {!isLogin ? (
+                <div className="flex items-center gap-4 text-sm">
+                  <Link href={"/login"}>
+                    <motion.button
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.8 }}
+                      className="bg-primaryGreen px-6 py-2 rounded-md"
+                    >
+                      Login
+                    </motion.button>
+                  </Link>
+                  <Link href={"/signup"}>
+                    <motion.button
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.8 }}
+                      className="bg-primaryGreen px-6 py-2 rounded-md"
+                    >
+                      SignUp
+                    </motion.button>
+                  </Link>
+                </div>
+              ) : (
+                <UserProfile  />
+              )}
             </div>
           )}
         </div>
@@ -212,26 +220,30 @@ const Navbar = () => {
             {!isMobile && (
               <div className="flex items-center gap-4 text-defaultGreen">
                 {renderNavLinks()}
-                <div className="flex items-center text-white gap-4">
-                <Link href={'/login'}> 
-                  <motion.button
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.8 }}
-                    className="bg-primaryGreen px-6 py-2 rounded-md"
-                  >
-                    Login
-                  </motion.button>
-                  </Link>
-                  <Link href={'/signup'}> 
-                  <motion.button
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.8 }}
-                    className="bg-primaryGreen px-6 py-2 rounded-md"
-                  >
-                    SignUp
-                  </motion.button>
-                  </Link>
-                </div>
+                {!isLogin ? (
+                  <div className="flex items-center text-white gap-4">
+                    <Link href={"/login"}>
+                      <motion.button
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.8 }}
+                        className="bg-primaryGreen px-6 py-2 rounded-md"
+                      >
+                        Login
+                      </motion.button>
+                    </Link>
+                    <Link href={"/signup"}>
+                      <motion.button
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.8 }}
+                        className="bg-primaryGreen px-6 py-2 rounded-md"
+                      >
+                        SignUp
+                      </motion.button>
+                    </Link>
+                  </div>
+                ) : (
+                  <UserProfile visible={false}/>
+                )}
               </div>
             )}
           </div>
