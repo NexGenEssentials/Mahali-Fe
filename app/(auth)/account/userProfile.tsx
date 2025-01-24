@@ -16,7 +16,7 @@ const myAccountMenu = [
     icon: "material-symbols-light:reviews-rounded",
   },
   { name: "Saved", link: "/saved", icon: "wpf:like" },
-  { name: "Sign out", link: "/signout", icon: "ri:logout-circle-line" },
+  { name: "Sign out", link: "/", icon: "ri:logout-circle-line" },
 ];
 
 const UserProfile = ({ visible = true }: { visible?: boolean }) => {

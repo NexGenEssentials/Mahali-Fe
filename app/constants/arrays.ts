@@ -2167,10 +2167,10 @@ export const AccountSettingsMenu = [
   {
     category: "Payment information",
     items: [
-      { name: "Rewards & Wallet", link: "/rewards-wallet", icon: "mdi:wallet" },
+      { name: "Rewards & Wallet", link: "/my-settings", icon: "mdi:wallet" },
       {
         name: "Payment methods",
-        link: "/payment-methods",
+        link: "/my-settings",
         icon: "mdi:credit-card-outline",
       },
     ],
@@ -2180,17 +2180,17 @@ export const AccountSettingsMenu = [
     items: [
       {
         name: "Personal details",
-        link: "/personal-details",
+        link: "/my-settings",
         icon: "mdi:account",
       },
       {
         name: "Security settings",
-        link: "/security-settings",
+        link: "/my-settings",
         icon: "mdi:shield-lock-outline",
       },
       {
         name: "Other travellers",
-        link: "/other-travellers",
+        link: "/my-settings",
         icon: "mdi:account-group-outline",
       },
     ],
@@ -2200,12 +2200,12 @@ export const AccountSettingsMenu = [
     items: [
       {
         name: "Customisation preferences",
-        link: "/customisation-preferences",
+        link: "/my-settings",
         icon: "mdi:tune",
       },
       {
         name: "Email preferences",
-        link: "/email-preferences",
+        link: "/my-settings",
         icon: "mdi:email-outline",
       },
     ],
@@ -2227,17 +2227,17 @@ export const AccountSettingsMenu = [
     items: [
       {
         name: "Contact Customer service",
-        link: "/contact-customer-service",
+        link: "/settings",
         icon: "mdi:phone-outline",
       },
       {
         name: "Safety resource centre",
-        link: "/safety-resource-centre",
+        link: "/settings",
         icon: "mdi:shield-check-outline",
       },
       {
         name: "Dispute resolution",
-        link: "/dispute-resolution",
+        link: "/settings",
         icon: "game-icons:shaking-hands",
       },
     ],

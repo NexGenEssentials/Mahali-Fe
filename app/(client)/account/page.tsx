@@ -6,24 +6,24 @@ import { AccountSettingsMenu } from "@/app/constants/arrays";
 import Link from "next/link";
 
 function AccountPage() {
-  const name: string = "John Doe";
+  const name: string| null = "John Doe";
   const [showStatus, setShowStatus] = useState(true);
 
   return (
     <ClientPageTemplates>
-      <div className="pt-10 px-8 flex flex-col gap-8">
+      <div className="flex flex-col gap-8">
         <div className="flex gap-2 items-center">
-          {!name ? (
+          {name ?  (
+            <span className="uppercase text-3xl border-2 border-primaryGreen text-primaryGreen h-12 w-12 rounded-full flex items-center justify-center p-4 font-bold">
+              {name.charAt(0)}
+            </span>
+          ):(
             <Icon
               icon="codicon:account"
               width="40"
               height="40"
               className="text-slate-300"
             />
-          ) : (
-            <span className="uppercase text-3xl border-2 border-primaryGreen text-primaryGreen h-12 w-12 rounded-full flex items-center justify-center p-4 font-bold">
-              {name.charAt(0)}
-            </span>
           )}
 
           <span className="text-sm">
@@ -60,28 +60,35 @@ function AccountPage() {
           {/* card for use information */}
           <div className="flex gap-4 w-full flex-wrap items-stretch">
             {AccountSettingsMenu.map((item) => (
-              <Link
-                href={item.items[0].link}
+              <div
                 key={item.category}
-                className="w-[400px] self-stretch border text-primaryBlue rounded-md shadow-sm shadow-slate-200 flex flex-col gap-4 p-6"
+                className="w-[400px] self-stretch border text-primaryBlue rounded-md shadow-sm shadow-slate-200 flex flex-col gap-4 p-6 hover:drop-shadow-md"
               >
                 <h2 className="font-bold text-lg ">{item.category}</h2>
                 <div className="flex flex-col w-full">
-                  {item.items.map((item, index) => (
-                    <Link
-                    href={item.link}
+                  {item.items.map((subItem, index) => (
+                    <div
                       key={index}
-                      className="text-sm hover:text-primaryGreen hover:duration-300 flex items-center justify-between gap-4 w-full hover:bg-slate-200 py-2 px-4 rounded-md"
+                      className="text-sm hover:text-primaryGreen hover:bg-slate-100 py-2 px-3 rounded-md"
                     >
-                      <span className="flex gap-4 items-end text-nowrap">
-                        <Icon icon={item.icon} width="24" height="24" />
-                        <span>{item.name}</span>
-                      </span>
-                      <Icon icon="weui:arrow-outlined" width="16" height="30" />
-                    </Link>
+                      <Link
+                        href={subItem.link}
+                        className="flex items-center justify-between gap-4"
+                      >
+                        <span className="flex gap-4 items-end text-nowrap">
+                          <Icon icon={subItem.icon} width="24" height="24" />
+                          <span>{subItem.name}</span>
+                        </span>
+                        <Icon
+                          icon="weui:arrow-outlined"
+                          width="16"
+                          height="30"
+                        />
+                      </Link>
+                    </div>
                   ))}
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>

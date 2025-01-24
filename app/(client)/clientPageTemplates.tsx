@@ -6,7 +6,7 @@ function ClientPageTemplates({ children }: { children: ReactNode }) {
   return (
     <div className="">
       <AccountNav />
-      <main className="pt-20 pb-5 max-w-[1450px] mx-auto w-full">
+      <main className="pt-28 px-8 pb-5 max-w-[1450px] mx-auto w-full">
         {children}
       </main>
       <Footer />
