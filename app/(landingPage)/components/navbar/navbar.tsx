@@ -57,7 +57,17 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    setIsLogin(IsLoggedIn());
+    const checkLogin = async () => {
+      try {
+        const loggedIn = await IsLoggedIn();
+        setIsLogin(loggedIn);
+      } catch (error) {
+        console.error("Error checking login status:", error);
+        setIsLogin(false);
+      }
+    };
+
+    checkLogin();
   }, []);
 
   const renderNavLinks = () => (
