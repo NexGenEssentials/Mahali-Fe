@@ -2167,11 +2167,17 @@ export const AccountSettingsMenu = [
   {
     category: "Payment information",
     items: [
-      { name: "Rewards & Wallet", link: "/my-settings", icon: "mdi:wallet" },
+      {
+        name: "Rewards & Wallet",
+        link: "account/settings",
+        icon: "mdi:wallet",
+      },
       {
         name: "Payment methods",
-        link: "/my-settings",
+        link: "account/my-settings",
         icon: "mdi:credit-card-outline",
+        about:
+          "Securely add or remove payment methods to make it easier when you book.",
       },
     ],
   },
@@ -2180,18 +2186,23 @@ export const AccountSettingsMenu = [
     items: [
       {
         name: "Personal details",
-        link: "/my-settings",
+        link: "account/my-settings",
         icon: "mdi:account",
+        about: "Update your information and find out how it's used.",
       },
       {
         name: "Security settings",
-        link: "/my-settings",
+        link: "account/my-settings",
         icon: "mdi:shield-lock-outline",
+        about:
+          "Change your security settings, set up secure authentication or delete your account.",
       },
       {
         name: "Other travellers",
-        link: "/my-settings",
+        link: "account/my-settings",
         icon: "mdi:account-group-outline",
+        about:
+          "Add or edit information about the people you’re travelling with.",
       },
     ],
   },
@@ -2200,13 +2211,9 @@ export const AccountSettingsMenu = [
     items: [
       {
         name: "Customisation preferences",
-        link: "/my-settings",
+        link: "account/my-settings",
         icon: "mdi:tune",
-      },
-      {
-        name: "Email preferences",
-        link: "/my-settings",
-        icon: "mdi:email-outline",
+        about: "Personalise your account to suit your needs.",
       },
     ],
   },
@@ -2215,11 +2222,19 @@ export const AccountSettingsMenu = [
     items: [
       {
         name: "Trips and bookings",
-        link: "/trips-and-bookings",
+        link: "account/trips-and-bookings",
         icon: "mdi:briefcase-outline",
       },
-      { name: "Saved lists", link: "/saved-lists", icon: "mdi:heart-outline" },
-      { name: "My reviews", link: "/my-reviews", icon: "mdi:star-outline" },
+      {
+        name: "Saved lists",
+        link: "account/saved-lists",
+        icon: "mdi:heart-outline",
+      },
+      {
+        name: "My reviews",
+        link: "account/my-reviews",
+        icon: "mdi:star-outline",
+      },
     ],
   },
   {
@@ -2227,17 +2242,17 @@ export const AccountSettingsMenu = [
     items: [
       {
         name: "Contact Customer service",
-        link: "/settings",
+        link: "account/settings",
         icon: "mdi:phone-outline",
       },
       {
         name: "Safety resource centre",
-        link: "/settings",
+        link: "account/settings",
         icon: "mdi:shield-check-outline",
       },
       {
         name: "Dispute resolution",
-        link: "/settings",
+        link: "account/settings",
         icon: "game-icons:shaking-hands",
       },
     ],
@@ -2247,12 +2262,14 @@ export const AccountSettingsMenu = [
     items: [
       {
         name: "Privacy and data management",
-        link: "/privacy-data-management",
+        link: "account/my-settings",
         icon: "mdi:lock-outline",
+        about:
+          "Exercise your privacy rights, control your data or export your information.",
       },
       {
         name: "Content guidelines",
-        link: "/content-guidelines",
+        link: "account/content-guidelines",
         icon: "mdi:file-document-outline",
       },
     ],
@@ -2262,7 +2279,7 @@ export const AccountSettingsMenu = [
     items: [
       {
         name: "List your property",
-        link: "/list-your-property",
+        link: "account/list-your-property",
         icon: "mdi:home-outline",
       },
     ],

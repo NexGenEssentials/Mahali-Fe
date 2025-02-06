@@ -1,28 +1,52 @@
 import { StaticImageData } from "next/image";
-import { Accommodations, CarDetails, PackageList } from "../constants/arrays";
+import {
+  Accommodations,
+  AccountSettingsMenu,
+  CarDetails,
+  PackageList,
+} from "../constants/arrays";
 
-export const filterPackages = (data: typeof PackageList, filters: { location: string; packageName: string }) => {
-  const matchingLocation = data.find(item => item.location.toLowerCase() === filters.location.toLowerCase()); 
+export const filterPackages = (
+  data: typeof PackageList,
+  filters: { location: string; packageName: string }
+) => {
+  const matchingLocation = data.find(
+    (item) => item.location.toLowerCase() === filters.location.toLowerCase()
+  );
 
   if (matchingLocation) {
-    const matchingPackage = matchingLocation.package.find(pkg =>
+    const matchingPackage = matchingLocation.package.find((pkg) =>
       pkg.name.toLowerCase().includes(filters.packageName.toLowerCase())
     );
 
     return matchingPackage || null;
   }
 
-  return null; 
+  return null;
 };
 
 export const getCarByName = (carName: string) => {
-  return CarDetails.find(car => car.name.toLowerCase() === carName.toLowerCase());
+  return CarDetails.find(
+    (car) => car.name.toLowerCase() === carName.toLowerCase()
+  );
 };
 
-export const searchCarDetails = ({ name, price, category }:{name?:string, price?:string, category?:string}) => {
+export const searchCarDetails = ({
+  name,
+  price,
+  category,
+}: {
+  name?: string;
+  price?: string;
+  category?: string;
+}) => {
   return CarDetails.filter((car) => {
-    const nameMatch = name ? car.name.toLowerCase().includes(name.toLowerCase()) : true;
-    const categoryMatch = category ? car.category.toLowerCase() === category.toLowerCase() : true;
+    const nameMatch = name
+      ? car.name.toLowerCase().includes(name.toLowerCase())
+      : true;
+    const categoryMatch = category
+      ? car.category.toLowerCase() === category.toLowerCase()
+      : true;
 
     const priceMatch = price ? isPriceInRange(car.price, price) : true;
 
@@ -30,8 +54,8 @@ export const searchCarDetails = ({ name, price, category }:{name?:string, price?
   });
 };
 
-const isPriceInRange = (carPrice:string, priceRange:string) => {
-  const carPriceValue = parseInt(carPrice.replace("$", "")); 
+const isPriceInRange = (carPrice: string, priceRange: string) => {
+  const carPriceValue = parseInt(carPrice.replace("$", ""));
 
   if (priceRange.includes("-")) {
     const [min, max] = priceRange.replace("$", "").split("-").map(Number);
@@ -41,7 +65,6 @@ const isPriceInRange = (carPrice:string, priceRange:string) => {
     return carPriceValue === exactPrice;
   }
 };
-
 
 export const getPopularAccommodations = () => {
   return Accommodations.flatMap((category) =>
@@ -55,10 +78,13 @@ export const getPopularAccommodations = () => {
 };
 
 export const filterByCategory = (category: string) => {
-  const foundCategory = Accommodations.find((accommodation) => accommodation.category.toLowerCase() === category.toLowerCase());
+  const foundCategory = Accommodations.find(
+    (accommodation) =>
+      accommodation.category.toLowerCase() === category.toLowerCase()
+  );
   return foundCategory ? foundCategory.details : [];
 };
- 
+
 export type AccommodationDetail = {
   name: string;
   rating: number;
@@ -111,10 +137,12 @@ export type AccommodationDetail = {
   };
 };
 
-export const findAccommodationByName = (accommodationName: string): AccommodationDetail | undefined => {
+export const findAccommodationByName = (
+  accommodationName: string
+): AccommodationDetail | undefined => {
   for (const category of Accommodations) {
-    const foundAccommodation = category.details.find((detail) =>
-        detail.name.toLowerCase() === accommodationName.toLowerCase()
+    const foundAccommodation = category.details.find(
+      (detail) => detail.name.toLowerCase() === accommodationName.toLowerCase()
     );
     if (foundAccommodation) {
       return foundAccommodation;
@@ -122,3 +150,7 @@ export const findAccommodationByName = (accommodationName: string): Accommodatio
   }
   return undefined;
 };
+
+export const filteredMenuItems = AccountSettingsMenu.flatMap((category) =>
+  category.items.filter((item) => item.link === "account/my-settings")
+);

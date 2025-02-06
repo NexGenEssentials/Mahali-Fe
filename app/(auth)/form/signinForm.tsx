@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { LockOutlined, LoginOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input, notification } from "antd";
 import Link from "next/link";
-import { SigninUser } from "./action";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 
@@ -19,48 +18,55 @@ const SignInForm = () => {
 
   const onFinish = async (values: SigninFormData) => {
     setLoading(true);
-    setIsLogin(true);
     try {
-      const data = await SigninUser(values);
-      console.log(data);
-      setLoading(false);
-      if (data.error) {
+      const res = await fetch("/api/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
         notification.error({
           message: data.error,
-          description: data.message,
+          description: data.description,
           placement: "topRight",
         });
       } else {
-        route.back();
         notification.success({
-          message: " Login",
-          description: "You have succesfull logged in",
+          message: "Login",
+          description: data.message,
           placement: "topRight",
         });
+        setIsLogin(true);
+        setTimeout(() => {
+          route.push("/account");
+        }, 1500);
       }
     } catch (error) {
-      setLoading(false);
       notification.error({
         message: "Submission Failed",
         description: "Oops something went wrong !!",
         placement: "topRight",
       });
+    } finally {
+      setLoading(false);
     }
   };
   const onFinishFailed = () => {
     notification.error({
-      message: "Submission Failed",
-      description: "Please check the form errors and try again !!",
+      message: "Form Errors",
+      description:
+        "Kindly correct the highlighted errors in the form and try again.",
       placement: "topRight",
     });
   };
 
   return (
-    <Form
-      layout="vertical"
-      // onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-    >
+    <Form layout="vertical" onFinish={onFinish} onFinishFailed={onFinishFailed}>
       <Form.Item
         label="Email"
         name="email"
@@ -82,7 +88,7 @@ const SignInForm = () => {
           prefix={
             <MailOutlined className="site-form-item-icon pl-1 pr-2 text-primaryGreen" />
           }
-          className=" bg-opacity-[4%] border-none text-xs py-3"
+          className=" !bg-opacity-[4%] hover:!border-primaryGreen !text-xs !py-3"
         />
       </Form.Item>
       <Form.Item
@@ -100,7 +106,7 @@ const SignInForm = () => {
           prefix={
             <LockOutlined className="site-form-item-icon pl-1 pr-2 text-primaryGreen" />
           }
-          className=" bg-opacity-[4%] border-none text-xs py-3"
+          className=" !bg-opacity-[4%] hover:!border-primaryGreen !text-xs !py-3"
         />
       </Form.Item>
       <div className="mt-6 flex justify-between flex-wrap space-y-4 items-center">
@@ -111,10 +117,9 @@ const SignInForm = () => {
         </Link>
         <Form.Item>
           <Button
-            onClick={() => {setIsLogin(true);route.back()}}
             loading={loading}
             htmlType="submit"
-            className="bg-primaryGreen hover:bg-primaryGreen hover:text-white rounded-md text-white p-5 font-extrabold text-sm"
+            className=" !shadow-md !border-0 hover:!bg-primaryGreen hover:!text-white rounded-md !text-primaryGreen !p-5 !font-extrabold !text-sm"
           >
             Login
             <LoginOutlined />

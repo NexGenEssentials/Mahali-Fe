@@ -13,7 +13,7 @@ const Signup = () => {
           <div className="w-full px-8 py-4 flex flex-col">
             <div className="flex gap-8 px-8 pb-2 items-center justify-between w-ful">
               <Logo />
-              <h1 className="w-3/5 text-textPrimaryColor font-extrabold text-2xl self-center ">
+              <h1 className="w-3/5 text-primaryGreen font-extrabold text-2xl self-center ">
                 Register
               </h1>
             </div>

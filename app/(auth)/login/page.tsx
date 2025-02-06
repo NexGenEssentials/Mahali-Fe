@@ -56,7 +56,7 @@ const Signin = () => {
             color=""
             link="/signup"
             icon={
-              <ArrowRightOutlined className="text-primaryGreen font-bold" />
+              <ArrowRightOutlined className="!text-primaryGreen group-hover:!text-white !font-bold" />
             }
           />
         </div>
