@@ -3,6 +3,7 @@ import Image, { StaticImageData } from "next/image";
 import { motion } from "motion/react";
 import Link from "next/link";
 interface Props {
+  id: number;
   car: StaticImageData | null;
   name: string;
   category: string;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const CarCard = ({
+  id,
   car,
   name,
   category,
@@ -20,8 +22,8 @@ const CarCard = ({
   transimission,
 }: Props) => {
   return (
-    <Link href={`/service/car-rental/${name}`}>
-      <div className="bg-white drop-shadow-lg w-full flex flex-col rounded-lg cursor-pointer">
+    <Link href={`/service/car-rental/${id}`}>
+      <div className="bg-white hover:shadow-xl  duration-300 transition shadow-md w-full flex flex-col rounded-lg cursor-pointer">
         <div className="relative h-[200px] w-full flex items-end rounded-lg justify-center overflow-hidden ">
           {car ? (
             <Image

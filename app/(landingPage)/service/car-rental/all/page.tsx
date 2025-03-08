@@ -22,6 +22,8 @@ import { getAllCars } from "@/app/api/carRental/action";
 import { CarData, CarResponse } from "@/app/types";
 import ZoomableImage from "@/app/(landingPage)/components/images/zoomImage";
 import { Eye } from "lucide-react";
+import ImagePlaceholder from "@/public/images/imagePlaceholder.jpg";
+import Link from "next/link";
 
 const { Search } = Input;
 type SearchProps = GetProps<typeof Input.Search>;
@@ -34,13 +36,14 @@ const Columns: TableProps<CarData>["columns"] = [
     key: "car",
     render: (record: CarData) => {
       return (
-        <ZoomableImage
-          src={
-            record.first_image ||
-            "https://via.placeholder.com/200x100?text=No+Image"
-          }
-          alt={`${record.brand} ${record.name}`}
-        />
+        <div className=" relative w-44 h-32 overflow-hidden">
+          <Image
+            src={record.first_image || ImagePlaceholder}
+            fill
+            alt={`${record.brand} ${record.name}`}
+            className="object-cover"
+          />
+        </div>
       );
     },
   },
@@ -101,14 +104,14 @@ const Columns: TableProps<CarData>["columns"] = [
     title: () => <span className="whitespace-nowrap">Actions</span>,
     key: "actions",
     render: (_, record) => (
-      <Button
-        type="primary"
-        icon={<Eye size={16} />}
-        onClick={() => console.table(`/car/${record.id}`)}
-        className="flex items-center"
-      >
-        View Details
-      </Button>
+      <Link href={`/service/car-rental/${record.id}`}>
+        <Button
+          icon={<Eye size={16} />}
+          className="flex items-center !bg-primaryGreen !py-6 !text-white"
+        >
+          View Details
+        </Button>
+      </Link>
     ),
   },
 ];
@@ -317,7 +320,8 @@ const AllCars = () => {
                     carList?.data?.map((car, index) => (
                       <div className="w-full md:w-[30%]" key={index}>
                         <CarCard
-                          car={car.first_image}
+                          id={car.id}
+                          car={car.first_image || ImagePlaceholder}
                           name={car.name}
                           category={car.category}
                           price={car.price_per_day}

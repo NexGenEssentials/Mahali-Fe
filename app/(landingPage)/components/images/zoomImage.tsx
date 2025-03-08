@@ -1,9 +1,14 @@
 "use client";
 import { useState, useRef } from "react";
-import { ZoomIn } from "lucide-react";
 import Image, { StaticImageData } from "next/image";
 
-const ZoomableImage = ({ src, alt }: { src: StaticImageData; alt: string }) => {
+const ZoomableImage = ({
+  src,
+  alt,
+}: {
+  src: string | StaticImageData;
+  alt: string;
+}) => {
   const [showZoom, setShowZoom] = useState(false);
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
   const [backgroundPosition, setBackgroundPosition] = useState("0% 0%");
@@ -19,13 +24,13 @@ const ZoomableImage = ({ src, alt }: { src: StaticImageData; alt: string }) => {
 
     setBackgroundPosition(`${x}% ${y}%`);
     setZoomPosition({
-      x: Math.max(0, Math.min(e.clientX - left - 100, width - 200)),
-      y: Math.max(0, Math.min(e.clientY - top - 100, height - 200)),
+      x: Math.min(e.clientX - left, width - 200),
+      y: Math.min(e.clientY - top, height - 200),
     });
   };
 
   return (
-    <div className="relative" style={{ width: "200px", height: "100px" }}>
+    <div className="relative w-full h-full">
       <div
         ref={containerRef}
         className="relative w-full h-full overflow-hidden cursor-zoom-in"
@@ -33,10 +38,7 @@ const ZoomableImage = ({ src, alt }: { src: StaticImageData; alt: string }) => {
         onMouseLeave={() => setShowZoom(false)}
         onMouseMove={handleMouseMove}
       >
-        <Image src={src} alt={alt} fill className="object-cover w-full h-full" />
-        <div className="absolute top-2 right-2 bg-white/70 rounded-full p-1">
-          <ZoomIn size={16} />
-        </div>
+        <Image src={src} alt={alt} fill className="object-cover" />
       </div>
 
       {showZoom && (
@@ -45,9 +47,9 @@ const ZoomableImage = ({ src, alt }: { src: StaticImageData; alt: string }) => {
           style={{
             width: "200px",
             height: "200px",
-            left: "210px",
-            top: "-50px",
-            backgroundImage: `url(${src})`,
+            left: `${zoomPosition.x}px`,
+            top: `${zoomPosition.y}px`,
+            backgroundImage: `url(${typeof src === "string" ? src : src.src})`,
             backgroundPosition,
             backgroundRepeat: "no-repeat",
             backgroundSize: "400% 400%",
@@ -57,4 +59,5 @@ const ZoomableImage = ({ src, alt }: { src: StaticImageData; alt: string }) => {
     </div>
   );
 };
+
 export default ZoomableImage;

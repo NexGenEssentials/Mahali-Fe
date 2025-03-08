@@ -76,9 +76,9 @@ const CarRentalForm = () => {
       <Link href={'/service/car-rental/all'}>
       <button
         type="submit"
-        className="p-2 bg-primaryGreen text-white font-semibold rounded-md"
+        className="p-3 bg-primaryGreen text-white font-semibold rounded-md"
       >
-        Rent a Car
+        Check now
       </button>
       </Link>
     </form>

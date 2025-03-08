@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react'
-import AccountNav from './components/navbar/accountNav';
-import Footer from '../(landingPage)/components/footer/footer';
+import React, { ReactNode } from "react";
+import AccountNav from "./components/navbar/accountNav";
+import Footer from "../(landingPage)/components/footer/footer";
 
 function ClientPageTemplates({ children }: { children: ReactNode }) {
   return (
@@ -14,4 +14,4 @@ function ClientPageTemplates({ children }: { children: ReactNode }) {
   );
 }
 
-export default ClientPageTemplates
+export default ClientPageTemplates;

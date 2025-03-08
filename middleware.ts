@@ -15,5 +15,5 @@ export function middleware(request: NextRequest) {
 
 // Apply middleware to specified routes
 export const config = {
-  matcher: ["/admin/:path*", "/account/:path*", "/service/:path*"],
+  matcher: ["/admin/:path*", "/account/:path*", "/service/booking/:path*"],
 };

@@ -1,10 +1,9 @@
 "use server";
-import { decodeJWT } from "@/app/helpers/decodeJWT";
 import { CarDetails, CarResponse, SingleCarType } from "@/app/types";
 import { cookies } from "next/headers";
 const base_url = process.env.BACKEND_BASE_URL;
 const accessToken = cookies().get("accessToken")?.value;
-const userId = decodeJWT();
+
 
 export const CreateCar = async (carDetails: CarDetails): Promise<{}> => {
   try {
@@ -35,7 +34,7 @@ export const CreateCar = async (carDetails: CarDetails): Promise<{}> => {
   }
 };
 
-interface filters {
+export interface filters {
   brand?: string;
   fuelType?: string;
   transmission?: string;
@@ -92,7 +91,7 @@ export const getAllCars = async ({
 
 export const getSingleCar = async (
   carId: string
-): Promise<SingleCarType | undefined> => {
+): Promise<SingleCarType> => {
   try {
     const response = await fetch(`${base_url}/cars/${carId}`, {
       method: "GET",
@@ -111,6 +110,7 @@ export const getSingleCar = async (
     return data;
   } catch (error) {
     console.log("Something went wrong", { error });
+    throw error
   }
 };
 
