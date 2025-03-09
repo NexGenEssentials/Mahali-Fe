@@ -26,7 +26,7 @@ const CarRental = () => {
           <div className="relative -top-20 left-0 flex max-lg:flex-col w-full items-center justify-center">
             <div className="bg-slate-100 max-lg:w-3/4 w-1/4 rounded-lg">
               <h1 className="bg-primaryGreen text-white rounded-t-lg p-4 w-full text-center font-bold text-lg">
-                Make your trip
+                Check Availability
               </h1>
               <CarRentalForm />
             </div>
@@ -55,8 +55,8 @@ const CarRental = () => {
                 ))}
               </div>
               <div className="text-white">
-              <Link href={'/service/car-rental/all'}>
-                <Button name="Reserver Your Perfect Car" />
+                <Link href={"/service/car-rental/all"}>
+                  <Button name="Reserver Your Perfect Car" />
                 </Link>
               </div>
             </div>
@@ -95,8 +95,8 @@ const CarRental = () => {
                 today and drive with confidence wherever your journey takes you!
               </p>
               <div className="text-white border rounded-md w-fit mt-4">
-              <Link href={'/service/car-rental/all'}>
-                <Button name="Choose a Vehicle" />
+                <Link href={"/service/car-rental/all"}>
+                  <Button name="Choose a Vehicle" />
                 </Link>
               </div>
             </div>

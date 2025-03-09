@@ -1,23 +1,58 @@
 "use client";
-import React, { useState } from "react";
-import ClientPageTemplates from "../clientPageTemplates";
+import React, { useEffect, useState } from "react";
+import ClientPageTemplates from "./clientPageTemplates";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { AccountSettingsMenu } from "@/app/constants/arrays";
 import Link from "next/link";
+import { UserProfile } from "@/app/types";
+import { useRouter } from "next/navigation";
 
 function AccountPage() {
-  const name: string| null = "John Doe";
   const [showStatus, setShowStatus] = useState(true);
+  const [userAccount, setUserAccount] = useState<UserProfile | undefined>(
+    undefined
+  );
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch("/api/user_profile", {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user profile");
+        }
+
+        const data = await response.json();
+        setUserAccount(data);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
+  const handleNavigate = (link: string, title: string, about: string) => {
+    router.push(
+      `${link}?title=${encodeURIComponent(title)}&about=${encodeURIComponent(
+        about
+      )}`
+    );
+  };
 
   return (
     <ClientPageTemplates>
       <div className="flex flex-col gap-8">
         <div className="flex gap-2 items-center">
-          {name ?  (
+          {userAccount?.full_name ? (
             <span className="uppercase text-3xl border-2 border-primaryGreen text-primaryGreen h-12 w-12 rounded-full flex items-center justify-center p-4 font-bold">
-              {name.charAt(0)}
+              {userAccount?.full_name.charAt(0)}
             </span>
-          ):(
+          ) : (
             <Icon
               icon="codicon:account"
               width="40"
@@ -28,7 +63,7 @@ function AccountPage() {
 
           <span className="text-sm">
             <h3 className="text-lg font-bold text-primaryGreen">
-              Hi, {name} 👋
+              Hi, {userAccount?.full_name} 👋
             </h3>
             <h3>Thank you for choosing Mahali Africa</h3>
           </span>
@@ -45,7 +80,7 @@ function AccountPage() {
               </span>
               <span className="flex gap-2 text-sm font-semibold text-nowrap">
                 <span className="p-3 text-white bg-primaryGreen border border-primaryGreen rounded-md cursor-pointer ">
-                  Complete Now
+                  <Link href={"account/my-settings"}>Complete Now</Link>
                 </span>
                 <span
                   onClick={() => setShowStatus(false)}
@@ -71,8 +106,10 @@ function AccountPage() {
                       key={index}
                       className="text-sm hover:text-primaryGreen hover:bg-slate-100 py-2 px-3 rounded-md"
                     >
-                      <Link
-                        href={subItem.link}
+                      <div
+                        onClick={() =>
+                          handleNavigate(subItem.link, subItem.name, subItem.about!)
+                        }
                         className="flex items-center justify-between gap-4"
                       >
                         <span className="flex gap-4 items-end text-nowrap">
@@ -84,7 +121,7 @@ function AccountPage() {
                           width="16"
                           height="30"
                         />
-                      </Link>
+                      </div>
                     </div>
                   ))}
                 </div>

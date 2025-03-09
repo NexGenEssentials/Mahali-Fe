@@ -1,3 +1,5 @@
+import { useAppContext } from "@/app/context";
+import { Logout } from "@/app/helpers/isUserLogedIn";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
@@ -21,6 +23,7 @@ const myAccountMenu = [
 
 const UserProfile = ({ visible = true }: { visible?: boolean }) => {
   const [show, setShow] = useState(false);
+  const { setIsLogin } = useAppContext();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
@@ -39,6 +42,11 @@ const UserProfile = ({ visible = true }: { visible?: boolean }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleLogout = () => {
+    Logout();
+    setIsLogin(false);
+  };
 
   return (
     <>
@@ -64,7 +72,10 @@ const UserProfile = ({ visible = true }: { visible?: boolean }) => {
         >
           {myAccountMenu.map((item) => (
             <Link href={item.link} key={item.name}>
-              <div className="p-4 flex gap-4 items-center hover:bg-gray-200  hover:duration-300 cursor-pointer">
+              <div
+                onClick={() => item.name === "Sign out" && handleLogout()}
+                className="p-4 flex gap-4 items-center hover:bg-gray-200  hover:duration-300 cursor-pointer"
+              >
                 <Icon
                   icon={item.icon}
                   width="24"

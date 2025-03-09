@@ -14,7 +14,7 @@ const ButtonComponent = (params: Props) => {
     <Button
       htmlType="submit"
       href={link}
-      className='bg-primaryGreen hover:bg-primaryGreen border-none rounded-lg text-primaryGreen p-5 font-extrabold text-sm '
+      className='group hover:!bg-primaryGreen hover:!text-white !shadow-md !border-none rounded-lg !text-primaryGreen !p-5 !font-extrabold !text-sm '
     >
       {iconPosition === "left" && icon}
       {title}

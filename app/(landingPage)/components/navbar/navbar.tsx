@@ -1,6 +1,7 @@
 "use client";
 import UserProfile from "@/app/(auth)/account/userProfile";
 import { useAppContext } from "@/app/context";
+import { IsLoggedIn } from "@/app/helpers/isUserLogedIn";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,7 +22,8 @@ const Navbar = () => {
   const [hideFixedNav, setHideFixedNav] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const {openNavDiscount, setOpenNavDiscount, isLogin} = useAppContext()
+  const { openNavDiscount, setOpenNavDiscount, setIsLogin, isLogin } =
+    useAppContext();
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
@@ -52,6 +54,20 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
+  }, []);
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      try {
+        const loggedIn = await IsLoggedIn();
+        setIsLogin(loggedIn);
+      } catch (error) {
+        console.error("Error checking login status:", error);
+        setIsLogin(false);
+      }
+    };
+
+    checkLogin();
   }, []);
 
   const renderNavLinks = () => (
@@ -154,7 +170,7 @@ const Navbar = () => {
                   </Link>
                 </div>
               ) : (
-                <UserProfile  />
+                <UserProfile />
               )}
             </div>
           )}
@@ -242,7 +258,7 @@ const Navbar = () => {
                     </Link>
                   </div>
                 ) : (
-                  <UserProfile visible={false}/>
+                  <UserProfile visible={false} />
                 )}
               </div>
             )}

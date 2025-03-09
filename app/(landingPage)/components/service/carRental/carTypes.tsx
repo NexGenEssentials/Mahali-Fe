@@ -50,6 +50,7 @@ const CarTypes = () => {
             <SwiperSlide key={index} className="py-4 mb-6 px-2">
               <Link href={"#"}>
                 <CarCard
+                  id={1}
                   car={car.car}
                   name={car.name}
                   category={car.category}

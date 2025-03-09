@@ -8,14 +8,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, notification } from "antd";
 import { useRouter } from "next/navigation";
-import { SignupUser } from "./action";
-export interface SignupFormValues {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-}
+import { SignupFormValues } from "@/app/types";
 
 const SignupForm = () => {
   const [checked, setChecked] = useState(false);
@@ -23,39 +16,59 @@ const SignupForm = () => {
   const [loading, setLoading] = useState(false);
   const route = useRouter();
 
-  const onFinish = async(values: SignupFormValues) => {
+  const onFinish = async (values: SignupFormValues) => {
     setLoading(true);
+    const formData = {
+      email: values.email,
+      full_name: `${values.firstName} ${values.lastName}`,
+      password: values.password,
+      phone: "+250" + values.phoneNumber,
+      role: "customer",
+    };
+
     try {
-      const data = await SignupUser(values);
-      setLoading(false);
-      if (data.error) {
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
         notification.error({
           message: data.error,
-          description: data.message,
+          description: data.description.email || data.description.phone,
           placement: "topRight",
         });
       } else {
-        route.push("/login");
         notification.success({
-          message: " Login",
-          description: "You have succesfull logged in",
+          message: "Account created",
+          description: "You have created Account",
           placement: "topRight",
         });
+
+        setTimeout(() => {
+          route.push("/login");
+        }, 1500);
       }
-    } catch (error) {
-      setLoading(false);
+    } catch (err: any) {
       notification.error({
-        message: "Submission Failed",
-        description: "Oops Something went wrong !!",
+        message: err.error,
+        description: err.error,
         placement: "topRight",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
   const onFinishFailed = () => {
     notification.error({
-      message: "Submission Failed",
-      description: "Please check the form for errors and try again.",
+      message: "Form Errors",
+      description:
+        "Kindly correct the highlighted errors in the form and try again.",
       placement: "topRight",
     });
   };
@@ -66,6 +79,7 @@ const SignupForm = () => {
     }
     return Promise.reject(new Error("Passwords do not match!"));
   };
+
   return (
     <Form
       form={form}
@@ -81,7 +95,7 @@ const SignupForm = () => {
           <Form.Item
             label="First Name"
             name="firstName"
-            className="mb-2 w-full sm:w-1/2"
+            className=" w-full sm:w-1/2 !text-primaryGreen"
             rules={[
               {
                 required: true,
@@ -96,13 +110,13 @@ const SignupForm = () => {
               prefix={
                 <UserOutlined className="site-form-item-icon pl-1 pr-2 text-textDefaultGreen" />
               }
-              className="bg-textPrimaryColor bg-opacity-[4%] border-none text-xs py-2"
+              className=" hover:!border hover:!border-primaryGreen !text-xs !py-2"
             />
           </Form.Item>
           <Form.Item
             label="Second Name"
             name="lastName"
-            className="mb-2 w-full sm:w-1/2"
+            className=" w-full sm:w-1/2 !text-primaryGreen"
             rules={[
               {
                 required: true,
@@ -117,7 +131,7 @@ const SignupForm = () => {
               prefix={
                 <UserOutlined className="site-form-item-icon pl-1 pr-2 text-textDefaultGreen" />
               }
-              className="bg-textPrimaryColor bg-opacity-[4%] border-none text-xs py-2"
+              className=" hover:!border hover:!border-primaryGreen !text-xs !py-2"
             />
           </Form.Item>
         </div>
@@ -126,7 +140,7 @@ const SignupForm = () => {
           <Form.Item
             label="Email"
             name="email"
-            className="mb-2 w-full sm:w-1/2"
+            className=" w-full sm:w-1/2 !text-primaryGreen"
             rules={[{ required: true, message: "Please input your email!" }]}
           >
             <Input
@@ -136,13 +150,13 @@ const SignupForm = () => {
               prefix={
                 <MailOutlined className="site-form-item-icon pl-1 pr-2 text-textDefaultGreen" />
               }
-              className="bg-textPrimaryColor bg-opacity-[4%] border-none text-xs py-2"
+              className=" hover:!border hover:!border-primaryGreen !text-xs !py-2"
             />
           </Form.Item>
           <Form.Item
             label="Phone number"
             name="phoneNumber"
-            className="mb-2 w-full sm:w-1/2"
+            className=" w-full sm:w-1/2 !text-primaryGreen"
             rules={[
               {
                 required: true,
@@ -163,7 +177,7 @@ const SignupForm = () => {
                   </span>
                 </div>
               }
-              className="bg-textPrimaryColor bg-opacity-[4%] border-none text-xs py-2"
+              className=" hover:!border hover:!border-primaryGreen !text-xs !py-2"
             />
           </Form.Item>
         </div>
@@ -172,7 +186,7 @@ const SignupForm = () => {
           <Form.Item
             label="Password"
             name="password"
-            className="mb-2 w-full sm:w-1/2"
+            className=" w-full sm:w-1/2 !text-primaryGreen"
             rules={[
               {
                 required: true,
@@ -185,13 +199,13 @@ const SignupForm = () => {
               prefix={
                 <LockOutlined className="site-form-item-icon text-textDefaultGreen" />
               }
-              className="bg-textPrimaryColor bg-opacity-[4%] border-none text-xs py-2"
+              className=" hover:!border hover:!border-primaryGreen !text-xs !py-2"
             />
           </Form.Item>
           <Form.Item
             label="Confirm Password"
             name="confirmpassword"
-            className="mb-2 w-full sm:w-1/2"
+            className=" w-full sm:w-1/2 !text-primaryGreen"
             dependencies={["password"]}
             hasFeedback
             rules={[
@@ -207,7 +221,7 @@ const SignupForm = () => {
               prefix={
                 <LockOutlined className="site-form-item-icon text-textDefaultGreen" />
               }
-              className="bg-textPrimaryColor bg-opacity-[4%] border-none text-xs py-2"
+              className=" hover:!border hover:!border-primaryGreen !text-xs !py-2"
             />
           </Form.Item>
         </div>
@@ -223,10 +237,10 @@ const SignupForm = () => {
             }
           ></Checkbox>
           <div>
-            <span className="text-textSubTitlesColor text-sm pr-1">
+            <span className="text-primaryBlue text-sm pr-1">
               I agree to the
             </span>
-            <span className="underlined text-textTitlesColor font-bold text-sm cursor-pointer">
+            <span className="underlined text-primaryBlue font-bold text-sm cursor-pointer">
               Terms and conditions
             </span>
           </div>
@@ -234,8 +248,9 @@ const SignupForm = () => {
         <Form.Item>
           <Button
             loading={loading}
+            disabled={!checked}
             htmlType="submit"
-            className="bg-textDefaultGreen hover:bg-textDefaultGreen hover:text-black rounded-md text-black white p-5 font-extrabold text-sm"
+            className=" hover:!bg-primaryGreen hover:!text-white !border-none !shadow-md rounded-md !text-primaryGreen !p-5 !font-extrabold text-sm"
           >
             Register
             <LoginOutlined />

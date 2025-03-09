@@ -7,6 +7,8 @@ interface ContextValue {
     setActiveModalId: (id: string | null) => void;
     isLogin:boolean;
     setIsLogin:(isLogin:boolean)=> void
+    adminServiceTab:string;
+    setAdminServiceTab:(adminServiceTab:string)=> void
 }
 
 const AppContext = createContext<ContextValue>({} as ContextValue);
@@ -15,6 +17,9 @@ function ContextProvider({ children }: PropsWithChildren) {
 const[openNavDiscount, setOpenNavDiscount] = useState<boolean>(true)
 const [activeModalId, setActiveModalId] = useState<string | null>(null);
 const [isLogin, setIsLogin]=useState(false)
+const [adminServiceTab, setAdminServiceTab] = useState(
+  "Holiday & Tour Packages"
+);
 
 return (
   <AppContext.Provider
@@ -25,6 +30,8 @@ return (
       setActiveModalId,
       isLogin,
       setIsLogin,
+      adminServiceTab,
+      setAdminServiceTab,
     }}
   >
     {children}
