@@ -15,7 +15,6 @@ import {
   Table,
   TableProps,
 } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { getAllCars } from "@/app/api/carRental/action";
@@ -24,6 +23,7 @@ import ZoomableImage from "@/app/(landingPage)/components/images/zoomImage";
 import { Eye } from "lucide-react";
 import ImagePlaceholder from "@/public/images/imagePlaceholder.jpg";
 import Link from "next/link";
+import Loader from "@/app/(landingPage)/components/skeleton/loader";
 
 const { Search } = Input;
 type SearchProps = GetProps<typeof Input.Search>;
@@ -81,6 +81,12 @@ const Columns: TableProps<CarData>["columns"] = [
     dataIndex: "seats",
     key: "seats",
     sorter: (a, b) => a.seats - b.seats,
+  },
+  {
+    title: () => <span className="whitespace-nowrap">Year</span>,
+    dataIndex: "year",
+    key: "year",
+    sorter: (a, b) => a.year - b.year,
   },
   {
     title: () => <span className="whitespace-nowrap">Fuel Type</span>,
@@ -168,6 +174,8 @@ const AllCars = () => {
       console.log("Something went wrong", { error });
     }
   };
+
+
 
   return (
     <LandingPage>
@@ -304,24 +312,14 @@ const AllCars = () => {
                 </div>
                 <div className="w-full flex gap-4 items-center flex-wrap justify-center   ">
                   {loading ? (
-                    <Flex
-                      align="center"
-                      gap="middle"
-                      justify="center"
-                      className="h-96 w-full"
-                    >
-                      <Spin
-                        indicator={
-                          <LoadingOutlined style={{ fontSize: 48 }} spin />
-                        }
-                      />
-                    </Flex>
+                    <Loader/>
                   ) : (
                     carList?.data?.map((car, index) => (
                       <div className="w-full md:w-[30%]" key={index}>
                         <CarCard
                           id={car.id}
                           car={car.first_image || ImagePlaceholder}
+                          year={car.year}
                           name={car.name}
                           category={car.category}
                           price={car.price_per_day}

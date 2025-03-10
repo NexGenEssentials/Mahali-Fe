@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LandingPage from "../../landingPageTamplates";
 import ServicePageHero from "../../components/service/serviceHeroSection";
 import car from "@/public/images/car2.jpg";
@@ -12,7 +12,39 @@ import Image from "next/image";
 import aboutImage from "@/public/images/carService1.jpg";
 import CarTypes from "../../components/service/carRental/carTypes";
 import Link from "next/link";
+import { getAllCars } from "@/app/api/carRental/action";
+import { CarResponse } from "@/app/types";
+import Loader from "../../components/skeleton/loader";
+
 const CarRental = () => {
+  const [carList, setCarList] = useState<CarResponse>({
+    status: "",
+    data: [],
+    message: "",
+    description: "",
+  });
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getAllCarList();
+  }, []);
+
+  const getAllCarList = async () => {
+    setLoading(true);
+    try {
+      const cars = await getAllCars({
+        carName: "",
+        brand: "",
+        seats: "",
+      });
+      setCarList(cars);
+      setLoading(false);
+    } catch (error) {
+      console.log("Something went wrong", { error });
+    }
+  };
+
   return (
     <LandingPage>
       <div>
@@ -134,7 +166,9 @@ const CarRental = () => {
               title={"What we offer"}
               subtitle={"Featured Vehicles"}
             />
-            <CarTypes />
+
+            {/* {loading ? <Loader /> : <CarTypes featuredCar={} />} */}
+
             <div className="w-full text-white flex items-center justify-center">
               <Link href={"/service/car-rental/all"}>
                 <Button name={"View All Our Cars"} />
@@ -148,4 +182,3 @@ const CarRental = () => {
 };
 
 export default CarRental;
-
