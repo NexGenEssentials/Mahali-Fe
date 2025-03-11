@@ -2,8 +2,10 @@ import React from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "motion/react";
 import Link from "next/link";
+
 interface Props {
   id: number;
+  year:number;
   car: StaticImageData | null;
   name: string;
   category: string;
@@ -14,6 +16,7 @@ interface Props {
 
 const CarCard = ({
   id,
+  year,
   car,
   name,
   category,
@@ -41,9 +44,14 @@ const CarCard = ({
             {name}
           </h1>
           <div className="w-full flex font-semibold text-sm justify-between">
-            <span className="text-slate-400">{category}</span>
+            <span className="text-slate-400">
+              <strong className="text-slate-700">Type: </strong>
+              {category}
+            </span>
             <span className="inline-flex">
-              <h4 className="text-primaryGreen">{price}</h4>/{period}
+              <h4 className="text-primaryGreen">
+                $ <span className="underline">{price}</span>/{period}
+              </h4>
             </span>
           </div>
           <div className="inline-flex gap-1 text-sm text-slate-400">
@@ -51,6 +59,13 @@ const CarCard = ({
             <span className="text-primaryGreen font-semibold">
               {" "}
               {transimission}
+            </span>
+          </div>
+          <div className="inline-flex gap-1 text-sm text-slate-400">
+            Year:
+            <span className="text-primaryGreen font-semibold">
+              {" "}
+              {year}
             </span>
           </div>
           <motion.button

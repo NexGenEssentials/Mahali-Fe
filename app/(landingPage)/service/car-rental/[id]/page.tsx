@@ -2,17 +2,15 @@
 import ServicePageHero from "@/app/(landingPage)/components/service/serviceHeroSection";
 import LandingPage from "@/app/(landingPage)/landingPageTamplates";
 import React, { useEffect, useState } from "react";
-import { getCarByName } from "@/app/helpers/filter";
 import ThumbsGallery from "@/app/(landingPage)/components/service/carRental/thumbsGallery";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Button from "@/app/(landingPage)/components/buttons/button";
 import { HeaderSection } from "@/app/(landingPage)/components/headers/header";
 import CarTypes from "@/app/(landingPage)/components/service/carRental/carTypes";
-import { getSingleCar } from "@/app/api/carRental/action";
-import { SingleCarType } from "@/app/types";
+import { getCarFeatures, getSingleCar } from "@/app/api/carRental/action";
+import { AllFeature, SingleCarType } from "@/app/types";
 import { StaticImageData } from "next/image";
 import Loading from "@/app/loading";
-import ImagePlaceholder from "@/public/images/imagePlaceholder.jpg";
 import { useAppContext } from "@/app/context";
 
 const CarDetails = ({ params }: { params: { id: string } }) => {
@@ -42,10 +40,12 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
     description: "",
   });
   const [loading, setloading] = useState(true);
- const {setActiveModalId}=useAppContext()
+  const [feature, setFeature] = useState<AllFeature[]>([]);
+  const { setActiveModalId } = useAppContext();
 
   useEffect(() => {
     getCarByName();
+    getCarAllFeatures();
   }, []);
 
   const getCarByName = async () => {
@@ -62,13 +62,23 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
     }
   };
 
+  const getCarAllFeatures = async () => {
+    try {
+      const result = await getCarFeatures();
+      if (result) setFeature(result);
+    } catch (error) {
+      alert("Something went wrong");
+    }
+  };
+
+  console.log({ feature });
   if (loading) return <Loading />;
 
   return (
     <LandingPage>
       <ServicePageHero
-        image={carInfo?.car}
-        service={carInfo?.name!}
+        image={carInfo?.first_image}
+        service={carInfo?.name}
         title="Fast & Easy Way To Rent A Car"
         desc="Experience the fastest and easiest way to rent a car. Reliable, affordable, and tailored to your journey—book your ride in just a few clicks!"
       />
@@ -78,14 +88,28 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
             <ThumbsGallery images={carInfo?.images} />
           </div>
           <div className="flex flex-col items-center w-full md:w-1/2 p-2">
-            <span className="text-slate-400 text-lg font-semibold uppercase">
-              {carInfo?.category}
-            </span>
-            <span className="text-primaryGreen text-2xl font-semibold">
-              {carInfo?.name}
-            </span>
+            <div className="flex justify-center items-end md:w-3/5 gap-4">
+              <div className="flex flex-col">
+                <span className="text-slate-400 text-lg font-semibold uppercase">
+                  {carInfo?.category}
+                </span>
+                <span className="text-primaryGreen text-2xl font-semibold">
+                  {carInfo?.name}
+                </span>
+              </div>
+              <span className="inline-flex">
+                <strong className="text-primaryGreen text-xl">
+                  $<span className="">{carInfo.price_per_day}</span>/{"day"}
+                </strong>
+              </span>
+            </div>
             <p className="text-black opacity-70 leading-relaxed text-sm mt-5 text-center">
-              {carInfo?.description}
+              {/* {carInfo?.description} */}
+              "The Mercedes-Benz E-Class is a symbol of luxury, performance, and
+              innovation. Renowned for its sophisticated design, this premium
+              sedan combines cutting-edge technology with unparalleled comfort
+              and advanced safety features. Whether for business or pleasure,
+              the E-Class offers a prestigious driving experience.",
             </p>
             <div
               onClick={() => setActiveModalId("bookCarModel")}
@@ -93,53 +117,138 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
             >
               <Button name="Book Now" />
             </div>
-            <div className="flex flex-wrap gap-6  w-full items-center justify-center">
-              {/* {carInfo?.spec.map((spec, index) => (
-                <div
-                  key={index}
-                  className="flex gap-2 items-center min-w-20  lg:min-w-60"
-                >
-                  <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
-                    <Icon
-                      icon={spec.icon}
-                      width="30"
-                      height="30"
-                      className="text-primaryGreen"
-                    />
+            <div className="flex flex-wrap gap-4  w-full items-center justify-between">
+              <div className="flex gap-2 items-center min-w-20  lg:min-w-60">
+                <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
+                  <Icon
+                    icon={"bi:speedometer2"}
+                    width="30"
+                    height="30"
+                    className="text-primaryGreen"
+                  />
+                </span>
+                <span className="flex flex-col justify-center items-center">
+                  <span className="text-slate-400 text-sm font-semibold ">
+                    Mileage
                   </span>
-                  <span className="flex flex-col justify-center items-center">
-                    <span className="text-slate-400 text-sm font-semibold ">
-                      {spec.name}
-                    </span>
-                    <span className="text-slate-900 text-xs font-semibold ">
-                      {spec.value}
-                    </span>
+                  <span className="text-slate-900 text-xs font-semibold ">
+                    {carInfo.mileage.toLocaleString()}
                   </span>
-                </div>
-              ))} */}
+                </span>
+              </div>
+              <div className="flex gap-2 items-center min-w-20  lg:min-w-60">
+                <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
+                  <Icon
+                    icon={"icon-park-twotone:manual-gear"}
+                    width="30"
+                    height="30"
+                    className="text-primaryGreen"
+                  />
+                </span>
+                <span className="flex flex-col justify-center items-center">
+                  <span className="text-slate-400 text-sm font-semibold ">
+                    Transmission
+                  </span>
+                  <span className="text-slate-900 text-xs font-semibold ">
+                    {carInfo.transmission}
+                  </span>
+                </span>
+              </div>
+              <div className="flex gap-2 items-center min-w-20  lg:min-w-60">
+                <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
+                  <Icon
+                    icon={"icon-park-twotone:baby-car-seat"}
+                    width="30"
+                    height="30"
+                    className="text-primaryGreen"
+                  />
+                </span>
+                <span className="flex flex-col justify-center items-center">
+                  <span className="text-slate-400 text-sm font-semibold ">
+                    Seats
+                  </span>
+                  <span className="text-slate-900 text-xs font-semibold ">
+                    {carInfo.seats}
+                  </span>
+                </span>
+              </div>
+              <div className="flex gap-2 items-center min-w-20  lg:min-w-60">
+                <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
+                  <Icon
+                    icon={"fluent-emoji-high-contrast:fuel-pump"}
+                    width="30"
+                    height="30"
+                    className="text-primaryGreen"
+                  />
+                </span>
+                <span className="flex flex-col justify-center items-center">
+                  <span className="text-slate-400 text-sm font-semibold ">
+                    Fuel
+                  </span>
+                  <span className="text-slate-900 text-xs font-semibold ">
+                    {carInfo.fuel_type}
+                  </span>
+                </span>
+              </div>
+              <div className="flex gap-2 items-center min-w-20  lg:min-w-60">
+                <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
+                  <Icon
+                    icon={"bi:luggage-fill"}
+                    width="30"
+                    height="30"
+                    className="text-primaryGreen"
+                  />
+                </span>
+                <span className="flex flex-col justify-center items-center">
+                  <span className="text-slate-400 text-sm font-semibold ">
+                    Luggage
+                  </span>
+                  <span className="text-slate-900 text-xs font-semibold ">
+                    {carInfo.luggage_capacity}
+                  </span>
+                </span>
+              </div>
+              <div className="flex gap-2 items-center min-w-20  lg:min-w-60">
+                <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
+                  <Icon
+                    icon={"carbon:hybrid-networking"}
+                    width="30"
+                    height="30"
+                    className="text-primaryGreen"
+                  />
+                </span>
+                <span className="flex flex-col justify-center items-center">
+                  <span className="text-slate-400 text-sm font-semibold ">
+                    Hybrid
+                  </span>
+                  <span className="text-slate-900 text-xs font-semibold ">
+                    {carInfo.fuel_type === "Hybrid" ? "Yes" : "No"}
+                  </span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
         <div className="flex flex-col items-center justify-center w-full">
           <HeaderSection subtitle="" title="Features" />
           <div className="w-2/3 flex flex-wrap gap-2 ">
-            {carInfo?.features?.map((feat, index) => (
+            {feature?.map((feat, index) => (
               <div
                 key={index}
                 className={`${
-                  feat.available
+                  feat.id
                     ? "bg-primaryGreen text-white"
                     : "bg-white text-slate-400"
                 }  rounded-md text-xs border p-2`}
               >
-                {feat.feature}
+                {feat.name}
               </div>
             ))}
           </div>
         </div>
         <div>
           <HeaderSection subtitle="Related Cars" title="Choose Car" />
-          <CarTypes />
+          <CarTypes featuredCar={carInfo.related_cars} />
         </div>
       </div>
     </LandingPage>

@@ -22,7 +22,10 @@ export type Car = {
   id: number;
   name: string;
   category: string;
+  year: number;
   transmission: string;
+  first_image: StaticImageData;
+  price_per_day: string;
 };
 
 export type CarData = {
@@ -74,6 +77,10 @@ export type Feature = {
   id: number;
   name: string;
 };
+export type AllFeature = {
+  id: number;
+  name: string;
+};
 
 export type SingleCarType = {
   car: StaticImageData;
@@ -90,7 +97,7 @@ export type SingleCarType = {
   category: string;
   year: number;
   mileage: number;
-  fuel_type: "Petrol" | "Diesel" | "Electric" | "Hybrid";
+  fuel_type: string;
   transmission: "Automatic" | "Manual";
   seats: number;
   luggage_capacity: number;

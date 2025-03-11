@@ -1,9 +1,13 @@
 "use server";
-import { CarDetails, CarResponse, SingleCarType } from "@/app/types";
+import {
+  AllFeature,
+  CarDetails,
+  CarResponse,
+  SingleCarType,
+} from "@/app/types";
 import { cookies } from "next/headers";
 const base_url = process.env.BACKEND_BASE_URL;
 const accessToken = cookies().get("accessToken")?.value;
-
 
 export const CreateCar = async (carDetails: CarDetails): Promise<{}> => {
   try {
@@ -66,14 +70,12 @@ export const getAllCars = async ({
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
 
-    console.log(response);
-    console.log({ carName, brand, seats });
     const data = await response.json();
+
     if (!response.ok) {
       return {
         status: response.statusText,
@@ -89,15 +91,12 @@ export const getAllCars = async ({
   }
 };
 
-export const getSingleCar = async (
-  carId: string
-): Promise<SingleCarType> => {
+export const getSingleCar = async (carId: string): Promise<SingleCarType> => {
   try {
     const response = await fetch(`${base_url}/cars/${carId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
       },
     });
 
@@ -110,7 +109,29 @@ export const getSingleCar = async (
     return data;
   } catch (error) {
     console.log("Something went wrong", { error });
-    throw error
+    throw error;
+  }
+};
+
+export const getCarFeatures = async (): Promise<AllFeature[]> => {
+  try {
+    const response = await fetch(`${base_url}/cars/features/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return data;
+    }
+
+    return data;
+  } catch (error) {
+    console.log("Something went wrong", { error });
+    throw error;
   }
 };
 
@@ -120,7 +141,6 @@ export const getCarAvailabilty = async (): Promise<{}> => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
       },
     });
 

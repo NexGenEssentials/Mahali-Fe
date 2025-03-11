@@ -1,4 +1,3 @@
-import { CarDetails } from "@/app/constants/arrays";
 import Link from "next/link";
 import React from "react";
 import { Autoplay, Keyboard, Pagination } from "swiper/modules";
@@ -7,7 +6,10 @@ import CarCard from "./carCard";
 import "swiper/css";
 import "swiper/css/keyboard";
 import "swiper/css/pagination";
-const CarTypes = () => {
+import { Car} from "@/app/types";
+import ImagePlaceholder from "@/public/images/imagePlaceholder.jpg";
+
+const CarTypes = ({ featuredCar }: { featuredCar: Car[] }) => {
   return (
     <div className="">
       <Swiper
@@ -46,16 +48,17 @@ const CarTypes = () => {
         className="mySwiper "
       >
         <div className="flex gap-4 items-stretch justify-center mx-4 ">
-          {CarDetails.map((car, index) => (
+          {featuredCar?.slice(0, 5).map((car, index) => (
             <SwiperSlide key={index} className="py-4 mb-6 px-2">
               <Link href={"#"}>
                 <CarCard
-                  id={1}
-                  car={car.car}
+                  id={car.id}
+                  car={car.first_image || ImagePlaceholder}
                   name={car.name}
+                  year={car.year}
                   category={car.category}
-                  price={car.price}
-                  period={car.period}
+                  price={car.price_per_day}
+                  period={"day"}
                   transimission={car.transmission}
                 />
               </Link>
