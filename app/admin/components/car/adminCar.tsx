@@ -92,7 +92,7 @@ function AdminCarRentalApp() {
       </div>
 
       <CenterModal
-        children={<CarDetails car={carList.data && carList.data[carId]} />}
+        children={<CarDetails carId={carId} />}
         id={`Car${carId}`}
       />
     </div>
