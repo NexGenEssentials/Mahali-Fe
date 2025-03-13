@@ -177,7 +177,7 @@ const About = () => {
                       >
                         <div className="relative w-[250px] h-[250px] overflow-hidden">
                           <Image
-                            src={guide}
+                            src={staff.image || guide}
                             alt="our tour guide"
                             className="object-cover w-full h-full group-hover:scale-105 duration-300 rounded-lg"
                           />

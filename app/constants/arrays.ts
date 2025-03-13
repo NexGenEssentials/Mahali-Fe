@@ -59,6 +59,8 @@ import ret1 from "@/public/images/ret1.jpg";
 import ret2 from "@/public/images/ret2.jpg";
 import ret3 from "@/public/images/ret3.jpg";
 import ret4 from "@/public/images/ret4.jpg";
+import Giselle from '@/public/images/giselle.jpg'
+// import DanPofile from '@/public/images/Dani.jpg'
 
 export const Parks = [
   {
@@ -1076,13 +1078,21 @@ export const StaffList = [
       { name: "Jackson Mugumya", title: "Board Member", image: "" },
       { name: "Daniella Rusamaza", title: "Board Member", image: "" },
       { name: "Egide Rucyaha", title: "Board Member", image: "" },
-      { name: "Dan Rwiyamira", title: "Secretary to the Board", image: "" },
+      {
+        name: "Dan Rwiyamira",
+        title: "Secretary to the Board",
+        image: '',
+      },
     ],
   },
   {
     category: "Management",
     list: [
-      { name: "Giselle K. Bigabiro", title: "Sales and Marketing", image: "" },
+      {
+        name: "Giselle K. Bigabiro",
+        title: "Sales and Marketing",
+        image: Giselle,
+      },
       { name: "Vanessa Kanangire Ukeye", title: "General Manager", image: "" },
       {
         name: "Patience Ntaganzwa",

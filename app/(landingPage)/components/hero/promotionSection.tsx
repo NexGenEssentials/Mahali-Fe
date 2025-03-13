@@ -17,8 +17,8 @@ const PromotionSection = () => {
     setSelectedService(value);
   };
   return (
-    <section className="max-w-[1750px] mx-auto relative w-full md:px-8 flex items-center max-md:my-4 justify-center md:mb-40 z-40">
-      <div className="md:absolute flex flex-col gap-4 w-full md:w-[90%] bg-primaryGreen md:shadow-md md:shadow-slate-500 text-primaryWhite p-8 rounded-md ">
+    <section className="max-w-[1750px] mx-auto relative w-full md:px-8 flex items-center max-md:my-4 justify-center lg:mb-40 z-40">
+      <div className="lg:absolute flex flex-col gap-4 w-full md:w-[90%] bg-primaryGreen md:shadow-md md:shadow-slate-500 text-primaryWhite p-8 rounded-md ">
         <div className="flex flex-col gap-4">
           <h1 className="text-3xl font-bold">
             2025 Great Migration Season is Here!

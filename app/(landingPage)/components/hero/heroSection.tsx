@@ -1,62 +1,43 @@
 "use client";
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
-import { Autoplay, EffectFade, Pagination } from "swiper/modules";
-import Image from "next/image";
-import { motion } from "motion/react";
-import { Parks } from "@/app/constants/arrays";
+import { motion } from "framer-motion";
 import Button from "../buttons/button";
 import Link from "next/link";
 
 const HeroSection = () => {
   return (
-    <div className="w-full ">
-      <Swiper
-        autoplay={{
-          delay: 6000,
-          disableOnInteraction: false,
-        }}
-        loop={true}
-        effect="fade"
-        pagination={{ clickable: true }}
-        speed={500}
-        modules={[Pagination, Autoplay, EffectFade]}
-        className="mySwiper w-full h-full"
+    <div className="relative w-full h-[400px] lg:h-[600px] xl:h-[750px] overflow-hidden">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover"
       >
-        {Parks.map((item, index) => (
-          <SwiperSlide
-            key={index}
-            className="w-full bg-black h-fit grid place-content-center"
-          >
-            <div className="relative w-full h-screen 2xl:h-[800px]">
-              <Image
-                src={item.image}
-                alt={item.title}
-                fill
-                className="object-cover opacity-50"
-              />
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -50, overflow: "hidden" }}
-                animate={{ opacity: 1, x: 50 }}
-                transition={{ duration: 1, ease: "backInOut" }}
-                className="max-w-[1750px] mx-auto  absolute top-1/3 right-1/3 px-8 py-4 text-white flex flex-col gap-6 w-3/4 lg:w-[40%]"
-              >
-                <h1 className="text-4xl font-bold">{item.title}</h1>
-                <p className="text-sm italic">
-                  &quot; {item.description} &quot;
-                </p>
-                <Link href={'/service'}>
-                <Button name="Explore More" />
-                </Link>
-              </motion.div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+        <source src="/video/Mahali.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      {/* Overlay to improve text readability */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60"></div>
+
+      {/* Content Section */}
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, ease: "backInOut" }}
+        className="absolute top-1/3 xl:left-1/4 p-4 lg:px-8 lg:py-4 text-white flex flex-col items-center justify-center  w-full xl:w-[40%] max-w-[1750px]"
+      >
+        <h1 className="text-4xl font-bold">Explore Nature with Us</h1>
+        <p className="text-sm italic">
+          &quot; Discover the beauty of untouched landscapes and breathtaking
+          views. &quot;
+        </p>
+        <Link href={"/service"}>
+          <Button name="Explore More" />
+        </Link>
+      </motion.div>
     </div>
   );
 };
