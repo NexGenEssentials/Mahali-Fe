@@ -6,6 +6,9 @@ import { SquarePen } from "lucide-react";
 import { CarResponse } from "@/app/types";
 import { getAllCars } from "@/app/api/carRental/action";
 import Loader from "@/app/(landingPage)/components/skeleton/loader";
+import { useAppContext } from "@/app/context";
+import CenterModal from "@/app/(landingPage)/components/model/centerModel";
+import CarDetails from "./carDetails";
 
 function AdminCarRentalApp() {
   const [searchParams, setSearchParams] = useState<{
@@ -23,13 +26,14 @@ function AdminCarRentalApp() {
   });
 
   const [loading, setLoading] = useState(true);
+  const [carId, setCarId] = useState<number>(0);
   const [carList, setCarList] = useState<CarResponse>({
     status: "",
     data: [],
     message: "",
     description: "",
   });
-
+  const { setActiveModalId } = useAppContext();
   useEffect(() => {
     getAllCarList();
   }, [searchParams]);
@@ -53,8 +57,9 @@ function AdminCarRentalApp() {
     console.log("Update car:", car);
   };
 
-  const handleView = (car: any) => {
-    console.log("View car:", car);
+  const handleView = (id: number) => {
+    setActiveModalId(`Car${id}`);
+    setCarId(id);
   };
 
   if (loading)
@@ -85,6 +90,11 @@ function AdminCarRentalApp() {
           onView={handleView}
         />
       </div>
+
+      <CenterModal
+        children={<CarDetails car={carList.data && carList.data[carId]} />}
+        id={`Car${carId}`}
+      />
     </div>
   );
 }

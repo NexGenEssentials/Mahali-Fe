@@ -51,7 +51,7 @@ interface CarRentalTableProps {
   data: CarResponse;
   onDelete: (id: number) => void;
   onUpdate: (car: CarData) => void;
-  onView: (car: CarData) => void;
+  onView: (car: number) => void;
 }
 
 const CarRentalTable: React.FC<CarRentalTableProps> = ({
@@ -114,20 +114,20 @@ const CarRentalTable: React.FC<CarRentalTableProps> = ({
                 <td className="px-6 py-4">
                   <div className="flex items-center">
                     {car.first_image ? (
-                      <div className="relative w-full h-full">
+                      <div className="relative w-60 h-40">
                         <Image
                           src={car.first_image}
                           alt={car.name}
                           fill
-                          className="h-16 w-24 object-cover rounded-md mr-4"
+                          className="h-40 w-40 object-cover rounded-md mr-4"
                         />
                       </div>
                     ) : (
-                      <div className="h-16 w-24 bg-gray-200 rounded-md flex items-center justify-center mr-4">
+                      <div className="h-40 w-40 bg-gray-200 rounded-md flex items-center justify-center mr-4">
                         <Car className="h-8 w-8 text-gray-400" />
                       </div>
                     )}
-                    <div>
+                    <div className="px-4">
                       <div className="text-sm font-medium text-gray-900">
                         {car.brand} {car.name}
                       </div>
@@ -156,7 +156,7 @@ const CarRentalTable: React.FC<CarRentalTableProps> = ({
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 max-w-sm">
                   <div className="flex flex-wrap gap-1">
                     {car.features.map((feature) => (
                       <span
@@ -193,7 +193,7 @@ const CarRentalTable: React.FC<CarRentalTableProps> = ({
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <div className="flex justify-end space-x-2">
                     <button
-                      // onClick={() => onView(car.id)}
+                      onClick={() => onView(car.id)}
                       className="text-blue-600 hover:text-blue-900"
                       title="View Details"
                     >

@@ -40,7 +40,7 @@ const CarRentalForm = ({
         available(result.available);
         notification.success({
           message: "Car Availability",
-          description: result.message,
+          description: "You can book this by clicking book now button",
           placement: "topRight",
         });
       } else {

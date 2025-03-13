@@ -56,3 +56,31 @@ export const getAllMyBookings = async (): Promise<BookingResponse> => {
     throw error;
   }
 };
+
+export const updateBookingStatus = async (
+  id: number,
+  newStatus: string
+): Promise<{ status: string; message: string }> => {
+  try {
+    const response = await fetch(
+      `${base_url}/bookings/${id}/${newStatus.toLocaleLowerCase()}/`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    const data = await response.json();
+
+    if (!response.ok) {
+      return data;
+    }
+
+    return data;
+  } catch (error) {
+    console.log("Something went wrong", { error });
+    throw error;
+  }
+};
