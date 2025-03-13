@@ -15,6 +15,7 @@ import { useAppContext } from "@/app/context";
 import CarRentalForm from "@/app/(landingPage)/components/service/carRental/carForm";
 import CenterModal from "@/app/(landingPage)/components/model/centerModel";
 import UserInfoForm from "@/app/(landingPage)/components/service/carRental/bookACar";
+import { usePathname, useRouter } from "next/navigation";
 
 const CarDetails = ({ params }: { params: { id: string } }) => {
   const carId = decodeURIComponent(params.id);
@@ -44,9 +45,10 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
   });
   const [loading, setloading] = useState(true);
   const [feature, setFeature] = useState<AllFeature[]>([]);
-  const { setActiveModalId, showZoom } = useAppContext();
+  const { setActiveModalId, showZoom, isLogin } = useAppContext();
   const [checkAvailability, setCheckAvailability] = useState(false);
-
+  const router = useRouter();
+  const pathname = usePathname();
   useEffect(() => {
     getCarByName();
     getCarAllFeatures();
@@ -74,7 +76,13 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
       alert("Something went wrong");
     }
   };
- 
+  const handleBooking = () => {
+    if (isLogin) {
+      setActiveModalId("bookCarModel");
+    } else {
+      router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
+    }
+  };
 
   if (loading) return <Loading />;
 
@@ -126,7 +134,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
 
             {checkAvailability ? (
               <div
-                onClick={() => setActiveModalId("bookCarModel")}
+                onClick={handleBooking}
                 className="w-full text-white grid place-content-center my-4"
               >
                 <Button name="Book Now" />
@@ -278,7 +286,15 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
           </div>
         )}
       </div>
-      <CenterModal children={<UserInfoForm price={Number(carInfo.price_per_day)} carId={carInfo.id} />} id={"bookCarModel"} />
+      <CenterModal
+        children={
+          <UserInfoForm
+            price={Number(carInfo.price_per_day)}
+            carId={carInfo.id}
+          />
+        }
+        id={"bookCarModel"}
+      />
     </LandingPage>
   );
 };
