@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { LockOutlined, LoginOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input, notification } from "antd";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAppContext } from "@/app/context";
 
 export interface SigninFormData {
@@ -15,6 +15,8 @@ const SignInForm = () => {
   const [loading, setLoading] = useState(false);
   const { setIsLogin } = useAppContext();
   const route = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/account";
 
   const onFinish = async (values: SigninFormData) => {
     setLoading(true);
@@ -43,7 +45,7 @@ const SignInForm = () => {
         });
         setIsLogin(true);
         setTimeout(() => {
-          route.push("/account");
+          route.push(callbackUrl);
         }, 1500);
       }
     } catch (error) {

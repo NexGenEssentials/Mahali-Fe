@@ -106,3 +106,12 @@ export type SingleCarType = {
   status: string;
   description: string;
 };
+
+export interface BookingDetails {
+  content_type: number;
+  object_id: number;
+  start_date: Date; 
+  end_date: Date; 
+  guests: number;
+  total_price: number;
+}

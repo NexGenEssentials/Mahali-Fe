@@ -21,7 +21,7 @@ const ThumbsGallery: React.FC<ThumbsGalleryProps> = ({ images }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   return (
-    <div className="container relative">
+    <div className="container">
       <Swiper
         loop={true}
         spaceBetween={10}
@@ -61,6 +61,7 @@ const ThumbsGallery: React.FC<ThumbsGalleryProps> = ({ images }) => {
               <Image
                 src={image || ImagePlaceholder}
                 alt={`Thumbnail ${index + 1}`}
+                fill
                 className="block h-full w-full object-cover"
               />
               {activeIndex !== index && (

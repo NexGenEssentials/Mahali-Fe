@@ -5,6 +5,7 @@ import {
   CarDetails,
   PackageList,
 } from "../constants/arrays";
+import { CarData } from "../types";
 
 export const filterPackages = (
   data: typeof PackageList,
@@ -25,9 +26,18 @@ export const filterPackages = (
   return null;
 };
 
-export const getCarByName = (carName: string) => {
-  return CarDetails.find(
-    (car) => car.name.toLowerCase() === carName.toLowerCase()
+export const getCarByName = (searchTerm: string, carList?: CarData[]) => {
+  if (!searchTerm.trim()) return carList;
+
+  const term = searchTerm.toLowerCase();
+
+  return (
+    carList?.filter(
+      (car) =>
+        car.name.toLowerCase().includes(term) ||
+        car.brand.toLowerCase().includes(term) ||
+        car.category.toLowerCase().includes(term)
+    ) || []
   );
 };
 

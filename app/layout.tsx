@@ -41,7 +41,7 @@ export default function RootLayout({
             {children}
             <div>
               <CenterModal children={<h1> I am a Model</h1>} id={"tests"} />
-              <CenterModal children={<UserInfoForm />} id={"bookCarModel"} />
+              
               <RightModal
                 children={<h1> More Details About This Room</h1>}
                 id={"test"}

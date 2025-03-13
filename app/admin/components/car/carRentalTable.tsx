@@ -113,11 +113,14 @@ const CarRentalTable: React.FC<CarRentalTableProps> = ({
                 <td className="px-6 py-4">
                   <div className="flex items-center">
                     {car.first_image ? (
-                      <Image
-                        src={car.first_image}
-                        alt={car.name}
-                        className="h-16 w-24 object-cover rounded-md mr-4"
-                      />
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={car.first_image}
+                          alt={car.name}
+                          fill
+                          className="h-16 w-24 object-cover rounded-md mr-4"
+                        />
+                      </div>
                     ) : (
                       <div className="h-16 w-24 bg-gray-200 rounded-md flex items-center justify-center mr-4">
                         <Car className="h-8 w-8 text-gray-400" />

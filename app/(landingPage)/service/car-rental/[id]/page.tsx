@@ -12,6 +12,9 @@ import { AllFeature, SingleCarType } from "@/app/types";
 import { StaticImageData } from "next/image";
 import Loading from "@/app/loading";
 import { useAppContext } from "@/app/context";
+import CarRentalForm from "@/app/(landingPage)/components/service/carRental/carForm";
+import CenterModal from "@/app/(landingPage)/components/model/centerModel";
+import UserInfoForm from "@/app/(landingPage)/components/service/carRental/bookACar";
 
 const CarDetails = ({ params }: { params: { id: string } }) => {
   const carId = decodeURIComponent(params.id);
@@ -41,7 +44,8 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
   });
   const [loading, setloading] = useState(true);
   const [feature, setFeature] = useState<AllFeature[]>([]);
-  const { setActiveModalId } = useAppContext();
+  const { setActiveModalId, showZoom } = useAppContext();
+  const [checkAvailability, setCheckAvailability] = useState(false);
 
   useEffect(() => {
     getCarByName();
@@ -70,8 +74,8 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
       alert("Something went wrong");
     }
   };
+ 
 
-  console.log({ feature });
   if (loading) return <Loading />;
 
   return (
@@ -82,6 +86,14 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
         title="Fast & Easy Way To Rent A Car"
         desc="Experience the fastest and easiest way to rent a car. Reliable, affordable, and tailored to your journey—book your ride in just a few clicks!"
       />
+      <div className="absolute top-[275px] right-20 ">
+        <div className="bg-slate-100 w-full rounded-lg">
+          <h1 className="bg-primaryGreen text-white rounded-t-lg p-4 w-full text-center font-bold text-lg">
+            Check Availability
+          </h1>
+          <CarRentalForm id={carInfo.id} available={setCheckAvailability} />
+        </div>
+      </div>
       <div className="max-w-[1750px] mx-auto w-full flex flex-col gap-8 p-8">
         <div className="w-full flex max-md:flex-wrap gap-4 ">
           <div className="w-full md:w-1/2 p-2">
@@ -111,14 +123,22 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
               and advanced safety features. Whether for business or pleasure,
               the E-Class offers a prestigious driving experience.",
             </p>
-            <div
-              onClick={() => setActiveModalId("bookCarModel")}
-              className="w-full text-white grid place-content-center my-4"
-            >
-              <Button name="Book Now" />
-            </div>
-            <div className="flex flex-wrap gap-4  w-full items-center justify-between">
-              <div className="flex gap-2 items-center min-w-20  lg:min-w-60">
+
+            {checkAvailability ? (
+              <div
+                onClick={() => setActiveModalId("bookCarModel")}
+                className="w-full text-white grid place-content-center my-4"
+              >
+                <Button name="Book Now" />
+              </div>
+            ) : (
+              <button className="cursor-not-allowed border rounded-md border-slate-300 text-slate-300 py-3 px-6 my-4">
+                Book Now
+              </button>
+            )}
+
+            <div className="grid max-md:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="flex gap-2 items-center min-w-20">
                 <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
                   <Icon
                     icon={"bi:speedometer2"}
@@ -136,7 +156,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
                   </span>
                 </span>
               </div>
-              <div className="flex gap-2 items-center min-w-20  lg:min-w-60">
+              <div className="flex gap-2 items-center min-w-20">
                 <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
                   <Icon
                     icon={"icon-park-twotone:manual-gear"}
@@ -154,7 +174,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
                   </span>
                 </span>
               </div>
-              <div className="flex gap-2 items-center min-w-20  lg:min-w-60">
+              <div className="flex gap-2 items-center min-w-20">
                 <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
                   <Icon
                     icon={"icon-park-twotone:baby-car-seat"}
@@ -172,7 +192,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
                   </span>
                 </span>
               </div>
-              <div className="flex gap-2 items-center min-w-20  lg:min-w-60">
+              <div className="flex gap-2 items-center min-w-20">
                 <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
                   <Icon
                     icon={"fluent-emoji-high-contrast:fuel-pump"}
@@ -190,7 +210,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
                   </span>
                 </span>
               </div>
-              <div className="flex gap-2 items-center min-w-20  lg:min-w-60">
+              <div className="flex gap-2 items-center min-w-20">
                 <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
                   <Icon
                     icon={"bi:luggage-fill"}
@@ -208,7 +228,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
                   </span>
                 </span>
               </div>
-              <div className="flex gap-2 items-center min-w-20  lg:min-w-60">
+              <div className="flex gap-2 items-center min-w-20">
                 <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
                   <Icon
                     icon={"carbon:hybrid-networking"}
@@ -231,26 +251,34 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
         </div>
         <div className="flex flex-col items-center justify-center w-full">
           <HeaderSection subtitle="" title="Features" />
-          <div className="w-2/3 flex flex-wrap gap-2 ">
-            {feature?.map((feat, index) => (
-              <div
-                key={index}
-                className={`${
-                  feat.id
-                    ? "bg-primaryGreen text-white"
-                    : "bg-white text-slate-400"
-                }  rounded-md text-xs border p-2`}
-              >
-                {feat.name}
-              </div>
-            ))}
+          <div className="w-2/3 flex flex-wrap gap-2">
+            {feature?.map((feat) => {
+              const isCarFeature = carInfo?.features.some(
+                (carfeat) => carfeat.id === feat.id
+              );
+              return (
+                <div
+                  key={feat.id}
+                  className={`${
+                    isCarFeature
+                      ? "bg-primaryGreen text-white"
+                      : "bg-white text-slate-400"
+                  } rounded-md text-xs border p-2`}
+                >
+                  {feat.name}
+                </div>
+              );
+            })}
           </div>
         </div>
-        <div>
-          <HeaderSection subtitle="Related Cars" title="Choose Car" />
-          <CarTypes featuredCar={carInfo.related_cars} />
-        </div>
+        {carInfo.related_cars.length > 0 && (
+          <div>
+            <HeaderSection subtitle="Related Cars" title="Choose Car" />
+            <CarTypes featuredCar={carInfo.related_cars} />
+          </div>
+        )}
       </div>
+      <CenterModal children={<UserInfoForm price={Number(carInfo.price_per_day)} carId={carInfo.id} />} id={"bookCarModel"} />
     </LandingPage>
   );
 };

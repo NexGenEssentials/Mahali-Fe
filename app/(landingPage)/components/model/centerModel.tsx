@@ -20,7 +20,7 @@ const CenterModal = ({children, id,}: {children: ReactNode; id: string | null | 
     <div className={`${activeModalId ? "block absolute" : "hidden"}`}>
       {activeModalId === id && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center max-md:items-end items-center z-50"
+          className="fixed inset-0 bg-black bg-opacity-60 flex justify-center max-md:items-end items-center z-50"
           onClick={closeModal}
         >
           <div

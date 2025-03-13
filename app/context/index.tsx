@@ -1,14 +1,16 @@
 "use client";
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 interface ContextValue {
-    openNavDiscount:boolean;
-    setOpenNavDiscount:(openNavDiscount:boolean)=> void;
-    activeModalId: string | null;
-    setActiveModalId: (id: string | null) => void;
-    isLogin:boolean;
-    setIsLogin:(isLogin:boolean)=> void
-    adminServiceTab:string;
-    setAdminServiceTab:(adminServiceTab:string)=> void
+  openNavDiscount: boolean;
+  setOpenNavDiscount: (openNavDiscount: boolean) => void;
+  activeModalId: string | null;
+  setActiveModalId: (id: string | null) => void;
+  isLogin: boolean;
+  setIsLogin: (isLogin: boolean) => void;
+  adminServiceTab: string;
+  setAdminServiceTab: (adminServiceTab: string) => void;
+  showZoom: boolean;
+  setShowZoom: (isLogin: boolean) => void;
 }
 
 const AppContext = createContext<ContextValue>({} as ContextValue);
@@ -17,6 +19,7 @@ function ContextProvider({ children }: PropsWithChildren) {
 const[openNavDiscount, setOpenNavDiscount] = useState<boolean>(true)
 const [activeModalId, setActiveModalId] = useState<string | null>(null);
 const [isLogin, setIsLogin]=useState(false)
+const [showZoom, setShowZoom] = useState(false);
 const [adminServiceTab, setAdminServiceTab] = useState(
   "Holiday & Tour Packages"
 );
@@ -32,6 +35,8 @@ return (
       setIsLogin,
       adminServiceTab,
       setAdminServiceTab,
+      showZoom,
+      setShowZoom,
     }}
   >
     {children}

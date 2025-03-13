@@ -16,7 +16,7 @@ import Link from "next/link";
 
 const AccommodationService = () => {
   const onSearch: SearchProps["onSearch"] = (value) => {
-    console.log(value);
+    
   };
 
   const popularAccommodations = getPopularAccommodations();

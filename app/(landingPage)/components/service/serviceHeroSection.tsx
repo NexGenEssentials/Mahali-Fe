@@ -16,7 +16,7 @@ const ServicePageHero = ({ image, service, title, desc }: Props) => {
           <Image
             src={image}
             alt={title}
-            fill={true}
+            fill
             className="object-cover opacity-60"
           />
         )}

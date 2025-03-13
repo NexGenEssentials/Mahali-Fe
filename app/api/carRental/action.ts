@@ -59,7 +59,7 @@ export const getAllCars = async ({
 }: filters): Promise<CarResponse> => {
   try {
     const response = await fetch(
-      `${base_url}/cars/?${brand ? `&brand=${brand}` : ""}${
+      `${base_url}/cars?${brand ? `&brand=${brand}` : ""}${
         fuelType ? `&fuel_type=${fuelType}` : ""
       }${transmission ? `&transimission=${transmission}` : ""}${
         seats ? `&seats=${Number(seats)}` : ""
@@ -75,7 +75,6 @@ export const getAllCars = async ({
     );
 
     const data = await response.json();
-
     if (!response.ok) {
       return {
         status: response.statusText,
@@ -135,29 +134,33 @@ export const getCarFeatures = async (): Promise<AllFeature[]> => {
   }
 };
 
-export const getCarAvailabilty = async (): Promise<{}> => {
+export const getCarAvailabilty = async (
+  carId: number,
+  startDate: string,
+  endDate: string
+): Promise<{
+  available: boolean;
+  message: string;
+}> => {
   try {
-    const response = await fetch(`${base_url}/cars/check-availability`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${base_url}/cars/check-availability/?car_id=${carId}&start_date=${startDate}&end_date=${endDate}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const data = await response.json();
 
     if (!response.ok) {
-      return {
-        status: response.statusText,
-        description: data.detail || "Something went wrong",
-      };
+      return data;
     }
 
     return data;
   } catch (error) {
-    return {
-      status: "Internal Server Error",
-      description: "Something went wrong",
-    };
+    throw error;
   }
 };

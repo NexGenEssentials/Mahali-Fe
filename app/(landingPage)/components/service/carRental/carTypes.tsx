@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import { Car} from "@/app/types";
 import ImagePlaceholder from "@/public/images/imagePlaceholder.jpg";
 
-const CarTypes = ({ featuredCar }: { featuredCar: Car[] }) => {
+const CarTypes = ({ featuredCar }: { featuredCar?: Car[] }) => {
   return (
     <div className="">
       <Swiper

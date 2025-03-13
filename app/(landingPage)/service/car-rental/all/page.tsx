@@ -4,29 +4,17 @@ import LandingPage from "@/app/(landingPage)/landingPageTamplates";
 import React, { useEffect, useState } from "react";
 import car from "@/public/images/car2.jpg";
 import CarCard from "@/app/(landingPage)/components/service/carRental/carCard";
-import {
-  Button,
-  Flex,
-  GetProps,
-  Input,
-  Select,
-  Space,
-  Spin,
-  Table,
-  TableProps,
-} from "antd";
+import { Button, Select, Space, Table, TableProps } from "antd";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { getAllCars } from "@/app/api/carRental/action";
 import { CarData, CarResponse } from "@/app/types";
-import ZoomableImage from "@/app/(landingPage)/components/images/zoomImage";
 import { Eye } from "lucide-react";
 import ImagePlaceholder from "@/public/images/imagePlaceholder.jpg";
 import Link from "next/link";
 import Loader from "@/app/(landingPage)/components/skeleton/loader";
-
-const { Search } = Input;
-type SearchProps = GetProps<typeof Input.Search>;
+import { getCarByName } from "@/app/helpers/filter";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 const CarNav = ["All Cars", "Pricing", "Reviews"];
 
@@ -130,33 +118,25 @@ const AllCars = () => {
     message: "",
     description: "",
   });
-  const [carName, setCarName] = useState("");
-  const [carCategory, setCategory] = useState("");
-  const [carPrice, setCarPrice] = useState("");
+  const [fuelType, setfuelType] = useState("");
+  const [transmission, setTransmission] = useState("");
+  const [searchItem, setSearchItem] = useState("");
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(0);
   const [searchParams, setSearchParams] = useState<{
-    brand?: string;
     fuelType?: string;
     transmission?: string;
-    seats?: string;
-    availability?: boolean;
-    carName?: string;
-    ordering?: string;
-  }>({
-    carName: "",
-    brand: "",
-    seats: "",
-  });
+  }>({});
 
-  const onSearch: SearchProps["onSearch"] = async (value) => {
-    value.length > 0 && setShow(true);
-    setCarName(value);
-    setSearchParams({
-      carName: value,
-      brand: carCategory,
-      seats: carPrice,
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchItem(value);
+    setShow(true);
+    const result = getCarByName(value, carList.data);
+    setCarList({
+      ...carList,
+      data: result,
     });
   };
 
@@ -174,8 +154,6 @@ const AllCars = () => {
       console.log("Something went wrong", { error });
     }
   };
-
-
 
   return (
     <LandingPage>
@@ -203,54 +181,46 @@ const AllCars = () => {
             </ul>
 
             {service === "All Cars" && (
-              <div className="my-8 w-full flex flex-col gap-8 justify-center ">
+              <div className="my-8 w-full flex flex-col gap-8 justify-center">
                 <div className="bg-primaryGreen p-8 w-full flex items-center justify-center rounded-lg ">
                   <div
                     key={refresh}
                     className="flex gap-4 items-end flex-wrap text-primaryBlue"
                   >
-                    <div className="flex flex-col gap-1">
-                      <Search
+                    <div className="flex justify-between  px-3 gap-1 bg-white rounded-full overflow-hidden items-center">
+                      <input
+                        type="text"
                         placeholder="search by car name"
-                        allowClear
-                        size="large"
-                        onSearch={onSearch}
+                        value={searchItem}
+                        onChange={(e) => handleSearch(e)}
+                        className="px-2 py-3 focus-within:outline-none focus:outline-none border-r-2"
                       />
+                      <Icon icon="ix:search" width="24" height="24" />
                     </div>
                     <div className="flex flex-col gap-1">
                       <label
                         htmlFor="place"
                         className="text-xs text-primaryWhite font-medium pl-2"
                       >
-                        TYPE
+                        Fuel Type
                       </label>
                       <Space wrap>
                         <Select
-                          defaultValue="All"
+                          defaultValue="Select"
                           allowClear
                           size="large"
                           onChange={(value) => {
                             value && setShow(true);
-                            setCategory(value);
-
+                            setfuelType(value);
                             setSearchParams({
-                              carName: carName,
-                              brand: value,
-                              seats: carPrice,
+                              fuelType: value,
+                              transmission: transmission,
                             });
                           }}
                           options={[
-                            { value: "Sedan" },
-                            { value: "Hatchback" },
-                            { value: "SUV" },
-                            { value: "Mini Van" },
-                            { value: " Van" },
-                            { value: "Wagon" },
-                            { value: "Coupe" },
-                            { value: "Bus" },
-                            { value: "Mini Bus" },
-                            { value: "Convertible" },
-                            { value: "Others" },
+                            { value: "Petrol" },
+                            { value: "Diesel" },
+                            { value: "Electric" },
                           ]}
                           className="w-full min-w-40"
                         />
@@ -261,28 +231,25 @@ const AllCars = () => {
                         htmlFor="place"
                         className="text-xs text-primaryWhite font-medium pl-2"
                       >
-                        Seats
+                        Transimission
                       </label>
                       <Space wrap>
                         <Select
-                          defaultValue="All"
+                          defaultValue="Select"
                           allowClear
                           onChange={(value) => {
                             value && setShow(true);
-                            setCarPrice(value);
+                            setTransmission(value);
 
                             setSearchParams({
-                              carName: carName,
-                              brand: carCategory,
-                              seats: value,
+                              fuelType: fuelType,
+                              transmission: value,
                             });
                           }}
                           size="large"
                           options={[
-                            { value: "4" },
-                            { value: "5" },
-                            { value: "6" },
-                            { value: "7" },
+                            { value: "Automatic" },
+                            { value: "Manual" },
                           ]}
                           className="w-full min-w-40"
                         />
@@ -291,15 +258,13 @@ const AllCars = () => {
                     {show && (
                       <motion.button
                         onClick={() => {
-                          setCarName("");
-                          setCarPrice("");
-                          setCategory("");
+                          setTransmission("");
+                          setfuelType("");
                           setShow(false);
                           setRefresh(Math.random());
                           setSearchParams({
-                            carName: carName,
-                            brand: carCategory,
-                            seats: carPrice,
+                            fuelType: fuelType,
+                            transmission: transmission,
                           });
                         }}
                         whileTap={{ scale: 0.8 }}
@@ -312,10 +277,10 @@ const AllCars = () => {
                 </div>
                 <div className="w-full flex gap-4 items-center flex-wrap justify-center   ">
                   {loading ? (
-                    <Loader/>
-                  ) : (
-                    carList?.data?.map((car, index) => (
-                      <div className="w-full md:w-[30%]" key={index}>
+                    <Loader />
+                  ) : carList.data && carList.data?.length > 0 ? (
+                    carList?.data?.map((car) => (
+                      <div className="w-full md:w-[30%]" key={car.id}>
                         <CarCard
                           id={car.id}
                           car={car.first_image || ImagePlaceholder}
@@ -328,6 +293,12 @@ const AllCars = () => {
                         />
                       </div>
                     ))
+                  ) : (
+                    <div className="my-8 w-full h-[200px] flex flex-col gap-8 justify-center text-center">
+                      <h1 className="text-primaryGreen font-bold text-2xl p-4">
+                        Car is not available
+                      </h1>
+                    </div>
                   )}
                 </div>
               </div>

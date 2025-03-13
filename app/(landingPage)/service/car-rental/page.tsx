@@ -56,14 +56,14 @@ const CarRental = () => {
         />
         <div className="relative max-w-[1750px] mx-auto w-full">
           <div className="relative -top-20 left-0 flex max-lg:flex-col w-full items-center justify-center">
-            <div className="bg-slate-100 max-lg:w-3/4 w-1/4 rounded-lg">
+            {/* <div className="bg-slate-100 max-lg:w-3/4 w-1/4 rounded-lg">
               <h1 className="bg-primaryGreen text-white rounded-t-lg p-4 w-full text-center font-bold text-lg">
                 Check Availability
               </h1>
               <CarRentalForm />
-            </div>
-            <div className="bg-white p-8 drop-shadow-lg max-lg:w-3/4 max-lg:rounded-lg w-1/2 flex-col flex gap-4 rounded-r-lg">
-              <h1 className="text-primaryBlue font-semibold text-2xl">
+            </div> */}
+            <div className="bg-white px-8 py-4 drop-shadow-lg max-lg:w-4/5 max-lg:rounded-lg w-3/5 flex-col flex gap-4 rounded-lg">
+              <h1 className="text-primaryBlue font-semibold text-center text-2xl">
                 Better Way to Rent Your Perfect Cars
               </h1>
               <div className="flex items-center justify-center gap-4">
@@ -72,7 +72,7 @@ const CarRental = () => {
                     key={index}
                     className="flex flex-col items-center justify-center gap-4"
                   >
-                    <div className="w-20 h-20 p-2 rounded-full border flex items-center justify-center">
+                    <div className="w-16 h-16 p-2 rounded-full border flex items-center justify-center">
                       <Icon
                         icon={item.icon}
                         width="40"
@@ -86,7 +86,7 @@ const CarRental = () => {
                   </div>
                 ))}
               </div>
-              <div className="text-white">
+              <div className="text-white mx-auto">
                 <Link href={"/service/car-rental/all"}>
                   <Button name="Reserver Your Perfect Car" />
                 </Link>
@@ -167,11 +167,11 @@ const CarRental = () => {
               subtitle={"Featured Vehicles"}
             />
 
-            {/* {loading ? <Loader /> : <CarTypes featuredCar={} />} */}
+            {loading ? <Loader /> : <CarTypes featuredCar={carList?.data?.[0].related_cars} />}
 
             <div className="w-full text-white flex items-center justify-center">
               <Link href={"/service/car-rental/all"}>
-                <Button name={"View All Our Cars"} />
+                <Button name={"View All Cars"} />
               </Link>
             </div>
           </div>

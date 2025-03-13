@@ -21,7 +21,7 @@ export function middleware(request: NextRequest) {
 
     // Check if token is expired
     const isExpired = decoded.exp * 1000 < Date.now(); // Convert exp to milliseconds
-    console.log({isExpired})
+   
     if (isExpired) {
       return NextResponse.redirect(loginUrl);
     }

@@ -1,35 +1,31 @@
 "use client";
+import { CreateBooking } from "@/app/api/booking/action";
 import { useAppContext } from "@/app/context";
+import { notification } from "antd";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import DatePicker, { DateObject, Value } from "react-multi-date-picker";
 
 interface FormData {
-  fullName: string;
-  email: string;
-  phone: string;
-  idOrPassport: string;
-  location: string;
   pickupDate: DateObject;
   pickupTime: string;
   dropDate: DateObject;
   dropTime: string;
 }
 
-const UserInfoForm = () => {
+const UserInfoForm = ({ carId, price }: { carId: number; price: number }) => {
   const [formData, setFormData] = useState<FormData>({
-    fullName: "",
-    email: "",
-    phone: "",
-    idOrPassport: "",
-    location: "",
     pickupDate: new DateObject(),
     pickupTime: "12:00",
     dropDate: new DateObject().add(1, "days"),
     dropTime: "12:00",
   });
-
   const { setActiveModalId } = useAppContext();
   const [loading, setLoading] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalDays, setTotalDays] = useState(0);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,18 +33,40 @@ const UserInfoForm = () => {
 
   const handleDateChange = (date: Value, type: "pickupDate" | "dropDate") => {
     if (date instanceof DateObject) {
-      setFormData((prev) => ({
-        ...prev,
-        [type]: date,
-        // If pickup date changes and is after drop date, update drop date
-        ...(type === "pickupDate" && date > prev.dropDate
-          ? { dropDate: new DateObject(date).add(1, "days") }
-          : {}),
-        // If drop date changes and is before pickup date, update pickup date
-        ...(type === "dropDate" && date < prev.pickupDate
-          ? { pickupDate: new DateObject(date).subtract(1, "days") }
-          : {}),
-      }));
+      setFormData((prev) => {
+        let newPickupDate = prev.pickupDate;
+        let newDropDate = prev.dropDate;
+
+        if (type === "pickupDate") {
+          newPickupDate = date;
+          if (date > prev.dropDate) {
+            newDropDate = new DateObject(date).add(1, "days");
+          }
+        } else if (type === "dropDate") {
+          newDropDate = date;
+          if (date < prev.pickupDate) {
+            newPickupDate = new DateObject(date).subtract(1, "days");
+          }
+        }
+        const startDate = newPickupDate.toDate();
+        const endDate = newDropDate.toDate();
+
+        const diffInMilliseconds = endDate.getTime() - startDate.getTime();
+        const newTotalDays = Math.ceil(
+          diffInMilliseconds / (1000 * 60 * 60 * 24)
+        );
+
+        const calculatedDays = newTotalDays > 0 ? newTotalDays : 1;
+
+        setTotalDays(calculatedDays);
+        setTotalPrice(price * calculatedDays);
+
+        return {
+          ...prev,
+          pickupDate: newPickupDate,
+          dropDate: newDropDate,
+        };
+      });
     }
   };
 
@@ -56,7 +74,6 @@ const UserInfoForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      // Validate dates
       const pickup = new Date(
         formData.pickupDate.format("YYYY-MM-DD") + "T" + formData.pickupTime
       );
@@ -68,14 +85,32 @@ const UserInfoForm = () => {
         alert("Drop-off time must be after pickup time");
         return;
       }
+      const bookingData = {
+        content_type: Number(process.env.CAR_RENTAL_ID),
+        object_id: carId,
+        start_date: pickup,
+        end_date: drop,
+        guests: 0,
+        total_price: totalPrice,
+      };
 
-      console.log("Form submitted:", {
-        ...formData,
-        pickupDate: pickup.toISOString(),
-        dropDate: drop.toISOString(),
-      });
-
-      setActiveModalId(null);
+      const result = await CreateBooking(bookingData);
+      if (result.status === "Unauthorized") {
+        notification.error({
+          message: "Unauthorized",
+          description: "Please Login first",
+          placement: "topRight",
+        });
+        router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
+      } else {
+        notification.success({
+          message: "Booking created successfully",
+          description: "You can track the status of your booking",
+          placement: "topRight",
+        });
+        router.push("/bookings-trips");
+        setActiveModalId(null);
+      }
     } catch (error) {
       console.error("Error processing dates:", error);
       alert("Please check your dates and times");
@@ -87,79 +122,11 @@ const UserInfoForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full md:min-w-[512px] max-w-2xl bg-white p-6 rounded-lg shadow-lg"
+      className="w-full md:min-w-[512px] max-w-2xl bg-white p-6 rounded-lg"
     >
-      <h2 className="text-xl font-semibold mb-4">Contact Details</h2>
-
-      {/* Full Name */}
-      <div className="mb-4">
-        <label
-          htmlFor="fullName"
-          className="block text-gray-700 font-medium mb-1"
-        >
-          Full Name
-        </label>
-        <input
-          type="text"
-          id="fullName"
-          name="fullName"
-          value={formData.fullName}
-          onChange={handleChange}
-          required
-          className="w-full px-2 py-3 border rounded-lg focus:outline-none focus:border-primaryGreen"
-        />
-      </div>
-
-      {/* Email */}
-      <div className="mb-4">
-        <label htmlFor="email" className="block text-gray-700 font-medium mb-1">
-          Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          className="w-full px-2 py-3 border rounded-lg focus:outline-none focus:border-primaryGreen"
-        />
-      </div>
-
-      {/* Phone Number */}
-      <div className="mb-4">
-        <label htmlFor="phone" className="block text-gray-700 font-medium mb-1">
-          Phone
-        </label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-          className="w-full px-2 py-3 border rounded-lg focus:outline-none focus:border-primaryGreen"
-        />
-      </div>
-
-      {/* ID or Passport */}
-      <div className="mb-4">
-        <label
-          htmlFor="idOrPassport"
-          className="block text-gray-700 font-medium mb-1"
-        >
-          ID or Passport
-        </label>
-        <input
-          type="text"
-          id="idOrPassport"
-          name="idOrPassport"
-          value={formData.idOrPassport}
-          onChange={handleChange}
-          required
-          className="w-full px-2 py-3 border rounded-lg focus:outline-none focus:border-primaryGreen"
-        />
-      </div>
+      <h2 className="text-xl font-semibold mb-4 text-center">
+        Booking Details
+      </h2>
 
       {/* Pickup Date & Time */}
       <div className="mb-4">
@@ -206,26 +173,18 @@ const UserInfoForm = () => {
           />
         </div>
       </div>
-
-      {/* Location */}
-      <div className="mb-4">
-        <label
-          htmlFor="location"
-          className="block text-gray-700 font-medium mb-1"
-        >
-          Location
-        </label>
-        <input
-          type="text"
-          id="location"
-          name="location"
-          value={formData.location}
-          onChange={handleChange}
-          required
-          className="w-full px-2 py-3 border rounded-lg focus:outline-none focus:border-primaryGreen"
-        />
+      <div className="flex flex-col gap-3 py-6 text-sm">
+        <span className="flex justify-between pr-2">
+          <span className="font-semibold">Unit Price:</span> ${price}/Day
+        </span>
+        <span className="flex justify-between border-b border-slate-800 pb-2 pr-2">
+          <span className="font-semibold ">Total Days:</span>
+          {totalDays}Days
+        </span>
+        <span className="flex justify-between pr-2">
+          <span className="font-semibold">Total Price:</span>${totalPrice}
+        </span>
       </div>
-
       {/* Submit Button */}
       <div className="w-full flex justify-center">
         <button
