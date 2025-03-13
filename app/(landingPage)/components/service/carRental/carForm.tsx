@@ -1,5 +1,6 @@
 "use client";
 import { getCarAvailabilty } from "@/app/api/carRental/action";
+import { useAppContext } from "@/app/context";
 import { notification } from "antd";
 import React, { useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
@@ -16,15 +17,20 @@ const CarRentalForm = ({
     new DateObject().add(1, "days"),
   ]);
   const [loading, setLoading] = useState(false);
+  const { setbookDate } = useAppContext();
 
   const handleCheckAvailability = async () => {
     setLoading(true);
     try {
       const startDate = dateSelected[0]?.format("YYYY-MM-DD");
       const endDate = dateSelected[1]?.format("YYYY-MM-DD");
-
+      setbookDate(dateSelected);
       if (!startDate || !endDate) {
-        console.error("Invalid date range selected");
+        notification.error({
+          message: "Invalid date range selected",
+          description: "Please select pickup date and drop date",
+          placement: "topRight",
+        });
         setLoading(false);
         return;
       }
@@ -44,7 +50,6 @@ const CarRentalForm = ({
           placement: "topRight",
         });
       }
-
     } catch (error) {
       console.log("Error occurred", error);
     } finally {

@@ -110,8 +110,27 @@ export type SingleCarType = {
 export interface BookingDetails {
   content_type: number;
   object_id: number;
-  start_date: Date; 
-  end_date: Date; 
+  start_date: string; 
+  end_date: string; 
   guests: number;
   total_price: number;
 }
+
+export type BookingData = {
+  id: number;
+  content_type: string;
+  object_id: number;
+  start_date: string;
+  end_date: string;
+  guests: number;
+  total_price: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type BookingResponse = {
+  status: string;
+  message: string;
+  data: BookingData[];
+};

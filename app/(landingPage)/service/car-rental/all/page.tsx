@@ -118,6 +118,7 @@ const AllCars = () => {
     message: "",
     description: "",
   });
+  const [carParamsList, setParmsCarList] = useState<CarData[] | undefined>([]);
   const [fuelType, setfuelType] = useState("");
   const [transmission, setTransmission] = useState("");
   const [searchItem, setSearchItem] = useState("");
@@ -131,13 +132,15 @@ const AllCars = () => {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    if (value.length > 1) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+    const result = getCarByName(value, carList.data);
+    setParmsCarList(result);
     setSearchItem(value);
     setShow(true);
-    const result = getCarByName(value, carList.data);
-    setCarList({
-      ...carList,
-      data: result,
-    });
   };
 
   useEffect(() => {
@@ -149,6 +152,7 @@ const AllCars = () => {
     try {
       const cars = await getAllCars(searchParams);
       setCarList(cars);
+      setParmsCarList(cars.data);
       setLoading(false);
     } catch (error) {
       console.log("Something went wrong", { error });
@@ -240,7 +244,6 @@ const AllCars = () => {
                           onChange={(value) => {
                             value && setShow(true);
                             setTransmission(value);
-
                             setSearchParams({
                               fuelType: fuelType,
                               transmission: value,
@@ -262,9 +265,10 @@ const AllCars = () => {
                           setfuelType("");
                           setShow(false);
                           setRefresh(Math.random());
+                          setSearchItem("");
                           setSearchParams({
-                            fuelType: fuelType,
-                            transmission: transmission,
+                            fuelType: "",
+                            transmission: "",
                           });
                         }}
                         whileTap={{ scale: 0.8 }}
@@ -278,8 +282,8 @@ const AllCars = () => {
                 <div className="w-full flex gap-4 items-center flex-wrap justify-center   ">
                   {loading ? (
                     <Loader />
-                  ) : carList.data && carList.data?.length > 0 ? (
-                    carList?.data?.map((car) => (
+                  ) : carParamsList && carParamsList?.length > 0 ? (
+                    carParamsList?.map((car) => (
                       <div className="w-full md:w-[30%]" key={car.id}>
                         <CarCard
                           id={car.id}

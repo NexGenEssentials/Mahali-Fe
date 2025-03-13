@@ -2,7 +2,6 @@ import { StaticImageData } from "next/image";
 import {
   Accommodations,
   AccountSettingsMenu,
-  CarDetails,
   PackageList,
 } from "../constants/arrays";
 import { CarData } from "../types";

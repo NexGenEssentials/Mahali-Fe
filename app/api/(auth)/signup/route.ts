@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const base_url = process.env.BACKEND_BASE_URL;
+const base_url = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 export async function POST(req: Request) {
   try {

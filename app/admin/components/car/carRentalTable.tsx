@@ -14,6 +14,7 @@ import {
 import { CarResponse } from "@/app/types";
 import Image from "next/image";
 
+
 interface Feature {
   id: number;
   name: string;

@@ -1,8 +1,8 @@
 "use server";
 
-import { BookingDetails } from "@/app/types";
+import { BookingDetails, BookingResponse } from "@/app/types";
 import { cookies } from "next/headers";
-const base_url = process.env.BACKEND_BASE_URL;
+const base_url = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 const accessToken = cookies().get("accessToken")?.value;
 
 export const CreateBooking = async (
@@ -19,7 +19,6 @@ export const CreateBooking = async (
     });
 
     const data = await response.json();
-
     if (!response.ok) {
       return {
         status: response.statusText,
@@ -33,5 +32,27 @@ export const CreateBooking = async (
       status: "Internal Server Error",
       description: "Something went wrong",
     };
+  }
+};
+
+export const getAllMyBookings = async (): Promise<BookingResponse> => {
+  try {
+    const response = await fetch(`${base_url}/bookings/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      return data;
+    }
+
+    return data;
+  } catch (error) {
+    console.log("Something went wrong", { error });
+    throw error;
   }
 };

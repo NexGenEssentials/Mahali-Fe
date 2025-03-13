@@ -59,8 +59,8 @@ import ret1 from "@/public/images/ret1.jpg";
 import ret2 from "@/public/images/ret2.jpg";
 import ret3 from "@/public/images/ret3.jpg";
 import ret4 from "@/public/images/ret4.jpg";
-import Giselle from '@/public/images/giselle.jpg'
-// import DanPofile from '@/public/images/Dani.jpg'
+import Giselle from "@/public/images/giselle.jpeg";
+import DanPofile from "@/public/images/dani.jpeg";
 
 export const Parks = [
   {
@@ -136,15 +136,6 @@ export const ServiceList = [
       "Discover expertly crafted holiday and tour packages that cater to your dream adventures. From cultural explorations to nature retreats, we create experiences you'll cherish forever.",
   },
   {
-    icon: "tabler:trekking",
-    title: "Gorilla & Chimpanzee Trekking",
-    link: "/destination",
-    image: gorilla2,
-    available: true,
-    description:
-      "Embark on unforgettable treks to encounter the majestic mountain gorillas and playful chimpanzees in their natural habitats. A rare and awe-inspiring wildlife experience awaits.",
-  },
-  {
     icon: "ri:hotel-line",
     title: "Accommodation Booking",
     link: "/service/accommodation",
@@ -162,6 +153,16 @@ export const ServiceList = [
     description:
       "Enjoy the freedom to explore with our reliable car rental services. Choose from a range of vehicles that suit your travel needs, ensuring a smooth and hassle-free journey.",
   },
+  {
+    icon: "tabler:trekking",
+    title: "Gorilla & Chimpanzee Trekking",
+    link: "/destination",
+    image: gorilla2,
+    available: true,
+    description:
+      "Embark on unforgettable treks to encounter the majestic mountain gorillas and playful chimpanzees in their natural habitats. A rare and awe-inspiring wildlife experience awaits.",
+  },
+
   {
     icon: "healthicons:truck-driver",
     title: "Game Drive Safaris",
@@ -1081,7 +1082,7 @@ export const StaffList = [
       {
         name: "Dan Rwiyamira",
         title: "Secretary to the Board",
-        image: '',
+        image: DanPofile,
       },
     ],
   },
@@ -1806,14 +1807,14 @@ export const Accommodations = [
             type: "Double / Deluxe Double Room",
             size: "72 m2",
             capacity: "1 adult and 1 child per Room",
-            rate:900,
+            rate: 900,
             availability: "100 room(s) left",
           },
           {
             type: "Double / Deluxe Double Room (2 Adults + 1 Child)",
             size: "36 m2",
             capacity: "2 adults and 1 child per Room",
-            rate:950,
+            rate: 950,
             availability: "30 room(s) left",
           },
           {
@@ -1821,7 +1822,7 @@ export const Accommodations = [
 
             size: "45 m2",
             capacity: "1 adult and 1 child per Room",
-            rate:180,
+            rate: 180,
             availability: "Not available",
           },
           {
@@ -1829,7 +1830,7 @@ export const Accommodations = [
 
             size: "45 m2",
             capacity: "2 adults and 2 children per Room",
-            rate:210,
+            rate: 210,
             availability: "80 room(s) left",
           },
           {
@@ -1837,7 +1838,7 @@ export const Accommodations = [
 
             size: "45 m2",
             capacity: "1 adult and 1 child per Room",
-            rate:240,
+            rate: 240,
             availability: "Not available",
           },
           {
@@ -1845,7 +1846,7 @@ export const Accommodations = [
 
             size: "50 m2",
             capacity: "1 adult and 1 child per Room",
-            rate:270,
+            rate: 270,
             availability: "15 room(s) left",
           },
           {
@@ -1853,7 +1854,7 @@ export const Accommodations = [
 
             size: "10 m2",
             capacity: "1 adult and 1 child per Room",
-            rate:350,
+            rate: 350,
             availability: "Not available",
           },
           {
@@ -1861,7 +1862,7 @@ export const Accommodations = [
 
             size: "10 m2",
             capacity: "1 adult and 1 child per Room",
-            rate:380,
+            rate: 380,
             availability: "5 room(s) left",
           },
         ],

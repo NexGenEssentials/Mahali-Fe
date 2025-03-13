@@ -6,18 +6,18 @@ import React, { useState, useEffect, useRef } from "react";
 
 const myAccountMenu = [
   { name: "My account", link: "/account", icon: "mdi:account" },
-  { name: "Notification", link: "/notification", icon: "mdi:account" },
+  { name: "Notification", link: "/account/notification", icon: "mdi:account" },
   {
     name: "Bookings & Trips",
-    link: "/bookings-trips",
+    link: "/account/bookings-trips",
     icon: "zondicons:travel",
   },
   {
     name: "Reviews",
-    link: "/review",
+    link: "/account/review",
     icon: "material-symbols-light:reviews-rounded",
   },
-  { name: "Saved", link: "/saved", icon: "wpf:like" },
+  { name: "Saved", link: "/account/saved", icon: "wpf:like" },
   { name: "Sign out", link: "/", icon: "ri:logout-circle-line" },
 ];
 

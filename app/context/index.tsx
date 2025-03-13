@@ -1,5 +1,6 @@
 "use client";
 import { createContext, PropsWithChildren, useContext, useState } from "react";
+import { DateObject } from "react-multi-date-picker";
 interface ContextValue {
   openNavDiscount: boolean;
   setOpenNavDiscount: (openNavDiscount: boolean) => void;
@@ -11,39 +12,44 @@ interface ContextValue {
   setAdminServiceTab: (adminServiceTab: string) => void;
   showZoom: boolean;
   setShowZoom: (isLogin: boolean) => void;
+  bookDate: DateObject[];
+  setbookDate: (bookDate: DateObject[]) => void;
 }
 
 const AppContext = createContext<ContextValue>({} as ContextValue);
 
 function ContextProvider({ children }: PropsWithChildren) {
-const[openNavDiscount, setOpenNavDiscount] = useState<boolean>(true)
-const [activeModalId, setActiveModalId] = useState<string | null>(null);
-const [isLogin, setIsLogin]=useState(false)
-const [showZoom, setShowZoom] = useState(false);
-const [adminServiceTab, setAdminServiceTab] = useState(
-  "Holiday & Tour Packages"
-);
+  const [openNavDiscount, setOpenNavDiscount] = useState<boolean>(true);
+  const [activeModalId, setActiveModalId] = useState<string | null>(null);
+  const [isLogin, setIsLogin] = useState(false);
+  const [showZoom, setShowZoom] = useState(false);
+  const [bookDate, setbookDate] = useState<DateObject[]>([]);
+  const [adminServiceTab, setAdminServiceTab] = useState(
+    "Holiday & Tour Packages"
+  );
 
-return (
-  <AppContext.Provider
-    value={{
-      openNavDiscount,
-      setOpenNavDiscount,
-      activeModalId,
-      setActiveModalId,
-      isLogin,
-      setIsLogin,
-      adminServiceTab,
-      setAdminServiceTab,
-      showZoom,
-      setShowZoom,
-    }}
-  >
-    {children}
-  </AppContext.Provider>
-);
+  return (
+    <AppContext.Provider
+      value={{
+        openNavDiscount,
+        setOpenNavDiscount,
+        activeModalId,
+        setActiveModalId,
+        isLogin,
+        setIsLogin,
+        adminServiceTab,
+        setAdminServiceTab,
+        showZoom,
+        setShowZoom,
+        bookDate,
+        setbookDate,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 }
 export function useAppContext() {
-    return useContext(AppContext);
-  }
-  export default ContextProvider;
+  return useContext(AppContext);
+}
+export default ContextProvider;

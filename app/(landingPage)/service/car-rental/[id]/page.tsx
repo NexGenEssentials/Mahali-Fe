@@ -14,8 +14,8 @@ import Loading from "@/app/loading";
 import { useAppContext } from "@/app/context";
 import CarRentalForm from "@/app/(landingPage)/components/service/carRental/carForm";
 import CenterModal from "@/app/(landingPage)/components/model/centerModel";
-import UserInfoForm from "@/app/(landingPage)/components/service/carRental/bookACar";
 import { usePathname, useRouter } from "next/navigation";
+import UserCarBookingInfoForm from "@/app/(landingPage)/components/service/carRental/bookACar";
 
 const CarDetails = ({ params }: { params: { id: string } }) => {
   const carId = decodeURIComponent(params.id);
@@ -288,7 +288,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
       </div>
       <CenterModal
         children={
-          <UserInfoForm
+          <UserCarBookingInfoForm
             price={Number(carInfo.price_per_day)}
             carId={carInfo.id}
           />

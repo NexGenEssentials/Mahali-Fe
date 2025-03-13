@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { SquarePen } from "lucide-react";
 import { CarResponse } from "@/app/types";
 import { getAllCars } from "@/app/api/carRental/action";
+import Loader from "@/app/(landingPage)/components/skeleton/loader";
 
 function AdminCarRentalApp() {
   const [searchParams, setSearchParams] = useState<{
@@ -56,7 +57,12 @@ function AdminCarRentalApp() {
     console.log("View car:", car);
   };
 
-  if (loading) return <>loading...</>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <Loader />
+      </div>
+    );
 
   return (
     <div className=" bg-gray-100 p-6">

@@ -6,7 +6,7 @@ import {
   SingleCarType,
 } from "@/app/types";
 import { cookies } from "next/headers";
-const base_url = process.env.BACKEND_BASE_URL;
+const base_url = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 const accessToken = cookies().get("accessToken")?.value;
 
 export const CreateCar = async (carDetails: CarDetails): Promise<{}> => {
@@ -61,7 +61,7 @@ export const getAllCars = async ({
     const response = await fetch(
       `${base_url}/cars?${brand ? `&brand=${brand}` : ""}${
         fuelType ? `&fuel_type=${fuelType}` : ""
-      }${transmission ? `&transimission=${transmission}` : ""}${
+      }${transmission ? `&transmission=${transmission}` : ""}${
         seats ? `&seats=${Number(seats)}` : ""
       }${availability ? `&is_available=${availability}` : ""}${
         carName ? `&search=${carName}` : ""

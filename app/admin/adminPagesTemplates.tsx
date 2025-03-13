@@ -11,10 +11,10 @@ function AdminPagesTemplates({ children }: { children: ReactNode }) {
   return (
     <div className="">
       <AccountNav />
-      <div className="w-full flex gap-2 pt-28 pb-5 max-w-[1450px] mx-auto">
-        <aside className="">
+      <div className="w-full flex gap-2 pt-28 pb-5 px-8 max-w-[1750px] mx-auto">
+        <aside className="min-w-[300px]">
           <ul className=" w-full border-2 rounded-lg shadow-md p-4 bg-white">
-            {ServiceList.map((service, index) => (
+            {ServiceList.slice(0, 3).map((service, index) => (
               <li
                 key={index}
                 onClick={() => setAdminServiceTab(service.title)}
@@ -28,6 +28,17 @@ function AdminPagesTemplates({ children }: { children: ReactNode }) {
                 <span className="text-sm font-semibold">{service.title}</span>
               </li>
             ))}
+            <li
+              onClick={() => setAdminServiceTab("Bookings")}
+              className={`cursor-pointer flex items-center gap-4 p-3 rounded-md transition-all duration-300 ${
+                adminServiceTab === "Bookings"
+                  ? "bg-primaryGreen text-white"
+                  : "text-gray-600 hover:bg-gray-100"
+              }`}
+            >
+              <Icon icon="material-symbols:book" width="20" height="20" />
+              <span className="text-sm font-semibold">{"Bookings"}</span>
+            </li>
           </ul>
         </aside>
         <main className="w-full">{children}</main>
