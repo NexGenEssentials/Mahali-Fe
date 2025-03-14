@@ -6,6 +6,7 @@ import ContextProvider from "./context";
 import CenterModal from "./(landingPage)/components/model/centerModel";
 import RightModal from "./(landingPage)/components/model/rightSideModel";
 import UserInfoForm from "./(landingPage)/components/service/carRental/bookACar";
+import ChatwootWidget from "./(landingPage)/components/chat/ChatwootWidget";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,6 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -49,6 +51,8 @@ export default function RootLayout({
             </div>
           </AntdRegistry>
         </ContextProvider>
+        <ChatwootWidget />
+        
       </body>
     </html>
   );
