@@ -91,7 +91,7 @@ const SingleDestination = ({ country }: { country: string }) => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="max-sm:hidden flex flex-col gap-4">
             <HeaderSection
               title=""
               subtitle={`When To Go​`}

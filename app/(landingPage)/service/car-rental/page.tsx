@@ -56,12 +56,6 @@ const CarRental = () => {
         />
         <div className="relative max-w-[1750px] mx-auto w-full">
           <div className="relative -top-20 left-0 flex max-lg:flex-col w-full items-center justify-center">
-            {/* <div className="bg-slate-100 max-lg:w-3/4 w-1/4 rounded-lg">
-              <h1 className="bg-primaryGreen text-white rounded-t-lg p-4 w-full text-center font-bold text-lg">
-                Check Availability
-              </h1>
-              <CarRentalForm />
-            </div> */}
             <div className="bg-white px-8 py-4 drop-shadow-lg max-lg:w-4/5 max-lg:rounded-lg w-3/5 flex-col flex gap-4 rounded-lg">
               <h1 className="text-primaryBlue font-semibold text-center text-2xl">
                 Better Way to Rent Your Perfect Cars
@@ -96,9 +90,9 @@ const CarRental = () => {
         </div>
 
         {/* about and service section */}
-        <div className="max-w-[1750px] mx-auto w-full flex flex-col gap-10">
+        <div className=" max-w-[1750px] mx-auto w-full flex flex-col gap-10">
           {/* about us on car rental */}
-          <div className="w-full bg-opacity-50 flex items-stretch">
+          <div className="max-sm:hidden w-full bg-opacity-50 flex items-stretch">
             <div className="max-md:hidden relative w-[40%] bg-white p-8">
               <Image
                 src={aboutImage}
@@ -139,7 +133,7 @@ const CarRental = () => {
               title={"Services"}
               subtitle={"Our Latest Services"}
             />
-            <div className="flex items-center justify-evenly p-8 flex-wrap">
+            <div className="flex items-center justify-evenly p-2 sm:p-8 flex-wrap">
               {CarService.map((item, index) => (
                 <div
                   key={index}
@@ -161,13 +155,17 @@ const CarRental = () => {
             </div>
           </div>
           {/* Feeatured Vehicles*/}
-          <div className="bg-slate-100 bg-opacity-20 p-8">
+          <div className="bg-slate-100 bg-opacity-20 p-2 sm:p-8">
             <HeaderSection
               title={"What we offer"}
               subtitle={"Featured Vehicles"}
             />
 
-            {loading ? <Loader /> : <CarTypes featuredCar={carList?.data?.[0].related_cars} />}
+            {loading ? (
+              <Loader />
+            ) : (
+              <CarTypes featuredCar={carList?.data?.[0].related_cars} />
+            )}
 
             <div className="w-full text-white flex items-center justify-center">
               <Link href={"/service/car-rental/all"}>

@@ -28,7 +28,7 @@ const About = () => {
                 className="Object-cover h-3/4 w-3/4 "
               />
             </div>
-            <div className="max-md:w-full w-1/2 pt-8 flex flex-col gap-4">
+            <div className="max-md:w-full w-1/2 pt-3 sm:pt-8 flex flex-col gap-4">
               <ul className="flex items-center justify-evenly gap-2">
                 {AboutArray.map((content, index) => (
                   <li
@@ -37,19 +37,19 @@ const About = () => {
                       active === content.title
                         ? "border-b-2 border-b-defaultGreen text-defaultGreen"
                         : " text-slate-400"
-                    } text-base text-center font-bold  py-1 cursor-pointer hover:text-defaultGreen`}
+                    } text-base text-center font-bold py-1 cursor-pointer hover:text-defaultGreen`}
                     key={index}
                   >
                     {content.title}
                   </li>
                 ))}
               </ul>
-              <div className="h-3/4 w-3/4 mx-auto pt-8">
+              <div className="h-3/4 w-full sm:w-3/4 mx-auto pt-2 sm:pt-8">
                 {AboutArray.map((content, index) => (
                   <>
                     {active === content.title && (
-                      <span key={index} className=" text-base ">
-                        <p className="text-black opacity-70 text-center relative">
+                      <span key={index} className="text-base ">
+                        <p className="text-black opacity-70 sm:text-center relative">
                           <span className="text-primaryGreen text-3xl font-serif absolute -left-4 -top-2 ">
                             <Icon
                               icon="ri:single-quotes-l"

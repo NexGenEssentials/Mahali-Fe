@@ -185,13 +185,13 @@ const AllCars = () => {
             </ul>
 
             {service === "All Cars" && (
-              <div className="my-8 w-full flex flex-col gap-8 justify-center">
-                <div className="bg-primaryGreen p-8 w-full flex items-center justify-center rounded-lg ">
+              <div className=" my-3 sm:my-8 w-full flex flex-col gap-8 justify-center">
+                <div className="bg-primaryGreen p-3 sm:p-8 w-full flex items-center justify-center rounded-lg ">
                   <div
                     key={refresh}
                     className="flex gap-4 items-end flex-wrap text-primaryBlue"
                   >
-                    <div className="flex justify-between  px-3 gap-1 bg-white rounded-full overflow-hidden items-center">
+                    <div className="flex justify-between px-3 gap-1 bg-white rounded-full overflow-hidden items-center">
                       <input
                         type="text"
                         placeholder="search by car name"
@@ -226,7 +226,7 @@ const AllCars = () => {
                             { value: "Diesel" },
                             { value: "Electric" },
                           ]}
-                          className="w-full min-w-40"
+                          className="w-full min-w-32 sm:min-w-40"
                         />
                       </Space>
                     </div>
@@ -254,7 +254,7 @@ const AllCars = () => {
                             { value: "Automatic" },
                             { value: "Manual" },
                           ]}
-                          className="w-full min-w-40"
+                          className="w-full min-w-32 sm:min-w-40"
                         />
                       </Space>
                     </div>

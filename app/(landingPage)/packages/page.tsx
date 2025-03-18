@@ -31,15 +31,15 @@ const PackagesPage = () => {
     <LandingPage>
       <div className="">
         <PageHero image={gorilla} title="Packages" />
-        <div className="max-w-[1750px] mx-auto px-16 py-8  flex-col flex gap-8">
+        <div className="max-w-[1750px] mx-auto p-4 sm:px-16 sm:py-8 flex-col flex gap-8">
           <div className="w-full flex flex-col gap-4">
             <SingleHeaderSection title="Overview" />
-            <div className="text-sm flex items-start max-lg:flex-wrap justify-center gap-8">
+            <div className="text-sm flex items-start max-lg:flex-wrap justify-center gap-2 sm:gap-8">
               <p className="w-full lg:w-1/3 text-black opacity-70 ">
                 {packag?.desc}
               </p>
-              <div className="w-full lg:w-2/3 flex items-start gap-4 font-semibold">
-                <span className=" text-sm  text-primaryGreen flex flex-col gap-3 ">
+              <div className="w-full lg:w-2/3 flex flex-wrap items-start gap-4 font-semibold">
+                <span className="text-sm  text-primaryGreen flex flex-col gap-3 ">
                   <span className="flex items-start gap-2">
                     <Icon
                       icon="lsicon:time-one-filled"
@@ -47,7 +47,9 @@ const PackagesPage = () => {
                       height="20"
                       className="text-primaryGreen"
                     />
-                    <h2 className="text-primaryBlue text-nowrap">Best time to visit:</h2>
+                    <h2 className="text-primaryBlue text-nowrap">
+                      Best time to visit:
+                    </h2>
                     {packag?.period}
                   </span>
                   <span className="flex items-start gap-2">
@@ -121,12 +123,12 @@ const PackagesPage = () => {
                         packag?.gallery?.map((img, idx) => (
                           <div
                             key={idx}
-                            className="w-[250px] h-[200px]  bg-primaryGreen overflow-hidden rounded-md grayscale hover:grayscale-0"
+                            className=" w-full md:w-[250px] h-[200px]  bg-primaryGreen overflow-hidden rounded-md grayscale hover:grayscale-0"
                           >
                             <Image
                               src={img.src}
                               alt={packag?.name}
-                              fill={true}
+                              fill
                               className="rounded-md w-full h-full hover:scale-110 hover:duration-500 object-cover"
                             />
                           </div>
@@ -135,7 +137,7 @@ const PackagesPage = () => {
                   </div>
                 )}
               </div>
-              <div className="flex items-start text-sm font-medium mt-6 gap-4">
+              <div className="flex items-start flex-wrap text-sm font-medium mt-6 gap-4">
                 <ul className="flex flex-col ">
                   <div className="mb-4">
                     <SingleHeaderSection title="Inclusion" />
@@ -176,7 +178,7 @@ const PackagesPage = () => {
                 </ul>
               </div>
             </div>
-            <div className="w-full lg:w-1/3 gap-8 flex flex-col">
+            <div className="w-full lg:w-1/3 gap-8  flex flex-col">
               <SingleHeaderSection title="Tour Inquiry" />
               <div className="bg-slate-100 flex flex-col">
                 <h2 className="text-white font-semibold p-4 bg-primaryGreen text-center w-full">
@@ -187,7 +189,7 @@ const PackagesPage = () => {
             </div>
           </div>
         </div>
-        <div className="max-w-[1750px] mx-auto p-8  flex-col flex gap-4">
+        <div className="max-w-[1750px] mx-auto p-8 flex-col flex gap-4">
           <HeaderSection title="Suggestions" subtitle="Related Tour" />
           <div className="flex flex-wrap gap-8 items-start  justify-center py-6 ">
             {PackageList.map((item, index) => (

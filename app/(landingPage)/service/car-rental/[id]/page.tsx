@@ -94,21 +94,21 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
         title="Fast & Easy Way To Rent A Car"
         desc="Experience the fastest and easiest way to rent a car. Reliable, affordable, and tailored to your journey—book your ride in just a few clicks!"
       />
-      <div className="absolute top-[275px] right-20 ">
+      <div className="absolute bottom-36 md:top-[275px] right-20 z-40 ">
         <div className="bg-slate-100 w-full rounded-lg">
-          <h1 className="bg-primaryGreen text-white rounded-t-lg p-4 w-full text-center font-bold text-lg">
+          <h1 className="bg-primaryGreen text-white rounded-t-lg p-4 w-full text-center font-bold md:text-lg">
             Check Availability
           </h1>
           <CarRentalForm id={carInfo.id} available={setCheckAvailability} />
         </div>
       </div>
-      <div className="max-w-[1750px] mx-auto w-full flex flex-col gap-8 p-8">
+      <div className="max-w-[1750px] mx-auto w-full flex flex-col gap-8 p-3 sm:p-8">
         <div className="w-full flex max-md:flex-wrap gap-4 ">
           <div className="w-full md:w-1/2 p-2">
             <ThumbsGallery images={carInfo?.images} />
           </div>
-          <div className="flex flex-col items-center w-full md:w-1/2 p-2">
-            <div className="flex justify-center items-end md:w-3/5 gap-4">
+          <div className="flex flex-col sm:items-center w-full md:w-1/2 p-2">
+            <div className="flex sm:justify-center items-end md:w-3/5 gap-4">
               <div className="flex flex-col">
                 <span className="text-slate-400 text-lg font-semibold uppercase">
                   {carInfo?.category}
@@ -123,7 +123,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
                 </strong>
               </span>
             </div>
-            <p className="text-black opacity-70 leading-relaxed text-sm mt-5 text-center">
+            <p className="text-black opacity-70 leading-relaxed text-sm mt-5 sm:text-center">
               {/* {carInfo?.description} */}
               "The Mercedes-Benz E-Class is a symbol of luxury, performance, and
               innovation. Renowned for its sophisticated design, this premium
@@ -145,7 +145,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
               </button>
             )}
 
-            <div className="grid max-md:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid max-md:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="flex gap-2 items-center min-w-20">
                 <span className="h-16 w-16 rounded-full border p-2 flex items-center justify-center">
                   <Icon
@@ -259,7 +259,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
         </div>
         <div className="flex flex-col items-center justify-center w-full">
           <HeaderSection subtitle="" title="Features" />
-          <div className="w-2/3 flex flex-wrap gap-2">
+          <div className=" w-full lg:w-2/3 flex flex-wrap gap-2">
             {feature?.map((feat) => {
               const isCarFeature = carInfo?.features.some(
                 (carfeat) => carfeat.id === feat.id

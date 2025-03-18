@@ -40,7 +40,7 @@ const CarRentalForm = ({
         available(result.available);
         notification.success({
           message: "Car Availability",
-          description: "You can book this by clicking book now button",
+          description: "You can book this car by clicking book now button",
           placement: "topRight",
         });
       } else {
@@ -58,7 +58,7 @@ const CarRentalForm = ({
   };
 
   return (
-    <section className="px-4 p-8 flex flex-col gap-4 text-black text-opacity-75 w-full">
+    <section className="px-4 py-2 md:p-8 flex flex-col gap-2 sm:gap-4 text-black text-opacity-75 w-full">
       <DatePicker
         range
         rangeHover

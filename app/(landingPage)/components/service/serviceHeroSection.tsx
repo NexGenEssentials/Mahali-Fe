@@ -36,7 +36,7 @@ const ServicePageHero = ({ image, service, title, desc }: Props) => {
           <div className="text-2xl lg:text-4xl text-center italic stroke-black font-bold font-mono">
             {title}
           </div>
-          <p className="w-full md:w-1/2 text-center uppercase tracking-wider lg:text-base font-semibold">
+          <p className="w-full md:w-1/2 text-center uppercase tracking-wider text-sm lg:text-base font-semibold">
             {desc}
           </p>
         </div>

@@ -25,7 +25,7 @@ const PageHero = ({ image, title }: Props) => {
             <Icon icon="uim:angle-double-left" width="24" height="24" rotate={90} />
             <span className="opacity-70">{title}</span>
           </div>
-          <div className=" text-6xl italic font-bold font-mono">{title}</div>
+          <div className="text-lg md:text-6xl italic font-bold font-mono">{title}</div>
         </div>
       </div>
     </div>

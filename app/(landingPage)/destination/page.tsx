@@ -31,7 +31,7 @@ const Destination = () => {
           </div>
 
           {/* Navigation Bar for Destinations */}
-          <ul className="w-3/4 mx-auto flex gap-8 items-center justify-center">
+          <ul className="w-full sm:w-3/4 mx-auto flex gap-2 sm:gap-8 items-center justify-start sm:justify-center overflow-x-scroll ">
             {navnarArr.map((location, index) => (
               <li
                 key={index}

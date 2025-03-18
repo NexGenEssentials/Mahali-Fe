@@ -8,7 +8,6 @@ export default function LandingPage({ children }: { children: ReactNode }) {
     <div className="">
       <Navbar />
       <main className="">{children}</main>
-
       <Footer />
     </div>
   );

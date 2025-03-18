@@ -18,9 +18,9 @@ const Footer = () => {
       id="contacts"
     >
       <div className="max-w-[1750px] mx-auto  text-primaryWhite text-sm font-light">
-        <div className="flex p-8 gap-8 flex-wrap items-start justify-center lg:justify-between">
-          <div className="flex flex-col gap-4 items-center justify-center">
-            <div className="relative w-[100px] h-[70px] object-cover">
+        <div className="flex p-4 sm:p-8 gap-8 sm:flex-wrap items-center sm:items-start sm:justify-center lg:justify-between">
+          <div className="flex flex-col gap-4 sm:items-center sm:justify-center">
+            <div className="max-sm:hidden relative w-[100px] h-[70px] object-cover">
               <Image src={"/images/logo.png"} alt="mahali africa" fill={true} />
             </div>
             <div className="flex gap-4">
@@ -64,7 +64,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <div>
+          <div className="max-sm:hidden">
             <h1 className="font-bold text-base pb-4">Quick Links</h1>
             <ul className="flex flex-col gap-2 items-start justify-start">
               <div className="flex gap-4 justify-between">
@@ -123,7 +123,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col h-full items-center justify-center">
+          <div className="max-sm:hidden flex flex-col h-full items-center justify-center">
             <h1 className="font-bold text-base pb-4">
               Subscribe to our Newsletter <br />& Discover the best offers!
             </h1>

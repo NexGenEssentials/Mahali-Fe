@@ -41,7 +41,7 @@ const TestimonialSection = () => {
             </div>
           </div>
         </div>
-        <div className="w-full lg:w-1/2 p-8 gap-4 flex flex-col items-start justify-center ">
+        <div className="w-full lg:w-1/2 p-2 sm:p-8 gap-4 flex flex-col items-start justify-center ">
           <div className="text-defaultGreen flex items-center gap-2">
             <span className="h-[2px] w-6 block bg-defaultGreen bg-opacity-20"></span>
             <h2 className=" text-sm leading-8 tracking-normal">Testimony</h2>
@@ -68,9 +68,9 @@ const TestimonialSection = () => {
             className="mySwiper"
           >
             {Testimonial.map((item, index) => (
-              <SwiperSlide key={index} className="bg-white rounded-lg p-4">
-                <div className="flex items-start justify-center gap-4 p-4 text-sm rounded-md ">
-                  <div className="h-[100px] w-[100px] rounded-full relative overflow-hidden">
+              <SwiperSlide key={index} className="bg-gray-100 rounded-lg p-4">
+                <div className="max-sm:flex-wrap flex items-start justify-center gap-4 pb-2 sm:p-4 text-sm rounded-md ">
+                  <div className=" h-[100px] w-[100px] rounded-full relative overflow-hidden">
                     <Image
                       src={item.image}
                       alt={item.comment}
@@ -80,7 +80,7 @@ const TestimonialSection = () => {
                     />
                   </div>
 
-                  <div className="w-4/5">
+                  <div className="w-full sm:w-4/5">
                     <p className=" text-black  text-opacity-50 italic text-wrap">
                      {item.comment}
                     </p>
