@@ -1,15 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { TourPlanType } from "@/app/types/tour";
 
-interface AccordionItem {
-  title: string;
-  desc: string;
-  inclusion: string;
-  accom: string;
-}
+
 
 interface AccordionProps {
-  items?: AccordionItem[];
+  items?: TourPlanType[];
 }
 
 const Accordion: React.FC<AccordionProps> = ({ items = [] }) => {
@@ -48,11 +44,11 @@ const Accordion: React.FC<AccordionProps> = ({ items = [] }) => {
               }`}
             >
               <div className="p-4 text-gray-700 flex flex-col gap-4">
-                <p className="text-sm">{item.desc}</p>
+                <p className="text-sm">{item.description}</p>
 
                 <div className="flex items-start justify-between w-full text-xs">
                   <div className="font-semibold w-1/2">
-                    <span className="flex gap-1 pb-2 items-end">
+                    <span className="flex gap-1 items-stretch">
                       <Icon
                         icon="lets-icons:check-fill"
                         width="24"
@@ -63,15 +59,15 @@ const Accordion: React.FC<AccordionProps> = ({ items = [] }) => {
                     {item.inclusion}
                   </div>
                   <div className="font-semibold w-1/2">
-                    <span className="flex gap-1 pb-2 items-end">
+                    <span className="flex gap-2  items-stretch ">
                       <Icon
                         icon="fluent-emoji-high-contrast:hotel"
-                        width="24"
-                        height="24"
+                        width="20"
+                        height="20"
                       />{" "}
                       <h3 className="text-sm font-semibold">Accommodation</h3>
                     </span>
-                    {item.accom}
+                    {item.accommodation}
                   </div>
                 </div>
               </div>

@@ -1,17 +1,33 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LandingPage from "../landingPageTamplates";
 import PageHero from "../components/hero/pageHero";
 import gorilla from "@/public/images/Gorilla2.jpg";
 import {HeaderSection} from "../components/headers/header";
-import { navnarArr } from "../components/package/packageSection";
 import SingleDestination from "../components/destination/singleDestination";
 import { useSearchParams } from "next/navigation";
+import { CountryType } from "@/app/types/tour";
+import { getAllCountry } from "@/app/api/tour/action";
 
 const Destination = () => {
   const searchParams = useSearchParams();
   const location = searchParams.get("location");
   const [active, setActive] = useState<string>(location ? location : "Rwanda");
+   const [navnarArr, setNavnarArr] = useState<CountryType[]>([]);
+
+   useEffect(() => {
+       getAllCountryDestination();
+     }, []);
+   
+     const getAllCountryDestination = async () => {
+       try {
+         const result = await getAllCountry();
+         if (result.success) setNavnarArr(result.data);
+       } catch (error) {
+         console.log(error);
+       }
+     };
+
   return (
     <LandingPage>
       <div className="">
@@ -35,14 +51,14 @@ const Destination = () => {
             {navnarArr.map((location, index) => (
               <li
                 key={index}
-                onClick={() => setActive(location)}
+                onClick={() => setActive(location.name)}
                 className={`${
-                  active === location
+                  active === location.name
                     ? "bg-primaryGreen text-white duration-500"
                     : "text-primaryBlue"
                 } p-2 cursor-pointer text-sm font-medium rounded hover:bg-primaryGreen hover:text-white duration-500`}
               >
-                {location}
+                {location.name}
               </li>
             ))}
           </ul>

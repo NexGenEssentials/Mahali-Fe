@@ -61,6 +61,7 @@ import ret3 from "@/public/images/ret3.jpg";
 import ret4 from "@/public/images/ret4.jpg";
 import Giselle from "@/public/images/giselle.jpeg";
 import DanPofile from "@/public/images/dani.jpeg";
+import muhirwa from "@/public/images/muhirwa.png";
 
 export const Parks = [
   {
@@ -1090,14 +1091,14 @@ export const StaffList = [
     category: "Management",
     list: [
       {
-        name: "Giselle K. Bigabiro",
+        name: "Roy R Muruta",
         title: "Sales and Marketing",
         image: Giselle,
       },
-      { name: "Vanessa Kanangire Ukeye", title: "General Manager", image: "" },
+      { name: "Nate Muhirwa", title: "Digital Creative Manager", image: muhirwa },
       {
-        name: "Patience Ntaganzwa",
-        title: "Travel and Tour Manager",
+        name: "Jackson Ngabonziza",
+        title: "CTO",
         image: "",
       },
     ],
@@ -2296,3 +2297,20 @@ export const AccountSettingsMenu = [
     ],
   },
 ];
+
+export const ExternalServices = {
+  inclusion: [
+    "All activities (unless labeled as optional)",
+    "All accommodation as stated in the itinerary",
+    "A professional driver/guide",
+    "All transportation (unless labeled as optional)",
+    "Roundtrip airport transfer",
+    "Drinking water on all days",
+  ],
+  exclusion: [
+    "All Meals (as specified in the day-by-day section)",
+    "International flights (from/to home)",
+    "Tips (tipping guideline US$20.00 pp per day)",
+    "Personal items (souvenirs, travel insurance, visa fees, etc.)",
+  ],
+};

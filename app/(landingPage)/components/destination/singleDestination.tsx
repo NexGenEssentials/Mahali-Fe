@@ -7,6 +7,9 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 
 const SingleDestination = ({ country }: { country: string }) => {
   const [season, setSeason] = useState("Dry Season");
+
+
+  
   return (
     <div className="">
       {DestinationCountry.map((item, index) => (
@@ -74,11 +77,12 @@ const SingleDestination = ({ country }: { country: string }) => {
                 "Dive into the heart of Africa with our meticulously crafted tours. Traverse lush jungles in search of majestic wildlife, explore vibrant cityscapes rich in culture and history, and immerse yourself in the diverse traditions that make Africa truly unique."
               }
             />
-            <div className="flex gap-8 items-start max-lg:flex-wrap justify-center py-6 ">
+            <div className="flex gap-8 items-start flex-wrap justify-center py-6 ">
               {country === item.location &&
                 item.package.map((pack, index) => (
                   <PackageCard
                     key={index}
+                    id={1}
                     location={item.location}
                     days={pack.days}
                     image={pack.image}

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import Image, { StaticImageData } from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -6,23 +6,35 @@ import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 
 interface packageType {
-  image:StaticImageData;
+  id: number;
+  image: StaticImageData;
   days: number;
   people: string;
   rate: number;
   name: string;
   route: string;
-  location?:string
+  location?: string;
 }
-const PackageCard = ({days,image,name,people,rate,route, location}:packageType) => {
+const PackageCard = ({
+  id,
+  days,
+  image,
+  name,
+  people,
+  rate,
+  route,
+  location,
+}: packageType) => {
   const router = useRouter();
-    const handleNavigation = (name: string) => {
-      const query = `?name=${encodeURIComponent(name)}&location=${encodeURIComponent(location || '')}`;
-      router.push(`/packages${query}`);
-    };
+
+  const handleNavigation = (name: string) => {
+    router.push(`/packages/${id}`);
+  };
 
   return (
-    <motion.div whileHover={{scale:0.97}} transition={{duration:0.2}}
+    <motion.div
+      whileHover={{ scale: 0.97 }}
+      transition={{ duration: 0.2 }}
       onClick={() => handleNavigation(name)}
       className="group w-[400px] max-w-md min-w-[300px] cursor-pointer h-auto drop-shadow-md border border-opacity-25 bg-gray-100 bg-opacity-20"
     >
@@ -63,7 +75,7 @@ const PackageCard = ({days,image,name,people,rate,route, location}:packageType) 
       </div>
       <div className="p-6 mt-4 flex flex-col gap-2 ">
         <div className="flex gap-1">
-          {Array(rate)
+          {Array(Math.floor(rate))
             .fill(null)
             .map((_, index) => (
               <Icon
