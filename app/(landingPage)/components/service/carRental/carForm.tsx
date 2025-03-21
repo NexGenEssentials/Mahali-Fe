@@ -58,7 +58,7 @@ const CarRentalForm = ({
   };
 
   return (
-    <section className="px-4 py-2 md:p-8 flex flex-col gap-2 sm:gap-4 text-black text-opacity-75 w-full">
+    <section className="px-4 py-2  flex flex-col gap-3 text-black text-opacity-75 w-full">
       <DatePicker
         range
         rangeHover

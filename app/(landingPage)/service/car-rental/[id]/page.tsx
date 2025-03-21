@@ -94,9 +94,9 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
         title="Fast & Easy Way To Rent A Car"
         desc="Experience the fastest and easiest way to rent a car. Reliable, affordable, and tailored to your journey—book your ride in just a few clicks!"
       />
-      <div className="absolute bottom-36 md:top-[275px] right-20 z-40 ">
+      <div className="max-md:hidden absolute bottom-[40%] right-10 z-40 ">
         <div className="bg-slate-100 w-full rounded-lg">
-          <h1 className="bg-primaryGreen text-white rounded-t-lg p-4 w-full text-center font-bold md:text-lg">
+          <h1 className="bg-primaryGreen text-white rounded-t-lg p-4 w-full text-center font-bold">
             Check Availability
           </h1>
           <CarRentalForm id={carInfo.id} available={setCheckAvailability} />
@@ -107,8 +107,8 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
           <div className="w-full md:w-1/2 p-2">
             <ThumbsGallery images={carInfo?.images} />
           </div>
-          <div className="flex flex-col sm:items-center w-full md:w-1/2 p-2">
-            <div className="flex sm:justify-center items-end md:w-3/5 gap-4">
+          <div className="flex flex-col md:items-center w-full md:w-1/2 p-2">
+            <div className="flex lg:justify-center items-end lg:w-3/5 gap-4">
               <div className="flex flex-col">
                 <span className="text-slate-400 text-lg font-semibold uppercase">
                   {carInfo?.category}
@@ -123,7 +123,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
                 </strong>
               </span>
             </div>
-            <p className="text-black opacity-70 leading-relaxed text-sm mt-5 sm:text-center">
+            <p className="text-black opacity-70 leading-relaxed text-sm mt-5 md:text-center">
               {/* {carInfo?.description} */}
               "The Mercedes-Benz E-Class is a symbol of luxury, performance, and
               innovation. Renowned for its sophisticated design, this premium
@@ -131,6 +131,18 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
               and advanced safety features. Whether for business or pleasure,
               the E-Class offers a prestigious driving experience.",
             </p>
+
+            <div className="max-md:block hidden sm:w-1/2 mx-auto ">
+              <div className="bg-slate-100 w-full rounded-lg">
+                <h1 className="bg-primaryGreen text-white rounded-t-lg p-4 w-full text-center font-bold">
+                  Check Availability
+                </h1>
+                <CarRentalForm
+                  id={carInfo.id}
+                  available={setCheckAvailability}
+                />
+              </div>
+            </div>
 
             {checkAvailability ? (
               <div
@@ -140,7 +152,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
                 <Button name="Book Now" />
               </div>
             ) : (
-              <button className="cursor-not-allowed border rounded-md border-slate-300 text-slate-300 py-3 px-6 my-4">
+              <button className="cursor-not-allowed border w-3/4 mx-auto rounded-md border-slate-300 text-slate-300 py-3 px-6 my-4">
                 Book Now
               </button>
             )}

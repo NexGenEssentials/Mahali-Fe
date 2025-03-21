@@ -44,7 +44,6 @@ const PackageSection = () => {
     }
   };
 
-  console.log("Data", packageList[`${active}`]);
   return (
     <div
       id="package"
