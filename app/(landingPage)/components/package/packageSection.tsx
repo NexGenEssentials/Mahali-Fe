@@ -87,7 +87,7 @@ const PackageSection = () => {
               id={item.id}
               location={item.location}
               days={item.duration_days}
-              image={item.main_image || ImagePlaceholder}
+              image={item?.main_image || ImagePlaceholder}
               people={`${item.min_people}-${item.max_people}`}
               rate={item.rating}
               name={item.title}

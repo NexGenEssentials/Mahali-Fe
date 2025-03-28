@@ -1,6 +1,11 @@
 "use server";
 
-import { CountryResponseType, SingleTourResponseType, TourResponseType } from "@/app/types/tour";
+import {
+  CountryResponseType,
+  countryTourResponseType,
+  SingleTourResponseType,
+  TourResponseType,
+} from "@/app/types/tour";
 import { cookies } from "next/headers";
 
 const base_url = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -40,9 +45,29 @@ export const getAllCountry = async (): Promise<CountryResponseType> => {
   }
 };
 
-export const getSingleTour= async (tourId:string): Promise<SingleTourResponseType> => {
+export const getSingleTour = async (
+  tourId: string
+): Promise<SingleTourResponseType> => {
   try {
     const response = await fetch(`${base_url}/tours/${tourId}/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const getCountryTour = async (
+  countryId?: number
+): Promise<countryTourResponseType> => {
+  try {
+    const response = await fetch(`${base_url}/tours/country/${countryId}/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

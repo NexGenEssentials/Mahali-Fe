@@ -14,6 +14,7 @@ const Destination = () => {
   const location = searchParams.get("location");
   const [active, setActive] = useState<string>(location ? location : "Rwanda");
    const [navnarArr, setNavnarArr] = useState<CountryType[]>([]);
+   const [activeId, setActiveId]=useState(6)
 
    useEffect(() => {
        getAllCountryDestination();
@@ -51,7 +52,10 @@ const Destination = () => {
             {navnarArr.map((location, index) => (
               <li
                 key={index}
-                onClick={() => setActive(location.name)}
+                onClick={() => {
+                  setActive(location.name);
+                  setActiveId(location.id);
+                }}
                 className={`${
                   active === location.name
                     ? "bg-primaryGreen text-white duration-500"
@@ -66,7 +70,7 @@ const Destination = () => {
 
         {/* Content for Selected Destination */}
         <div className="max-w-[1750px] mx-auto w-full p-8">
-          <SingleDestination country={active} />
+          <SingleDestination country={active} countryId={activeId} />
         </div>
       </div>
     </LandingPage>

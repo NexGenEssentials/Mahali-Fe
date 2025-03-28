@@ -33,7 +33,7 @@ export function middleware(request: NextRequest) {
       if (pathname.startsWith("/admin")) {
         return NextResponse.next();
       } else {
-        return NextResponse.redirect(new URL("/unauthorized", request.url));
+        return NextResponse.redirect(loginUrl);
       }
     } else if (decoded.role === "customer") {
       // Allow customers only on customer routes
@@ -43,7 +43,7 @@ export function middleware(request: NextRequest) {
       ) {
         return NextResponse.next();
       } else {
-        return NextResponse.redirect(new URL("/unauthorized", request.url));
+        return NextResponse.redirect(loginUrl);
       }
     }
 

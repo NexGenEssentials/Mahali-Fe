@@ -5,6 +5,7 @@ import {
   PackageList,
 } from "../constants/arrays";
 import { CarData } from "../types";
+import { CountryResponseType, CountryType } from "../types/tour";
 
 export const filterPackages = (
   data: typeof PackageList,
@@ -128,3 +129,16 @@ export const findAccommodationByName = (
 export const filteredMenuItems = AccountSettingsMenu.flatMap((category) =>
   category.items.filter((item) => item.link === "account/my-settings")
 );
+
+export const filterCountry = (
+  response: CountryType[],
+  countryNameOrId: string | number
+): CountryType | null => {
+  return (
+    response.find(
+      (country) =>
+        country.id === countryNameOrId ||
+        country.name.toLowerCase() === String(countryNameOrId).toLowerCase()
+    ) || null
+  );
+};

@@ -7,8 +7,8 @@ import { motion } from "motion/react";
 
 interface packageType {
   id: number;
-  image: StaticImageData;
-  days: number;
+  image: StaticImageData | string;
+  days: string;
   people: string;
   rate: number;
   name: string;
@@ -69,7 +69,7 @@ const PackageCard = ({
               height="16"
               className="text-primaryGreen"
             />{" "}
-            Rwanda
+            {location}
           </span>
         </div>
       </div>

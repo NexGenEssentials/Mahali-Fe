@@ -14,7 +14,8 @@ import Image from "next/image";
 import InquiryForm from "../../components/package/form";
 import { TourPackageType } from "@/app/types/tour";
 import { getSingleTour } from "@/app/api/tour/action";
-import { ExternalServices, PackageList } from "@/app/constants/arrays";
+import { ExternalServices } from "@/app/constants/arrays";
+import ImagePlaceHolder from'@/public/images/imagePlaceholder.jpg'
 
 const PackagesPage = ({ params }: { params: { id: string } }) => {
   const [packag, setPackag] = useState<TourPackageType | null>(null);
@@ -43,7 +44,7 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
               <p className="w-full lg:w-1/3 text-black opacity-70 ">
                 {packag?.description}
               </p>
-              <div className="w-full lg:w-2/3 flex flex-wrap items-start gap-4 font-semibold">
+              <div className="w-full lg:w-2/3 flex flex-wrap items-start gap-8 font-semibold">
                 <span className="text-sm  text-primaryGreen flex flex-col gap-3 ">
                   <span className="flex items-start gap-2">
                     <Icon
@@ -111,6 +112,16 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
                     <h2 className="text-primaryBlue">Location:</h2>
                     {packag?.location}
                   </span>
+                  <span className="flex items-start gap-2">
+                    <Icon
+                      icon="solar:route-outline"
+                      width="20"
+                      height="20"
+                      className="text-primaryGreen"
+                    />
+                    <h2 className="text-primaryBlue">Price:</h2>
+                    {packag?.max_people}
+                  </span>
                 </span>
               </div>
             </div>
@@ -119,20 +130,20 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
             <div className="w-full lg:w-2/3 max-lg:flex-wrap flex flex-col gap-4">
               <SingleHeaderSection title="Tour Plan" />
               <Accordion items={packag?.tour_plans} />
-              {/* <div>
-                {packag?.gallery?.length! > 0 && (
+              <div>
+                {packag?.images?.length! > 0 && (
                   <div className="flex flex-col gap-8">
                     <SingleHeaderSection title="Tour Gallery" />
                     <div className="flex w-full flex-wrap items-stretch gap-2">
-                      {packag?.gallery &&
-                        packag?.gallery?.map((img, idx) => (
+                      {packag?.images &&
+                        packag?.images?.map((img, idx) => (
                           <div
                             key={idx}
                             className=" w-full md:w-[250px] h-[200px]  bg-primaryGreen overflow-hidden rounded-md grayscale hover:grayscale-0"
                           >
                             <Image
-                              src={img.src}
-                              alt={packag?.name}
+                              src={img || ImagePlaceHolder}
+                              alt={packag?.title}
                               fill
                               className="rounded-md w-full h-full hover:scale-110 hover:duration-500 object-cover"
                             />
@@ -141,7 +152,7 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
                     </div>
                   </div>
                 )}
-              </div> */}
+              </div>
 
               <div className="flex items-start flex-wrap text-sm font-medium mt-6 gap-4">
                 <ul className="flex flex-col ">
@@ -197,32 +208,26 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
         </div>
         <div className="max-w-[1750px] mx-auto p-8 flex-col flex gap-4">
           <HeaderSection title="Suggestions" subtitle="Related Tour" />
-          {/* <div className="flex flex-wrap gap-8 items-start  justify-center py-6 ">
-            {PackageList.map((item, index) => (
+          <div className="flex flex-wrap gap-8 items-start  justify-center py-6 ">
+            {packag?.related_packages.map((pack, index) => (
               <div
                 key={index}
-                className={`${
-                  location === item.location
-                    ? "flex flex-wrap gap-8 items-stretch  justify-center py-6 "
-                    : "hidden"
-                } `}
+                className={` "flex flex-wrap gap-8 items-stretch  justify-center py-6 `}
               >
-                {location === item.location &&
-                  item.package.map((pack, index) => (
-                    <PackageCard
-                      key={index}
-                      location={location}
-                      days={pack.days}
-                      image={pack.image}
-                      people={pack.people}
-                      rate={pack.rate}
-                      name={pack.name}
-                      route={pack.route}
-                    />
-                  ))}
+                <PackageCard
+                  key={pack.id}
+                  id={pack.id}
+                  location={""}
+                  days={`${pack.min_people}-${pack.max_people}`}
+                  image={pack.main_image || ImagePlaceHolder}
+                  people={`${pack.min_people}-${pack.max_people}`}
+                  rate={pack.rating}
+                  name={pack.title}
+                  route={""}
+                />
               </div>
             ))}
-          </div> */}
+          </div>
         </div>
       </div>
     </LandingPage>
