@@ -1,6 +1,7 @@
 "use server";
 
 import {
+  CategoriesResponse,
   CountryResponseType,
   countryTourResponseType,
   SingleTourResponseType,
@@ -68,6 +69,25 @@ export const getCountryTour = async (
 ): Promise<countryTourResponseType> => {
   try {
     const response = await fetch(`${base_url}/tours/country/${countryId}/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// custom package api
+
+export const getTourCategories = async (): Promise<CategoriesResponse> => {
+  try {
+    const response = await fetch(`${base_url}/categories/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

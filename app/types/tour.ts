@@ -87,3 +87,24 @@ export type CountryResponseType = {
 };
 
 
+export type Activity = {
+  id: number;
+  name: string;
+  description: string | null;
+  location: string;
+  price_per_day: string;
+  category: number;
+};
+
+export type CategoryType = {
+  id: number;
+  name: string;
+  description: string | null;
+  activities: Activity[];
+};
+
+export type CategoriesResponse = {
+  success: boolean;
+  message: string;
+  data: CategoryType[];
+};

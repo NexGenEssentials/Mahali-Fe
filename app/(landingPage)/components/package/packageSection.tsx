@@ -8,6 +8,11 @@ import { getAllCountry, getAllTours } from "@/app/api/tour/action";
 import { CountryType, TourDataType } from "@/app/types/tour";
 import Loader from "../skeleton/loader";
 import ImagePlaceholder from "@/public/images/imagePlaceholder.jpg";
+import ButtonComponent from "../buttons/buttonIcon";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import { useAppContext } from "@/app/context";
+import CenterModal from "../model/centerModel";
+import CustomTourPackage from "./customePackage";
 
 const PackageSection = () => {
   const [active, setActive] = useState("Rwanda");
@@ -15,6 +20,7 @@ const PackageSection = () => {
   const [packageList, setPackageList] = useState<TourDataType>({});
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const {setActiveModalId}=useAppContext()
   const handleNavigation = (location: string) => {
     router.push(`/destination?location=${location}`);
   };
@@ -45,63 +51,89 @@ const PackageSection = () => {
   };
 
   return (
-    <div
-      id="package"
-      className="max-w-[1750px] mx-auto p-8 w-full bg-slate-100 bg-opacity-20 flex flex-col gap-8"
-    >
-      <div className="w-full flex flex-col gap-4 justify-center items-center">
-        <HeaderSection
-          subtitle="Pefect Tour Packages"
-          title="Special Offers"
-          description="Discover Africa’s wonders with our expertly crafted tours. Experience
+    <>
+      <div
+        id="package"
+        className="max-w-[1750px] mx-auto p-8 w-full bg-slate-100 bg-opacity-20 flex flex-col gap-8"
+      >
+        <div className="w-full flex flex-col gap-4 justify-center items-center">
+          <HeaderSection
+            subtitle="Pefect Tour Packages"
+            title="Special Offers"
+            description="Discover Africa’s wonders with our expertly crafted tours. Experience
           captivating landscapes and vibrant cultures on unforgettable journeys."
-        />
+          />
 
-        <ul className="flex max-md:space-y-2 md:gap-8 items-end flex-wrap justify-evenly ">
-          {navnarArr?.map((location) => (
+          <ul className="flex max-md:space-y-2 md:gap-8 items-end flex-wrap justify-evenly ">
             <li
-              onClick={() => setActive(location.name)}
+              onClick={() => setActive("Custom Package")}
               className={`${
-                active === location.name
+                active === "Custom Package"
                   ? "bg-primaryGreen text-white duration-500 "
                   : "text-primaryBlue"
               } p-2 cursor-pointer text-sm font-medium rounded hover:bg-primaryGreen hover:text-white duration-500`}
-              key={location.id}
+              key={"custome"}
             >
-              {location.name}
+              {"Custom Package"}
             </li>
-          ))}
-        </ul>
-      </div>
-      {loading ? (
-        <Loader />
-      ) : !packageList[`${active}`] ? (
-        <div className="flex text-3xl font-bold text-primaryGreen gap-4 items-center min-h-[200px] w-full justify-center">
-          Packages Not Available
+            {navnarArr?.map((location) => (
+              <li
+                onClick={() => setActive(location.name)}
+                className={`${
+                  active === location.name
+                    ? "bg-primaryGreen text-white duration-500 "
+                    : "text-primaryBlue"
+                } p-2 cursor-pointer text-sm font-medium rounded hover:bg-primaryGreen hover:text-white duration-500`}
+                key={location.id}
+              >
+                {location.name}
+              </li>
+            ))}
+          </ul>
         </div>
-      ) : (
-        <div className="flex flex-wrap gap-4 items-stretch w-full justify-center">
-          {packageList[`${active}`]?.map((item) => (
-            <PackageCard
-              key={item.id}
-              id={item.id}
-              location={item.location}
-              days={item.duration_days}
-              image={item?.main_image || ImagePlaceholder}
-              people={`${item.min_people}-${item.max_people}`}
-              rate={item.rating}
-              name={item.title}
-              route={item.location}
-            />
-          ))}
-          <div className="text-white w-full flex items-center justify-center">
-            <div onClick={() => handleNavigation(active)}>
-              <Button name={"View All Tours"} />
+        {loading ? (
+          <Loader />
+        ) : active === "Custom Package" ? (
+          <div className="h-[400px] w-full max-w-6xl mx-auto bg-gray-50 rounded-lg flex items-center justify-center">
+            <span onClick={() => setActiveModalId("Custom Package")}>
+              <ButtonComponent
+                title={"Create Custom Package"}
+                color="#667c3e"
+                icon={<Icon icon="ic:round-add" width="24" height="24" />}
+                iconPosition="right"
+              />
+            </span>
+          </div>
+        ) : !packageList[`${active}`] ? (
+          <div className="flex text-3xl font-bold text-primaryGreen gap-4 items-center min-h-[200px] w-full justify-center">
+            Packages Not Available
+          </div>
+        ) : (
+          <div className="flex flex-wrap gap-4 items-stretch w-full justify-center">
+            {packageList[`${active}`]?.map((item) => (
+              <PackageCard
+                key={item.id}
+                id={item.id}
+                location={item.location}
+                days={item.duration_days}
+                image={item?.main_image || ImagePlaceholder}
+                people={`${item.min_people}-${item.max_people}`}
+                rate={item.rating}
+                name={item.title}
+                route={item.location}
+              />
+            ))}
+            <div className="text-white w-full flex items-center justify-center">
+              <div onClick={() => handleNavigation(active)}>
+                <Button name={"View All Tours"} />
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+
+      <CenterModal children={<CustomTourPackage />} id={'Custom Package'} />
+    </>
   );
 };
 

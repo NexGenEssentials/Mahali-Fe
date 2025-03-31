@@ -7,7 +7,7 @@ const Button = ({ name }: { name: string }) => {
   return (
     <motion.button
       whileTap={{ scale: 0.8 }}
-      className="bg-primaryGreen px-4 py-2 gap-2 rounded-md text-sm w-fit flex items-center group"
+      className="bg-primaryGreen px-4 py-2 gap-2 text-white font-bold rounded-md text-sm w-fit flex items-center group"
     >
       <span>{name}</span>
 
