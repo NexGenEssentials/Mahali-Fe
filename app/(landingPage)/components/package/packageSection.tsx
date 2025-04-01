@@ -114,7 +114,7 @@ const PackageSection = () => {
               <PackageCard
                 key={item.id}
                 id={item.id}
-                location={item.location}
+                location={active}
                 days={item.duration_days}
                 image={item?.main_image || ImagePlaceholder}
                 people={`${item.min_people}-${item.max_people}`}

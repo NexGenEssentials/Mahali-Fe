@@ -5,7 +5,7 @@ import {
   PackageList,
 } from "../constants/arrays";
 import { CarData } from "../types";
-import { CountryResponseType, CountryType } from "../types/tour";
+import { CategoryType, CountryResponseType, CountryType } from "../types/tour";
 
 export const filterPackages = (
   data: typeof PackageList,
@@ -142,3 +142,14 @@ export const filterCountry = (
     ) || null
   );
 };
+
+export function getSelectedCategories(
+  data: CategoryType[],
+  selectedCategories: string[]
+) {
+  return data.filter(
+    (category) =>
+      selectedCategories.includes(category.name) &&
+      category.activities.length > 0
+  );
+}

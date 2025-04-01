@@ -108,3 +108,13 @@ export type CategoriesResponse = {
   message: string;
   data: CategoryType[];
 };
+
+type PackageActivity = {
+  activity_id: number;
+  number_of_days: number;
+};
+
+export type CustomeTourPackageType = {
+  name: string;
+  package_activities: PackageActivity[];
+};
