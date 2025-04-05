@@ -201,7 +201,7 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
                 <h2 className="text-white font-semibold p-4 bg-primaryGreen text-center w-full">
                   Book Now
                 </h2>
-                <InquiryForm />
+                <InquiryForm tour={packag} />
               </div>
             </div>
           </div>

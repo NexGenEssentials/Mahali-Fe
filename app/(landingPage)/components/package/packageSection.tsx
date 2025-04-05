@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import PackageCard from "./packageCard";
 import Button from "../buttons/button";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { HeaderSection } from "../headers/header";
 import { getAllCountry, getAllTours } from "@/app/api/tour/action";
 import { CountryType, TourDataType } from "@/app/types/tour";
@@ -11,8 +11,7 @@ import ImagePlaceholder from "@/public/images/imagePlaceholder.jpg";
 import ButtonComponent from "../buttons/buttonIcon";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useAppContext } from "@/app/context";
-import CenterModal from "../model/centerModel";
-import CustomTourPackage from "./customePackage";
+
 
 const PackageSection = () => {
   const [active, setActive] = useState("Rwanda");
@@ -20,7 +19,9 @@ const PackageSection = () => {
   const [packageList, setPackageList] = useState<TourDataType>({});
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const {setActiveModalId}=useAppContext()
+  const pathname = usePathname();
+  const { setActiveModalId, isLogin } = useAppContext();
+
   const handleNavigation = (location: string) => {
     router.push(`/destination?location=${location}`);
   };
@@ -38,6 +39,7 @@ const PackageSection = () => {
       console.log(error);
     }
   };
+
   const getAllTourPackages = async () => {
     setLoading(true);
     try {
@@ -47,6 +49,14 @@ const PackageSection = () => {
       console.log(error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleCreatePackage = async () => {
+    if (isLogin) {
+      setActiveModalId("Custom Package");
+    } else {
+      router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
     }
   };
 
@@ -95,7 +105,7 @@ const PackageSection = () => {
           <Loader />
         ) : active === "Custom Package" ? (
           <div className="h-[400px] w-full max-w-6xl mx-auto bg-gray-50 rounded-lg flex items-center justify-center">
-            <span onClick={() => setActiveModalId("Custom Package")}>
+            <span onClick={handleCreatePackage}>
               <ButtonComponent
                 title={"Create Custom Package"}
                 color="#667c3e"
@@ -131,8 +141,6 @@ const PackageSection = () => {
           </div>
         )}
       </div>
-
-      <CenterModal children={<CustomTourPackage />} id={'Custom Package'} />
     </>
   );
 };

@@ -17,7 +17,11 @@ const myAccountMenu = [
     link: "/account/review",
     icon: "material-symbols-light:reviews-rounded",
   },
-  { name: "Saved", link: "/account/saved", icon: "wpf:like" },
+  {
+    name: "Custome Packages",
+    link: "/account/my-packages",
+    icon: "zondicons:travel",
+  },
   { name: "Sign out", link: "/", icon: "ri:logout-circle-line" },
 ];
 

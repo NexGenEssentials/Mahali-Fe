@@ -7,6 +7,7 @@ import CenterModal from "./(landingPage)/components/model/centerModel";
 import RightModal from "./(landingPage)/components/model/rightSideModel";
 import UserInfoForm from "./(landingPage)/components/service/carRental/bookACar";
 import ChatwootWidget from "./(landingPage)/components/chat/ChatwootWidget";
+import CustomTourPackage from "./(landingPage)/components/package/customePackage";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,7 +35,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -42,8 +42,10 @@ export default function RootLayout({
           <AntdRegistry>
             {children}
             <div>
-              <CenterModal children={<h1> I am a Model</h1>} id={"tests"} />
-              
+              <CenterModal
+                children={<CustomTourPackage />}
+                id={"Custom Package"}
+              />
               <RightModal
                 children={<h1> More Details About This Room</h1>}
                 id={"test"}
@@ -52,7 +54,6 @@ export default function RootLayout({
           </AntdRegistry>
         </ContextProvider>
         <ChatwootWidget />
-        
       </body>
     </html>
   );

@@ -3,72 +3,13 @@ import React, { useState, useEffect } from "react";
 import ClientPageTemplates from "../clientPageTemplates";
 import Title from "../components/header/title";
 import { Icon } from "@iconify/react";
-import { Table, Pagination, Spin, Tag, Input } from "antd";
+import { Table, Pagination, Spin, Tag, Input, Button, Popconfirm } from "antd";
 import { getAllMyBookings } from "@/app/api/booking/action";
 import { BookingData } from "@/app/types";
 import Loader from "@/app/(landingPage)/components/skeleton/loader";
+import { useRouter } from "next/navigation";
 
 const { Search } = Input;
-const columns = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-      sorter: (a: BookingData, b: BookingData) => a.id - b.id,
-    },
-    {
-      title: "Type",
-      dataIndex: "content_type",
-      key: "content_type",
-      sorter: (a: BookingData, b: BookingData) =>
-        a.content_type.localeCompare(b.content_type),
-    },
-    {
-      title: "Start Date",
-      dataIndex: "start_date",
-      key: "start_date",
-      sorter: (a: BookingData, b: BookingData) =>
-        new Date(a.start_date).getTime() - new Date(b.start_date).getTime(),
-    },
-    {
-      title: "End Date",
-      dataIndex: "end_date",
-      key: "end_date",
-      sorter: (a: BookingData, b: BookingData) =>
-        new Date(a.end_date).getTime() - new Date(b.end_date).getTime(),
-    },
-    {
-      title: "Price ($)",
-      dataIndex: "total_price",
-      key: "total_price",
-      sorter: (a: BookingData, b: BookingData) =>
-        Number(a.total_price) - Number(b.total_price),
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      sorter: (a: BookingData, b: BookingData) =>
-        a.status.localeCompare(b.status),
-      render: (status: string) => {
-        let color = "";
-        switch (status) {
-          case "pending":
-            color = "gold"; // Yellow
-            break;
-          case "confirmed":
-            color = "green";
-            break;
-          case "canceled":
-            color = "red";
-            break;
-          default:
-            color = "gray";
-        }
-        return <Tag color={color}>{status.toUpperCase()}</Tag>;
-      },
-    },
-  ];
 
 function BookingsPage() {
   const [bookings, setBookings] = useState<BookingData[]>([]);
@@ -76,6 +17,7 @@ function BookingsPage() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
+  const router = useRouter();
   const pageSize = 10;
 
   useEffect(() => {
@@ -107,6 +49,136 @@ function BookingsPage() {
     setCurrentPage(1);
   };
 
+  const handleDelete = async (bookingId: number) => {
+    try {
+      console.log(bookingId);
+    } catch (error) {
+      console.error("Error deleting booking:", error);
+    }
+  };
+
+  const handleRebook = (booking: BookingData) => {
+    console.log("Rebooking", booking);
+  };
+
+  const handleView = (bookingId: number, type: string) => {
+    if (type === "tourpackage") {
+      router.push(`/packages/${bookingId}`);
+    } else if (type === "car") router.push(`/service/car-rental/${bookingId}`);
+  };
+
+  const columns = [
+    {
+      title: "ID",
+      dataIndex: "id",
+      key: "id",
+      sorter: (a: BookingData, b: BookingData) => a.id - b.id,
+    },
+    {
+      title: "Type",
+      dataIndex: "content_type",
+      key: "content_type",
+      sorter: (a: BookingData, b: BookingData) =>
+        a.content_type.localeCompare(b.content_type),
+    },
+    {
+      title: "Start Date",
+      dataIndex: "start_date",
+      key: "start_date",
+      sorter: (a: BookingData, b: BookingData) =>
+        new Date(a.start_date).getTime() - new Date(b.start_date).getTime(),
+    },
+    {
+      title: "End Date",
+      dataIndex: "end_date",
+      key: "end_date",
+      sorter: (a: BookingData, b: BookingData) =>
+        new Date(a.end_date).getTime() - new Date(b.end_date).getTime(),
+    },
+    {
+      title: "Booking Due Date",
+      dataIndex: "booking_due_date",
+      key: "booking_due_date",
+      sorter: (a: BookingData, b: BookingData) =>
+        new Date(a.booking_due_date).getTime() -
+        new Date(b.booking_due_date).getTime(),
+      render: (text: string, record: BookingData) => {
+        const dueDate = new Date(record.end_date);
+        dueDate.setDate(dueDate.getDate() + 7);
+        return dueDate.toISOString().split("T")[0];
+      },
+    },
+    {
+      title: "Price ($)",
+      dataIndex: "total_price",
+      key: "total_price",
+      sorter: (a: BookingData, b: BookingData) =>
+        Number(a.total_price) - Number(b.total_price),
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      sorter: (a: BookingData, b: BookingData) =>
+        a.status.localeCompare(b.status),
+      render: (status: string) => {
+        let color = "";
+        switch (status) {
+          case "pending":
+            color = "gold";
+            break;
+          case "confirmed":
+            color = "green";
+            break;
+          case "canceled":
+            color = "red";
+            break;
+          default:
+            color = "gray";
+        }
+        return <Tag color={color}>{status.toUpperCase()}</Tag>;
+      },
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (text: string, record: BookingData) => (
+        <span className="flex space-x-2">
+          <Button
+            type="link"
+            onClick={() => handleView(record.object_id, record.content_type)}
+            icon={<Icon icon="mdi:eye" />}
+            className="!text-stone-500 !font-bold"
+          >
+            View
+          </Button>
+          <Button
+            type="link"
+            onClick={() => handleRebook(record)}
+            icon={<Icon icon="mdi:repeat" />}
+            className=" !font-bold"
+          >
+            Rebook
+          </Button>
+          <Popconfirm
+            title="Are you sure you want to delete this booking?"
+            onConfirm={() => handleDelete(record.id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button
+              type="link"
+              danger
+              icon={<Icon icon="mdi:delete" />}
+              className=" !font-bold"
+            >
+              Delete
+            </Button>
+          </Popconfirm>
+        </span>
+      ),
+    },
+  ];
   return (
     <ClientPageTemplates>
       <div className="flex flex-col gap-6 min-h-screen px-4">
