@@ -12,6 +12,8 @@ type RelatedPackage = {
   min_people: number;
   max_people: number;
   country: number;
+  price: string;
+  location: string;
   duration_days: number;
   rating: number;
   main_image: string | null;
@@ -27,6 +29,7 @@ export type TourPackageType = {
   min_people: number;
   max_people: number;
   rating: number;
+  price:string;
   main_image: StaticImageData | null;
   is_active: boolean;
   created_at: string;
@@ -117,4 +120,24 @@ type PackageActivity = {
 export type CustomeTourPackageType = {
   name: string;
   package_activities: PackageActivity[];
+};
+
+type PackageActivityData = {
+  id: number;
+  number_of_days: number;
+  sub_total_price: string;
+  activity: Activity;
+};
+
+export type CustomPackageData = {
+  id: number;
+  name: string;
+  total_price: string;
+  package_activities: PackageActivityData[];
+};
+
+export type CustomPackagesResponse = {
+  success: true;
+  message: string;
+  data: CustomPackageData[];
 };

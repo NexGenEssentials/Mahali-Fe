@@ -17,10 +17,10 @@ const SingleDestination = ({
   country: string;
   countryId: number;
 }) => {
-  const [season, setSeason] = useState("Dry Season");
   const [countryDetails, setCountryDetails] = useState<CountryType | null>(
     null
   );
+  const [season, setSeason] = useState(countryDetails?.when_to_go[0].season);
   const [countryTours, setCountryTours] = useState<TourPackageType[] | null>(
     null
   );
@@ -62,7 +62,6 @@ const SingleDestination = ({
   };
 
   if (loading) return <Loading />;
-
   return (
     <div className="">
       <div key={countryDetails?.id} className={`flex flex-col gap-12 `}>
@@ -138,6 +137,7 @@ const SingleDestination = ({
                   rate={pack.rating}
                   name={pack.title}
                   route={pack.location}
+                  price={pack.price}
                 />
               ))}
             </div>
@@ -166,34 +166,6 @@ const SingleDestination = ({
                       : ""
                   }   group p-4 cursor-pointer hover:duration-500 hover:bg-defaultGreen hover:text-primaryWhite font-semibold text-base inline-flex gap-2 items-center`}
                 >
-                  {pack.season === "Dry Season" ? (
-                    <Icon
-                      icon="fa6-solid:cloud-sun"
-                      width="24"
-                      height="24"
-                      className={`${
-                        season === pack.season ? "text-primaryWhite" : ""
-                      }  text-primaryGreen group-hover:bg-defaultGreen group-hover:text-primaryWhite`}
-                    />
-                  ) : pack.season === "Long Dry Season" ? (
-                    <Icon
-                      icon="stash:sun"
-                      width="24"
-                      height="24"
-                      className={`${
-                        season === pack.season ? "text-primaryWhite" : ""
-                      }  text-primaryGreen group-hover:bg-defaultGreen group-hover:text-primaryWhite`}
-                    />
-                  ) : (
-                    <Icon
-                      icon="Rainy Season"
-                      width="24"
-                      height="24"
-                      className={`${
-                        season === pack.season ? "text-primaryWhite" : ""
-                      }  text-primaryGreen group-hover:bg-defaultGreen group-hover:text-primaryWhite`}
-                    />
-                  )}
                   <span>{pack.season}</span>
                 </div>
               ))}

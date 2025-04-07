@@ -96,17 +96,11 @@ function BookingsPage() {
         new Date(a.end_date).getTime() - new Date(b.end_date).getTime(),
     },
     {
-      title: "Booking Due Date",
-      dataIndex: "booking_due_date",
-      key: "booking_due_date",
+      title: "Booking Referance",
+      dataIndex: "booking_reference",
+      key: "booking_reference",
       sorter: (a: BookingData, b: BookingData) =>
-        new Date(a.booking_due_date).getTime() -
-        new Date(b.booking_due_date).getTime(),
-      render: (text: string, record: BookingData) => {
-        const dueDate = new Date(record.end_date);
-        dueDate.setDate(dueDate.getDate() + 7);
-        return dueDate.toISOString().split("T")[0];
-      },
+        a.booking_reference.localeCompare(b.booking_reference),
     },
     {
       title: "Price ($)",
@@ -179,6 +173,7 @@ function BookingsPage() {
       ),
     },
   ];
+
   return (
     <ClientPageTemplates>
       <div className="flex flex-col gap-6 min-h-screen px-4">

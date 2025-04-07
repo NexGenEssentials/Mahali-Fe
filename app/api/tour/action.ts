@@ -5,6 +5,7 @@ import {
   CountryResponseType,
   countryTourResponseType,
   CustomeTourPackageType,
+  CustomPackagesResponse,
   SingleTourResponseType,
   TourResponseType,
 } from "@/app/types/tour";
@@ -102,6 +103,7 @@ export const getTourCategories = async (): Promise<CategoriesResponse> => {
     throw error;
   }
 };
+
 export const CreateCustomPackage = async (
   data: CustomeTourPackageType
 ): Promise<CategoriesResponse> => {
@@ -118,6 +120,24 @@ export const CreateCustomPackage = async (
     const result = await response.json();
 
     return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getCustomPackage = async (): Promise<CustomPackagesResponse> => {
+  try {
+    const response = await fetch(`${base_url}/packages/list/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const data = await response.json();
+
+    return data;
   } catch (error) {
     throw error;
   }

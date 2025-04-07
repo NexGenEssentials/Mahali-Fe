@@ -9,12 +9,15 @@ import {
 import { Button, Checkbox, Form, Input, notification } from "antd";
 import { useRouter } from "next/navigation";
 import { SignupFormValues } from "@/app/types";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 
 const SignupForm = () => {
   const [checked, setChecked] = useState(false);
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const route = useRouter();
+  const [phone, setPhone] = useState("");
 
   const onFinish = async (values: SignupFormValues) => {
     setLoading(true);
@@ -22,7 +25,7 @@ const SignupForm = () => {
       email: values.email,
       full_name: `${values.firstName} ${values.lastName}`,
       password: values.password,
-      phone: "+250" + values.phoneNumber,
+      phone: phone,
       role: "customer",
     };
 
@@ -164,7 +167,7 @@ const SignupForm = () => {
               },
             ]}
           >
-            <Input
+            {/* <Input
               type="number"
               allowClear
               maxLength={9}
@@ -178,6 +181,12 @@ const SignupForm = () => {
                 </div>
               }
               className=" hover:!border hover:!border-primaryGreen !text-xs !py-2"
+            /> */}
+            <PhoneInput
+              defaultCountry="ua"
+              value={phone}
+              onChange={(phone) => setPhone(phone)}
+              // className=" hover:border hover:border-primaryGreen text-xs w-full"
             />
           </Form.Item>
         </div>

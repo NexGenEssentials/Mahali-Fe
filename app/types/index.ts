@@ -122,7 +122,7 @@ export type BookingData = {
   object_id: number;
   start_date: string;
   end_date: string;
-  booking_due_date:string;
+  booking_reference: string;
   guests: number;
   total_price: string;
   status: string;

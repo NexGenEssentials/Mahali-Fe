@@ -50,6 +50,7 @@ export default function CustomTourPackage() {
   const [loading, setLoading] = useState(false);
   const { setActiveModalId } = useAppContext();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [name, setName] = useState("");
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -152,7 +153,7 @@ export default function CustomTourPackage() {
 
     try {
       const result = await CreateCustomPackage({
-        name: "Custom package",
+        name: name,
         package_activities: package_activities,
       });
 
@@ -175,6 +176,19 @@ export default function CustomTourPackage() {
           <h2 className="text-2xl font-bold mb-4 text-primaryGreen">
             Create Your Custom Tour Package
           </h2>
+          {/* package name */}
+          <div className={`${style.section}`}>
+            <h1 className={`${style.title}`}>Name your Package:</h1>
+            <div className="flex-1 gap-2 ">
+              <input
+                type="text"
+                placeholder="create a package name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="outline-none p-3 border rounded-lg w-full"
+              />
+            </div>
+          </div>
 
           {/* Destination Selection */}
           <div className={`${style.section}`}>
@@ -490,7 +504,7 @@ export default function CustomTourPackage() {
                   : "bg-primaryGreen text-white"
               }     w-3/4 text-center   font-semibold  py-3 rounded`}
             >
-              Book Now
+              Save Package
             </motion.button>
           </div>
         </div>

@@ -114,13 +114,13 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
                   </span>
                   <span className="flex items-start gap-2">
                     <Icon
-                      icon="solar:route-outline"
+                      icon="solar:dollar-bold"
                       width="20"
                       height="20"
                       className="text-primaryGreen"
                     />
-                    <h2 className="text-primaryBlue">Price:</h2>
-                    {packag?.max_people}
+                    <h2 className="text-primaryBlue">Price:</h2>$
+                    {Number(packag?.price).toLocaleString() || 0}
                   </span>
                 </span>
               </div>
@@ -223,7 +223,8 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
                   people={`${pack.min_people}-${pack.max_people}`}
                   rate={pack.rating}
                   name={pack.title}
-                  route={""}
+                  route={pack.location}
+                  price={pack.price}
                 />
               </div>
             ))}

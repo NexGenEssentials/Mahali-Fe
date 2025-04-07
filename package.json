@@ -15,10 +15,11 @@
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.476.0",
     "motion": "^11.12.0",
-    "next": "14.2.18",
+    "next": "^14.2.26",
     "react": "^18",
     "react-dom": "^18",
     "react-element-popper": "^2.1.7",
+    "react-international-phone": "^4.5.0",
     "react-multi-date-picker": "^4.5.2",
     "sharp": "^0.33.5",
     "swiper": "^11.1.15"

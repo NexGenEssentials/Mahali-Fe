@@ -14,6 +14,7 @@ interface packageType {
   name: string;
   route: string;
   location?: string;
+  price:string;
 }
 const PackageCard = ({
   id,
@@ -24,6 +25,7 @@ const PackageCard = ({
   rate,
   route,
   location,
+  price
 }: packageType) => {
   const router = useRouter();
 
@@ -74,19 +76,31 @@ const PackageCard = ({
         </div>
       </div>
       <div className="p-6 mt-4 flex flex-col gap-2 ">
-        <div className="flex gap-1">
-          {Array(Math.floor(rate))
-            .fill(null)
-            .map((_, index) => (
-              <Icon
-                key={index}
-                icon="material-symbols-light:star"
-                width="20"
-                height="20"
-                className="text-primaryGreen"
-              />
-            ))}
+        <div className="flex items-stretch justify-between">
+          <div className="flex gap-1">
+            {Array(Math.floor(rate))
+              .fill(null)
+              .map((_, index) => (
+                <Icon
+                  key={index}
+                  icon="material-symbols-light:star"
+                  width="20"
+                  height="20"
+                  className="text-primaryGreen"
+                />
+              ))}
+          </div>
+          <span className="flex items-start gap-1 font-semibold text-slate-600 text-sm">
+            <Icon
+              icon="solar:dollar-bold"
+              width="20"
+              height="20"
+              className="text-primaryGreen"
+            />
+            {Number(price).toLocaleString() || 0}
+          </span>
         </div>
+
         <span
           onClick={() => handleNavigation(name)}
           className="text-xl font-semibold group-hover:text-primaryGreen cursor-pointer"
