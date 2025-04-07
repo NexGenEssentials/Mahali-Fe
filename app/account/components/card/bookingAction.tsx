@@ -2,27 +2,20 @@
 import { CreateBooking } from "@/app/api/booking/action";
 import { useAppContext } from "@/app/context";
 import { CustomPackageData } from "@/app/types/tour";
-import { notification } from "antd";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import DatePicker, { DateObject, Value } from "react-multi-date-picker";
-
-interface FormData {
-  pickupDate: DateObject;
-  dropDate: DateObject;
-}
-
-// rebook, delete, book custom package
+import {useRouter } from "next/navigation";
+import { useState } from "react";
+import DatePicker, { DateObject } from "react-multi-date-picker";
+import { CalendarDaysIcon } from "lucide-react";
+import { motion } from "framer-motion";
 
 const contentId = process.env.NEXT_PUBLIC_CUSTOM_PACKAGE_ID;
 
-const BookingAction = ({
-  pack,
-  serviceType,
-}: {
+interface BookingActionProps {
   pack?: CustomPackageData;
   serviceType: string;
-}) => {
+}
+
+const BookingAction: React.FC<BookingActionProps> = ({ pack, serviceType }) => {
   const { setActiveModalId } = useAppContext();
   const [dateSelected, setDateSelected] = useState<DateObject[]>([
     new DateObject(),
@@ -30,43 +23,7 @@ const BookingAction = ({
   ]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const pathname = usePathname();
-  const [errors, setErrors] = useState({
-    dateRange: "",
-  });
-
-  const handleBooking = async () => {
-    if (!validateForm()) return;
-
-    setLoading(true);
-    try {
-      const bookingData = {
-        content_type: Number(contentId),
-        object_id: Number(pack?.id),
-        start_date: Array.isArray(dateSelected)
-          ? dateSelected[0].format("YYYY-MM-DD")
-          : "",
-        end_date: Array.isArray(dateSelected)
-          ? dateSelected[1].format("YYYY-MM-DD")
-          : "",
-        guests: 1,
-        total_price: Number(pack?.total_price),
-      };
-
-      const result = await CreateBooking(bookingData);
-      if (result) router.push("/account/bookings-trips");
-    } catch (error) {
-      console.error("ERROR", error);
-    } finally {
-      setLoading(false);
-      setActiveModalId(null);
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    handleBooking();
-  };
+  const [errors, setErrors] = useState({ dateRange: "" });
 
   const validateForm = () => {
     let isValid = true;
@@ -76,7 +33,7 @@ const BookingAction = ({
       !dateSelected ||
       (Array.isArray(dateSelected) && dateSelected.length !== 2)
     ) {
-      newErrors.dateRange = "Please select a valid date range.";
+      newErrors.dateRange = "Please select a valid start and end date.";
       isValid = false;
     }
 
@@ -84,41 +41,77 @@ const BookingAction = ({
     return isValid;
   };
 
+  const handleBooking = async () => {
+    if (!validateForm()) return;
+    setLoading(true);
+
+    try {
+      const bookingData = {
+        content_type: Number(contentId),
+        object_id: Number(pack?.id),
+        start_date: dateSelected[0].format("YYYY-MM-DD"),
+        end_date: dateSelected[1].format("YYYY-MM-DD"),
+        guests: 1,
+        total_price: Number(pack?.total_price),
+      };
+
+      const result = await CreateBooking(bookingData);
+      if (result) router.push("/account/bookings-trips");
+    } catch (error) {
+      console.error("Booking error:", error);
+    } finally {
+      setLoading(false);
+      setActiveModalId(null);
+    }
+  };
+
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-full md:min-w-[512px] min-h-96 max-w-2xl bg-white p-6 rounded-lg flex flex-col items-center justify-center gap-8"
+    <motion.form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleBooking();
+      }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="w-full max-w-2xl  bg-white p-8 rounded-2xl shadow-xl flex flex-col gap-6 justify-center "
     >
-      <h2 className="text-xl font-semibold text-center">
-        Booking Details
+      <h2 className="text-2xl font-bold text-center text-gray-800">
+        🧳 Book Your Adventure
       </h2>
 
-      <div className="flex flex-col items-center justify-center gap-1">
-        <h1 className="text-sm text-slate-600">Select starting date and ending date</h1>
-        <DatePicker
-          range
-          rangeHover
-          dateSeparator=" to "
-          value={dateSelected}
-          onChange={setDateSelected}
-          format="DD/MM/YYYY"
-          inputClass="py-2 w-fit min-w-[200px] text-center text-sm rounded-lg outline-none text-nowrap border p-3"
-        />
+      <div className="flex flex-col items-center gap-2 text-center">
+        <p className="text-gray-600 text-sm">Choose your travel dates</p>
+        <div className="flex items-center gap-2 ">
+          <CalendarDaysIcon className="text-primaryGreen w-5 h-5" />
+          <DatePicker
+            range
+            rangeHover
+            dateSeparator=" to "
+            value={dateSelected}
+            onChange={setDateSelected}
+            format="DD/MM/YYYY"
+            inputClass="border z-50 relative overflow-visible rounded-lg px-4 py-2 text-sm text-center shadow-sm w-64 outline-primaryGreen"
+          />
+        </div>
         {errors.dateRange && (
-          <p className="text-red-500 text-sm">{errors.dateRange}</p>
+          <span className="text-sm text-red-500">{errors.dateRange}</span>
         )}
       </div>
 
-      {/* Submit Button */}
-      <div className="w-full flex justify-center">
-        <button
-          type="submit"
-          className="w-2/4 mx-auto px-2 py-3 border border-primaryGreen hover:text-white hover:bg-primaryGreen duration-300 text-primaryGreen font-semibold rounded-lg"
-        >
-          {loading ? "loading..." : "Book Tour"}
-        </button>
-      </div>
-    </form>
+      <button
+        type="submit"
+        disabled={loading}
+        className={`w-full py-3 text-white font-semibold rounded-lg transition-all duration-300
+          ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-primaryGreen hover:bg-green-700"
+          }`}
+      >
+        {loading ? "Booking..." : "Confirm Booking"}
+      </button>
+    </motion.form>
   );
 };
 

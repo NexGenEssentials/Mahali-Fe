@@ -26,7 +26,7 @@ const CustomPackageCard: React.FC<Props> = ({ customPackage, onBook }) => {
             {customPackage.package_activities.map((activity, index) => (
               <div
                 key={activity.id}
-                className="bg-gray-50 p-3 rounded-lg border border-gray-200"
+                className="bg-white p-3 rounded-lg border border-gray-200"
               >
                 <p className="text-sm font-semibold text-gray-800">
                   {index + 1}. {activity.activity.name}
