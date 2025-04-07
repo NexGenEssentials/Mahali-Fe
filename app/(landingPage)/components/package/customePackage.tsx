@@ -44,6 +44,7 @@ export default function CustomTourPackage() {
   const [selectedPeople, setSelectedPeople] = useState(1);
   const [price, setPrice] = useState(0);
   const [show, setShow] = useState(false);
+  const [inquireNote, setinquireNote] = useState("");
 
   const router = useRouter();
   const [packageStatus, setPackageStatus] = useState(false);
@@ -155,6 +156,11 @@ export default function CustomTourPackage() {
       const result = await CreateCustomPackage({
         name: name,
         package_activities: package_activities,
+        number_of_people: selectedPeople,
+        destination: selectedDestination,
+        transport: selectedTransport,
+        note: inquireNote,
+        accomodation: selectedAccommodation,
       });
 
       if (result.success) {
@@ -367,7 +373,7 @@ export default function CustomTourPackage() {
             />
           </div>
 
-          {/* Duration Selection */}
+          {/* Duration Selection
           <div className={`${style.section}`}>
             <h1 className={`${style.title}`}>Duration (Days):</h1>
             <input
@@ -376,6 +382,18 @@ export default function CustomTourPackage() {
               value={duration}
               min={1}
               onChange={(e) => setDuration(Number(e.target.value))}
+            />
+          </div> */}
+
+          {/* inquire Selection */}
+          <div className={`${style.section}`}>
+            <h1 className={`${style.title}`}>Inquiry Note:</h1>
+            <textarea
+              className={`${style.items} text-sm`}
+              value={inquireNote}
+              placeholder="Share any details, ideas, or special needs you'd like us to consider for your tour."
+              rows={4}
+              onChange={(e) => setinquireNote(e.target.value)}
             />
           </div>
 
@@ -493,16 +511,18 @@ export default function CustomTourPackage() {
                 selectedActivities.length < 0 ||
                 !selectedAccommodation ||
                 !selectedPeople ||
-                !selectedDestination
+                !selectedDestination ||
+                !name
               }
               className={`${
                 selectedActivities.length < 0 ||
                 !selectedAccommodation ||
                 !selectedPeople ||
-                !selectedDestination
+                !selectedDestination ||
+                !name
                   ? "bg-slate-200 text-slate-100"
                   : "bg-primaryGreen text-white"
-              }     w-3/4 text-center   font-semibold  py-3 rounded`}
+              }     w-3/4 text-center   font-semibold py-3 rounded`}
             >
               Save Package
             </motion.button>

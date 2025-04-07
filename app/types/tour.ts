@@ -119,6 +119,11 @@ type PackageActivity = {
 
 export type CustomeTourPackageType = {
   name: string;
+  number_of_people: number;
+  destination: string;
+  transport: string;
+  note: string;
+  accomodation: string;
   package_activities: PackageActivity[];
 };
 
@@ -133,6 +138,7 @@ export type CustomPackageData = {
   id: number;
   name: string;
   total_price: string;
+  number_of_people:string;
   package_activities: PackageActivityData[];
 };
 

@@ -9,6 +9,8 @@ import BookingAction from "../components/card/bookingAction";
 import CenterModal from "@/app/(landingPage)/components/model/centerModel";
 import { useAppContext } from "@/app/context";
 
+const contentId = process.env.NEXT_PUBLIC_CUSTOM_PACKAGE_ID;
+
 const CustomPackgesPage = () => {
   const [custPack, setCustPack] = useState<CustomPackageData[]>([]);
   const [bookedCustPack, setBookedCustPack] = useState<
@@ -51,7 +53,12 @@ const CustomPackgesPage = () => {
       </div>
       <CenterModal
         children={
-          <BookingAction pack={bookedCustPack} serviceType={"booking"} />
+          <BookingAction
+            content_type={Number(contentId)}
+            object_id={Number(bookedCustPack?.id)}
+            guests={Number(bookedCustPack?.number_of_people)}
+            total_price={Number(bookedCustPack?.total_price)}
+          />
         }
         id={"book custom pack"}
       />

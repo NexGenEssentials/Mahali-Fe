@@ -4,21 +4,28 @@ import ClientPageTemplates from "../clientPageTemplates";
 import Title from "../components/header/title";
 import { Icon } from "@iconify/react";
 import { Table, Pagination, Spin, Tag, Input, Button, Popconfirm } from "antd";
-import { getAllMyBookings } from "@/app/api/booking/action";
+import { DeleteMyBooking, getAllMyBookings } from "@/app/api/booking/action";
 import { BookingData } from "@/app/types";
 import Loader from "@/app/(landingPage)/components/skeleton/loader";
 import { useRouter } from "next/navigation";
+import { useAppContext } from "@/app/context";
+import CenterModal from "@/app/(landingPage)/components/model/centerModel";
+import BookingAction from "../components/card/bookingAction";
 
 const { Search } = Input;
-
+const contentId = process.env.NEXT_PUBLIC_CUSTOM_PACKAGE_ID;
 function BookingsPage() {
   const [bookings, setBookings] = useState<BookingData[]>([]);
   const [filteredBookings, setFilteredBookings] = useState<BookingData[]>([]);
+  const [bookedCustPack, setBookedCustPack] = useState<
+    BookingData | undefined
+  >();
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
   const router = useRouter();
   const pageSize = 10;
+  const { setActiveModalId } = useAppContext();
 
   useEffect(() => {
     fetchBookings();
@@ -51,14 +58,20 @@ function BookingsPage() {
 
   const handleDelete = async (bookingId: number) => {
     try {
-      console.log(bookingId);
+      const result = await DeleteMyBooking(bookingId);
+      if (result)
+        setFilteredBookings((prev) =>
+          prev.filter((booking) => booking.id !== bookingId)
+        );
     } catch (error) {
       console.error("Error deleting booking:", error);
     }
   };
 
   const handleRebook = (booking: BookingData) => {
-    console.log("Rebooking", booking);
+    console.log(booking);
+    setBookedCustPack(booking);
+    setActiveModalId("rebook pack");
   };
 
   const handleView = (bookingId: number, type: string) => {
@@ -69,10 +82,12 @@ function BookingsPage() {
 
   const columns = [
     {
-      title: "ID",
+      title: "#",
       dataIndex: "id",
       key: "id",
-      sorter: (a: BookingData, b: BookingData) => a.id - b.id,
+      render: (_: any, __: BookingData, index: number) => (
+        <span>{index + 1}</span>
+      ),
     },
     {
       title: "Type",
@@ -81,6 +96,22 @@ function BookingsPage() {
       sorter: (a: BookingData, b: BookingData) =>
         a.content_type.localeCompare(b.content_type),
     },
+    {
+      title: "Created At",
+      dataIndex: "created_at",
+      key: "created_at",
+      sorter: (a: BookingData, b: BookingData) =>
+        new Date(a.end_date).getTime() - new Date(b.end_date).getTime(),
+
+      render: (record: BookingData) => {
+        const createdAt = new Date(record.created_at);
+        if (isNaN(createdAt.getTime())) {
+          return <span>Invalid Date</span>;
+        }
+        return <span>{createdAt.toLocaleDateString()}</span>;
+      },
+    },
+
     {
       title: "Start Date",
       dataIndex: "start_date",
@@ -146,19 +177,28 @@ function BookingsPage() {
           >
             View
           </Button>
-          <Button
-            type="link"
-            onClick={() => handleRebook(record)}
-            icon={<Icon icon="mdi:repeat" />}
-            className=" !font-bold"
-          >
-            Rebook
-          </Button>
+          {record.content_type === "custompackage" && (
+            <Button
+              type="link"
+              onClick={() => handleRebook(record)}
+              icon={<Icon icon="mdi:repeat" />}
+              className=" !font-bold"
+            >
+              Rebook
+            </Button>
+          )}
           <Popconfirm
             title="Are you sure you want to delete this booking?"
             onConfirm={() => handleDelete(record.id)}
             okText="Yes"
             cancelText="No"
+            okButtonProps={{
+              style: { backgroundColor: "#16a34a", borderColor: "#16a34a" },
+              type: "primary",
+            }}
+            cancelButtonProps={{
+              style: { color: "#dc2626" },
+            }}
           >
             <Button
               type="link"
@@ -173,7 +213,7 @@ function BookingsPage() {
       ),
     },
   ];
-
+  console.log(filteredBookings);
   return (
     <ClientPageTemplates>
       <div className="flex flex-col gap-6 min-h-screen px-4">
@@ -212,10 +252,13 @@ function BookingsPage() {
           <div className="overflow-x-auto">
             <Table
               columns={columns}
-              dataSource={filteredBookings.slice(
-                (currentPage - 1) * pageSize,
-                currentPage * pageSize
-              )}
+              dataSource={[...filteredBookings]
+                .sort(
+                  (a, b) =>
+                    new Date(b.created_at).getTime() -
+                    new Date(a.created_at).getTime()
+                )
+                .slice((currentPage - 1) * pageSize, currentPage * pageSize)}
               rowKey="id"
               pagination={false}
               className="w-full"
@@ -232,6 +275,17 @@ function BookingsPage() {
           </div>
         )}
       </div>
+      <CenterModal
+        children={
+          <BookingAction
+            content_type={Number(contentId)}
+            object_id={Number(bookedCustPack?.object_id)}
+            guests={Number(bookedCustPack?.guests)}
+            total_price={Number(bookedCustPack?.total_price)}
+          />
+        }
+        id={"rebook pack"}
+      />
     </ClientPageTemplates>
   );
 }

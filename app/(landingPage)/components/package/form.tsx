@@ -97,6 +97,7 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
       className="px-4 p-8 flex flex-col gap-4 text-black text-opacity-75 w-full"
     >
       <div>
+        <h1 className="text-slate-400 text-sm pl-2">Number of People</h1>
         <input
           type="number"
           value={people}
@@ -111,6 +112,9 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
       </div>
 
       <div>
+        <h1 className="text-slate-400 text-sm pl-2">
+          Choose starting and ending Date
+        </h1>
         <DatePicker
           range
           rangeHover
@@ -118,26 +122,12 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
           value={dateSelected}
           onChange={setDateSelected}
           format="DD/MM/YYYY"
-          inputClass="p-2 grow w-full text-sm rounded-lg outline-none text-nowrap"
+          inputClass="p-2 grow w-full min-w-[200px] text-sm rounded-lg outline-none text-nowrap"
         />
         {errors.dateRange && (
           <p className="text-red-500 text-sm">{errors.dateRange}</p>
         )}
       </div>
-
-      <Space wrap>
-        <Select
-          defaultValue="Duration"
-          size="large"
-          options={[
-            { value: "1-3 Days", label: "1-3 Days" },
-            { value: "4-6 Days", label: "4-6 Days" },
-            { value: "7-8 Days", label: "7-8 Days" },
-            { value: "9+ Days", label: "9+ Days" },
-          ]}
-          className="w-full min-w-48"
-        />
-      </Space>
 
       <div>
         <textarea

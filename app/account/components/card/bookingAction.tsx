@@ -2,20 +2,27 @@
 import { CreateBooking } from "@/app/api/booking/action";
 import { useAppContext } from "@/app/context";
 import { CustomPackageData } from "@/app/types/tour";
-import {useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import { CalendarDaysIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
-const contentId = process.env.NEXT_PUBLIC_CUSTOM_PACKAGE_ID;
 
-interface BookingActionProps {
-  pack?: CustomPackageData;
-  serviceType: string;
-}
 
-const BookingAction: React.FC<BookingActionProps> = ({ pack, serviceType }) => {
+export type CreateBookingPayload = {
+  content_type: number;
+  object_id: number;
+  guests: number;
+  total_price: number;
+};
+
+const BookingAction: React.FC<CreateBookingPayload> = ({
+  content_type,
+  object_id,
+  guests,
+  total_price,
+}) => {
   const { setActiveModalId } = useAppContext();
   const [dateSelected, setDateSelected] = useState<DateObject[]>([
     new DateObject(),
@@ -47,15 +54,19 @@ const BookingAction: React.FC<BookingActionProps> = ({ pack, serviceType }) => {
 
     try {
       const bookingData = {
-        content_type: Number(contentId),
-        object_id: Number(pack?.id),
+        content_type: content_type,
+        object_id: object_id,
         start_date: dateSelected[0].format("YYYY-MM-DD"),
         end_date: dateSelected[1].format("YYYY-MM-DD"),
-        guests: 1,
-        total_price: Number(pack?.total_price),
+        guests: guests,
+        total_price: total_price,
       };
 
+      console.log({bookingData})
+
       const result = await CreateBooking(bookingData);
+      console.log({ result });
+      
       if (result) router.push("/account/bookings-trips");
     } catch (error) {
       console.error("Booking error:", error);

@@ -6,7 +6,7 @@ const base_url = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 const accessToken = cookies().get("accessToken")?.value;
 
 export const CreateBooking = async (
-  carBook: BookingDetails
+  bookingData: BookingDetails
 ): Promise<{ status?: string; description?: string }> => {
   try {
     const response = await fetch(`${base_url}/bookings/`, {
@@ -15,7 +15,7 @@ export const CreateBooking = async (
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
-      body: JSON.stringify(carBook),
+      body: JSON.stringify(bookingData),
     });
 
     const data = await response.json();
@@ -79,6 +79,27 @@ export const updateBookingStatus = async (
     }
 
     return data;
+  } catch (error) {
+    console.log("Something went wrong", { error });
+    throw error;
+  }
+};
+
+export const DeleteMyBooking = async (objectId:number): Promise<boolean> => {
+  try {
+    const response = await fetch(`${base_url}/bookings/${objectId}/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  console.log(response)
+    if (!response.ok) {
+      return false;
+    }
+
+    return true;
   } catch (error) {
     console.log("Something went wrong", { error });
     throw error;
