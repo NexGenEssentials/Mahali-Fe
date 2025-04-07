@@ -50,7 +50,8 @@ function BookingsPage() {
     const filteredData = bookings.filter(
       (booking) =>
         booking.id.toString().includes(value) ||
-        booking.content_type.toLowerCase().includes(value.toLowerCase())
+        booking.content_type.toLowerCase().includes(value.toLowerCase()) ||
+        booking.booking_reference.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredBookings(filteredData);
     setCurrentPage(1);
@@ -69,7 +70,6 @@ function BookingsPage() {
   };
 
   const handleRebook = (booking: BookingData) => {
-    console.log(booking);
     setBookedCustPack(booking);
     setActiveModalId("rebook pack");
   };
@@ -90,6 +90,13 @@ function BookingsPage() {
       ),
     },
     {
+      title: "Booking Referance",
+      dataIndex: "booking_reference",
+      key: "booking_reference",
+      sorter: (a: BookingData, b: BookingData) =>
+        a.booking_reference.localeCompare(b.booking_reference),
+    },
+    {
       title: "Type",
       dataIndex: "content_type",
       key: "content_type",
@@ -108,7 +115,7 @@ function BookingsPage() {
         if (isNaN(createdAt.getTime())) {
           return <span>Invalid Date</span>;
         }
-        return <span>{createdAt.toLocaleDateString()}</span>;
+        <span>{record.created_at}</span>;
       },
     },
 
@@ -125,13 +132,6 @@ function BookingsPage() {
       key: "end_date",
       sorter: (a: BookingData, b: BookingData) =>
         new Date(a.end_date).getTime() - new Date(b.end_date).getTime(),
-    },
-    {
-      title: "Booking Referance",
-      dataIndex: "booking_reference",
-      key: "booking_reference",
-      sorter: (a: BookingData, b: BookingData) =>
-        a.booking_reference.localeCompare(b.booking_reference),
     },
     {
       title: "Price ($)",
@@ -213,7 +213,7 @@ function BookingsPage() {
       ),
     },
   ];
-  console.log(filteredBookings);
+
   return (
     <ClientPageTemplates>
       <div className="flex flex-col gap-6 min-h-screen px-4">
@@ -262,7 +262,26 @@ function BookingsPage() {
               rowKey="id"
               pagination={false}
               className="w-full"
+              expandable={{
+                expandedRowRender: (record: BookingData) => (
+                  <div className="p-4 bg-gray-100 rounded-md">
+                    <p>
+                      <strong>Traveler Name:</strong> {record.user.full_name}
+                    </p>
+                    <p>
+                      <strong>Email:</strong> {record.user.email}
+                    </p>
+
+                    <p>
+                      <strong>Notes:</strong>{" "}
+                      {record.note || "No additional notes."}
+                    </p>
+                  </div>
+                ),
+                rowExpandable: (record) => true, // all rows expandable, or add your condition
+              }}
             />
+
             <div className="flex justify-center mt-4">
               <Pagination
                 current={currentPage}

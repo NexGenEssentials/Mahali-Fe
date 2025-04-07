@@ -279,12 +279,12 @@ const AllCars = () => {
                     )}
                   </div>
                 </div>
-                <div className="w-full flex gap-4 items-center flex-wrap justify-center   ">
+                <div className="w-full flex gap-4 items-center flex-wrap justify-center  ">
                   {loading ? (
                     <Loader />
                   ) : carParamsList && carParamsList?.length > 0 ? (
                     carParamsList?.map((car) => (
-                      <div className="w-full md:w-[30%]" key={car.id}>
+                      <div className="w-full md:w-[20%] max-lg:min-w-[300px]" key={car.id}>
                         <CarCard
                           id={car.id}
                           car={car.first_image || ImagePlaceholder}

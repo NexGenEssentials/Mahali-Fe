@@ -1,16 +1,25 @@
 "use client";
-import { CustomPackageData } from "@/app/types/tour";
+import { DeleteActivityPackage } from "@/app/api/tour/action";
+import { CustomPackageData, PackageActivityData } from "@/app/types/tour";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useEffect, useRef, useState } from "react";
 
 type Props = {
   customPackage: CustomPackageData;
   onBook: (id: number) => void;
+  onDelete: (id: number) => void;
 };
 
-const CustomPackageCard: React.FC<Props> = ({ customPackage, onBook }) => {
+const CustomPackageCard: React.FC<Props> = ({
+  customPackage,
+  onBook,
+  onDelete,
+}) => {
   const [show, setShow] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [activityList, setActivityList] = useState<PackageActivityData[]>(
+    customPackage.package_activities
+  );
 
   // Close dropdown when clicked outside
   useEffect(() => {
@@ -26,6 +35,18 @@ const CustomPackageCard: React.FC<Props> = ({ customPackage, onBook }) => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const handleDeleteActivity = async (activityId: number) => {
+    try {
+      const result = await DeleteActivityPackage(customPackage.id, activityId);
+      if (result)
+        setActivityList((prev) =>
+          prev.filter((activity) => activity.id !== activityId)
+        );
+    } catch (error) {
+      console.error("Error deleting booking:", error);
+    }
+  };
 
   return (
     <div className="bg-white rounded-2xl shadow-md p-6 hover:shadow-xl transition duration-300 ease-in-out flex flex-col justify-between min-h-[350px] w-full max-w-sm border border-gray-100">
@@ -53,7 +74,10 @@ const CustomPackageCard: React.FC<Props> = ({ customPackage, onBook }) => {
                   />
                   Edit
                 </span>
-                <span className="flex items-center gap-2 hover:bg-gray-100 hover:text-red-500 rounded-md text-sm px-4 py-1 text-primaryGreen cursor-pointer">
+                <span
+                  onClick={() => onDelete(customPackage.id)}
+                  className="flex items-center gap-2 hover:bg-gray-100 hover:text-red-500 rounded-md text-sm px-4 py-1 text-primaryGreen cursor-pointer"
+                >
                   <Icon
                     icon="weui:delete-outlined"
                     width="18"
@@ -74,12 +98,12 @@ const CustomPackageCard: React.FC<Props> = ({ customPackage, onBook }) => {
           </span>
         </p>
 
-        {customPackage.package_activities.length > 0 && (
+        {activityList.length > 0 && (
           <div className="space-y-2 overflow-y-scroll max-h-[300px] p-2 rounded-lg bg-slate-100">
-            {customPackage.package_activities.map((activity, index) => (
+            {activityList.map((activity, index) => (
               <div
                 key={activity.id}
-                className="bg-white p-3 rounded-lg border border-gray-200"
+                className="relative group bg-white p-3 rounded-lg border border-gray-200"
               >
                 <p className="text-sm font-semibold text-gray-800">
                   {index + 1}. {activity.activity.name}
@@ -91,6 +115,17 @@ const CustomPackageCard: React.FC<Props> = ({ customPackage, onBook }) => {
                   Days: {activity.number_of_days} | Subtotal: $
                   {activity.sub_total_price}
                 </p>
+                <div
+                  onClick={() => handleDeleteActivity(activity.id)}
+                  className="hidden group-hover:block duration-500 transition-all absolute -top-1 -right-1 "
+                >
+                  <Icon
+                    icon="pajamas:clear"
+                    width="16"
+                    height="16"
+                    className="text-red-500 cursor-pointer"
+                  />
+                </div>
               </div>
             ))}
           </div>

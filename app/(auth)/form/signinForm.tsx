@@ -5,6 +5,7 @@ import { Button, Form, Input, notification } from "antd";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppContext } from "@/app/context";
+import { GetUserInfo } from "@/app/helpers/userRoles";
 
 export interface SigninFormData {
   email: string;
@@ -31,6 +32,8 @@ const SignInForm = () => {
 
       const data = await res.json();
 
+      const user = GetUserInfo(data.user.access);
+
       if (!res.ok) {
         notification.error({
           message: data.error,
@@ -42,11 +45,15 @@ const SignInForm = () => {
           message: "Login",
           description: data.message,
           placement: "topRight",
+          duration: 1.5,
         });
         setIsLogin(true);
-        setTimeout(() => {
-          route.push(callbackUrl);
-        }, 1500);
+        if (user?.role === "admin") route.push("/admin");
+        else {
+          setTimeout(() => {
+            route.push(callbackUrl);
+          }, 1500);
+        }
       }
     } catch (error) {
       notification.error({

@@ -66,6 +66,7 @@ export const getSingleTour = async (
     throw error;
   }
 };
+
 export const getCountryTour = async (
   countryId?: number
 ): Promise<countryTourResponseType> => {
@@ -139,6 +140,56 @@ export const getCustomPackage = async (): Promise<CustomPackagesResponse> => {
 
     return data;
   } catch (error) {
+    throw error;
+  }
+};
+
+export const DeleteCustomPackage = async (
+  packageId: number,
+): Promise<boolean> => {
+  try {
+    const response = await fetch(
+      `${base_url}/packages/${packageId}/delete/`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    if (!response.ok) {
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.log("Something went wrong", { error });
+    throw error;
+  }
+};
+
+// delete activity on custom package
+
+export const DeleteActivityPackage = async (packageId:number,activityId:number): Promise<boolean> => {
+  try {
+    const response = await fetch(
+      `${base_url}/packages/${packageId}/remove-activity/${activityId}/`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    if (!response.ok) {
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.log("Something went wrong", { error });
     throw error;
   }
 };

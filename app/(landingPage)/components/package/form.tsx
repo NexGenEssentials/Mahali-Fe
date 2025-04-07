@@ -70,8 +70,8 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
             ? dateSelected[1].format("YYYY-MM-DD")
             : "",
           guests: people,
-          total_price: people, // Replace with actual price calculation
-          inquiry: inquiry.trim(),
+          total_price: Number(tour?.price), 
+          note: inquiry.trim(),
         };
 
         const result = await CreateBooking(bookingData);

@@ -193,7 +193,7 @@ export const CarRenTalForm = () => {
   ]);
   return (
     <form
-      action="/service/car-rental"
+      action="/service/car-rental/all"
       className="flex gap-4 items-end flex-wrap text-primaryBlue"
     >
       <div className="flex flex-col gap-1">

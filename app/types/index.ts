@@ -110,24 +110,30 @@ export type SingleCarType = {
 export interface BookingDetails {
   content_type: number;
   object_id: number;
-  start_date: string; 
-  end_date: string; 
+  start_date: string;
+  end_date: string;
   guests: number;
   total_price: number;
 }
 
 export type BookingData = {
   id: number;
-  content_type: string;
+  user: {
+    id: number;
+    full_name: string;
+    email: string;
+  };
+  content_type: string; 
   object_id: number;
-  start_date: string;
+  start_date: string; 
   end_date: string;
-  booking_reference: string;
   guests: number;
   total_price: string;
-  status: string;
-  created_at: string;
+  status: string; 
+  created_at: string; 
   updated_at: string;
+  booking_reference: string;
+  note?: string; 
 };
 
 export type BookingResponse = {

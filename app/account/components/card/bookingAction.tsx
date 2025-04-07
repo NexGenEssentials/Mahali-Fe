@@ -8,13 +8,12 @@ import DatePicker, { DateObject } from "react-multi-date-picker";
 import { CalendarDaysIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
-
-
 export type CreateBookingPayload = {
   content_type: number;
   object_id: number;
   guests: number;
   total_price: number;
+  note?: string;
 };
 
 const BookingAction: React.FC<CreateBookingPayload> = ({
@@ -22,6 +21,7 @@ const BookingAction: React.FC<CreateBookingPayload> = ({
   object_id,
   guests,
   total_price,
+  note,
 }) => {
   const { setActiveModalId } = useAppContext();
   const [dateSelected, setDateSelected] = useState<DateObject[]>([
@@ -31,6 +31,7 @@ const BookingAction: React.FC<CreateBookingPayload> = ({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [errors, setErrors] = useState({ dateRange: "" });
+  const [expand, setExpand] = useState(false);
 
   const validateForm = () => {
     let isValid = true;
@@ -60,13 +61,14 @@ const BookingAction: React.FC<CreateBookingPayload> = ({
         end_date: dateSelected[1].format("YYYY-MM-DD"),
         guests: guests,
         total_price: total_price,
+        note,
       };
 
-      console.log({bookingData})
+      console.log({ bookingData });
 
       const result = await CreateBooking(bookingData);
       console.log({ result });
-      
+
       if (result) router.push("/account/bookings-trips");
     } catch (error) {
       console.error("Booking error:", error);
@@ -85,7 +87,9 @@ const BookingAction: React.FC<CreateBookingPayload> = ({
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="w-full max-w-2xl  bg-white p-8 rounded-2xl shadow-xl flex flex-col gap-6 justify-center "
+      className={`${
+        expand ? "min-h-[50vh]" : ""
+      }  w-full max-w-2xl h-fit  bg-white p-8 rounded-2xl flex flex-col gap-6 justify-start`}
     >
       <h2 className="text-2xl font-bold text-center text-gray-800">
         🧳 Book Your Adventure
@@ -100,9 +104,11 @@ const BookingAction: React.FC<CreateBookingPayload> = ({
             rangeHover
             dateSeparator=" to "
             value={dateSelected}
+            onOpen={() => setExpand(true)}
+            onClose={() => setExpand(false)}
             onChange={setDateSelected}
             format="DD/MM/YYYY"
-            inputClass="border z-50 relative overflow-visible rounded-lg px-4 py-2 text-sm text-center shadow-sm w-64 outline-primaryGreen"
+            inputClass="border rounded-lg px-4 py-2 text-sm text-center shadow-sm w-64"
           />
         </div>
         {errors.dateRange && (
