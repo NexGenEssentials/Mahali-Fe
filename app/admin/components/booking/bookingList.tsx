@@ -69,21 +69,108 @@ function AdminBookingsPage() {
     const filteredData = bookings.filter(
       (booking) =>
         booking.id.toString().includes(value) ||
-        booking.content_type.toLowerCase().includes(value.toLowerCase())
+        booking.content_type.toLowerCase().includes(value.toLowerCase()) ||
+        booking.booking_reference.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredBookings(filteredData);
     setCurrentPage(1);
   };
 
+  // const columns = [
+  //   {
+  //     title: "ID",
+  //     dataIndex: "id",
+  //     key: "id",
+  //     sorter: (a: BookingData, b: BookingData) => a.id - b.id,
+  //   },
+  //   { title: "Type", dataIndex: "content_type", key: "content_type" },
+  //   { title: "Guest", dataIndex: "guests", key: "guests" },
+  //   {
+  //     title: "Start Date",
+  //     dataIndex: "start_date",
+  //     key: "start_date",
+  //     sorter: (a: BookingData, b: BookingData) =>
+  //       new Date(a.start_date).getTime() - new Date(b.start_date).getTime(),
+  //   },
+  //   {
+  //     title: "End Date",
+  //     dataIndex: "end_date",
+  //     key: "end_date",
+  //     sorter: (a: BookingData, b: BookingData) =>
+  //       new Date(a.end_date).getTime() - new Date(b.end_date).getTime(),
+  //   },
+  //   {
+  //     title: "Price ($)",
+  //     dataIndex: "total_price",
+  //     key: "total_price",
+  //     sorter: (a: BookingData, b: BookingData) =>
+  //       Number(a.total_price) - Number(b.total_price),
+  //   },
+  //   {
+  //     title: "Status",
+  //     dataIndex: "status",
+  //     key: "status",
+  //     render: (status: string, record: BookingData) =>
+  //       status === "pending" ? (
+  //         <Select
+  //           defaultValue={status}
+  //           onChange={(value) => handleStatusChange(record.id, value)}
+  //         >
+  //           <Option value="confirm">Confirm</Option>
+  //           <Option value="cancel">Cancel</Option>
+  //         </Select>
+  //       ) : (
+  //         <Tag color={status === "confirmed" ? "green" : "red"}>
+  //           {status.toUpperCase()}
+  //         </Tag>
+  //       ),
+  //   },
+  // ];
+
   const columns = [
     {
-      title: "ID",
+      title: "#",
+      dataIndex: "id",
+      key: "id",
+      render: (_: any, __: BookingData, index: number) => (
+        <span>{index + 1}</span>
+      ),
+    },
+    {
+      title: "Booking Id",
       dataIndex: "id",
       key: "id",
       sorter: (a: BookingData, b: BookingData) => a.id - b.id,
     },
-    { title: "Type", dataIndex: "content_type", key: "content_type" },
-    { title: "Guest", dataIndex: "guests", key: "guests" },
+    {
+      title: "Booking Referance",
+      dataIndex: "booking_reference",
+      key: "booking_reference",
+      sorter: (a: BookingData, b: BookingData) =>
+        a.booking_reference.localeCompare(b.booking_reference),
+    },
+    {
+      title: "Type",
+      dataIndex: "content_type",
+      key: "content_type",
+      sorter: (a: BookingData, b: BookingData) =>
+        a.content_type.localeCompare(b.content_type),
+    },
+    {
+      title: "Created At",
+      key: "created_at",
+      sorter: (a: BookingData, b: BookingData) =>
+        new Date(a.end_date).getTime() - new Date(b.end_date).getTime(),
+
+      render: (record: BookingData) => {
+        const createdAt = new Date(record.created_at);
+        if (isNaN(createdAt.getTime())) {
+          return <span>Invalid Date</span>;
+        }
+        return <span>{createdAt.toISOString().split("T")[0]}</span>;
+      },
+    },
+
     {
       title: "Start Date",
       dataIndex: "start_date",
@@ -100,11 +187,14 @@ function AdminBookingsPage() {
     },
     {
       title: "Price ($)",
-      dataIndex: "total_price",
       key: "total_price",
       sorter: (a: BookingData, b: BookingData) =>
         Number(a.total_price) - Number(b.total_price),
+      render: (record: BookingData) => {
+        return <span>{Number(record.total_price).toLocaleString()}</span>;
+      },
     },
+    { title: "Guest", dataIndex: "guests", key: "guests" },
     {
       title: "Status",
       dataIndex: "status",
@@ -124,6 +214,45 @@ function AdminBookingsPage() {
           </Tag>
         ),
     },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (text: string, record: BookingData) => (
+        <span className="flex space-x-2">
+          <Button
+            type="link"
+            //  onClick={() => handleView(record.object_id, record.content_type)}
+            icon={<Icon icon="mdi:eye" />}
+            className="!text-stone-500 !font-bold"
+          >
+            View
+          </Button>
+
+          <Popconfirm
+            title="Are you sure you want to delete this booking?"
+            //  onConfirm={() => handleDelete(record.id)}
+            okText="Yes"
+            cancelText="No"
+            okButtonProps={{
+              style: { backgroundColor: "#16a34a", borderColor: "#16a34a" },
+              type: "primary",
+            }}
+            cancelButtonProps={{
+              style: { color: "#dc2626" },
+            }}
+          >
+            <Button
+              type="link"
+              danger
+              icon={<Icon icon="mdi:delete" />}
+              className=" !font-bold"
+            >
+              Delete
+            </Button>
+          </Popconfirm>
+        </span>
+      ),
+    },
   ];
 
   return (
@@ -133,7 +262,7 @@ function AdminBookingsPage() {
       {/* Search Bar */}
       <div className="flex flex-col w-full md:w-2/3 md:flex-row md:items-center justify-between gap-4 bg-white p-4 shadow-md rounded-md">
         <Search
-          placeholder="Search by ID or Type..."
+          placeholder="Search by ID, Booking reference or Type..."
           allowClear
           value={searchText}
           onChange={(e) => handleSearch(e.target.value)}
@@ -170,6 +299,24 @@ function AdminBookingsPage() {
             rowKey="id"
             pagination={false}
             className="w-full"
+            expandable={{
+              expandedRowRender: (record: BookingData) => (
+                <div className="p-4 bg-gray-100 rounded-md">
+                  <p>
+                    <strong>Traveler Name:</strong> {record.user.full_name}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {record.user.email}
+                  </p>
+
+                  <p>
+                    <strong>Notes:</strong>{" "}
+                    {record.note || "No additional notes."}
+                  </p>
+                </div>
+              ),
+              rowExpandable: (record) => true, // all rows expandable, or add your condition
+            }}
           />
           <div className="flex justify-center mt-4">
             <Pagination

@@ -105,7 +105,6 @@ function BookingsPage() {
     },
     {
       title: "Created At",
-      dataIndex: "created_at",
       key: "created_at",
       sorter: (a: BookingData, b: BookingData) =>
         new Date(a.end_date).getTime() - new Date(b.end_date).getTime(),
@@ -115,7 +114,7 @@ function BookingsPage() {
         if (isNaN(createdAt.getTime())) {
           return <span>Invalid Date</span>;
         }
-        <span>{record.created_at}</span>;
+        return <span>{createdAt.toISOString().split("T")[0]}</span>;
       },
     },
 
@@ -135,10 +134,12 @@ function BookingsPage() {
     },
     {
       title: "Price ($)",
-      dataIndex: "total_price",
       key: "total_price",
       sorter: (a: BookingData, b: BookingData) =>
         Number(a.total_price) - Number(b.total_price),
+      render: (record: BookingData) => {
+        return <span>{Number(record.total_price).toLocaleString()}</span>;
+      },
     },
     {
       title: "Status",

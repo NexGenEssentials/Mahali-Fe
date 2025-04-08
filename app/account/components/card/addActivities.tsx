@@ -21,7 +21,7 @@ export default function AddActivities({
   onFinish,
   pack,
 }: {
-  onFinish: (data: string) => void;
+  onFinish: () => Promise<void>;
   pack?: CustomPackageData;
 }) {
   const [selectedActivities, setSelectedActivities] = useState<
@@ -139,7 +139,7 @@ export default function AddActivities({
       );
 
       if (result.success) {
-        onFinish(String(Math.random()));
+        onFinish();
         setPackageStatus(false);
         setActiveModalId(null);
       }

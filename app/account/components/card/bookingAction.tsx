@@ -64,9 +64,7 @@ const BookingAction: React.FC<CreateBookingPayload> = ({
         note,
       };
 
-
       const result = await CreateBooking(bookingData);
-  
 
       if (result) router.push("/account/bookings-trips");
     } catch (error) {
@@ -104,7 +102,7 @@ const BookingAction: React.FC<CreateBookingPayload> = ({
             dateSeparator=" to "
             value={dateSelected}
             onOpen={() => setExpand(true)}
-            onClose={() => setExpand(false)}
+            // onClose={() => setExpand(false)}
             onChange={setDateSelected}
             format="DD/MM/YYYY"
             inputClass="border rounded-lg px-4 py-2 text-sm text-center shadow-sm w-64"
