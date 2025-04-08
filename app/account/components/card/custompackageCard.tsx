@@ -19,8 +19,12 @@ const CustomPackageCard: React.FC<Props> = ({
 }) => {
   const [show, setShow] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [activityList, setActivityList] = useState<PackageActivityData[]>(customPackage.package_activities);
-
+  const [activityList, setActivityList] = useState<PackageActivityData[]>(
+    customPackage.package_activities
+  );
+  const [totalPrice, setTotalPrice] = useState<number>(
+    Number(customPackage.total_price)
+  );
   // Close dropdown when clicked outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -36,13 +40,18 @@ const CustomPackageCard: React.FC<Props> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleDeleteActivity = async (activityId: number) => {
+  const handleDeleteActivity = async (
+    activityPrice: number,
+    activityId: number
+  ) => {
     try {
       const result = await DeleteActivityPackage(customPackage.id, activityId);
-      if (result)
+      if (result) {
         setActivityList((prev) =>
           prev.filter((activity) => activity.id !== activityId)
         );
+        setTotalPrice((prev) => prev - activityPrice);
+      }
     } catch (error) {
       console.error("Error deleting booking:", error);
     }
@@ -97,7 +106,7 @@ const CustomPackageCard: React.FC<Props> = ({
         <p className="text-gray-500 mb-4">
           Total Price:{" "}
           <span className="font-semibold text-defaultGreen">
-            ${Number(customPackage.total_price).toLocaleString()}
+            ${totalPrice.toLocaleString()}
           </span>
         </p>
 
@@ -119,7 +128,12 @@ const CustomPackageCard: React.FC<Props> = ({
                   {activity.sub_total_price}
                 </p>
                 <div
-                  onClick={() => handleDeleteActivity(activity.id)}
+                  onClick={() =>
+                    handleDeleteActivity(
+                      Number(activity.sub_total_price),
+                      activity.id
+                    )
+                  }
                   className="hidden group-hover:block duration-500 transition-all absolute -top-1 -right-1 "
                 >
                   <Icon

@@ -7,20 +7,20 @@ import Logo from "@/app/(landingPage)/components/navbar/logo";
 
 const Signup = () => {
   return (
-    <section className="bg-slate-100 w-full h-full min-h-[calc(100vh)] p-8 flex items-center justify-center">
+    <section className="bg-slate-100 w-full h-full min-h-[calc(100vh)] p-2 sm:p-8 flex items-center justify-center">
       <div className="w-full flex flex-col gap-4 items-center justify-center">
-        <div className="w-[90%] md:w-3/4 lg:w-2/3 xl:w-1/2 max-w-screen-lg rounded-2xl bg-white flex flex-row shadow-md">
-          <div className="w-full px-8 py-4 flex flex-col">
-            <div className="flex gap-8 px-8 pb-2 items-center justify-between w-ful">
+        <div className="w-full sm:w-[90%] md:w-3/4 lg:w-2/3 xl:w-1/2 max-w-screen-lg rounded-2xl bg-white flex flex-row shadow-md">
+          <div className="w-full px-4 sm:px-8 py-4 flex flex-col">
+            <div className="flex gap-8 px-2 sm:px-8 pb-2 items-center justify-between w-ful">
               <Logo />
-              <h1 className="w-3/5 text-primaryGreen font-extrabold text-2xl self-center ">
+              <h1 className="w-ful md:w-3/5 text-primaryGreen font-extrabold text-2xl self-center ">
                 Register
               </h1>
             </div>
             <SignupForm />
           </div>
         </div>
-        <div className="w-[90%] md:w-3/4 lg:w-2/3 xl:w-1/2 max-w-screen-lg p-8 bg-white rounded-2xl flex justify-between items-center flex-wrap gap-4 shadow-md">
+        <div className="w-full sm:w-[90%] md:w-3/4 lg:w-2/3 xl:w-1/2 max-w-screen-lg p-4 sm:p-8 bg-white rounded-2xl flex justify-between items-center flex-wrap gap-4 shadow-md">
           <div className="flex flex-col gap-2">
             <span className="text-textTitlesColor font-bold text-sm">
               Already have an account ?

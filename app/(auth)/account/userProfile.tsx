@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
 
 const myAccountMenu = [
+  { name: "Home", link: "/", icon: "fluent:home-20-filled" },
   { name: "My account", link: "/account", icon: "mdi:account" },
   { name: "Notification", link: "/account/notification", icon: "mdi:account" },
   {

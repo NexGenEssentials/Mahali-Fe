@@ -74,14 +74,14 @@ const PackageSection = () => {
           captivating landscapes and vibrant cultures on unforgettable journeys."
           />
 
-          <ul className="flex max-md:space-y-2 md:gap-8 items-end flex-wrap justify-evenly ">
+          <ul className="flex max-md:rounded-full hide-scrollbar gap-3 md:gap-8 p-2 w-full items-end justify-evenly overflow-x-scroll max-md:bg-slate-100">
             <li
               onClick={() => setActive("Custom Package")}
               className={`${
                 active === "Custom Package"
                   ? "bg-primaryGreen text-white duration-500 "
                   : "text-primaryBlue"
-              } p-2 cursor-pointer text-sm font-medium rounded hover:bg-primaryGreen hover:text-white duration-500`}
+              } p-2 cursor-pointer text-nowrap text-sm font-medium max-md:rounded-full rounded hover:bg-primaryGreen hover:text-white duration-500`}
               key={"custome"}
             >
               {"Custom Package"}
@@ -93,7 +93,7 @@ const PackageSection = () => {
                   active === location.name
                     ? "bg-primaryGreen text-white duration-500 "
                     : "text-primaryBlue"
-                } p-2 cursor-pointer text-sm font-medium rounded hover:bg-primaryGreen hover:text-white duration-500`}
+                } p-2 cursor-pointer text-sm font-medium max-md:rounded-full rounded hover:bg-primaryGreen hover:text-white duration-500`}
                 key={location.id}
               >
                 {location.name}

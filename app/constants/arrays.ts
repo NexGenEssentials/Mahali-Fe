@@ -1070,7 +1070,7 @@ export const DestinationCountry = [
 
 export const StaffList = [
   {
-    category: "Board Of Directors",
+    category: "Board",
     list: [
       {
         name: "Carolyne Mziray Lawrence",

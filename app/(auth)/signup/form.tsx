@@ -94,7 +94,7 @@ const SignupForm = () => {
     >
       <div className="">
         {/* names */}
-        <div className="w-full flex flex-row items-center gap-4  max-sm:flex-wrap ">
+        <div className="w-full flex flex-row items-center sm:gap-4  max-sm:flex-wrap ">
           <Form.Item
             label="First Name"
             name="firstName"
@@ -139,7 +139,7 @@ const SignupForm = () => {
           </Form.Item>
         </div>
         {/* contacts */}
-        <div className="w-full flex flex-row items-center gap-4  max-sm:flex-wrap ">
+        <div className="w-full flex flex-row items-center sm:gap-4  max-sm:flex-wrap ">
           <Form.Item
             label="Email"
             name="email"
@@ -191,7 +191,7 @@ const SignupForm = () => {
           </Form.Item>
         </div>
         {/* password */}
-        <div className="w-full flex flex-row items-center gap-4  max-sm:flex-wrap ">
+        <div className="w-full flex flex-row items-center sm:gap-4  max-sm:flex-wrap ">
           <Form.Item
             label="Password"
             name="password"

@@ -14,7 +14,7 @@ import Link from "next/link";
 
 const About = () => {
   const [active, setActive] = useState("What We Do");
-  const [category, setCategory] = useState("Board Of Directors");
+  const [category, setCategory] = useState("Board");
   return (
     <LandingPage>
       <div className="">
@@ -139,7 +139,7 @@ const About = () => {
         <div className="max-w-[1750px] mx-auto w-full bg-slate-100 bg-opacity-20 p-8 flex flex-col gap-4">
           <HeaderSection title="Staff" subtitle="Our Team" />
           <div className="flex flex-col gap-8 ">
-            <ul className="w-4/5 md:w-1/3 mx-auto flex items-center justify-evenly gap-2">
+            <ul className="w-full sm:w-4/5 md:w-1/3 mx-auto flex items-center justify-evenly gap-2">
               {/* <li
                 onClick={() => setCategory("All")}
                 className={`${

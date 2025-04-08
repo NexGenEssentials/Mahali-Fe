@@ -14,8 +14,6 @@ export const NavItems = [
   { item: "Destinations", link: "destination" },
   { item: "Packages", link: "#package" },
   { item: "Contact Us", link: "#contacts" },
-  // { item: "login", link: "login" },
-  // { item: "Sign up", link: "signup" },
 ];
 
 const Navbar = () => {
@@ -24,9 +22,15 @@ const Navbar = () => {
   const [hideFixedNav, setHideFixedNav] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isMounted, setIsMounted] = useState(false); 
   const { openNavDiscount, setOpenNavDiscount, setIsLogin, isLogin } =
     useAppContext();
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
     setScrollY(currentScrollY);
@@ -72,44 +76,63 @@ const Navbar = () => {
     checkLogin();
   }, []);
 
-  const renderNavLinks = () => (
-    <ul className="flex flex-col lg:flex-row items-center mb-0 lg:gap-8">
-      {NavItems.map((nav, index) => (
-        <Link key={index} href={`/${nav.link}`}>
-          <motion.li
-            whileHover={{
-              scale: 1.05,
-              transition: { duration: 0.2 },
-            }}
-            className="hover:border-b-2 hover:border-primaryGreen py-2 lg:py-0 icon"
-          >
-            {nav.item}
-          </motion.li>
-        </Link>
-      ))}
-      <li className="hidden max-lg:flex items-center text-white my-4 gap-4 text-sm">
-        <Link href={"/login"}>
-          <motion.button
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-            className="bg-primaryGreen px-6 py-2 rounded-md"
-          >
-            Login
-          </motion.button>
-        </Link>
-        <Link href={"/signup"}>
-          <motion.button
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-            className="bg-primaryGreen px-6 py-2 rounded-md"
-          >
-            SignUp
-          </motion.button>
-        </Link>
-      </li>
-    </ul>
-  );
+  const renderNavLinks = () => {
+    return (
+      <ul className="flex flex-col lg:flex-row items-center mb-0 lg:gap-8">
+        {NavItems.map((nav, index) => (
+          <Link key={index} href={`/${nav.link}`}>
+            <motion.li
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.2 },
+              }}
+              className="hover:border-b-2 hover:border-primaryGreen py-2 lg:py-0 icon"
+            >
+              {nav.item}
+            </motion.li>
+          </Link>
+        ))}
 
+        {isLogin && (
+          <Link href={`/account`} className="hidden max-lg:flex items-center">
+            <motion.li
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.2 },
+              }}
+              className="hover:border-b-2 hover:border-primaryGreen py-2 lg:py-0 icon"
+            >
+              My account
+            </motion.li>
+          </Link>
+        )}
+
+        {!isLogin && (
+          <li className="hidden max-lg:flex items-center text-white my-4 gap-4 text-sm">
+            <Link href={"/login"}>
+              <motion.button
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.8 }}
+                className="bg-primaryGreen px-6 py-2 rounded-md"
+              >
+                Login
+              </motion.button>
+            </Link>
+            <Link href={"/signup"}>
+              <motion.button
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.8 }}
+                className="bg-primaryGreen px-6 py-2 rounded-md"
+              >
+                SignUp
+              </motion.button>
+            </Link>
+          </li>
+        )}
+      </ul>
+    );
+  };
+  if (!isMounted) return null;
   return (
     <>
       {/* Default Navbar */}
@@ -143,7 +166,7 @@ const Navbar = () => {
               </div>
             </Link>
 
-            {isMobile && !isLogin ? (
+            {isMobile && (
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="text-white lg:hidden focus:outline-none"
@@ -167,14 +190,6 @@ const Navbar = () => {
                   />
                 </svg>
               </button>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                className="w-fit lg:hidden"
-              >
-                <UserProfile />
-              </motion.div>
             )}
           </div>
 
@@ -240,10 +255,11 @@ const Navbar = () => {
                   width={60}
                 />
               </Link>
-              {isMobile && !isLogin ? (
+
+              {isMobile && (
                 <button
                   onClick={() => setMenuOpen(!menuOpen)}
-                  className="text-white lg:hidden focus:outline-none"
+                  className="text-slate-900 lg:hidden focus:outline-none"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -264,16 +280,9 @@ const Navbar = () => {
                     />
                   </svg>
                 </button>
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  className="w-fit lg:hidden"
-                >
-                  <UserProfile />
-                </motion.div>
               )}
             </div>
+
             {!isMobile && (
               <div className="flex items-center gap-4 text-defaultGreen">
                 {renderNavLinks()}

@@ -60,7 +60,7 @@ const Destination = () => {
           </div>
 
           {/* Navigation Bar for Destinations */}
-          <ul className="w-full sm:w-3/4 mx-auto flex gap-2 sm:gap-8 items-center justify-start sm:justify-center overflow-x-scroll ">
+          <ul className="w-full lg:w-3/4 mx-auto flex gap-2 sm:gap-8 items-center justify-evenly sm:justify-center overflow-x-scroll max-md:bg-slate-100 max-md:rounded-full hide-scrollbar py-2">
             <li
               onClick={() => {
                 setActive("Custom Package");
@@ -70,7 +70,7 @@ const Destination = () => {
                 active === "Custom Package"
                   ? "bg-primaryGreen text-white duration-500 "
                   : "text-primaryBlue"
-              } p-2 cursor-pointer text-sm font-medium rounded hover:bg-primaryGreen hover:text-white duration-500`}
+              } p-2 cursor-pointer text-sm text-nowrap font-medium max-md:rounded-full rounded hover:bg-primaryGreen hover:text-white duration-500`}
               key={"custome"}
             >
               {"Custom Package"}
@@ -86,7 +86,7 @@ const Destination = () => {
                   active === location.name
                     ? "bg-primaryGreen text-white duration-500"
                     : "text-primaryBlue"
-                } p-2 cursor-pointer text-sm font-medium rounded hover:bg-primaryGreen hover:text-white duration-500`}
+                } p-2 cursor-pointer text-sm font-medium max-md:rounded-full rounded hover:bg-primaryGreen hover:text-white duration-500`}
               >
                 {location.name}
               </li>
