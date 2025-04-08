@@ -125,6 +125,10 @@ export type CustomeTourPackageType = {
   accomodation: string;
   package_activities: PackageActivity[];
 };
+export type AddActivityTourPackageType = {
+  number_of_people: number;
+  activities: PackageActivity[];
+};
 
 export type PackageActivityData = {
   id: number;

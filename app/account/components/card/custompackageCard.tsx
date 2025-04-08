@@ -8,18 +8,18 @@ type Props = {
   customPackage: CustomPackageData;
   onBook: (id: number) => void;
   onDelete: (id: number) => void;
+  onEdit: (id: number) => void;
 };
 
 const CustomPackageCard: React.FC<Props> = ({
   customPackage,
   onBook,
   onDelete,
+  onEdit,
 }) => {
   const [show, setShow] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [activityList, setActivityList] = useState<PackageActivityData[]>(
-    customPackage.package_activities
-  );
+  const [activityList, setActivityList] = useState<PackageActivityData[]>(customPackage.package_activities);
 
   // Close dropdown when clicked outside
   useEffect(() => {
@@ -65,7 +65,10 @@ const CustomPackageCard: React.FC<Props> = ({
             />
             {show && (
               <div className="absolute top-6 right-0 shadow-xl bg-white rounded-lg p-3 space-y-2 min-w-20 z-30 border">
-                <span className="flex items-center gap-2 hover:bg-gray-200 rounded-md text-sm px-4 py-1 text-primaryGreen cursor-pointer">
+                <span
+                  onClick={() => onEdit(customPackage.id)}
+                  className="flex items-center gap-2 hover:bg-gray-200 rounded-md text-sm px-4 py-1 text-primaryGreen cursor-pointer"
+                >
                   <Icon
                     icon="lucide:edit"
                     width="15"

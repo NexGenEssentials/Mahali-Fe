@@ -64,10 +64,9 @@ const BookingAction: React.FC<CreateBookingPayload> = ({
         note,
       };
 
-      console.log({ bookingData });
 
       const result = await CreateBooking(bookingData);
-      console.log({ result });
+  
 
       if (result) router.push("/account/bookings-trips");
     } catch (error) {

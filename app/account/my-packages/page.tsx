@@ -8,6 +8,7 @@ import CustomPackageCard from "../components/card/custompackageCard";
 import BookingAction from "../components/card/bookingAction";
 import CenterModal from "@/app/(landingPage)/components/model/centerModel";
 import { useAppContext } from "@/app/context";
+import AddActivities from "../components/card/addActivities";
 
 const contentId = process.env.NEXT_PUBLIC_CUSTOM_PACKAGE_ID;
 
@@ -20,17 +21,19 @@ const CustomPackgesPage = () => {
     CustomPackageData | undefined
   >();
   const { setActiveModalId } = useAppContext();
+  const [finish, setFinish] = useState("12");
 
   useEffect(() => {
-    const getCustomData = async () => {
-      const result = await getCustomPackage();
-      if (result.success) {
-        setCustPack(result.data);
-        setFilteredCustomPack(result.data);
-      }
-    };
     getCustomData();
-  }, []);
+  }, [finish]);
+
+  const getCustomData = async () => {
+    const result = await getCustomPackage();
+    if (result.success) {
+      setCustPack(result.data);
+      setFilteredCustomPack(result.data);
+    }
+  };
 
   function getPackageById(
     packages: CustomPackageData[],
@@ -44,6 +47,11 @@ const CustomPackgesPage = () => {
     setActiveModalId("book custom pack");
   };
 
+  const handleEdit = async (packageId: number) => {
+    setBookedCustPack(getPackageById(custPack, packageId));
+    setActiveModalId("edit custom pack");
+  };
+
   const handleDelete = async (packageId: number) => {
     try {
       const result = await DeleteCustomPackage(packageId);
@@ -55,12 +63,15 @@ const CustomPackgesPage = () => {
       console.error("Error deleting booking:", error);
     }
   };
-
+ 
   return (
     <ClientPageTemplates>
       <div className="flex flex-col gap-6 min-h-screen px-4">
         <Title name="My Tour Package " icon="material-symbols:book" />
-        <div className="flex gap-4 flex-wrap items-stretch justify-center">
+        <div
+          key={finish}
+          className="flex gap-4 flex-wrap items-stretch justify-center"
+        >
           {[...filteredCustomPack]
             .sort((a, b) => b.id - a.id)
             .map((pack) => (
@@ -69,6 +80,7 @@ const CustomPackgesPage = () => {
                 customPackage={pack}
                 onBook={handleBook}
                 onDelete={handleDelete}
+                onEdit={handleEdit}
               />
             ))}
         </div>
@@ -84,6 +96,11 @@ const CustomPackgesPage = () => {
           />
         }
         id={"book custom pack"}
+      />
+
+      <CenterModal
+        children={<AddActivities pack={bookedCustPack} onFinish={setFinish} />}
+        id={"edit custom pack"}
       />
     </ClientPageTemplates>
   );

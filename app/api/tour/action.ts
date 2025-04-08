@@ -1,6 +1,7 @@
 "use server";
 
 import {
+  AddActivityTourPackageType,
   CategoriesResponse,
   CountryResponseType,
   countryTourResponseType,
@@ -145,11 +146,36 @@ export const getCustomPackage = async (): Promise<CustomPackagesResponse> => {
 };
 
 export const DeleteCustomPackage = async (
+  packageId: number
+): Promise<boolean> => {
+  try {
+    const response = await fetch(`${base_url}/packages/${packageId}/delete/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (!response.ok) {
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.log("Something went wrong", { error });
+    throw error;
+  }
+};
+
+// delete activity on custom package
+
+export const DeleteActivityPackage = async (
   packageId: number,
+  activityId: number
 ): Promise<boolean> => {
   try {
     const response = await fetch(
-      `${base_url}/packages/${packageId}/delete/`,
+      `${base_url}/packages/${packageId}/remove-activity/${activityId}/`,
       {
         method: "DELETE",
         headers: {
@@ -169,27 +195,28 @@ export const DeleteCustomPackage = async (
   }
 };
 
-// delete activity on custom package
+export const AddNewActivities = async (
+  data: AddActivityTourPackageType,
+  packageId?: number,
+): Promise<CategoriesResponse> => {
 
-export const DeleteActivityPackage = async (packageId:number,activityId:number): Promise<boolean> => {
   try {
     const response = await fetch(
-      `${base_url}/packages/${packageId}/remove-activity/${activityId}/`,
+      `${base_url}/packages/${packageId}/add-activity/`,
       {
-        method: "DELETE",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
+        body: JSON.stringify(data),
       }
     );
-    if (!response.ok) {
-      return false;
-    }
 
-    return true;
+    const result = await response.json();
+
+    return result;
   } catch (error) {
-    console.log("Something went wrong", { error });
     throw error;
   }
 };
