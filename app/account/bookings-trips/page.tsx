@@ -26,7 +26,7 @@ function BookingsPage() {
   const router = useRouter();
   const pageSize = 10;
   const { setActiveModalId } = useAppContext();
-
+  const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
   useEffect(() => {
     fetchBookings();
   }, []);
@@ -74,11 +74,20 @@ function BookingsPage() {
     setActiveModalId("rebook pack");
   };
 
-  const handleView = (bookingId: number, type: string) => {
-    if (type === "tourpackage") {
-      router.push(`/packages/${bookingId}`);
-    } else if (type === "car") router.push(`/service/car-rental/${bookingId}`);
-  };
+ const handleView = (bookingId: number, type: string, rowKey: number) => {
+   if (type === "custompackage") {
+     // Toggle expand/collapse
+     setExpandedRowKeys((prevKeys) =>
+       prevKeys.includes(rowKey)
+         ? prevKeys.filter((key) => key !== rowKey)
+         : [...prevKeys, rowKey]
+     );
+   } else if (type === "tourpackage") {
+     router.push(`/packages/${bookingId}`);
+   } else if (type === "car") {
+     router.push(`/service/car-rental/${bookingId}`);
+   }
+ };
 
   const columns = [
     {
@@ -117,7 +126,6 @@ function BookingsPage() {
         return <span>{createdAt.toISOString().split("T")[0]}</span>;
       },
     },
-
     {
       title: "Start Date",
       dataIndex: "start_date",
@@ -172,7 +180,9 @@ function BookingsPage() {
         <span className="flex space-x-2">
           <Button
             type="link"
-            onClick={() => handleView(record.object_id, record.content_type)}
+            onClick={() =>
+              handleView(record.object_id, record.content_type, record.id)
+            }
             icon={<Icon icon="mdi:eye" />}
             className="!text-stone-500 !font-bold"
           >
@@ -264,6 +274,8 @@ function BookingsPage() {
               pagination={false}
               className="w-full"
               expandable={{
+                expandedRowKeys,
+                onExpandedRowsChange: (keys) => setExpandedRowKeys([...keys]),
                 expandedRowRender: (record: BookingData) => (
                   <div className="p-4 bg-gray-100 rounded-md">
                     <p>
@@ -272,14 +284,13 @@ function BookingsPage() {
                     <p>
                       <strong>Email:</strong> {record.user.email}
                     </p>
-
                     <p>
                       <strong>Notes:</strong>{" "}
                       {record.note || "No additional notes."}
                     </p>
                   </div>
                 ),
-                rowExpandable: (record) => true, // all rows expandable, or add your condition
+                rowExpandable: (record) => true,
               }}
             />
 

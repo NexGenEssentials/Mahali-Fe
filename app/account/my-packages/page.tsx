@@ -10,6 +10,8 @@ import CenterModal from "@/app/(landingPage)/components/model/centerModel";
 import { useAppContext } from "@/app/context";
 import AddActivities from "../components/card/addActivities";
 import Loading from "@/app/loading";
+import { motion } from "motion/react";
+import { SquarePen } from "lucide-react";
 
 const contentId = process.env.NEXT_PUBLIC_CUSTOM_PACKAGE_ID;
 
@@ -21,12 +23,12 @@ const CustomPackgesPage = () => {
   const [bookedCustPack, setBookedCustPack] = useState<
     CustomPackageData | undefined
   >();
-  const { setActiveModalId } = useAppContext();
+  const {activeModalId, setActiveModalId } = useAppContext();
   const [loading, setloading] = useState(false);
 
   useEffect(() => {
     getCustomData();
-  }, []);
+  }, [activeModalId]);
 
   const getCustomData = async () => {
     setloading(true);
@@ -72,7 +74,16 @@ const CustomPackgesPage = () => {
   return (
     <ClientPageTemplates>
       <div className="flex flex-col gap-6 min-h-screen px-4">
-        <Title name="My Tour Package " icon="material-symbols:book" />
+        <div className="flex items-stretch justify-between gap-2">
+          <Title name="My Tour Package " icon="material-symbols:book" />
+          <motion.span
+            onClick={() => setActiveModalId("Custom Package")}
+            whileHover={{ scale: 0.9 }}
+            className="p-3 rounded-md text-white hover:bg-primaryGreen bg-primaryGreen/70 cursor-pointer font-bold flex gap-2"
+          >
+            Create New Custom Package <SquarePen />
+          </motion.span>
+        </div>
         <div className="flex gap-4 flex-wrap items-stretch justify-center">
           {[...filteredCustomPack]
             .sort((a, b) => b.id - a.id)
@@ -106,6 +117,7 @@ const CustomPackgesPage = () => {
         }
         id={"edit custom pack"}
       />
+      
     </ClientPageTemplates>
   );
 };

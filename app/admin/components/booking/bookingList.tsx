@@ -76,56 +76,7 @@ function AdminBookingsPage() {
     setCurrentPage(1);
   };
 
-  // const columns = [
-  //   {
-  //     title: "ID",
-  //     dataIndex: "id",
-  //     key: "id",
-  //     sorter: (a: BookingData, b: BookingData) => a.id - b.id,
-  //   },
-  //   { title: "Type", dataIndex: "content_type", key: "content_type" },
-  //   { title: "Guest", dataIndex: "guests", key: "guests" },
-  //   {
-  //     title: "Start Date",
-  //     dataIndex: "start_date",
-  //     key: "start_date",
-  //     sorter: (a: BookingData, b: BookingData) =>
-  //       new Date(a.start_date).getTime() - new Date(b.start_date).getTime(),
-  //   },
-  //   {
-  //     title: "End Date",
-  //     dataIndex: "end_date",
-  //     key: "end_date",
-  //     sorter: (a: BookingData, b: BookingData) =>
-  //       new Date(a.end_date).getTime() - new Date(b.end_date).getTime(),
-  //   },
-  //   {
-  //     title: "Price ($)",
-  //     dataIndex: "total_price",
-  //     key: "total_price",
-  //     sorter: (a: BookingData, b: BookingData) =>
-  //       Number(a.total_price) - Number(b.total_price),
-  //   },
-  //   {
-  //     title: "Status",
-  //     dataIndex: "status",
-  //     key: "status",
-  //     render: (status: string, record: BookingData) =>
-  //       status === "pending" ? (
-  //         <Select
-  //           defaultValue={status}
-  //           onChange={(value) => handleStatusChange(record.id, value)}
-  //         >
-  //           <Option value="confirm">Confirm</Option>
-  //           <Option value="cancel">Cancel</Option>
-  //         </Select>
-  //       ) : (
-  //         <Tag color={status === "confirmed" ? "green" : "red"}>
-  //           {status.toUpperCase()}
-  //         </Tag>
-  //       ),
-  //   },
-  // ];
+  
 
   const columns = [
     {
@@ -219,14 +170,14 @@ function AdminBookingsPage() {
       key: "actions",
       render: (text: string, record: BookingData) => (
         <span className="flex space-x-2">
-          <Button
+          {/* <Button
             type="link"
             //  onClick={() => handleView(record.object_id, record.content_type)}
             icon={<Icon icon="mdi:eye" />}
             className="!text-stone-500 !font-bold"
           >
             View
-          </Button>
+          </Button> */}
 
           <Popconfirm
             title="Are you sure you want to delete this booking?"
