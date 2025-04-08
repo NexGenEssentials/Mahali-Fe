@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Key } from "react";
 import { Icon } from "@iconify/react";
 import {
   Table,
@@ -19,7 +19,7 @@ import {
 import { BookingData } from "@/app/types";
 import Loader from "@/app/(landingPage)/components/skeleton/loader";
 import Title from "@/app/account/components/header/title";
-import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { useAppContext } from "@/app/context";
 
 const { Option } = Select;
 const { Search } = Input;
@@ -31,6 +31,8 @@ function AdminBookingsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
   const pageSize = 10;
+
+  const [expandedRowKeys, setExpandedRowKeys] = useState<Key[]>([]);
 
   useEffect(() => {
     fetchBookings();
@@ -76,7 +78,14 @@ function AdminBookingsPage() {
     setCurrentPage(1);
   };
 
-  
+  const handleView = (bookingId: number, type: string, rowKey: number) => {
+    // Toggle expand/collapse
+    setExpandedRowKeys((prevKeys) =>
+      prevKeys.includes(rowKey)
+        ? prevKeys.filter((key) => key !== rowKey)
+        : [...prevKeys, rowKey]
+    );
+  };
 
   const columns = [
     {
@@ -170,14 +179,16 @@ function AdminBookingsPage() {
       key: "actions",
       render: (text: string, record: BookingData) => (
         <span className="flex space-x-2">
-          {/* <Button
+          <Button
             type="link"
-            //  onClick={() => handleView(record.object_id, record.content_type)}
+            onClick={() =>
+              handleView(record.object_id, record.content_type, record.id)
+            }
             icon={<Icon icon="mdi:eye" />}
             className="!text-stone-500 !font-bold"
           >
             View
-          </Button> */}
+          </Button>
 
           <Popconfirm
             title="Are you sure you want to delete this booking?"
@@ -251,6 +262,8 @@ function AdminBookingsPage() {
             pagination={false}
             className="w-full"
             expandable={{
+              expandedRowKeys,
+              onExpandedRowsChange: (keys) => setExpandedRowKeys([...keys]),
               expandedRowRender: (record: BookingData) => (
                 <div className="p-4 bg-gray-100 rounded-md">
                   <p>
@@ -259,14 +272,13 @@ function AdminBookingsPage() {
                   <p>
                     <strong>Email:</strong> {record.user.email}
                   </p>
-
                   <p>
                     <strong>Notes:</strong>{" "}
                     {record.note || "No additional notes."}
                   </p>
                 </div>
               ),
-              rowExpandable: (record) => true, // all rows expandable, or add your condition
+              rowExpandable: (record) => true,
             }}
           />
           <div className="flex justify-center mt-4">
