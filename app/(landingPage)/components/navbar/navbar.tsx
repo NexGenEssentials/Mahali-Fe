@@ -14,6 +14,8 @@ export const NavItems = [
   { item: "Destinations", link: "destination" },
   { item: "Packages", link: "#package" },
   { item: "Contact Us", link: "#contacts" },
+  // { item: "login", link: "login" },
+  // { item: "Sign up", link: "signup" },
 ];
 
 const Navbar = () => {
@@ -85,6 +87,26 @@ const Navbar = () => {
           </motion.li>
         </Link>
       ))}
+      <li className="hidden max-lg:flex items-center text-white my-4 gap-4 text-sm">
+        <Link href={"/login"}>
+          <motion.button
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+            className="bg-primaryGreen px-6 py-2 rounded-md"
+          >
+            Login
+          </motion.button>
+        </Link>
+        <Link href={"/signup"}>
+          <motion.button
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+            className="bg-primaryGreen px-6 py-2 rounded-md"
+          >
+            SignUp
+          </motion.button>
+        </Link>
+      </li>
     </ul>
   );
 
@@ -106,7 +128,8 @@ const Navbar = () => {
             </div>
           </div>
         )}
-        <div className="max-w-[1750px] mx-auto text-white text-sm font-semibold flex-wrap flex items-center justify-between px-8 py-3">
+
+        <div className="max-w-[1750px] mx-auto text-white text-sm font-semibold flex-wrap flex items-center justify-between px-2 md:px-8 py-3">
           <div className="flex items-center justify-between w-full lg:w-auto">
             <Link href={"/"}>
               <div className="h-20 w-20 rounded-full  bg-white flex items-center justify-center">
@@ -119,7 +142,8 @@ const Navbar = () => {
                 />
               </div>
             </Link>
-            {isMobile && (
+
+            {isMobile && !isLogin ? (
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="text-white lg:hidden focus:outline-none"
@@ -143,8 +167,17 @@ const Navbar = () => {
                   />
                 </svg>
               </button>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                className="w-fit lg:hidden"
+              >
+                <UserProfile />
+              </motion.div>
             )}
           </div>
+
           {!isMobile && (
             <div className="flex items-center gap-4 text-white text-base">
               {renderNavLinks()}
@@ -197,7 +230,7 @@ const Navbar = () => {
               : "-translate-y-full"
           }`}
         >
-          <div className="max-w-[1750px] mx-auto text-black text-sm font-semibold flex-wrap flex items-center justify-between px-8 py-3">
+          <div className="max-w-[1750px] mx-auto text-black text-sm font-semibold flex-wrap flex items-center justify-between px-2 md:px-8 py-3">
             <div className="flex items-center justify-between w-full lg:w-auto">
               <Link href={"/"}>
                 <Image
@@ -207,10 +240,10 @@ const Navbar = () => {
                   width={60}
                 />
               </Link>
-              {isMobile && (
+              {isMobile && !isLogin ? (
                 <button
                   onClick={() => setMenuOpen(!menuOpen)}
-                  className="text-black lg:hidden focus:outline-none"
+                  className="text-white lg:hidden focus:outline-none"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -231,6 +264,14 @@ const Navbar = () => {
                     />
                   </svg>
                 </button>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  className="w-fit lg:hidden"
+                >
+                  <UserProfile />
+                </motion.div>
               )}
             </div>
             {!isMobile && (

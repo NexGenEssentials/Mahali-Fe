@@ -1,10 +1,10 @@
 "use client";
 import React, { ReactNode, useState } from "react";
 import Footer from "../(landingPage)/components/footer/footer";
-import AccountNav from "../account/components/navbar/accountNav";
 import { ServiceList } from "../constants/arrays";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useAppContext } from "../context";
+import AdminNav from "./components/navbar/adminNav";
 
 function AdminPagesTemplates({ children }: { children: ReactNode }) {
   const { adminServiceTab, setAdminServiceTab } = useAppContext();
@@ -12,7 +12,7 @@ function AdminPagesTemplates({ children }: { children: ReactNode }) {
 
   return (
     <div className="">
-      <AccountNav />
+      <AdminNav />
       <div className="w-full flex  pt-28 pb-5 px-8 max-w-[1750px] mx-auto">
         <aside className={`${show ? "min-w-[300px]" : "px-6"} relative `}>
           {show && (
