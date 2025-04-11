@@ -184,13 +184,15 @@ function AdminBookingsPage() {
         return (
           <button
             className={`${
-              data.status === "confirmed"
-                ? "bg-blue-300 text-slate-700"
-                : "bg-slate-200 text-slate-400"
-            } p-2 rounded-lg`}
+              data.payment_status === "pending"
+                ? " text-yellow-400"
+                : data.payment_status === "confirmed"
+                ? "text-green-400"
+                : " text-red-400"
+            } p-2 rounded-lg capitalize font-semibold`}
             disabled={data.status !== "confirmed"}
           >
-            Pay Now
+            {data.payment_status ? data.payment_status : "Not paid"}
           </button>
         );
       },

@@ -25,7 +25,7 @@ function BookingsPage() {
   const [searchText, setSearchText] = useState("");
   const router = useRouter();
   const pageSize = 10;
-  const { setActiveModalId } = useAppContext();
+  const { setActiveModalId, setBookingData } = useAppContext();
   const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
   useEffect(() => {
     fetchBookings();
@@ -87,6 +87,11 @@ function BookingsPage() {
     } else if (type === "car") {
       router.push(`/service/car-rental/${bookingId}`);
     }
+  };
+
+  const handlePayment = (record: BookingData) => {
+    setActiveModalId("pay");
+    setBookingData(record);
   };
 
   const columns = [
@@ -223,6 +228,7 @@ function BookingsPage() {
             </Button>
           )}
           <button
+            onClick={() => handlePayment(record)}
             className={`${
               record.status === "confirmed"
                 ? "bg-blue-300 text-slate-700"
