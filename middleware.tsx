@@ -30,7 +30,11 @@ export function middleware(request: NextRequest) {
 
     if (decoded.role === "admin") {
       // Allow admin only on admin routes
-      if (pathname.startsWith("/admin")) {
+      if (
+        pathname.startsWith("/admin") ||
+        pathname.startsWith("/account") ||
+        pathname.startsWith("/service/booking")
+      ) {
         return NextResponse.next();
       } else {
         return NextResponse.redirect(loginUrl);
