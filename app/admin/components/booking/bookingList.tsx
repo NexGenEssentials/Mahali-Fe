@@ -13,6 +13,7 @@ import {
   notification,
 } from "antd";
 import {
+  DeleteMyBooking,
   getAllMyBookings,
   updateBookingStatus,
 } from "@/app/api/booking/action";
@@ -85,6 +86,18 @@ function AdminBookingsPage() {
         ? prevKeys.filter((key) => key !== rowKey)
         : [...prevKeys, rowKey]
     );
+  };
+
+  const handleDelete = async (bookingId: number) => {
+    try {
+      const result = await DeleteMyBooking(bookingId);
+      if (result)
+        setFilteredBookings((prev) =>
+          prev.filter((booking) => booking.id !== bookingId)
+        );
+    } catch (error) {
+      console.error("Error deleting booking:", error);
+    }
   };
 
   const columns = [
@@ -215,7 +228,7 @@ function AdminBookingsPage() {
 
           <Popconfirm
             title="Are you sure you want to delete this booking?"
-            //  onConfirm={() => handleDelete(record.id)}
+             onConfirm={() => handleDelete(record.id)}
             okText="Yes"
             cancelText="No"
             okButtonProps={{
