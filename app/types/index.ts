@@ -141,3 +141,13 @@ export type BookingResponse = {
   message: string;
   data: BookingData[];
 };
+
+export type PaymentResponseType = {
+  authkey: string;
+  refid: string;
+  reply: string;
+  retcode: number;
+  success: number;
+  tid: string;
+  url: string;
+};

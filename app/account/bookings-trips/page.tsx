@@ -74,20 +74,20 @@ function BookingsPage() {
     setActiveModalId("rebook pack");
   };
 
- const handleView = (bookingId: number, type: string, rowKey: number) => {
-   if (type === "custompackage") {
-     // Toggle expand/collapse
-     setExpandedRowKeys((prevKeys) =>
-       prevKeys.includes(rowKey)
-         ? prevKeys.filter((key) => key !== rowKey)
-         : [...prevKeys, rowKey]
-     );
-   } else if (type === "tourpackage") {
-     router.push(`/packages/${bookingId}`);
-   } else if (type === "car") {
-     router.push(`/service/car-rental/${bookingId}`);
-   }
- };
+  const handleView = (bookingId: number, type: string, rowKey: number) => {
+    if (type === "custompackage") {
+      // Toggle expand/collapse
+      setExpandedRowKeys((prevKeys) =>
+        prevKeys.includes(rowKey)
+          ? prevKeys.filter((key) => key !== rowKey)
+          : [...prevKeys, rowKey]
+      );
+    } else if (type === "tourpackage") {
+      router.push(`/packages/${bookingId}`);
+    } else if (type === "car") {
+      router.push(`/service/car-rental/${bookingId}`);
+    }
+  };
 
   const columns = [
     {
@@ -173,6 +173,28 @@ function BookingsPage() {
         return <Tag color={color}>{status.toUpperCase()}</Tag>;
       },
     },
+    {
+      title: "Payment Status",
+      key: "payment_status",
+
+      sorter: (a: BookingData, b: BookingData) =>
+        a.status.localeCompare(b.status),
+      render: (data: BookingData) => {
+        return (
+          <button
+            className={`${
+              data.status === "confirmed"
+                ? "bg-blue-300 text-slate-700"
+                : "bg-slate-200 text-slate-400"
+            } p-2 rounded-lg`}
+            disabled={data.status !== "confirmed"}
+          >
+            Pay Now
+          </button>
+        );
+      },
+    },
+
     {
       title: "Actions",
       key: "actions",

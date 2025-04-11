@@ -1,6 +1,7 @@
 "use client";
 import { CreateBooking } from "@/app/api/booking/action";
 import { useAppContext } from "@/app/context";
+import { BookingData } from "@/app/types";
 import { notification } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -21,7 +22,7 @@ const UserCarBookingInfoForm = ({
   carId: number;
   price: number;
 }) => {
-  const { setActiveModalId, bookDate } = useAppContext();
+  const { setActiveModalId, bookDate, setBookingData } = useAppContext();
   const [formData, setFormData] = useState<FormData>({
     pickupDate: bookDate[0],
     pickupTime: "12:00",
@@ -29,8 +30,10 @@ const UserCarBookingInfoForm = ({
     dropTime: "12:00",
   });
   const [loading, setLoading] = useState(false);
+  const [loadingpay, setLoadingpay] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalDays, setTotalDays] = useState(0);
+  const [buttonType, setButtontype] = useState("booking");
   const router = useRouter();
   const pathname = usePathname();
 
@@ -92,7 +95,11 @@ const UserCarBookingInfoForm = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    if (buttonType === "booking") {
+      setLoading(true);
+    } else {
+      setLoadingpay(true);
+    }
     try {
       const pickup = new Date(
         formData.pickupDate.format("YYYY-MM-DD") + "T" + formData.pickupTime
@@ -118,22 +125,28 @@ const UserCarBookingInfoForm = ({
         };
 
         const result = await CreateBooking(bookingData);
-        
+
         if (result.status === "Unauthorized") {
           notification.error({
             message: "Unauthorized",
             description: "Please Login first",
             placement: "topRight",
           });
+
           router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
         } else {
+          setBookingData(result);
           notification.success({
             message: "Booking created successfully",
             description: "You can track the status of your booking",
             placement: "topRight",
           });
-          router.push("/account/bookings-trips");
-          setActiveModalId(null);
+          if (buttonType === "booking") {
+            router.push("/account/bookings-trips");
+            setActiveModalId(null);
+          } else if (buttonType === "pay") {
+            setActiveModalId("pay");
+          }
         }
       }
     } catch (error) {
@@ -144,6 +157,7 @@ const UserCarBookingInfoForm = ({
       });
     } finally {
       setLoading(false);
+      setLoadingpay(false);
     }
   };
 
@@ -201,6 +215,16 @@ const UserCarBookingInfoForm = ({
           />
         </div>
       </div>
+      <div className="flex gap-6 items-center">
+        <label className="flex items-center gap-2">
+          <input type="radio" name="location" value="inkigali" />
+          In Kigali
+        </label>
+        <label className="flex items-center gap-2">
+          <input type="radio" name="location" value="outkigali" />
+          Out of Kigali
+        </label>
+      </div>
       <div className="flex flex-col gap-3 py-6 text-sm">
         <span className="flex justify-between pr-2">
           <span className="font-semibold">Unit Price:</span> ${price}/Day
@@ -216,10 +240,20 @@ const UserCarBookingInfoForm = ({
       {/* Submit Button */}
       <div className="w-full flex justify-center">
         <button
+          onClick={() => setButtontype("booking")}
           type="submit"
           className="w-2/4 mx-auto px-2 py-3 border border-primaryGreen hover:text-white hover:bg-primaryGreen duration-300 text-primaryGreen font-semibold rounded-lg"
         >
           {loading ? "loading..." : "Book a car"}
+        </button>
+      </div>
+      <div className="w-full flex justify-center">
+        <button
+          onClick={() => setButtontype("pay")}
+          type="submit"
+          className="w-2/4 mx-auto px-2 py-3 border mt-4 bg-blue-200 text-slate-800 border-blue-400 hover:bg-blue-300 duration-300  font-semibold rounded-lg"
+        >
+          {loadingpay ? "loading..." : "Pay Now"}
         </button>
       </div>
     </form>

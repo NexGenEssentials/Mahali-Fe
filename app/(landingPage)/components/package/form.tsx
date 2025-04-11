@@ -75,7 +75,7 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
         };
 
         const result = await CreateBooking(bookingData);
-        if (result) router.push("/account/bookings-trips");
+        if (result.status) router.push("/account/bookings-trips");
       } else {
         router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
       }
@@ -133,7 +133,7 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
         <textarea
           value={inquiry}
           onChange={(e) => setInquiry(e.target.value)}
-          placeholder="Your inquiry"
+          placeholder="Your tour inquiry"
           rows={3}
           className="p-2 w-full text-sm rounded-lg outline-none"
         />
@@ -146,10 +146,19 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
         whileTap={{ scale: 0.9 }}
         transition={{ duration: 0.1 }}
         type="submit"
-        className="p-3 bg-primaryGreen text-white font-semibold rounded-md"
+        className="p-3 w-2/4 mx-auto bg-primaryGreen text-white font-semibold rounded-md"
       >
-        {loading ? "Sending..." : "Send"}
+        {loading ? "Sending..." : "Book Tour"}
       </motion.button>
+
+      <div className="w-full flex justify-center">
+        <button
+          type="submit"
+          className="w-2/4 mx-auto px-2 py-3 border  border-primaryGreen hover:text-white hover:bg-primaryGreen duration-300 text-primaryGreen font-semibold rounded-lg"
+        >
+          {loading ? "loading..." : "Pay Now"}
+        </button>
+      </div>
     </form>
   );
 };

@@ -1,13 +1,18 @@
 "use server";
 
-import { BookingDetails, BookingResponse } from "@/app/types";
+import {
+  BookingData,
+  BookingDetails,
+  BookingResponse,
+  PaymentResponseType,
+} from "@/app/types";
 import { cookies } from "next/headers";
 const base_url = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 const accessToken = cookies().get("accessToken")?.value;
 
 export const CreateBooking = async (
   bookingData: BookingDetails
-): Promise<{ status?: string; description?: string }> => {
+): Promise<BookingData> => {
   try {
     const response = await fetch(`${base_url}/bookings/`, {
       method: "POST",
@@ -19,19 +24,10 @@ export const CreateBooking = async (
     });
 
     const data = await response.json();
-    if (!response.ok) {
-      return {
-        status: response.statusText,
-        description: data.detail || "Something went wrong",
-      };
-    }
 
     return data;
   } catch (error) {
-    return {
-      status: "Internal Server Error",
-      description: "Something went wrong",
-    };
+    throw error;
   }
 };
 
@@ -85,7 +81,7 @@ export const updateBookingStatus = async (
   }
 };
 
-export const DeleteMyBooking = async (objectId:number): Promise<boolean> => {
+export const DeleteMyBooking = async (objectId: number): Promise<boolean> => {
   try {
     const response = await fetch(`${base_url}/bookings/${objectId}/`, {
       method: "DELETE",
@@ -94,7 +90,7 @@ export const DeleteMyBooking = async (objectId:number): Promise<boolean> => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
- 
+
     if (!response.ok) {
       return false;
     }
@@ -102,6 +98,30 @@ export const DeleteMyBooking = async (objectId:number): Promise<boolean> => {
     return true;
   } catch (error) {
     console.log("Something went wrong", { error });
+    throw error;
+  }
+};
+
+export const CreatePaymentMethod = async (bookingData: {
+  booking_id?: number;
+  pmethod?: string;
+  amount: number;
+  redirect_url: string;
+}): Promise<PaymentResponseType> => {
+  try {
+    const response = await fetch(`${base_url}/payment/initiate/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(bookingData),
+    });
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
     throw error;
   }
 };
