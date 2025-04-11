@@ -29,7 +29,7 @@ const PaymentMethodModel: React.FC<Props> = () => {
       booking_id: bookingData?.id,
       pmethod: method,
       amount: Number(bookingData?.total_price),
-      redirect_url: "",
+      redirect_url: "http://localhost:3000/account/bookings-trips",
     };
 
     try {

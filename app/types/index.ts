@@ -123,17 +123,18 @@ export type BookingData = {
     full_name: string;
     email: string;
   };
-  content_type: string; 
+  content_type: string;
   object_id: number;
-  start_date: string; 
+  start_date: string;
   end_date: string;
   guests: number;
   total_price: string;
-  status: string; 
-  created_at: string; 
+  status: string;
+  created_at: string;
   updated_at: string;
   booking_reference: string;
-  note?: string; 
+  note?: string;
+  payment_status:string;
 };
 
 export type BookingResponse = {
