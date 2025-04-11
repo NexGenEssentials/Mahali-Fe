@@ -26,7 +26,9 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
   const [inquiry, setInquiry] = useState<string>("");
   const pathname = usePathname();
   const router = useRouter();
-  const { isLogin } = useAppContext();
+  const { isLogin, setActiveModalId, setBookingData } = useAppContext();
+  const [loadingpay, setLoadingpay] = useState(false);
+  const [buttonType, setButtontype] = useState("booking");
 
   const validateForm = () => {
     let isValid = true;
@@ -56,8 +58,12 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
 
   const handleBooking = async () => {
     if (!validateForm()) return;
+    if (buttonType === "booking") {
+      setLoading(true);
+    } else {
+      setLoadingpay(true);
+    }
 
-    setLoading(true);
     try {
       if (isLogin) {
         const bookingData = {
@@ -70,12 +76,19 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
             ? dateSelected[1].format("YYYY-MM-DD")
             : "",
           guests: people,
-          total_price: Number(tour?.price), 
+          total_price: Number(tour?.price),
           note: inquiry.trim(),
         };
 
         const result = await CreateBooking(bookingData);
-        if (result.status) router.push("/account/bookings-trips");
+        if (result.object_id) {
+          if (buttonType === "booking") {
+            router.push("/account/bookings-trips");
+          } else if (buttonType === "pay") {
+            setBookingData(result);
+            setActiveModalId("pay");
+          }
+        }
       } else {
         router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
       }
@@ -83,6 +96,7 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
       console.error("ERROR", error);
     } finally {
       setLoading(false);
+      setLoadingpay(false);
     }
   };
 
@@ -146,6 +160,7 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
         whileTap={{ scale: 0.9 }}
         transition={{ duration: 0.1 }}
         type="submit"
+        onClick={() => setButtontype("booking")}
         className="p-3 w-2/4 mx-auto bg-primaryGreen text-white font-semibold rounded-md"
       >
         {loading ? "Sending..." : "Book Tour"}
@@ -153,10 +168,11 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
 
       <div className="w-full flex justify-center">
         <button
+          onClick={() => setButtontype("pay")}
           type="submit"
-          className="w-2/4 mx-auto px-2 py-3 border  border-primaryGreen hover:text-white hover:bg-primaryGreen duration-300 text-primaryGreen font-semibold rounded-lg"
+          className="w-2/4 mx-auto px-2 py-3 border mt-4 bg-blue-200 text-slate-800 border-blue-400 hover:bg-blue-300 duration-300  font-semibold rounded-lg"
         >
-          {loading ? "loading..." : "Pay Now"}
+          {loadingpay ? "loading..." : "Pay Now"}
         </button>
       </div>
     </form>
