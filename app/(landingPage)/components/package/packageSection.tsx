@@ -74,7 +74,7 @@ const PackageSection = () => {
           captivating landscapes and vibrant cultures on unforgettable journeys."
           />
 
-          <ul className="flex max-md:rounded-full hide-scrollbar gap-3 md:gap-8 p-2 w-full items-end justify-evenly overflow-x-scroll max-md:bg-slate-100">
+          <ul className="flex max-md:rounded-full hide-scrollbar gap-3 md:gap-8 p-2 w-full items-end justify-center overflow-x-scroll max-md:bg-slate-100">
             <li
               onClick={() => setActive("Custom Package")}
               className={`${
