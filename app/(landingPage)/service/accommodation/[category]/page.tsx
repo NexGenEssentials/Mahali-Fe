@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Search, { SearchProps } from "antd/es/input/Search";
 import CheckAvailability from "@/app/(landingPage)/components/service/accommodation/filters/checkAvailability";
 import PriceFilter from "@/app/(landingPage)/components/service/accommodation/filters/price";
@@ -9,20 +9,51 @@ import LandingPage from "@/app/(landingPage)/landingPageTamplates";
 import { filterByCategory } from "@/app/helpers/filter";
 import accom1 from "@/public/images/accom3.jpg";
 import AccommodationCard from "@/app/(landingPage)/components/service/accommodation/accomodationCategoryCad";
+import { getAllAccomodations } from "@/app/api/accommodation/action";
+import { AccommodationType } from "@/app/types/accommodation";
+import Loading from "@/app/loading";
 
 // Main accommodation category component
-const AccommodationCategory = async ({
+
+const AccommodationCategory = ({
   params,
 }: {
   params: { category: string };
 }) => {
+  const [Accommodations, setAccomodations] = useState<AccommodationType[]>([]);
+  const [getAccommodations, setGetAccommodations] = useState<
+    AccommodationType[]
+  >([]);
+  const [loading, setLoading] = useState(false);
   const category = decodeURIComponent(params.category);
-  const Accommodations = filterByCategory(category);
+
+  useEffect(() => {
+    accommodations();
+  }, []);
+
+  const accommodations = async () => {
+    setLoading(true);
+    try {
+      const result = await getAllAccomodations();
+      if (result.success) {
+        setGetAccommodations(result.data);
+        setAccomodations(filterByCategory(category, result.data));
+      }
+    } catch (error) {
+      console.log({ error });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Search functionality
   const onSearch: SearchProps["onSearch"] = (value) => {
     console.log(value);
   };
+
+  if (loading) return <Loading />;
+
+  console.log({ category, Accommodations });
 
   return (
     <LandingPage>
@@ -53,9 +84,9 @@ const AccommodationCategory = async ({
           </div>
 
           <div className="flex flex-col space-y-4 w-full">
-            {Accommodations.map((accomod, index) => (
+            {Accommodations.map((accomod) => (
               <AccommodationCard
-                key={index}
+                key={accomod.id}
                 accomod={accomod}
                 category={category}
               />

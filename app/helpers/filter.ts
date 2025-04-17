@@ -6,6 +6,7 @@ import {
 } from "../constants/arrays";
 import { CarData } from "../types";
 import { CategoryType, CountryResponseType, CountryType } from "../types/tour";
+import { AccommodationType } from "../types/accommodation";
 
 export const filterPackages = (
   data: typeof PackageList,
@@ -41,23 +42,21 @@ export const getCarByName = (searchTerm: string, carList?: CarData[]) => {
   );
 };
 
-export const getPopularAccommodations = () => {
-  return Accommodations.flatMap((category) =>
-    category.details
-      .filter((detail) => detail.isPopular)
-      .map((detail) => ({
-        ...detail,
-        category: category.category,
-      }))
-  );
+export const getFeaturedAccommodations = (
+  accommodations: AccommodationType[]
+) => {
+  return accommodations.filter((accom) => accom.is_featured);
 };
 
-export const filterByCategory = (category: string) => {
-  const foundCategory = Accommodations.find(
+export const filterByCategory = (
+  category: string,
+  accommodations: AccommodationType[]
+): AccommodationType[] => {
+  const foundCategory = accommodations.filter(
     (accommodation) =>
       accommodation.category.toLowerCase() === category.toLowerCase()
   );
-  return foundCategory ? foundCategory.details : [];
+  return foundCategory;
 };
 
 export type AccommodationDetail = {

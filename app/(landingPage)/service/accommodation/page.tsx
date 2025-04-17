@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LandingPage from "../../landingPageTamplates";
 import ServicePageHero from "../../components/service/serviceHeroSection";
 import accom from "@/public/images/accom1.jpg";
@@ -10,16 +10,34 @@ import { HeaderSection } from "../../components/headers/header";
 import { motion } from "framer-motion";
 import AccomGalleryCard from "../../components/service/accommodation/accomGalleryCard";
 import { Icon } from "@iconify/react";
-import { Accommodations } from "@/app/constants/arrays";
-import { getPopularAccommodations } from "@/app/helpers/filter";
+import { getFeaturedAccommodations } from "@/app/helpers/filter";
 import Link from "next/link";
+import { getAllAccomodations } from "@/app/api/accommodation/action";
+import { AccommodationType } from "@/app/types/accommodation";
+import Loader from "../../components/skeleton/loader";
+import Loading from "@/app/loading";
 
 const AccommodationService = () => {
-  const onSearch: SearchProps["onSearch"] = (value) => {
-    
-  };
+  const [Accommodations, setAccomodations] = useState<AccommodationType[]>([]);
+  const [popularAccommodations, setpopularAccommodations] = useState<
+    AccommodationType[]
+  >([]);
+  const [loading, setLoading] = useState(false);
+  const onSearch: SearchProps["onSearch"] = (value) => {};
 
-  const popularAccommodations = getPopularAccommodations();
+  useEffect(() => {
+    accommodations();
+  }, []);
+
+  const accommodations = async () => {
+    setLoading(true);
+    const result = await getAllAccomodations();
+    if (result.success) {
+      setLoading(false);
+      setAccomodations(result.data);
+      setpopularAccommodations(getFeaturedAccommodations(result.data));
+    }
+  };
 
   return (
     <LandingPage>
@@ -78,7 +96,7 @@ const AccommodationService = () => {
                 >
                   <span>{category.category}</span>
                   <span className="absolute top-2 right-2 bg-white text-primaryGreen text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                    {category.details.length}
+                    {10}
                   </span>
                 </motion.div>
               </Link>
@@ -93,49 +111,56 @@ const AccommodationService = () => {
             subtitle="Most Popular Stays"
             description="Explore the top accommodations our guests rave about and book your favorite stay today!"
           />
-          <div className="flex gap-6 flex-wrap items-stretch justify-center">
-            {popularAccommodations.map((accommodation, index) => (
-              <div
-                key={index}
-                className="md:w-1/4 w-full flex flex-col gap-4 bg-white p-4 rounded-lg shadow-md"
-              >
-                {/* Accommodation Image Gallery */}
-                <AccomGalleryCard Gallery={accommodation.gallery} />
-                <Link
-                  href={`accommodation/${accommodation.category}/${accommodation.name}`}
+
+          {loading ? (
+            <div className="flex gap-6 flex-wrap items-stretch justify-center">
+              <Loading />
+            </div>
+          ) : (
+            <div className="flex gap-6 flex-wrap items-stretch justify-center">
+              {popularAccommodations.map((accommodation, index) => (
+                <div
+                  key={index}
+                  className="md:w-1/4 w-full flex flex-col gap-4 bg-white p-4 rounded-lg shadow-md"
                 >
-                  <div className="flex flex-col gap-2">
-                    {/* Title and Rating */}
-                    <div className="flex justify-between items-center">
-                      <h3 className="text-primaryGreen font-bold uppercase hover:opacity-70 transition-all">
-                        {accommodation.name}
-                      </h3>
-                      <span className="flex items-center text-primaryGreen">
-                        <Icon
-                          icon="material-symbols-light:star-rounded"
-                          width="20"
-                          height="20"
-                        />
-                        {accommodation.rating} ({accommodation.reviews})
+                  {/* Accommodation Image Gallery */}
+                  <AccomGalleryCard Gallery={accommodation.images} />
+                  <Link
+                    href={`accommodation/${accommodation.category}/${accommodation.name}`}
+                  >
+                    <div className="flex flex-col gap-2">
+                      {/* Title and Rating */}
+                      <div className="flex justify-between items-center">
+                        <h3 className="text-primaryGreen font-bold uppercase hover:opacity-70 transition-all">
+                          {accommodation.name}
+                        </h3>
+                        <span className="flex items-center text-primaryGreen">
+                          <Icon
+                            icon="material-symbols-light:star-rounded"
+                            width="20"
+                            height="20"
+                          />
+                          {accommodation.rating}({100})
+                        </span>
+                      </div>
+                      {/* Location */}
+                      <span className="text-primaryBlue">
+                        {accommodation.location}
                       </span>
+                      {/* Description */}
+                      <p className="text-xs text-gray-500 line-clamp-2">
+                        {accommodation.description}
+                      </p>
+                      {/* Price */}
+                      <div className="text-primaryGreen font-semibold text-lg">
+                        ${100}/Night
+                      </div>
                     </div>
-                    {/* Location */}
-                    <span className="text-primaryBlue">
-                      {accommodation.location}
-                    </span>
-                    {/* Description */}
-                    <p className="text-xs text-gray-500">
-                      {accommodation.description}
-                    </p>
-                    {/* Price */}
-                    <div className="text-primaryGreen font-semibold text-lg">
-                      {accommodation.price}/Night
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </LandingPage>

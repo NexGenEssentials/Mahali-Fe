@@ -6,7 +6,7 @@ import aboutImage from "@/public/images/kenya.jpg";
 import mahali from "@/public/images/logo.png";
 import Image from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import {HeaderSection} from "../components/headers/header";
+import { HeaderSection } from "../components/headers/header";
 import { AboutArray, AboutService, StaffList } from "@/app/constants/arrays";
 import ServiceSection from "../components/service/serviceSection";
 import guide from "@/public/images/profile.png";
@@ -119,18 +119,32 @@ const About = () => {
             </div>
           </div>
         </div>
-        <div className="max-w-[1750px] mx-auto w-full bg-slate-100 bg-opacity-20 p-8 flex flex-col gap-8">
+
+        <div className="max-w-[1750px] mx-auto w-full px-6 py-12">
           <HeaderSection title="" subtitle="Why Travel with Us?" />
-          <div className="flex flex-wrap  items-stretch justify-center gap-4">
+          <div className="flex gap-10 flex-wrap justify-center  mt-10">
             {AboutService.map((service, index) => (
               <div
                 key={index}
-                className=" group p-4 text-primaryBlue border md:w-1/3 lg:w-1/4 flex-col flex gap-2 hover:bg-primaryGreen hover:text-white hover:duration-400 hover:transition-transform hover:-translate-x-2 hover:-translate-y-2"
+                className="bg-[#f8f6f2] p-6 rounded-2xl border max-w-[400px] border-gray-200 shadow-md"
               >
-                <span className="text-base font-semibold">{service.title}</span>
-                <span className="text-sm font-medium opacity-70 group-hover:opacity-90">
-                  {service.description}
-                </span>
+                <h3 className="text-xl font-bold text-gray-800">
+                  {service.title}
+                </h3>
+                <div className="h-[2px] w-10 bg-[#267c54] my-4" />
+
+                <div className="flex flex-col sm:flex-row items-start gap-4">
+                  {service.image && (
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      className="w-32 h-32 object-cover rounded-full border-4 border-white shadow"
+                    />
+                  )}
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -140,14 +154,7 @@ const About = () => {
           <HeaderSection title="Staff" subtitle="Our Team" />
           <div className="flex flex-col gap-8 ">
             <ul className="w-full sm:w-4/5 md:w-1/3 mx-auto flex items-center justify-evenly gap-2">
-              {/* <li
-                onClick={() => setCategory("All")}
-                className={`${
-                  category === "All" ? "border-b-2 border-b-defaultGreen" : ""
-                } text-base text-center font-bold text-defaultGreen py-1 cursor-pointer`}
-              >
-                {"All"}
-              </li> */}
+             
               {StaffList.map((cat, index) => (
                 <li
                   onClick={() => setCategory(cat.category)}
@@ -166,9 +173,13 @@ const About = () => {
             {StaffList.map((item, index) => (
               <div
                 key={index}
-                className={`${ item.category === category ?"w-full flex items-center flex-wrap justify-center gap-4":"hidden"}`}
+                className={`${
+                  item.category === category
+                    ? "w-full flex items-center flex-wrap justify-center gap-4"
+                    : "hidden"
+                }`}
               >
-                {item.category === category  && (
+                {item.category === category && (
                   <>
                     {item.list.map((staff, index) => (
                       <div

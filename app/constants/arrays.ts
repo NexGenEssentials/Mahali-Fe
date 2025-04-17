@@ -532,31 +532,37 @@ export const AboutService = [
     title: "Well-Established",
     description:
       "With roots dating back to 2009, our journey began with Dan Rwiyamirira [Managing Director], whose passion for exploration as a tour guide and driver inspired the founding of our company. Over the years, we've grown into a trusted name in travel, delivering unforgettable experiences.",
+    image: DanPofile,
   },
   {
     title: "Locally Owned",
     description:
       "Proudly based in Rwanda, we are a 100% locally-owned business. Our team is composed entirely of talented Rwandans who ensure your journey is seamless and authentic, showcasing the very best of our culture and landscapes.",
+    image: rwanda,
   },
   {
     title: "24/7 Customer Service",
     description:
       "Your comfort and satisfaction are our priorities. With 24/7 customer support, we are by your side from the moment you arrive to your departure. Expect personalized briefings and attentive care throughout your adventure.",
+    image: gorilla2,
   },
   {
     title: "Acclaimed Recognition",
     description:
       "Our excellence has been recognized worldwide, with accolades such as the Tripadvisor Certificate of Excellence since 2015 and prestigious wins at the World Travel Awards, affirming our commitment to delivering unparalleled travel experiences.",
+    image: nyungwe1,
   },
   {
     title: "Wide Range of Tours",
     description:
       "Explore a world of possibilities with our diverse offerings, from thrilling safari tours and romantic wedding packages to Kilimanjaro climbs, Zanzibar retreats, Great Migration adventures, and unforgettable journeys across East and Southern Africa.",
+    image: akagera1,
   },
   {
     title: "Growing Reputation",
     description:
       "Our reputation speaks volumes, with thousands of glowing reviews on platforms like TripAdvisor, Google, and Trustpilot. Guests consistently praise our expertly curated Serengeti Great Migration itineraries and our dedication to creating extraordinary travel memories.",
+    image: profile2,
   },
 ];
 
@@ -1095,7 +1101,11 @@ export const StaffList = [
         title: "Sales and Marketing",
         image: Giselle,
       },
-      { name: "Nate Muhirwa", title: "Digital Creative Manager", image: muhirwa },
+      {
+        name: "Nate Muhirwa",
+        title: "Digital Creative Manager",
+        image: muhirwa,
+      },
       {
         name: "Jackson Ngabonziza",
         title: "CTO",

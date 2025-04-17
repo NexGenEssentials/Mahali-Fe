@@ -1,18 +1,28 @@
-import Link from 'next/link';
-import React from 'react'
-import Image from 'next/image';
-import Button from '../../buttons/button';
+"use client";
+import Link from "next/link";
+import React from "react";
+import Image from "next/image";
+import Button from "../../buttons/button";
+import { AccommodationType } from "@/app/types/accommodation";
+import placeHolderimage from "@/public/images/imagePlaceholder.jpg";
 
 // Component for rendering accommodation details
-const AccommodationCard = ({accomod,category,}: {accomod: any;category: string;}) => (
+const AccommodationCard = ({
+  accomod,
+  category,
+}: {
+  accomod: AccommodationType;
+  category: string;
+}) => (
   <Link href={`${category}/${accomod.name}`}>
     <div className="group flex max-md:flex-wrap gap-4 border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow bg-white cursor-pointer">
       {/* Image Section */}
-      <div className="flex-shrink-0 max-md:w-full w-72 h-52 overflow-hidden rounded-lg">
+      <div className="relative flex-shrink-0 max-md:w-full w-72 h-52 overflow-hidden rounded-lg">
         <Image
-          src={accomod.gallery[0]}
+          src={accomod.first_image || placeHolderimage}
           alt={accomod.name}
-          className="object-cover w-full h-full group-hover:scale-110 group-hover:duration-700"
+          fill={true}
+          className="object-cover rounded-md"
         />
       </div>
 
@@ -23,7 +33,7 @@ const AccommodationCard = ({accomod,category,}: {accomod: any;category: string;}
             {accomod.name}
           </span>
           <span className="text-sm text-slate-500 font-medium">
-            ★ {accomod.rating} ({accomod.reviews} reviews)
+            ★ {accomod.rating} (100 reviews)
           </span>
         </div>
         <span className="text-sm text-gray-600">{accomod.description}</span>
@@ -34,10 +44,10 @@ const AccommodationCard = ({accomod,category,}: {accomod: any;category: string;}
           {accomod.location}
         </span>
         <ul className="place-content-end lg:w-3/5 grid grid-cols-2 gap-x-4 gap-y-2 text-xs text-slate-500 mt-8">
-          {accomod.amenality.slice(0, 5).map((amty:string, index:number) => (
-            <li key={index} className="flex items-center">
+          {accomod.facilities.slice(0, 5).map((amty) => (
+            <li key={amty.id} className="flex items-center">
               <span className="mr-2">✔</span>
-              {amty}
+              {amty.name}
             </li>
           ))}
         </ul>
