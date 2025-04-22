@@ -16,6 +16,7 @@ import { getAllAccomodations } from "@/app/api/accommodation/action";
 import { AccommodationType } from "@/app/types/accommodation";
 import Loader from "../../components/skeleton/loader";
 import Loading from "@/app/loading";
+import ImagePlaceHolder from "@/public/images/imagePlaceholder.jpg";
 
 const AccommodationService = () => {
   const [Accommodations, setAccomodations] = useState<AccommodationType[]>([]);
@@ -124,9 +125,15 @@ const AccommodationService = () => {
                   className="md:w-1/4 w-full flex flex-col gap-4 bg-white p-4 rounded-lg shadow-md"
                 >
                   {/* Accommodation Image Gallery */}
-                  <AccomGalleryCard Gallery={accommodation.images} />
+                  <AccomGalleryCard
+                    Gallery={
+                      accommodation.images && accommodation.images?.length > 0
+                        ? accommodation.images
+                        : [ImagePlaceHolder]
+                    }
+                  />
                   <Link
-                    href={`accommodation/${accommodation.category}/${accommodation.name}`}
+                    href={`accommodation/${accommodation.category}/${accommodation.id}`}
                   >
                     <div className="flex flex-col gap-2">
                       {/* Title and Rating */}
@@ -140,7 +147,7 @@ const AccommodationService = () => {
                             width="20"
                             height="20"
                           />
-                          {accommodation.rating}({100})
+                          {accommodation.rating}
                         </span>
                       </div>
                       {/* Location */}
@@ -153,7 +160,8 @@ const AccommodationService = () => {
                       </p>
                       {/* Price */}
                       <div className="text-primaryGreen font-semibold text-lg">
-                        ${100}/Night
+                        From ${accommodation.lowest_price.toLocaleString()}
+                        /Night
                       </div>
                     </div>
                   </Link>

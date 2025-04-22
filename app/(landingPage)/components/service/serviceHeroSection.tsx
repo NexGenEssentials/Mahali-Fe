@@ -3,7 +3,7 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import React from "react";
 type Props = {
-  image: StaticImageData;
+  image: StaticImageData |string;
   title: string;
   desc: string;
   service: string;

@@ -1,17 +1,26 @@
 "use client";
 import { SingleHeaderSection } from "@/app/(landingPage)/components/headers/header";
+import RightModal from "@/app/(landingPage)/components/model/rightSideModel";
 import StickyNavbar from "@/app/(landingPage)/components/navbar/accomodationNav";
 import ReviewsPage from "@/app/(landingPage)/components/reviews/reviewsPage";
 import AvailableDropdown from "@/app/(landingPage)/components/service/accommodation/dropDown/accomAvailableDropDown";
+import RoomCard from "@/app/(landingPage)/components/service/accommodation/roomCard";
 import ServicePageHero from "@/app/(landingPage)/components/service/serviceHeroSection";
 import LandingPage from "@/app/(landingPage)/landingPageTamplates";
+import { getAccommodation } from "@/app/api/accommodation/action";
 import { useAppContext } from "@/app/context";
-import { findAccommodationByName } from "@/app/helpers/filter";
+import {
+  AccommodationDetail,
+  findAccommodationByName,
+} from "@/app/helpers/filter";
+import Loading from "@/app/loading";
+import { AccommodationType, RoomType } from "@/app/types/accommodation";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Button, Table, TableColumnsType, TableProps } from "antd";
+import { Badge, Button, Table, TableColumnsType, TableProps } from "antd";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
+import ImagePlaceholder from "@/public/images/imagePlaceholder.jpg"
 
 const navBar = [
   "Overview",
@@ -21,42 +30,92 @@ const navBar = [
   "Guest Reviews",
 ];
 
-interface DataType {
-  type: string;
-  size: string;
-  capacity: string;
-  rate: number;
-  availability: string;
-}
-
-const accommodationName = ({ params }: { params: { name: string } }) => {
-  const name = decodeURIComponent(params.name);
+const accommodationName = ({ params }: { params: { id: string } }) => {
+  const accomId = decodeURIComponent(params.id);
   const { setActiveModalId } = useAppContext();
-  const AccomDetails = findAccommodationByName(name);
+  const [AccomDetailData, setAccomDetailData] = useState<AccommodationDetail>();
   const [selectedSection, setSelectedSection] = useState("Overview");
   const [like, setLike] = useState(false);
   const [dateSelected, setDateSelected] = useState<DateObject[]>([
     new DateObject(),
     new DateObject().add(2, "days"),
   ]);
+  const [loading, setLoading] = useState(true);
 
-  const Columns: TableColumnsType<DataType> = [
+  const [AccomDetails, setAccomDetails] = useState<AccommodationType>({
+    id: 0,
+    name: "",
+    description: "",
+    location: "",
+    address: "",
+    latitude: "",
+    longitude: "",
+    category: "",
+    rating: 0,
+    facilities: [],
+    image: "",
+    created_at: "",
+    is_active: false,
+    is_featured: false,
+    tags: "",
+    house_rules: {
+      check_in_time: "",
+      check_out_time: "",
+      smoking_allowed: false,
+      pets_allowed: false,
+      additional_rules: "",
+    },
+    check_in_time: "",
+    check_out_time: "",
+    smoking_allowed: false,
+    pets_allowed: false,
+    additional_rules: "",
+    first_image: "",
+    images: [],
+    lowest_price: 0,
+  });
+
+  const [roomData, setRoomData] = useState<RoomType[]>([]);
+  const [selectedRoom, setSelectedRoom] = useState<RoomType>();
+
+  useEffect(() => {
+    HandleGetAccommodation();
+  }, []);
+
+  const HandleGetAccommodation = async () => {
+    setLoading(true);
+    try {
+      const result = await getAccommodation(Number(accomId));
+      if (result.success) {
+        setAccomDetails(result.data.accommodation);
+        setRoomData(result.data.room_types);
+        const found = findAccommodationByName(result.data.accommodation.name);
+        setAccomDetailData(found);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log({ error });
+    } finally {
+    }
+  };
+
+  const Columns: TableColumnsType<RoomType> = [
     {
       title: "Name",
-      dataIndex: "type",
-      key: "type",
+      dataIndex: "name",
+      key: "name",
     },
     {
       title: "Number Of Guests",
-      dataIndex: "capacity",
-      key: "capacity",
+      dataIndex: "max_guests",
+      key: "max_guests",
     },
     {
       title: "Price/USD",
-      dataIndex: "rate",
-      key: "rate",
+      dataIndex: "price_per_night",
+      key: "price_per_night",
       defaultSortOrder: "descend",
-      sorter: (a, b) => a.rate - b.rate,
+      sorter: (a, b) => Number(a.price_per_night) - Number(b.price_per_night),
     },
     {
       title: "Sizes",
@@ -65,16 +124,35 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
     },
     {
       title: "Availability",
-      dataIndex: "availability",
-      key: "availability",
+      dataIndex: "",
+      key: "is_available",
+      render:(a:RoomType)=>{
+        return(
+           a.is_available ? (
+          <Badge
+            status="success"
+            text="Available"
+            style={{ color: "green", fontWeight: "bold" }}
+          />
+        ) : (
+          <Badge
+            status="error"
+            text="Unavailable"
+            style={{ color: "red", fontWeight: "bold" }}
+          />
+        )
+        )
+      }
     },
     {
       title: "Action",
       dataIndex: "",
       key: "x",
-      render: () => (
+      render: (a:RoomType) => (
         <button
-          onClick={() => setActiveModalId("test")}
+          onClick={() =>{ setActiveModalId("room");
+            setSelectedRoom(a)
+          }}
           className="px-4 py-2 bg-primaryGreen text-white font-bold hover:bg-white hover:text-primaryGreen hover:duration-700 border rounded-md"
         >
           View More
@@ -83,7 +161,7 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
     },
   ];
 
-  const onChange: TableProps<DataType>["onChange"] = (
+  const onChange: TableProps<RoomType>["onChange"] = (
     pagination,
     filters,
     sorter,
@@ -92,11 +170,13 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
     // console.log("params", pagination, filters, sorter, extra);
   };
 
+  if (loading) return <Loading />;
+
   return (
     <LandingPage>
       <ServicePageHero
-        image={AccomDetails?.gallery[0]!}
-        service={`${name}`}
+        image={AccomDetails.first_image}
+        service={`${AccomDetails.name}`}
         title="Where Every Stay Is Extraordinary"
         desc="Discover the perfect blend of luxury, comfort, and convenience at Mahali. Nestled in the heart of Africa, our hotel is your gateway to an unforgettable experience."
       />
@@ -138,21 +218,26 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
         <div className="w-[98%] h-96 flex gap-2 overflow-hidden justify-between rounded-lg cursor-pointer">
           <div className="w-full md:w-1/2 h-full overflow-hidden">
             <Image
-              src={AccomDetails?.gallery[0]!}
-              alt={AccomDetails?.name!}
+              src={AccomDetails.first_image || ImagePlaceholder}
+              alt={AccomDetails.name}
+              width={800}
+              height={600}
               className="object-cover w-full h-full hover:scale-110 hover:duration-700 transition-all"
             />
           </div>
           <div className="relative max-md:hidden w-1/2 h-full grid grid-cols-2 gap-2 overflow-hidden">
-            {AccomDetails?.gallery.map((image, index) => (
-              <div key={index} className="w-full h-48 overflow-hidden">
-                <Image
-                  src={image}
-                  alt={AccomDetails?.name!}
-                  className="object-cover w-full h-full hover:scale-110 hover:duration-700 transition-all"
-                />
-              </div>
-            ))}
+            {AccomDetails.images &&
+              AccomDetails.images.map((image, index) => (
+                <div key={index} className="w-full h-48 overflow-hidden">
+                  <Image
+                    src={image || ImagePlaceholder}
+                    alt={AccomDetails.name}
+                    width={800}
+                    height={600}
+                    className="object-cover w-full h-full hover:scale-110 hover:duration-700 transition-all"
+                  />
+                </div>
+              ))}
             <div className="absolute flex items-center gap-1 bg-primaryGreen text-white font-semibold p-2 bottom-3 right-5 text-sm rounded-md hover:scale-90 hover:duration-300 cursor-pointer">
               <Icon icon="line-md:grid-3-filled" width="16" height="16" /> Show
               All photos
@@ -164,7 +249,7 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
         <div id="Overview" className="w-full px-8 flex flex-col gap-4">
           <SingleHeaderSection title="Description" />
           <p className="text-slate-600 text-sm w-full md:w-3/4">
-            {AccomDetails?.moreDescription}
+            {AccomDetails?.description}
           </p>
         </div>
 
@@ -172,10 +257,10 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
         <div id="Facilities" className="w-full px-8 flex flex-col gap-4">
           <SingleHeaderSection title="Most popular facilities" />
           <ul className="place-content-end lg:w-3/5 grid grid-cols-2 gap-x-4 gap-y-2 text-xs text-slate-500">
-            {AccomDetails?.amenality.map((amty, index) => (
-              <li key={index} className="flex items-center">
+            {AccomDetails?.facilities?.map((amty) => (
+              <li key={amty.id} className="flex items-center">
                 <span className="mr-2">✔</span>
-                {amty}
+                {amty.name}
               </li>
             ))}
           </ul>
@@ -198,7 +283,7 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
                 />
                 What's nearby
               </h1>
-              {AccomDetails?.whatsNearby?.places.map((place, index) => (
+              {AccomDetailData?.whatsNearby?.places.map((place, index) => (
                 <div
                   key={index}
                   className="flex gap-4 it justify-between w-full text-sm"
@@ -219,7 +304,7 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
                   />
                   Restaurants & cafes
                 </h1>
-                {AccomDetails?.whatsNearby?.restaurantsAndCafes.map(
+                {AccomDetailData?.whatsNearby?.restaurantsAndCafes.map(
                   (place, index) => (
                     <div
                       key={index}
@@ -241,7 +326,7 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
                   />
                   Closest airports
                 </h1>
-                {AccomDetails?.whatsNearby?.closestAirports.map(
+                {AccomDetailData?.whatsNearby?.closestAirports.map(
                   (place, index) => (
                     <div
                       key={index}
@@ -264,7 +349,7 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
             <Icon icon="si:warning-line" width="16" height="16" />
             Select dates to see this property's availability and prices
           </p>
-          <div className="flex border border-primaryGreen rounded-lg w-fit gap-4">
+          <div className="flex border border-primaryGreen rounded-lg w-fit gap-0">
             <DatePicker
               range
               rangeHover
@@ -272,7 +357,7 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
               value={dateSelected}
               onChange={setDateSelected}
               format="DD/MM/YYYY"
-              inputClass="p-2 grow max-md:w-full text-sm rounded-md outline-none"
+              inputClass="p-2 grow max-md:w-full min-w-[200px] text-sm rounded-md outline-none"
             />
             <AvailableDropdown />
 
@@ -282,8 +367,9 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
           </div>
           <div className="overflow-x-scroll">
             <Table
-              dataSource={AccomDetails?.rooms}
+              dataSource={roomData}
               columns={Columns}
+              rowKey={(record) => record.id}
               onChange={onChange}
               showSorterTooltip={{ target: "sorter-icon" }}
               className="mt-4 border rounded-lg"
@@ -299,24 +385,68 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
             {AccomDetails?.name} takes special requests - add in the next step!
           </p>
           <div className="border-t border-x rounded-lg">
-            {AccomDetails?.houseRules?.map((rule, index) => (
+            <div className="flex gap-4 p-6 border-b rounded-lg">
+              <span className="w-1/3 font-bold text-lg text-defaultGreen">
+                Check-In
+              </span>
+
+              <span className="w-2/3 text-sm text-slate-600 font-medium">
+                From {AccomDetails.house_rules.check_in_time} to 00:00
+              </span>
+            </div>
+            <div className="flex gap-4 p-6 border-b rounded-lg">
+              <span className="w-1/3 font-bold text-lg text-defaultGreen">
+                Check-out
+              </span>
+
+              <span className="w-2/3 text-sm text-slate-600 font-medium">
+                From 8:00 to {AccomDetails.house_rules.check_out_time}
+              </span>
+            </div>
+            <div className="flex gap-4 p-6 border-b rounded-lg">
+              <span className="w-1/3 font-bold text-lg text-defaultGreen">
+                Smoking Allowed
+              </span>
+
+              <span className="w-2/3 text-sm text-slate-600 font-medium">
+                {AccomDetails.house_rules.smoking_allowed ? "Yes" : "No"}
+              </span>
+            </div>
+            <div className="flex gap-4 p-6 border-b rounded-lg">
+              <span className="w-1/3 font-bold text-lg text-defaultGreen">
+                Pets Allowed
+              </span>
+
+              <span className="w-2/3 text-sm text-slate-600 font-medium">
+                {AccomDetails.house_rules.pets_allowed ? "Yes" : "No"}
+              </span>
+            </div>
+            <div className="flex gap-4 p-6 border-b rounded-lg">
+              <span className="w-1/3 font-bold text-lg text-defaultGreen">
+                Additional Rules
+              </span>
+
+              <span className="w-2/3 text-sm text-slate-600 font-medium">
+                {AccomDetails.house_rules.additional_rules}
+              </span>
+            </div>
+
+            {AccomDetailData?.houseRules?.slice(-1).map((rule, index) => (
               <div key={index} className="flex gap-4 p-6 border-b rounded-lg">
-                <span className="w-1/3 font-bold text-lg text-defaultGreen">
-                  {rule.title}
-                </span>
-                {typeof rule.details === "string" ? (
-                  <span className="w-2/3 text-sm text-slate-600 font-medium">
-                    {rule.details}
-                  </span>
-                ) : (
-                  <span className="w-2/3 flex gap-4 items-center">
-                    {rule.details.map((detail, idx) => (
-                      <Icon icon={detail} width="48" height="48" />
-                    ))}
-                    <span className="bg-primaryGreen h-fit px-4 py-2 font-semibold rounded-sm text-xs text-center text-white">
-                      Cash
+                {typeof rule.details !== "string" && (
+                  <>
+                    <span className="w-1/3 font-bold text-lg text-defaultGreen">
+                      {rule.title}
                     </span>
-                  </span>
+                    <span className="w-2/3 flex gap-4 items-center">
+                      {rule.details.map((detail, idx) => (
+                        <Icon icon={detail} width="48" height="48" />
+                      ))}
+                      <span className="bg-primaryGreen h-fit px-4 py-2 font-semibold rounded-sm text-xs text-center text-white">
+                        Cash
+                      </span>
+                    </span>
+                  </>
                 )}
               </div>
             ))}
@@ -331,16 +461,14 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
               {AccomDetails?.rating}
             </span>
             <span className="text-primaryGreen text-sm font-semibold">
-              {AccomDetails?.reviewStatus} 👌
+              Faboulus 👌
             </span>
-            <span className="text-slate-500 text-sm">
-              {AccomDetails?.reviews} Reviews
-            </span>
+            <span className="text-slate-500 text-sm">{400} Reviews</span>
           </div>
           <div>
             <h1 className="font-semibold text-primaryGreen">Categories :</h1>
             <div className="flex gap-x-12 gap-y-4 flex-wrap">
-              {AccomDetails?.ratings?.map((rate, index) => (
+              {AccomDetailData?.ratings?.map((rate, index) => (
                 <div key={index} className="w-72">
                   <span className="w-full flex justify-between items-end space-x-2 text-sm font-bold">
                     <h2 className="mb-0">{rate.category}</h2>
@@ -357,7 +485,7 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
             </div>
           </div>
           <div>
-            <ReviewsPage Testimonial={AccomDetails?.testimonies!} />
+            <ReviewsPage Testimonial={AccomDetailData?.testimonies! || []} />
           </div>
         </div>
 
@@ -369,7 +497,7 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
           </p>
 
           <iframe
-            src={AccomDetails?.map}
+            src={AccomDetailData?.map}
             height="400"
             style={{ border: 0, width: "100%" }}
             allowFullScreen
@@ -378,6 +506,8 @@ const accommodationName = ({ params }: { params: { name: string } }) => {
           />
         </div>
       </div>
+
+      <RightModal children={<RoomCard room={selectedRoom} />} id={"room"} />
     </LandingPage>
   );
 };

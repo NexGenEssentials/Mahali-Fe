@@ -112,11 +112,11 @@ export type AccommodationDetail = {
 };
 
 export const findAccommodationByName = (
-  accommodationName: string
+  accommodationName?: string
 ): AccommodationDetail | undefined => {
   for (const category of Accommodations) {
     const foundAccommodation = category.details.find(
-      (detail) => detail.name.toLowerCase() === accommodationName.toLowerCase()
+      (detail) => detail.name.toLowerCase() === accommodationName?.toLowerCase()
     );
     if (foundAccommodation) {
       return foundAccommodation;

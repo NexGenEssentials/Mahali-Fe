@@ -53,7 +53,6 @@ const AccommodationCategory = ({
 
   if (loading) return <Loading />;
 
-  console.log({ category, Accommodations });
 
   return (
     <LandingPage>

@@ -14,7 +14,7 @@ const AccommodationCard = ({
   accomod: AccommodationType;
   category: string;
 }) => (
-  <Link href={`${category}/${accomod.name}`}>
+  <Link href={`${category}/${accomod.id}`}>
     <div className="group flex max-md:flex-wrap gap-4 border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow bg-white cursor-pointer">
       {/* Image Section */}
       <div className="relative flex-shrink-0 max-md:w-full w-72 h-52 overflow-hidden rounded-lg">
@@ -33,10 +33,10 @@ const AccommodationCard = ({
             {accomod.name}
           </span>
           <span className="text-sm text-slate-500 font-medium">
-            ★ {accomod.rating} (100 reviews)
+            ★ {accomod.rating}
           </span>
         </div>
-        <span className="text-sm text-gray-600">{accomod.description}</span>
+        <span className="text-sm text-gray-600 line-clamp-2">{accomod.description}</span>
         <span className="text-sm text-gray-500 flex items-center">
           <span className="mr-2 text-primaryGreen font-semibold">
             Location:
@@ -54,6 +54,7 @@ const AccommodationCard = ({
       </div>
 
       {/* Button Section */}
+      
       <div className="p-4 self-center text-nowrap text-white">
         <Button name="View More" />
       </div>

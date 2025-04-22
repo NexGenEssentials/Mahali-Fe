@@ -9,9 +9,10 @@ import "swiper/css/pagination";
 import "swiper/css/keyboard";
 import { Keyboard, Navigation, Pagination } from "swiper/modules";
 import { Icon } from "@iconify/react";
+import ImagePlaceHolder from "@/public/images/imagePlaceholder.jpg";
 
 interface AccomGalleryCardProps {
-  Gallery: StaticImageData[];
+  Gallery: string[] | StaticImageData[];
 }
 
 const AccomGalleryCard: React.FC<AccomGalleryCardProps> = ({ Gallery }) => {
