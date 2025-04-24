@@ -36,13 +36,21 @@ const AccommodationCard = ({
             ★ {accomod.rating}
           </span>
         </div>
-        <span className="text-sm text-gray-600 line-clamp-2">{accomod.description}</span>
-        <span className="text-sm text-gray-500 flex items-center">
-          <span className="mr-2 text-primaryGreen font-semibold">
-            Location:
-          </span>
-          {accomod.location}
+        <span className="text-sm text-gray-600 line-clamp-2">
+          {accomod.description}
         </span>
+        <div className="space-y-2">
+          <span className="text-sm text-gray-500 flex items-center">
+            <span className="mr-2 text-primaryGreen font-semibold">
+              Location:
+            </span>
+            {accomod.location}
+          </span>
+          <span className="text-sm text-gray-500 flex items-center">
+            <span className="mr-2 text-primaryGreen font-semibold">From:</span>$
+            {accomod.lowest_price}
+          </span>
+        </div>
         <ul className="place-content-end lg:w-3/5 grid grid-cols-2 gap-x-4 gap-y-2 text-xs text-slate-500 mt-8">
           {accomod.facilities.slice(0, 5).map((amty) => (
             <li key={amty.id} className="flex items-center">
@@ -54,7 +62,7 @@ const AccommodationCard = ({
       </div>
 
       {/* Button Section */}
-      
+
       <div className="p-4 self-center text-nowrap text-white">
         <Button name="View More" />
       </div>

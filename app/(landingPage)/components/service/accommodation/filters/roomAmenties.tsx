@@ -1,32 +1,34 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Checkbox } from "antd";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { facility, getFacilities } from "@/app/api/accommodation/action";
 
-const amenities = [
-  "Sound proof",
-  "Clothes rack",
-  "Drying rack for clothing",
-  "Fold-up bed",
-  "Sofa bed",
-  "Air Conditioning",
-  "Wardrobe or closet",
-  "Carpeted",
-  "Walk-in closet",
-  "Extra long beds (>6.5 ft)",
-  "Private Bathroom",
-  "Sitting area",
-];
-
-const RoomAmenities: React.FC = () => {
+const RoomAmenities = ({ fac }: { fac: (facility: string[]) => void }) => {
   const [checkedList, setCheckedList] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [amenities, setAmenities] = useState<facility[]>([]);
 
   const onCheckboxChange = (amenity: string, checked: boolean) => {
     if (checked) {
-      setCheckedList((prev) => [...prev, amenity]);
+      const updatedList = [...checkedList, amenity];
+      setCheckedList(updatedList);
+      fac(updatedList);
     } else {
-      setCheckedList((prev) => prev.filter((item) => item !== amenity));
+      const updatedList = checkedList.filter((item) => item !== amenity);
+      setCheckedList(updatedList);
+      fac(updatedList);
+    }
+  };
+
+  useEffect(() => {
+    handleGetFacilities();
+  }, []);
+
+  const handleGetFacilities = async () => {
+    const result = await getFacilities();
+    if (result.success) {
+      setAmenities(result.data);
     }
   };
 
@@ -62,18 +64,18 @@ const RoomAmenities: React.FC = () => {
       {/* Amenities List (Collapsible) */}
       {isOpen && (
         <div className="mt-4 space-y-2 flex flex-col">
-          {amenities.map((amenity, index) => (
+          {amenities.map((amenity) => (
             <Checkbox
-              key={index}
-              onChange={(e) => onCheckboxChange(amenity, e.target.checked)}
-              checked={checkedList.includes(amenity)}
+              key={amenity.id}
+              onChange={(e) => onCheckboxChange(amenity.name, e.target.checked)}
+              checked={checkedList.includes(amenity.name)}
               style={{
                 color: "#667c3e", // Green text color for the label
                 borderColor: "#667c3e", // Green border for the checkbox
               }}
               className="text-slate-500 focus:ring-2 focus:ring-[#667c3e] checked:bg-[#667c3e] checked:border-[#667c3e]"
             >
-              {amenity}
+              {amenity.name}
             </Checkbox>
           ))}
         </div>

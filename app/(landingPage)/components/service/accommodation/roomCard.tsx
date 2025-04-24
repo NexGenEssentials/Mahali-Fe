@@ -42,17 +42,27 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
         </div>
         <div className="flex items-center gap-1">
           <Users size={16} />
-          <span>Guests: {room?.max_guests} </span>
+          <span>
+            {room?.max_guests} {room?.max_guests! > 1 ? "adults" : "adult"} and{" "}
+            {room?.max_children}{" "}
+            {room?.max_children! > 1 ? "children" : "child"} per Room
+          </span>
         </div>
         <div className="flex items-center gap-1">
           <BedDouble size={16} />
-          <span>{room?.bed_type}</span>
+          <span>
+            {room?.total_units} {room?.total_units! > 1 ? "Rooms" : "Room"} left
+          </span>
         </div>
         <div className="flex items-center gap-1 text-sm text-gray-700">
           <Ruler className="w-4 h-4" />
           <span>
-            Size: {room?.size} m<span className="align-super text-sm">²</span>
+            Size: {room?.size} M<span className="align-super text-sm">²</span>
           </span>
+        </div>
+        <div className="flex items-center gap-1">
+          <BedDouble size={16} />
+          <span>{room?.bed_type}</span>
         </div>
       </div>
 
@@ -85,15 +95,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
           //   onClick={() => }
           className="mt-6 border w-1/2  border-primaryGreen text-defaultGreen hover:bg-primaryGreen hover:text-white font-bold py-3 rounded-xl transition-all duration-300"
         >
-          {loading ? "Sending..." : "Book Room"}
-        </button>
-
-        <button
-          //   onClick={() => setButtontype("pay")}
-          type="submit"
-          className="w-1/2 mx-auto px-2 py-3 border mt-4 bg-blue-200 text-slate-800 border-blue-400 hover:bg-blue-300 duration-300  font-semibold rounded-lg"
-        >
-          {loadingpay ? "loading..." : "Pay Now"}
+          {loading ? "Sending..." : "Equip Room"}
         </button>
       </div>
     </div>

@@ -20,7 +20,7 @@ import { Badge, Button, Table, TableColumnsType, TableProps } from "antd";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
-import ImagePlaceholder from "@/public/images/imagePlaceholder.jpg"
+import ImagePlaceholder from "@/public/images/imagePlaceholder.jpg";
 
 const navBar = [
   "Overview",
@@ -106,9 +106,38 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
       key: "name",
     },
     {
+      title: "Max Beds",
+      dataIndex: "max_beds",
+      key: "max_beds",
+    },
+    {
+      title: "Availability",
+      dataIndex: "",
+      key: "total_units",
+      render: (a: RoomType) => (
+        <span>
+          {a.total_units > 0 ? (
+            `${a.total_units > 1 ? "Rooms" : "Room"} left`
+          ) : (
+            <Badge
+              status="error"
+              text="Unavailable"
+              style={{ color: "red", fontWeight: "bold" }}
+            />
+          )}
+        </span>
+      ),
+    },
+    {
       title: "Number Of Guests",
-      dataIndex: "max_guests",
+      dataIndex: "",
       key: "max_guests",
+      render: (a: RoomType) => (
+        <span>
+          {a.max_guests} {a.max_guests > 1 ? "adults" : "adult"} and{" "}
+          {a.max_children} {a.max_children > 1 ? "children" : "child"} per Room
+        </span>
+      ),
     },
     {
       title: "Price/USD",
@@ -119,45 +148,48 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
     },
     {
       title: "Sizes",
-      dataIndex: "size",
-      key: "size",
-    },
-    {
-      title: "Availability",
       dataIndex: "",
-      key: "is_available",
-      render:(a:RoomType)=>{
-        return(
-           a.is_available ? (
-          <Badge
-            status="success"
-            text="Available"
-            style={{ color: "green", fontWeight: "bold" }}
-          />
-        ) : (
-          <Badge
-            status="error"
-            text="Unavailable"
-            style={{ color: "red", fontWeight: "bold" }}
-          />
-        )
-        )
-      }
+      key: "size",
+      render: (room: RoomType) => (
+        <span>
+          {room?.size} M<span className="align-super text-sm">²</span>
+        </span>
+      ),
     },
+
     {
       title: "Action",
       dataIndex: "",
-      key: "x",
-      render: (a:RoomType) => (
-        <button
-          onClick={() =>{ setActiveModalId("room");
-            setSelectedRoom(a)
-          }}
-          className="px-4 py-2 bg-primaryGreen text-white font-bold hover:bg-white hover:text-primaryGreen hover:duration-700 border rounded-md"
-        >
-          View More
-        </button>
-      ),
+      key: "action",
+      render: (room: RoomType) => {
+        const commonButtonClass =
+          "px-4 py-2 bg-primaryGreen text-white font-semibold hover:bg-white hover:text-primaryGreen transition duration-300 border border-primaryGreen rounded-md";
+
+        return (
+          <div className="flex gap-3">
+            <button
+              onClick={() => {
+                setActiveModalId("room-details");
+                setSelectedRoom(room);
+              }}
+              className={commonButtonClass}
+              aria-label={`View details for ${room.name}`}
+            >
+              View Details
+            </button>
+            <button
+              onClick={() => {
+                setActiveModalId("room-amenities");
+                setSelectedRoom(room);
+              }}
+              className={commonButtonClass}
+              aria-label={`Manage amenities for ${room.name}`}
+            >
+              Equip Room
+            </button>
+          </div>
+        );
+      },
     },
   ];
 
@@ -167,7 +199,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
     sorter,
     extra
   ) => {
-    // console.log("params", pagination, filters, sorter, extra);
+    
   };
 
   if (loading) return <Loading />;
@@ -507,7 +539,10 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
         </div>
       </div>
 
-      <RightModal children={<RoomCard room={selectedRoom} />} id={"room"} />
+      <RightModal
+        children={<RoomCard room={selectedRoom} />}
+        id={"room-details"}
+      />
     </LandingPage>
   );
 };

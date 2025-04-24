@@ -1,15 +1,23 @@
-'use client'
+"use client";
 import { useState } from "react";
 import { Slider } from "antd";
 import "antd/dist/reset.css"; // Import Ant Design styles
 import { Icon } from "@iconify/react/dist/iconify.js";
 
-const PriceFilter: React.FC = () => {
+const PriceFilter = ({
+  min,
+  max,
+}: {
+  min: (price: number) => void;
+  max: (price: number) => void;
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [priceRange, setPriceRange] = useState<number[]>([100, 1800]);
 
   const onRangeChange = (value: number[]) => {
     setPriceRange(value);
+    min(value[0]);
+    max(value[1]);
   };
 
   return (
@@ -18,15 +26,26 @@ const PriceFilter: React.FC = () => {
         className="flex justify-between gap-8 items-center cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h3 className="text-base text-nowrap font-semibold text-primaryGreen">Price</h3>
-        <button
-          className={`px-2 py-1 text-white text-sm rounded `}
-        >
+        <h3 className="text-base text-nowrap font-semibold text-primaryGreen">
+          Price
+        </h3>
+        <button className={`px-2 py-1 text-white text-sm rounded `}>
           {isOpen ? (
-          <Icon icon="uis:angle-up" width="24" height="24" className="text-primaryGreen"/>
-        ) : (
-          <Icon icon="uis:angle-up" width="24" height="24" className="text-primaryGreen" rotate={90} />
-        )}
+            <Icon
+              icon="uis:angle-up"
+              width="24"
+              height="24"
+              className="text-primaryGreen"
+            />
+          ) : (
+            <Icon
+              icon="uis:angle-up"
+              width="24"
+              height="24"
+              className="text-primaryGreen"
+              rotate={90}
+            />
+          )}
         </button>
       </div>
 

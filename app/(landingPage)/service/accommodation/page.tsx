@@ -12,7 +12,11 @@ import AccomGalleryCard from "../../components/service/accommodation/accomGaller
 import { Icon } from "@iconify/react";
 import { getFeaturedAccommodations } from "@/app/helpers/filter";
 import Link from "next/link";
-import { getAllAccomodations } from "@/app/api/accommodation/action";
+import {
+  categoryCounts,
+  getAccommodationCategory,
+  getAllAccomodations,
+} from "@/app/api/accommodation/action";
 import { AccommodationType } from "@/app/types/accommodation";
 import Loader from "../../components/skeleton/loader";
 import Loading from "@/app/loading";
@@ -20,6 +24,9 @@ import ImagePlaceHolder from "@/public/images/imagePlaceholder.jpg";
 
 const AccommodationService = () => {
   const [Accommodations, setAccomodations] = useState<AccommodationType[]>([]);
+  const [AccommodationCategory, setAccomodationCategory] = useState<
+    categoryCounts[]
+  >([]);
   const [popularAccommodations, setpopularAccommodations] = useState<
     AccommodationType[]
   >([]);
@@ -33,10 +40,14 @@ const AccommodationService = () => {
   const accommodations = async () => {
     setLoading(true);
     const result = await getAllAccomodations();
+    const data = await getAccommodationCategory();
     if (result.success) {
       setLoading(false);
       setAccomodations(result.data);
       setpopularAccommodations(getFeaturedAccommodations(result.data));
+    }
+    if (data.success) {
+      setAccomodationCategory(data.data);
     }
   };
 
@@ -85,7 +96,7 @@ const AccommodationService = () => {
             subtitle="Choose a category of your choice"
           />
           <div className="bg-slate-50 p-8 rounded-lg flex gap-6 flex-wrap justify-center">
-            {Accommodations.map((category, index) => (
+            {AccommodationCategory.map((category, index) => (
               <Link
                 key={index}
                 href={`/service/accommodation/${category.category}`}
@@ -97,7 +108,7 @@ const AccommodationService = () => {
                 >
                   <span>{category.category}</span>
                   <span className="absolute top-2 right-2 bg-white text-primaryGreen text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                    {10}
+                    {category.count}
                   </span>
                 </motion.div>
               </Link>

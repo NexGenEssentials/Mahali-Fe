@@ -5,7 +5,7 @@ const AvailableDropdown: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(0);
-  const [rooms, setRooms] = useState(1);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
@@ -29,7 +29,10 @@ const AvailableDropdown: React.FC = () => {
   // Close the dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         closeDropdown();
       }
     };
@@ -47,7 +50,7 @@ const AvailableDropdown: React.FC = () => {
         onClick={toggleDropdown}
         className="px-4 py-2  shadow-sm outline-none"
       >
-        {`${adults} adults  ·  ${children} children  ·  ${rooms} room${rooms > 1 ? "s" : ""}`}
+        {`${adults} adults  ·  ${children} children`}
       </button>
 
       {/* Dropdown Content */}
@@ -92,26 +95,6 @@ const AvailableDropdown: React.FC = () => {
                 <span>{children}</span>
                 <button
                   onClick={() => increment(setChildren)}
-                  className="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-
-            {/* Rooms */}
-            <div className="flex items-center justify-between px-4 py-2 border-b">
-              <span className="text-sm font-medium">Rooms</span>
-              <div className="text-xs flex items-center space-x-4">
-                <button
-                  onClick={() => decrement(rooms, setRooms, 1)}
-                  className="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300"
-                >
-                  -
-                </button>
-                <span>{rooms}</span>
-                <button
-                  onClick={() => increment(setRooms)}
                   className="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300"
                 >
                   +
