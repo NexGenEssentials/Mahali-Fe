@@ -1,4 +1,3 @@
-
 export type Facility = {
   id: number;
   name: string;
@@ -55,6 +54,7 @@ export type AccommodationType = {
   first_image: string;
   images: string[];
   lowest_price: number;
+  room_types: RoomType[];
 };
 
 export type AccommodationResponse = {

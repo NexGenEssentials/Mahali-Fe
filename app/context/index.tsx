@@ -44,6 +44,8 @@ function ContextProvider({ children }: PropsWithChildren) {
     created_at: "",
     updated_at: "",
     booking_reference: "",
+    payment_status: "",
+    booking_id: 0,
   });
   const [adminServiceTab, setAdminServiceTab] = useState(
     "Holiday & Tour Packages"

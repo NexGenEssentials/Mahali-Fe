@@ -26,12 +26,12 @@ const PaymentMethodModel: React.FC<Props> = () => {
     }
 
     const formData = {
-      booking_id: bookingData?.id,
+      booking_id: bookingData?.id || bookingData.booking_id,
       pmethod: method,
       amount: Number(bookingData?.total_price),
       redirect_url: "http://localhost:3000/account/bookings-trips",
     };
-
+ 
     try {
       setLoading(true);
       const result = await CreatePaymentMethod(formData);

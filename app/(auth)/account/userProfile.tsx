@@ -2,6 +2,7 @@ import { useAppContext } from "@/app/context";
 import { Logout } from "@/app/helpers/isUserLogedIn";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";
 
 const myAccountMenu = [
@@ -14,9 +15,9 @@ const myAccountMenu = [
     icon: "zondicons:travel",
   },
   {
-    name: "Reviews",
-    link: "/account/review",
-    icon: "material-symbols-light:reviews-rounded",
+    name: "My Rooms",
+    link: "#",
+    icon: "emojione-monotone:bed",
   },
   {
     name: "Custome Packages",
@@ -28,8 +29,10 @@ const myAccountMenu = [
 
 const UserProfile = ({ visible = true }: { visible?: boolean }) => {
   const [show, setShow] = useState(false);
-  const { setIsLogin } = useAppContext();
+  const { setIsLogin, setActiveModalId, isLogin } = useAppContext();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const pathname = usePathname();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -69,7 +72,7 @@ const UserProfile = ({ visible = true }: { visible?: boolean }) => {
 
         {/* Dropdown menu */}
         <div
-          className={`absolute border right-0 bg-white drop-shadow-lg z-30 mt-2 rounded-md overflow-hidden w-64 transition-all duration-300 ${
+          className={`absolute border right-0 bg-white drop-shadow-lg z-50 mt-2 rounded-md overflow-hidden w-64 transition-all duration-300 ${
             show
               ? "opacity-100 scale-100"
               : "opacity-0 scale-95 pointer-events-none"
@@ -78,7 +81,19 @@ const UserProfile = ({ visible = true }: { visible?: boolean }) => {
           {myAccountMenu.map((item) => (
             <Link href={item.link} key={item.name}>
               <div
-                onClick={() => item.name === "Sign out" && handleLogout()}
+                onClick={() => {
+                  item.name === "Sign out" && handleLogout();
+                  if (isLogin) {
+                    if (item.name === "My Rooms") {
+                      setActiveModalId("my-rooms");
+                      setShow(false);
+                    }
+                  } else {
+                    router.push(
+                      `/login?callbackUrl=${encodeURIComponent(pathname)}`
+                    );
+                  }
+                }}
                 className="p-4 flex gap-4 items-center hover:bg-gray-200  hover:duration-300 cursor-pointer"
               >
                 <Icon

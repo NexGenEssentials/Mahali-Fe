@@ -9,6 +9,7 @@ import UserInfoForm from "./(landingPage)/components/service/carRental/bookACar"
 import ChatwootWidget from "./(landingPage)/components/chat/ChatwootWidget";
 import CustomTourPackage from "./(landingPage)/components/package/customePackage";
 import PaymentMethodModel from "./(landingPage)/components/model/paymentModel";
+import RoomsInCart from "./account/components/roomsCart/roomsInCart";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -48,10 +49,7 @@ export default function RootLayout({
                 id={"Custom Package"}
               />
               <CenterModal children={<PaymentMethodModel />} id={"pay"} />
-              <RightModal
-                children={<h1> More Details About This Room</h1>}
-                id={"test"}
-              />
+              <RightModal children={<RoomsInCart />} id={"my-rooms"} />
             </div>
           </AntdRegistry>
         </ContextProvider>

@@ -7,7 +7,10 @@ import AvailableDropdown from "@/app/(landingPage)/components/service/accommodat
 import RoomCard from "@/app/(landingPage)/components/service/accommodation/roomCard";
 import ServicePageHero from "@/app/(landingPage)/components/service/serviceHeroSection";
 import LandingPage from "@/app/(landingPage)/landingPageTamplates";
-import { getAccommodation } from "@/app/api/accommodation/action";
+import {
+  getAccommodation,
+  getAccommodationsFilters,
+} from "@/app/api/accommodation/action";
 import { useAppContext } from "@/app/context";
 import {
   AccommodationDetail,
@@ -21,6 +24,10 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import ImagePlaceholder from "@/public/images/imagePlaceholder.jpg";
+import { AddToCart } from "@/app/api/cart/action";
+import { usePathname, useRouter } from "next/navigation";
+import { CornerDownLeft } from "lucide-react";
+import { formatDateToISO } from "@/app/helpers/formatDate";
 
 const navBar = [
   "Overview",
@@ -32,15 +39,18 @@ const navBar = [
 
 const accommodationName = ({ params }: { params: { id: string } }) => {
   const accomId = decodeURIComponent(params.id);
-  const { setActiveModalId } = useAppContext();
+  const { setActiveModalId, isLogin } = useAppContext();
   const [AccomDetailData, setAccomDetailData] = useState<AccommodationDetail>();
   const [selectedSection, setSelectedSection] = useState("Overview");
   const [like, setLike] = useState(false);
+  const [open, setOpen] = useState(false);
   const [dateSelected, setDateSelected] = useState<DateObject[]>([
     new DateObject(),
     new DateObject().add(2, "days"),
   ]);
   const [loading, setLoading] = useState(true);
+  const [cartLoading, setCartLoading] = useState(false);
+  const [tableLoading, setTableLoading] = useState(false);
 
   const [AccomDetails, setAccomDetails] = useState<AccommodationType>({
     id: 0,
@@ -73,10 +83,15 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
     first_image: "",
     images: [],
     lowest_price: 0,
+    room_types: [],
   });
+  const [message, setMessage] = useState(false);
 
   const [roomData, setRoomData] = useState<RoomType[]>([]);
   const [selectedRoom, setSelectedRoom] = useState<RoomType>();
+  const [totalRooms, setTotalRooms] = useState(1);
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     HandleGetAccommodation();
@@ -85,13 +100,49 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
   const HandleGetAccommodation = async () => {
     setLoading(true);
     try {
-      const result = await getAccommodation(Number(accomId));
+      const result = await getAccommodationsFilters({ id: Number(accomId) });
       if (result.success) {
-        setAccomDetails(result.data.accommodation);
-        setRoomData(result.data.room_types);
-        const found = findAccommodationByName(result.data.accommodation.name);
+        setAccomDetails(result.data[0]);
+        setRoomData(result.data[0].room_types);
+        const found = findAccommodationByName(result.data[0].name);
         setAccomDetailData(found);
         setLoading(false);
+      }
+    } catch (error) {
+      console.log({ error });
+    } finally {
+    }
+  };
+
+  const AddItemToCart = async (roomId: number, quantity: number) => {
+    setCartLoading(true);
+
+    try {
+      const result = await AddToCart({
+        room_type: roomId,
+        quantity: quantity,
+      });
+
+      if (result.success) {
+        setMessage(true);
+        setCartLoading(false);
+        setTotalRooms(1);
+      }
+    } catch (error) {}
+  };
+
+  const HandleFilterRoom = async () => {
+    setTableLoading(true);
+    try {
+      const result = await getAccommodationsFilters({
+        start_date: formatDateToISO(String(dateSelected[0])),
+        end_date: formatDateToISO(String(dateSelected[1])),
+        id: Number(accomId),
+      });
+     
+      if (result.success) {
+        setRoomData(result.data[0].room_types);
+        setTableLoading(true);
       }
     } catch (error) {
       console.log({ error });
@@ -156,17 +207,19 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
         </span>
       ),
     },
-
     {
       title: "Action",
       dataIndex: "",
       key: "action",
       render: (room: RoomType) => {
         const commonButtonClass =
-          "px-4 py-2 bg-primaryGreen text-white font-semibold hover:bg-white hover:text-primaryGreen transition duration-300 border border-primaryGreen rounded-md";
+          "px-4 py-2 text-nowrap bg-primaryGreen text-white font-semibold hover:bg-white hover:text-primaryGreen transition duration-300 border border-primaryGreen rounded-md";
+
+        const isRoomOpen = open && room.id === selectedRoom?.id;
 
         return (
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3 relative">
+            {/* View Room Details */}
             <button
               onClick={() => {
                 setActiveModalId("room-details");
@@ -175,18 +228,73 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
               className={commonButtonClass}
               aria-label={`View details for ${room.name}`}
             >
-              View Details
+              View
             </button>
-            <button
-              onClick={() => {
-                setActiveModalId("room-amenities");
-                setSelectedRoom(room);
-              }}
-              className={commonButtonClass}
-              aria-label={`Manage amenities for ${room.name}`}
-            >
-              Equip Room
-            </button>
+
+            {/* Equip Room Action */}
+            <div className="relative">
+              <button
+                onClick={() => {
+                  if (isLogin) {
+                    setSelectedRoom(room);
+                    setOpen(true);
+                  } else {
+                    router.push(
+                      `/login?callbackUrl=${encodeURIComponent(pathname)}`
+                    );
+                  }
+                }}
+                className={commonButtonClass}
+                aria-label={`Equip ${room.name}`}
+              >
+                Equip Room
+              </button>
+
+              {/* Conditional Room Popup */}
+              {isRoomOpen && (
+                <div className="absolute z-40 w-72 -top-10 right-28 bg-white border rounded-md shadow-lg p-4 space-y-2">
+                  {message ? (
+                    <>
+                      <p className="text-sm text-primaryBlue">
+                        You have successfully added a room.
+                      </p>
+                      <button
+                        onClick={() => {
+                          setMessage(false);
+                          setOpen(false);
+                        }}
+                        className={commonButtonClass}
+                        aria-label={`Close message for ${room.name}`}
+                      >
+                        Close
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <h3 className="font-medium text-sm text-primaryBlue">
+                        Enter number of Rooms
+                      </h3>
+                      <input
+                        type="number"
+                        min={1}
+                        value={totalRooms}
+                        onChange={(e) => setTotalRooms(Number(e.target.value))}
+                        className="w-full border p-2 rounded-md focus:ring-2 focus:ring-primaryGreen outline-none"
+                        placeholder="Enter number of rooms"
+                        aria-label="Number of rooms"
+                      />
+                      <button
+                        onClick={() => AddItemToCart(room.id, totalRooms)}
+                        className={commonButtonClass}
+                        aria-label={`Add ${totalRooms} room(s) to cart for ${room.name}`}
+                      >
+                        {cartLoading ? "Adding..." : "Add Room"}
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         );
       },
@@ -198,9 +306,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
     filters,
     sorter,
     extra
-  ) => {
-    
-  };
+  ) => {};
 
   if (loading) return <Loading />;
 
@@ -393,18 +499,23 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
             />
             <AvailableDropdown />
 
-            <button className="inline-flex gap-2 items-center bg-primaryGreen p-2 text-white text-sm font-semibold rounded-r-md">
-              <Icon icon="mage:reload" width="20" height="20" /> Apply Changes
+            <button
+              onClick={HandleFilterRoom}
+              className="inline-flex gap-2 items-center bg-primaryGreen p-2 text-white text-sm font-semibold rounded-r-md"
+            >
+              <Icon icon="mage:reload" width="20" height="20" />{" "}
+              {tableLoading ? "Searching..." : "Apply Changes"}
             </button>
           </div>
           <div className="overflow-x-scroll">
             <Table
+              loading={tableLoading}
               dataSource={roomData}
               columns={Columns}
               rowKey={(record) => record.id}
               onChange={onChange}
               showSorterTooltip={{ target: "sorter-icon" }}
-              className="mt-4 border rounded-lg"
+              className="mt-4 border rounded-lg relative"
             />
           </div>
         </div>
@@ -472,7 +583,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
                     </span>
                     <span className="w-2/3 flex gap-4 items-center">
                       {rule.details.map((detail, idx) => (
-                        <Icon icon={detail} width="48" height="48" />
+                        <Icon key={idx} icon={detail} width="48" height="48" />
                       ))}
                       <span className="bg-primaryGreen h-fit px-4 py-2 font-semibold rounded-sm text-xs text-center text-white">
                         Cash

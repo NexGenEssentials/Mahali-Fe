@@ -28,6 +28,7 @@ export const getAllAccomodations = async (): Promise<AccommodationResponse> => {
 };
 
 export const getAccommodationsFilters = async ({
+  id,
   facilities,
   category,
   end_date,
@@ -36,6 +37,7 @@ export const getAccommodationsFilters = async ({
   min_price,
   start_date,
 }: {
+  id?: number;
   facilities?: string[];
   location?: string;
   start_date?: string;
@@ -47,6 +49,8 @@ export const getAccommodationsFilters = async ({
   try {
     const queryParams = new URLSearchParams();
 
+    if (id !== undefined) queryParams.append("accommodation_id", id.toString());
+    if (location) queryParams.append("location", location);
     if (location) queryParams.append("location", location);
     if (start_date) queryParams.append("start_date", start_date);
     if (end_date) queryParams.append("end_date", end_date);
@@ -59,7 +63,6 @@ export const getAccommodationsFilters = async ({
       queryParams.append("facilities", JSON.stringify(facilities));
     }
 
-    
     const response = await fetch(
       `${base_url}/filter-accommodations/?${queryParams.toString()}`,
       {
@@ -71,6 +74,7 @@ export const getAccommodationsFilters = async ({
     );
 
     const data = await response.json();
+   
     return data;
   } catch (error) {
     console.log("Something went wrong", { error });

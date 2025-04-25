@@ -133,7 +133,7 @@ const AccommodationService = () => {
               {popularAccommodations.map((accommodation, index) => (
                 <div
                   key={index}
-                  className="md:w-1/4 w-full flex flex-col gap-4 bg-white p-4 rounded-lg shadow-md"
+                  className="max-w-sm w-full flex flex-col gap-4 bg-white p-4 rounded-lg shadow-md"
                 >
                   {/* Accommodation Image Gallery */}
                   <AccomGalleryCard

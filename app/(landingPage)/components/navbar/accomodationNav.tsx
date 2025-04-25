@@ -24,7 +24,7 @@ const StickyNavbar = ({
 
   return (
     <div
-      className="max-sm:hidden sticky top-[67px] bg-white z-50 border-t w-full flex items-center justify-center gap-8 p-4 shadow-md overflow-x-scroll hide-scrollbar"
+      className="max-sm:hidden sticky top-[67px] bg-white z-40 border-t w-full flex items-center justify-center gap-8 p-4 shadow-md overflow-x-scroll hide-scrollbar"
       style={{ transition: "box-shadow 0.3s ease-in-out " }}
     >
       {navBar.map((item, index) => (

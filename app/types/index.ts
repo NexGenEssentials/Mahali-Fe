@@ -117,6 +117,7 @@ export interface BookingDetails {
 }
 
 export type BookingData = {
+  booking_id: number;
   id: number;
   user: {
     id: number;
