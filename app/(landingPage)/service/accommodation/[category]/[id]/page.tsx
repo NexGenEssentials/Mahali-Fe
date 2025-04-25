@@ -39,7 +39,7 @@ const navBar = [
 
 const accommodationName = ({ params }: { params: { id: string } }) => {
   const accomId = decodeURIComponent(params.id);
-  const { setActiveModalId, isLogin } = useAppContext();
+  const { setActiveModalId, isLogin, setShowCart } = useAppContext();
   const [AccomDetailData, setAccomDetailData] = useState<AccommodationDetail>();
   const [selectedSection, setSelectedSection] = useState("Overview");
   const [like, setLike] = useState(false);
@@ -127,6 +127,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
         setMessage(true);
         setCartLoading(false);
         setTotalRooms(1);
+        setShowCart(true);
       }
     } catch (error) {}
   };
@@ -139,7 +140,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
         end_date: formatDateToISO(String(dateSelected[1])),
         id: Number(accomId),
       });
-     
+
       if (result.success) {
         setRoomData(result.data[0].room_types);
         setTableLoading(true);
@@ -168,7 +169,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
       render: (a: RoomType) => (
         <span>
           {a.total_units > 0 ? (
-            `${a.total_units }${a.total_units > 1 ? " Rooms" : " Room"} left`
+            `${a.total_units}${a.total_units > 1 ? " Rooms" : " Room"} left`
           ) : (
             <Badge
               status="error"
@@ -283,13 +284,25 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
                         placeholder="Enter number of rooms"
                         aria-label="Number of rooms"
                       />
-                      <button
-                        onClick={() => AddItemToCart(room.id, totalRooms)}
-                        className={commonButtonClass}
-                        aria-label={`Add ${totalRooms} room(s) to cart for ${room.name}`}
-                      >
-                        {cartLoading ? "Adding..." : "Add Room"}
-                      </button>
+                      <div className="flex w-full justify-between px-2">
+                        <button
+                          onClick={() => AddItemToCart(room.id, totalRooms)}
+                          className={commonButtonClass}
+                          aria-label={`Add ${totalRooms} room(s) to cart for ${room.name}`}
+                        >
+                          {cartLoading ? "Adding..." : "Add Room"}
+                        </button>
+                        <button
+                          onClick={() => {
+                            setMessage(false);
+                            setOpen(false);
+                          }}
+                          className={commonButtonClass}
+                          aria-label={`Close message for ${room.name}`}
+                        >
+                          Close
+                        </button>
+                      </div>
                     </>
                   )}
                 </div>

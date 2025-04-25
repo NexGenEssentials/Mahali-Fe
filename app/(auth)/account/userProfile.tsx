@@ -1,3 +1,4 @@
+import { getCart } from "@/app/api/cart/action";
 import { useAppContext } from "@/app/context";
 import { Logout } from "@/app/helpers/isUserLogedIn";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -29,13 +30,14 @@ const myAccountMenu = [
 
 const UserProfile = ({ visible = true }: { visible?: boolean }) => {
   const [show, setShow] = useState(false);
-  const { setIsLogin, setActiveModalId, isLogin } = useAppContext();
+  const { setIsLogin, setActiveModalId, isLogin, showCart, setShowCart } =
+    useAppContext();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const pathname = usePathname();
 
-  // Close dropdown when clicking outside
   useEffect(() => {
+    CheckCart();
     const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
@@ -51,6 +53,13 @@ const UserProfile = ({ visible = true }: { visible?: boolean }) => {
     };
   }, []);
 
+  const CheckCart = async () => {
+    const result = await getCart();
+    if (result.data.items.length > 0) {
+      setShowCart(true);
+    }
+  };
+
   const handleLogout = () => {
     Logout();
     setIsLogin(false);
@@ -63,9 +72,12 @@ const UserProfile = ({ visible = true }: { visible?: boolean }) => {
         <div
           className={`${
             visible ? "border border-slate-50 border-opacity-25" : ""
-          } flex gap-2 shadow rounded-lg ml-8 px-4 py-2 items-center cursor-pointer`}
+          } relative flex gap-2 shadow rounded-lg ml-8 px-4 py-2 items-center cursor-pointer`}
           onClick={() => setShow(!show)}
         >
+          {!show && showCart && (
+            <span className="absolute top-1 right-1 h-3 w-3 bg-red-500 rounded-full block"></span>
+          )}
           <Icon icon="codicon:account" width="30" height="30" />
           <Icon icon="eva:arrow-down-fill" width="24" height="24" />
         </div>
@@ -105,6 +117,9 @@ const UserProfile = ({ visible = true }: { visible?: boolean }) => {
                 <span className="text-sm font-semibold text-slate-600">
                   {item.name}
                 </span>
+                {item.name === "My Rooms" && showCart && (
+                  <span className=" absolute right-8  h-2 w-2 bg-red-500 rounded-full block"></span>
+                )}
               </div>
             </Link>
           ))}

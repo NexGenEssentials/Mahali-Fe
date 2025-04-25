@@ -5,7 +5,6 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import ContextProvider from "./context";
 import CenterModal from "./(landingPage)/components/model/centerModel";
 import RightModal from "./(landingPage)/components/model/rightSideModel";
-import UserInfoForm from "./(landingPage)/components/service/carRental/bookACar";
 import ChatwootWidget from "./(landingPage)/components/chat/ChatwootWidget";
 import CustomTourPackage from "./(landingPage)/components/package/customePackage";
 import PaymentMethodModel from "./(landingPage)/components/model/paymentModel";

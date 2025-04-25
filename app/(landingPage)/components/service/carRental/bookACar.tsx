@@ -32,8 +32,10 @@ const UserCarBookingInfoForm = ({
   const [loading, setLoading] = useState(false);
   const [loadingpay, setLoadingpay] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [outPrice, setOutPrice] = useState(0);
   const [totalDays, setTotalDays] = useState(0);
   const [buttonType, setButtontype] = useState("booking");
+  const [isOutOfKigali, setIsOutOfKigali] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -52,6 +54,7 @@ const UserCarBookingInfoForm = ({
 
     setTotalDays(calculatedDays);
     setTotalPrice(price * calculatedDays);
+    setOutPrice(price * calculatedDays);
   }, [formData]);
 
   const handleDateChange = (date: Value, type: "pickupDate" | "dropDate") => {
@@ -160,7 +163,7 @@ const UserCarBookingInfoForm = ({
       setLoadingpay(false);
     }
   };
-  console.log({ totalPrice });
+ 
   return (
     <form
       onSubmit={handleSubmit}
@@ -217,15 +220,29 @@ const UserCarBookingInfoForm = ({
       </div>
       <div className="flex gap-6 items-center">
         <label className="flex items-center gap-2">
-          <input type="radio" name="location" value="inkigali" />
+          <input
+            type="radio"
+            name="location"
+            value="inkigali"
+            onClick={() => {
+                setIsOutOfKigali(false);
+                setTotalPrice(outPrice);
+              }
+            }
+          />
           In Kigali
         </label>
         <label className="flex items-center gap-2">
           <input
-            onClick={() => setTotalPrice((prev) => prev + prev / 10)}
             type="radio"
             name="location"
             value="outkigali"
+            onClick={() => {
+              if (!isOutOfKigali) {
+                setIsOutOfKigali(true);
+                setTotalPrice((prev) => prev + price * 0.1);
+              }
+            }}
           />
           Out of Kigali
         </label>

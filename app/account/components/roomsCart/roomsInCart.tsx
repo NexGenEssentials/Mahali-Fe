@@ -4,6 +4,7 @@ import { useAppContext } from "@/app/context";
 import Loading from "@/app/loading";
 import { cartListType } from "@/app/types/cart";
 import { Icon } from "@iconify/react";
+import { notification } from "antd";
 import { motion } from "motion/react";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -21,13 +22,7 @@ const RoomsInCart = () => {
     created_at: "",
     updated_at: "",
   });
-  const [cartList, setCartList] = useState<cartListType>({
-    id: 0,
-    user: 0,
-    items: [],
-    created_at: "",
-    updated_at: "",
-  });
+  const [cartList, setCartList] = useState<cartListType>(FilterCartList);
   const [dateSelected, setDateSelected] = useState<DateObject[]>([
     new DateObject(),
     new DateObject().add(1, "days"),
@@ -72,22 +67,40 @@ const RoomsInCart = () => {
   const handleGetCartList = async () => {
     const result = await getCart();
     if (result.success) {
-      setCartList(result.data);
       setFilterCartList(result.data);
+      setCartList(result.data);
     }
     setLoading(false);
   };
-  const handleDeleteRoom = async (id: number) => {
-    setLoading(true);
-    const result = await DeleteItemToCart(id);
 
-    if (result.success) {
-      setCartList((prev) => ({
-        ...prev,
-        items: prev.items.filter((item) => item.id !== id),
-      }));
+  const handleDeleteRoom = async (roomId: number) => {
+    try {
+      const result = await DeleteItemToCart(roomId);
+      if (result.success) {
+        setCartList((prev) => ({
+          ...prev,
+          items: prev.items.filter((room) => room.room_type !== roomId),
+        }));
+
+        notification.success({
+          message: "Room deleted successfully",
+          placement: "topRight",
+        });
+      } else {
+        notification.error({
+          message: "Failed to delete room",
+          placement: "topRight",
+        });
+      }
+    } catch (error) {
+      console.error("Failed to delete room:", error);
+      notification.error({
+        message: "An error occurred while deleting the room",
+        placement: "topRight",
+      });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleBooking = async () => {

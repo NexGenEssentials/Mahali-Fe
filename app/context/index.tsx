@@ -12,7 +12,9 @@ interface ContextValue {
   adminServiceTab: string;
   setAdminServiceTab: (adminServiceTab: string) => void;
   showZoom: boolean;
-  setShowZoom: (isLogin: boolean) => void;
+  setShowZoom: (showZoom: boolean) => void;
+  showCart: boolean;
+  setShowCart: (showZoom: boolean) => void;
   bookDate: DateObject[];
   setbookDate: (bookDate: DateObject[]) => void;
   bookingData: BookingData;
@@ -26,6 +28,7 @@ function ContextProvider({ children }: PropsWithChildren) {
   const [activeModalId, setActiveModalId] = useState<string | null>(null);
   const [isLogin, setIsLogin] = useState(false);
   const [showZoom, setShowZoom] = useState(false);
+   const [showCart, setShowCart] = useState(false);
   const [bookDate, setbookDate] = useState<DateObject[]>([]);
   const [bookingData, setBookingData] = useState<BookingData>({
     id: 0,
@@ -68,6 +71,8 @@ function ContextProvider({ children }: PropsWithChildren) {
         setbookDate,
         bookingData,
         setBookingData,
+        showCart,
+        setShowCart,
       }}
     >
       {children}
