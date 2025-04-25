@@ -36,7 +36,8 @@ const RoomsInCart = () => {
   const router = useRouter();
   const [loadingpay, setLoadingpay] = useState(false);
   const [buttonType, setButtontype] = useState("booking");
-  const { isLogin, setActiveModalId, setBookingData } = useAppContext();
+  const { isLogin, setActiveModalId, setBookingData, setShowCart } =
+    useAppContext();
   const [open, setOpen] = useState(false);
 
   const validateForm = () => {
@@ -76,12 +77,16 @@ const RoomsInCart = () => {
   const handleDeleteRoom = async (roomId: number) => {
     try {
       const result = await DeleteItemToCart(roomId);
+
       if (result.success) {
         setCartList((prev) => ({
           ...prev,
           items: prev.items.filter((room) => room.room_type !== roomId),
         }));
 
+        if (cartList.items.length <= 0) {
+          setShowCart(false);
+        }
         notification.success({
           message: "Room deleted successfully",
           placement: "topRight",
