@@ -168,7 +168,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
       render: (a: RoomType) => (
         <span>
           {a.total_units > 0 ? (
-            `${a.total_units > 1 ? "Rooms" : "Room"} left`
+            `${a.total_units }${a.total_units > 1 ? " Rooms" : " Room"} left`
           ) : (
             <Badge
               status="error"

@@ -160,7 +160,7 @@ const UserCarBookingInfoForm = ({
       setLoadingpay(false);
     }
   };
-
+  console.log({ totalPrice });
   return (
     <form
       onSubmit={handleSubmit}
@@ -221,7 +221,12 @@ const UserCarBookingInfoForm = ({
           In Kigali
         </label>
         <label className="flex items-center gap-2">
-          <input type="radio" name="location" value="outkigali" />
+          <input
+            onClick={() => setTotalPrice((prev) => prev + prev / 10)}
+            type="radio"
+            name="location"
+            value="outkigali"
+          />
           Out of Kigali
         </label>
       </div>

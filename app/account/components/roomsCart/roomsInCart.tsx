@@ -197,7 +197,7 @@ const RoomsInCart = () => {
                 onClick={() => setButtontype("booking")}
                 className="p-3 w-2/4 mx-auto bg-primaryGreen text-white font-semibold rounded-md"
               >
-                {loading ? "Sending..." : "Book Tour"}
+                {loading ? "Sending..." : "Book Rooms"}
               </motion.button>
 
               <div className="w-full flex justify-center">
