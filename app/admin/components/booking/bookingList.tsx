@@ -290,10 +290,13 @@ function AdminBookingsPage() {
         <div className="overflow-x-auto">
           <Table
             columns={columns}
-            dataSource={filteredBookings.slice(
-              (currentPage - 1) * pageSize,
-              currentPage * pageSize
-            )}
+            dataSource={[...filteredBookings]
+              .sort(
+                (a, b) =>
+                  new Date(b.created_at).getTime() -
+                  new Date(a.created_at).getTime()
+              )
+              .slice((currentPage - 1) * pageSize, currentPage * pageSize)}
             rowKey="id"
             pagination={false}
             className="w-full"

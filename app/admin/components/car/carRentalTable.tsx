@@ -14,7 +14,6 @@ import {
 import { CarResponse } from "@/app/types";
 import Image from "next/image";
 
-
 interface Feature {
   id: number;
   name: string;
@@ -106,117 +105,119 @@ const CarRentalTable: React.FC<CarRentalTableProps> = ({
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {currentItems?.map((car) => (
-              <tr
-                key={car.id}
-                className="hover:bg-gray-50 transition-colors duration-150"
-              >
-                <td className="px-6 py-4">
-                  <div className="flex items-center">
-                    {car.first_image ? (
-                      <div className="relative w-60 h-40">
-                        <Image
-                          src={car.first_image}
-                          alt={car.name}
-                          fill
-                          className="h-40 w-40 object-cover rounded-md mr-4"
-                        />
-                      </div>
-                    ) : (
-                      <div className="h-40 w-40 bg-gray-200 rounded-md flex items-center justify-center mr-4">
-                        <Car className="h-8 w-8 text-gray-400" />
-                      </div>
-                    )}
-                    <div className="px-4">
-                      <div className="text-sm font-medium text-gray-900">
-                        {car.brand} {car.name}
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        {car.year} • {car.category}
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="text-sm text-gray-900 space-y-1">
+            {[...(currentItems ?? [])]
+              .sort((a, b) => b.id - a.id)
+              ?.map((car) => (
+                <tr
+                  key={car.id}
+                  className="hover:bg-gray-50 transition-colors duration-150"
+                >
+                  <td className="px-6 py-4">
                     <div className="flex items-center">
-                      <Fuel className="h-4 w-4 mr-2 text-gray-400" />
-                      {car.fuel_type} • {car.transmission}
+                      {car.first_image ? (
+                        <div className="relative w-60 h-40">
+                          <Image
+                            src={car.first_image}
+                            alt={car.name}
+                            fill
+                            className="h-40 w-40 object-cover rounded-md mr-4"
+                          />
+                        </div>
+                      ) : (
+                        <div className="h-40 w-40 bg-gray-200 rounded-md flex items-center justify-center mr-4">
+                          <Car className="h-8 w-8 text-gray-400" />
+                        </div>
+                      )}
+                      <div className="px-4">
+                        <div className="text-sm font-medium text-gray-900">
+                          {car.brand} {car.name}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          {car.year} • {car.category}
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex items-center">
-                      <Users className="h-4 w-4 mr-2 text-gray-400" />
-                      {car.seats} seats
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="text-sm text-gray-900 space-y-1">
+                      <div className="flex items-center">
+                        <Fuel className="h-4 w-4 mr-2 text-gray-400" />
+                        {car.fuel_type} • {car.transmission}
+                      </div>
+                      <div className="flex items-center">
+                        <Users className="h-4 w-4 mr-2 text-gray-400" />
+                        {car.seats} seats
+                      </div>
+                      <div className="flex items-center">
+                        <Briefcase className="h-4 w-4 mr-2 text-gray-400" />
+                        {car.luggage_capacity} bags
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        Mileage: {formatMileage(car.mileage)}
+                      </div>
                     </div>
-                    <div className="flex items-center">
-                      <Briefcase className="h-4 w-4 mr-2 text-gray-400" />
-                      {car.luggage_capacity} bags
+                  </td>
+                  <td className="px-6 py-4 max-w-sm">
+                    <div className="flex flex-wrap gap-1">
+                      {car.features.map((feature) => (
+                        <span
+                          key={feature.id}
+                          className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800"
+                        >
+                          {feature.name}
+                        </span>
+                      ))}
+                      {car.features.length === 0 && (
+                        <span className="text-sm text-gray-500">
+                          No features listed
+                        </span>
+                      )}
                     </div>
-                    <div className="text-xs text-gray-500">
-                      Mileage: {formatMileage(car.mileage)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm font-medium text-gray-900">
+                      {formatPrice(car.price_per_day)}
                     </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4 max-w-sm">
-                  <div className="flex flex-wrap gap-1">
-                    {car.features.map((feature) => (
-                      <span
-                        key={feature.id}
-                        className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800"
+                    <div className="text-xs text-gray-500">per day</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span
+                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                        car.is_available
+                          ? "bg-green-100 text-green-800"
+                          : "bg-red-100 text-red-800"
+                      }`}
+                    >
+                      {car.is_available ? "Available" : "Not Available"}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <div className="flex justify-end space-x-2">
+                      <button
+                        onClick={() => onView(car.id)}
+                        className="text-blue-600 hover:text-blue-900"
+                        title="View Details"
                       >
-                        {feature.name}
-                      </span>
-                    ))}
-                    {car.features.length === 0 && (
-                      <span className="text-sm text-gray-500">
-                        No features listed
-                      </span>
-                    )}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900">
-                    {formatPrice(car.price_per_day)}
-                  </div>
-                  <div className="text-xs text-gray-500">per day</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      car.is_available
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
-                  >
-                    {car.is_available ? "Available" : "Not Available"}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <div className="flex justify-end space-x-2">
-                    <button
-                      onClick={() => onView(car.id)}
-                      className="text-blue-600 hover:text-blue-900"
-                      title="View Details"
-                    >
-                      <Eye className="w-5 h-5" />
-                    </button>
-                    <button
-                      // onClick={() => onUpdate(car)}
-                      className="text-indigo-600 hover:text-indigo-900"
-                      title="Edit"
-                    >
-                      <Pencil className="w-5 h-5" />
-                    </button>
-                    <button
-                      onClick={() => onDelete(car.id)}
-                      className="text-red-600 hover:text-red-900"
-                      title="Delete"
-                    >
-                      <Trash2 className="w-5 h-5" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                        <Eye className="w-5 h-5" />
+                      </button>
+                      <button
+                        // onClick={() => onUpdate(car)}
+                        className="text-indigo-600 hover:text-indigo-900"
+                        title="Edit"
+                      >
+                        <Pencil className="w-5 h-5" />
+                      </button>
+                      <button
+                        onClick={() => onDelete(car.id)}
+                        className="text-red-600 hover:text-red-900"
+                        title="Delete"
+                      >
+                        <Trash2 className="w-5 h-5" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

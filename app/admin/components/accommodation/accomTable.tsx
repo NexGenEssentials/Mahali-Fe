@@ -91,82 +91,88 @@ const AccommodationTable: React.FC<AccommodationTableProps> = ({
               </td>
             </tr>
           ) : (
-            currentItems.map((a) => (
-              <tr key={a.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap">{a.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{a.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{a.location}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{a.address}</td>
+            [...currentItems]
+              .sort(
+                (a, b) =>
+                  new Date(b.created_at).getTime() -
+                  new Date(a.created_at).getTime()
+              )
+              .map((a) => (
+                <tr key={a.id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap">{a.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{a.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{a.location}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{a.address}</td>
 
-                <td className="px-6 py-4 whitespace-nowrap">{a.category}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {renderRatingStars(a.rating)}
-                </td>
+                  <td className="px-6 py-4 whitespace-nowrap">{a.category}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {renderRatingStars(a.rating)}
+                  </td>
 
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {new Date(a.created_at).toLocaleDateString()}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                      a.is_active
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
-                  >
-                    {a.is_active ? "Yes" : "No"}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                      a.is_featured
-                        ? "bg-blue-100 text-blue-800"
-                        : "bg-gray-100 text-gray-800"
-                    }`}
-                  >
-                    {a.is_featured ? "Yes" : "No"}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">{a.tags}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {a.check_in_time}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {a.check_out_time}
-                </td>
-
-                <td className="px-6 py-4 whitespace-nowrap">
-                  ${a.lowest_price}
-                </td>
-
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => onView(a.id, a.category)}
-                      className="text-blue-600"
-                      title="View"
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {new Date(a.created_at).toLocaleDateString()}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                        a.is_active
+                          ? "bg-green-100 text-green-800"
+                          : "bg-red-100 text-red-800"
+                      }`}
                     >
-                      <Eye className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={() => onUpdate(a.id)}
-                      className="text-indigo-600"
-                      title="Edit"
+                      {a.is_active ? "Yes" : "No"}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                        a.is_featured
+                          ? "bg-blue-100 text-blue-800"
+                          : "bg-gray-100 text-gray-800"
+                      }`}
                     >
-                      <Pencil className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={() => onDelete(a.id)}
-                      className="text-red-600"
-                      title="Delete"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))
+                      {a.is_featured ? "Yes" : "No"}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">{a.tags}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {a.check_in_time}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {a.check_out_time}
+                  </td>
+
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    ${a.lowest_price}
+                  </td>
+
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={() => onView(a.id, a.category)}
+                        className="text-blue-600"
+                        title="View"
+                      >
+                        <Eye className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => onUpdate(a.id)}
+                        className="text-indigo-600"
+                        title="Edit"
+                      >
+                        <Pencil className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => onDelete(a.id)}
+                        className="text-red-600"
+                        title="Delete"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
           )}
         </tbody>
       </table>
