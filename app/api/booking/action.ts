@@ -59,7 +59,7 @@ export const updateBookingStatus = async (
 ): Promise<{ status: string; message: string }> => {
   try {
     const response = await fetch(
-      `${base_url}/bookings/${id}/${newStatus.toLocaleLowerCase()}/`,
+      `${base_url}/bookings/${id}/${newStatus.toLowerCase()}/`,
       {
         method: "PUT",
         headers: {

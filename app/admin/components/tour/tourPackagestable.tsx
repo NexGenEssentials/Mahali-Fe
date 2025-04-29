@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import {
   Pencil,
@@ -8,54 +8,28 @@ import {
   ChevronRight,
   Eye,
 } from "lucide-react";
-
-interface Country {
-  id: number;
-  name: string;
-}
-
-interface TourPlan {
-  title: string;
-  description: string;
-  inclusion: string | null;
-  accommodation: string | null;
-}
-
-interface TourPackage {
-  id: number;
-  country: Country;
-  tour_plans: TourPlan[];
-  title: string;
-  description: string;
-  location: string;
-  best_time_to_visit: string;
-  duration_days: number;
-  duration_nights: number;
-  min_people: number;
-  max_people: number;
-  rating: number;
-  main_image: string | null;
-  is_active: boolean;
-  created_at: string;
-  updated_at: string;
-}
+import { TourDataType } from "@/app/types/tour";
+import { getAllToursData } from "@/app/helpers/filter";
+import Loader from "@/app/(landingPage)/components/skeleton/loader";
 
 interface TourPackagesTableProps {
-  data: TourPackage[];
+  tour: TourDataType;
   onDelete: (id: number) => void;
-  onUpdate: (tourPackage: TourPackage) => void;
-  onView: (tourPackage: TourPackage) => void;
+  onUpdate: (tourPackage: number) => void;
+  onView: (tourPackage: number) => void;
+  loading: boolean;
 }
 
 const TourPackagesTable: React.FC<TourPackagesTableProps> = ({
-  data,
+  tour,
   onDelete,
   onUpdate,
   onView,
+  loading,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
+  const data = getAllToursData(tour);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = data.slice(startIndex, endIndex);
@@ -87,7 +61,7 @@ const TourPackagesTable: React.FC<TourPackagesTableProps> = ({
                 Title
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Country
+                Country Id
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Location
@@ -107,75 +81,84 @@ const TourPackagesTable: React.FC<TourPackagesTableProps> = ({
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {currentItems.map((tourPackage) => (
-              <tr
-                key={tourPackage.id}
-                className="hover:bg-gray-50 transition-colors duration-150"
-              >
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900">
-                    {tourPackage.title}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {tourPackage.description.substring(0, 50)}...
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">
-                    {tourPackage.country.name}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">
-                    {tourPackage.location}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">
-                    {tourPackage.duration_days}D/{tourPackage.duration_nights}N
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {renderRatingStars(tourPackage.rating)}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      tourPackage.is_active
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
-                  >
-                    {tourPackage.is_active ? "Active" : "Inactive"}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <div className="flex justify-end space-x-2">
-                    <button
-                      onClick={() => onView(tourPackage)}
-                      className="text-blue-600 hover:text-blue-900"
-                      title="View Details"
-                    >
-                      <Eye className="w-5 h-5" />
-                    </button>
-                    <button
-                      onClick={() => onUpdate(tourPackage)}
-                      className="text-indigo-600 hover:text-indigo-900"
-                      title="Edit"
-                    >
-                      <Pencil className="w-5 h-5" />
-                    </button>
-                    <button
-                      onClick={() => onDelete(tourPackage.id)}
-                      className="text-red-600 hover:text-red-900"
-                      title="Delete"
-                    >
-                      <Trash2 className="w-5 h-5" />
-                    </button>
-                  </div>
+            {loading ? (
+              <tr>
+                <td colSpan={7} className="text-center py-4">
+                  <Loader />
                 </td>
               </tr>
-            ))}
+            ) : (
+              currentItems.map((tourPackage) => (
+                <tr
+                  key={tourPackage.id}
+                  className="hover:bg-gray-50 transition-colors duration-150"
+                >
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm font-medium text-gray-900">
+                      {tourPackage.title}
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      {tourPackage.description.substring(0, 50)}...
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">
+                      {tourPackage.country}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">
+                      {tourPackage.location}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">
+                      {tourPackage.duration_days}D/{tourPackage.duration_nights}
+                      N
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {renderRatingStars(tourPackage.rating)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span
+                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                        tourPackage.is_active
+                          ? "bg-green-100 text-green-800"
+                          : "bg-red-100 text-red-800"
+                      }`}
+                    >
+                      {tourPackage.is_active ? "Active" : "Inactive"}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <div className="flex justify-end space-x-2">
+                      <button
+                        onClick={() => onView(tourPackage.id)}
+                        className="text-blue-600 hover:text-blue-900"
+                        title="View Details"
+                      >
+                        <Eye className="w-5 h-5" />
+                      </button>
+                      <button
+                        onClick={() => onUpdate(tourPackage.id)}
+                        className="text-indigo-600 hover:text-indigo-900"
+                        title="Edit"
+                      >
+                        <Pencil className="w-5 h-5" />
+                      </button>
+                      <button
+                        onClick={() => onDelete(tourPackage.id)}
+                        className="text-red-600 hover:text-red-900"
+                        title="Delete"
+                      >
+                        <Trash2 className="w-5 h-5" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
