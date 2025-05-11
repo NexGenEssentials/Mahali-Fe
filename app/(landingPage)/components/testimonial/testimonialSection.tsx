@@ -18,7 +18,7 @@ const TestimonialSection = () => {
         <div className="w-full lg:w-1/2 p-8 gap-4 flex flex-col items-start justify-center ">
           <div className="text-defaultGreen flex items-center gap-2">
             <span className="h-[2px] w-6 block bg-defaultGreen bg-opacity-20"></span>
-            <h2 className=" text-sm leading-8 tracking-normal">Service</h2>
+            <h2 className=" text-sm leading-8 tracking-normal">Services</h2>
             <span className="h-[2px] w-6 block bg-defaultGreen bg-opacity-20"></span>
           </div>
           <h1 className="text-2xl font-bold text-defaultGreen ">
@@ -44,7 +44,7 @@ const TestimonialSection = () => {
         <div className="w-full lg:w-1/2 p-2 sm:p-8 gap-4 flex flex-col items-start justify-center ">
           <div className="text-defaultGreen flex items-center gap-2">
             <span className="h-[2px] w-6 block bg-defaultGreen bg-opacity-20"></span>
-            <h2 className=" text-sm leading-8 tracking-normal">Testimony</h2>
+            <h2 className=" text-sm leading-8 tracking-normal">Testimonies</h2>
             <span className="h-[2px] w-6 block bg-defaultGreen bg-opacity-20"></span>
           </div>
           <h1 className="text-2xl font-bold text-defaultGreen ">

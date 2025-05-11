@@ -15,11 +15,11 @@ const DestinationSection = () => {
         <div className="text-defaultGreen flex items-center gap-2">
           <span className="h-[2px] w-12 block bg-defaultGreen"></span>
           <h2 className="font-semibold text-lg leading-8 tracking-normal">
-            Our Destination
+            Our Destinations
           </h2>
           <span className="h-[2px] w-12 block bg-defaultGreen"></span>
         </div>
-        <h1 className="text-4xl font-bold ">Explore Top Destination</h1>
+        <h1 className="text-4xl font-bold ">Explore Top Destinations</h1>
       </div>
       <div className="flex flex-wrap gap-8 items-center justify-center py-8">
         {Destination?.map((location, index) => (

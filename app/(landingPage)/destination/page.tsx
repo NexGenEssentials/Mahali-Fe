@@ -49,8 +49,8 @@ const Destination = () => {
         <div className="max-w-[1750px] mx-auto w-full bg-slate-100 bg-opacity-20 p-8 flex flex-col gap-8">
           <div className="flex flex-col gap-2 items-center justify-center">
             <HeaderSection
-              title="Our Destination"
-              subtitle="Explore Top Destination"
+              title="Our Destinations"
+              subtitle="Explore Top Destinations"
             />
             <p className=" w-full md:w-3/4 mx-auto flex items-center justify-center text-sm text-slate-400">
               Discover Africa’s wonders with our expertly crafted tours.
@@ -73,7 +73,7 @@ const Destination = () => {
               } p-2 cursor-pointer text-sm text-nowrap font-medium max-md:rounded-full rounded hover:bg-primaryGreen hover:text-white duration-500`}
               key={"custome"}
             >
-              {"Custom Package"}
+              {"Custom Packages"}
             </li>
             {navnarArr.map((location, index) => (
               <li

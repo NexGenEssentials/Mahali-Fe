@@ -1097,7 +1097,7 @@ export const StaffList = [
     category: "Management",
     list: [
       {
-        name: "Roy R Muruta",
+        name: "Roy Rugazora Muruta",
         title: "Sales and Marketing",
         image: Giselle,
       },

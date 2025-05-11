@@ -35,7 +35,7 @@ const PromotionSection = () => {
               htmlFor="place"
               className="text-xs text-primaryWhite font-medium pl-2"
             >
-              SERVICE
+              SERVICES
             </label>
             <Space wrap>
               <Select

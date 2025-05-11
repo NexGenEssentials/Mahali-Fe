@@ -16,7 +16,7 @@ const ServiceSection = () => {
       id="service"
       className="max-w-[1750px] mx-auto p-2 sm:p-8 w-full bg-slate-100 bg-opacity-20"
     >
-      <HeaderSection title="Service" subtitle="Tours & Travel Services" />
+      <HeaderSection title="Services" subtitle="Tours & Travel Services" />
       <div className="sm:pt-8 ">
         <Swiper
           pagination={{
