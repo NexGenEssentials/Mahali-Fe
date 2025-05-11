@@ -48,12 +48,10 @@ const SignInForm = () => {
           duration: 1.5,
         });
         setIsLogin(true);
-        if (user?.role === "admin") route.push("/admin");
-        else {
-          setTimeout(() => {
-            route.push(callbackUrl);
-          }, 1500);
-        }
+
+        setTimeout(() => {
+          route.push(callbackUrl);
+        }, 1500);
       }
     } catch (error) {
       notification.error({
