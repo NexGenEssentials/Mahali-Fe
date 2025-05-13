@@ -1,4 +1,3 @@
-import { DestinationCountry } from "@/app/constants/arrays";
 import React, { useEffect, useState } from "react";
 import PackageCard from "../package/packageCard";
 import { HeaderSection } from "../headers/header";
@@ -95,12 +94,12 @@ const SingleDestination = ({
                   className=" group p-4 text-primaryBlue border md:w-1/3 lg:w-1/4 hover:bg-primaryGreen hover:text-white hover:duration-400 hover:transition-transform hover:-translate-x-2 hover:-translate-y-2  flex justify-start gap-2 "
                 >
                   <div className="">
-                    {/* <Icon
+                    <Icon
                       icon={pack.icon}
                       width="30"
                       height="30"
                       className="text-primaryGreen group-hover:bg-white "
-                    /> */}
+                    />
                   </div>
                   <div className="flex-col flex gap-2 ">
                     <span className="text-base font-semibold">

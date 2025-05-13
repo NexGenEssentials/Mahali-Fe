@@ -22,7 +22,7 @@ const Signin = () => {
                   size === "small" ? "text-base" : "text-2xl"
                 } font-extrabold  text-primaryGreen`}
               >
-                Mahali Africa <br /> Adventure
+                Mahali Africa <br /> Adventures
               </h1>
               <span
                 onClick={() => router.back()}

@@ -12,10 +12,7 @@ import {
   getAccommodationsFilters,
 } from "@/app/api/accommodation/action";
 import { useAppContext } from "@/app/context";
-import {
-  AccommodationDetail,
-  findAccommodationByName,
-} from "@/app/helpers/filter";
+
 import Loading from "@/app/loading";
 import { AccommodationType, RoomType } from "@/app/types/accommodation";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -28,6 +25,7 @@ import { AddToCart } from "@/app/api/cart/action";
 import { usePathname, useRouter } from "next/navigation";
 import { CornerDownLeft } from "lucide-react";
 import { formatDateToISO } from "@/app/helpers/formatDate";
+import { AccommodationsStatic } from "@/app/constants/arrays";
 
 const navBar = [
   "Overview",
@@ -40,7 +38,7 @@ const navBar = [
 const accommodationName = ({ params }: { params: { id: string } }) => {
   const accomId = decodeURIComponent(params.id);
   const { setActiveModalId, isLogin, setShowCart } = useAppContext();
-  const [AccomDetailData, setAccomDetailData] = useState<AccommodationDetail>();
+  const [AccomDetailData, setAccomDetailData] = useState<AccommodationType>();
   const [selectedSection, setSelectedSection] = useState("Overview");
   const [like, setLike] = useState(false);
   const [open, setOpen] = useState(false);
@@ -100,12 +98,12 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
   const HandleGetAccommodation = async () => {
     setLoading(true);
     try {
-      const result = await getAccommodationsFilters({ id: Number(accomId) });
+      const result = await getAccommodation( Number(accomId) );
       if (result.success) {
-        setAccomDetails(result.data[0]);
-        setRoomData(result.data[0].room_types);
-        const found = findAccommodationByName(result.data[0].name);
-        setAccomDetailData(found);
+        setAccomDetails(result.data.accommodation);
+        setRoomData(result.data.room_types);
+       
+        setAccomDetailData(result.data.accommodation);
         setLoading(false);
       }
     } catch (error) {
@@ -148,6 +146,22 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
     } catch (error) {
       console.log({ error });
     } finally {
+    }
+  };
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Mahali Africa",
+          text: "Check out Mahali Africa!",
+          url: window.location.href,
+        });
+       
+      } catch (error) {
+        console.error("Error sharing:", error);
+      }
+    } else {
+      alert("Sharing is not supported in this browser.");
     }
   };
 
@@ -248,7 +262,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
                 className={commonButtonClass}
                 aria-label={`Equip ${room.name}`}
               >
-                Equip Room
+                Book Room
               </button>
 
               {/* Conditional Room Popup */}
@@ -340,7 +354,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
         />
 
         {/* Title and Action Bar */}
-        <div className="w-full px-8 flex gap-6 flex-row items-start justify-between">
+        <div className="w-full px-8 flex gap-6 flex-row items-start justify-between max-sm:pt-8">
           <div>
             <h1 className="text-lg font-semibold uppercase text-primaryGreen">
               {AccomDetails?.name}
@@ -358,8 +372,27 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
               className="cursor-pointer"
               onClick={() => setLike(!like)}
             />
-            <Icon icon="ri:share-line" width="24" height="24" />
-            <button className="p-2 bg-primaryGreen rounded-md text-sm text-white font-medium">
+            <Icon
+              onClick={handleShare}
+              icon="ri:share-line"
+              width="24"
+              height="24"
+              className="cursor-pointer"
+            />
+            <button
+              onClick={() => {
+                if (isLogin) {
+                  setActiveModalId("room-details");
+                  setSelectedRoom(AccomDetails.room_types[0]);
+                  setOpen(true);
+                } else {
+                  router.push(
+                    `/login?callbackUrl=${encodeURIComponent(pathname)}`
+                  );
+                }
+              }}
+              className="p-2 bg-primaryGreen rounded-md text-sm text-white font-medium"
+            >
               Reserve
             </button>
           </div>
@@ -434,7 +467,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
                 />
                 What's nearby
               </h1>
-              {AccomDetailData?.whatsNearby?.places.map((place, index) => (
+              {AccommodationsStatic.whatsNearby?.places.map((place, index) => (
                 <div
                   key={index}
                   className="flex gap-4 it justify-between w-full text-sm"
@@ -455,7 +488,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
                   />
                   Restaurants & cafes
                 </h1>
-                {AccomDetailData?.whatsNearby?.restaurantsAndCafes.map(
+                {AccommodationsStatic.whatsNearby?.restaurantsAndCafes.map(
                   (place, index) => (
                     <div
                       key={index}
@@ -477,7 +510,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
                   />
                   Closest airports
                 </h1>
-                {AccomDetailData?.whatsNearby?.closestAirports.map(
+                {AccommodationsStatic.whatsNearby?.closestAirports.map(
                   (place, index) => (
                     <div
                       key={index}
@@ -587,7 +620,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
               </span>
             </div>
 
-            {AccomDetailData?.houseRules?.slice(-1).map((rule, index) => (
+            {AccommodationsStatic.houseRules?.slice(-1).map((rule, index) => (
               <div key={index} className="flex gap-4 p-6 border-b rounded-lg">
                 {typeof rule.details !== "string" && (
                   <>
@@ -617,14 +650,14 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
               {AccomDetails?.rating}
             </span>
             <span className="text-primaryGreen text-sm font-semibold">
-              Faboulus 👌
+              Fabulous 👌
             </span>
             <span className="text-slate-500 text-sm">{400} Reviews</span>
           </div>
           <div>
             <h1 className="font-semibold text-primaryGreen">Categories :</h1>
             <div className="flex gap-x-12 gap-y-4 flex-wrap">
-              {AccomDetailData?.ratings?.map((rate, index) => (
+              {AccommodationsStatic.ratings?.map((rate, index) => (
                 <div key={index} className="w-72">
                   <span className="w-full flex justify-between items-end space-x-2 text-sm font-bold">
                     <h2 className="mb-0">{rate.category}</h2>
@@ -641,7 +674,9 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
             </div>
           </div>
           <div>
-            <ReviewsPage Testimonial={AccomDetailData?.testimonies! || []} />
+            <ReviewsPage
+              Testimonial={AccommodationsStatic.testimonies! || []}
+            />
           </div>
         </div>
 
@@ -653,7 +688,7 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
           </p>
 
           <iframe
-            src={AccomDetailData?.map}
+            src={`https://maps.google.com/maps?q=${AccomDetails?.latitude},${AccomDetails?.longitude}&hl=en&z=14&output=embed`}
             height="400"
             style={{ border: 0, width: "100%" }}
             allowFullScreen

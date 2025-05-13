@@ -54,7 +54,7 @@ const PackageSection = () => {
 
   const handleCreatePackage = async () => {
     if (isLogin) {
-      setActiveModalId("Custom Packages");
+      setActiveModalId("Custom Package");
     } else {
       router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
     }
@@ -64,17 +64,17 @@ const PackageSection = () => {
     <>
       <div
         id="package"
-        className="max-w-[1750px] mx-auto p-8 w-full bg-slate-100 bg-opacity-20 flex flex-col gap-8"
+        className="max-w-[1750px] mx-auto p-4 md:p-8 w-full bg-slate-100 bg-opacity-20 flex flex-col gap-8"
       >
         <div className="w-full flex flex-col gap-4 justify-center items-center">
           <HeaderSection
-            subtitle="Pefect Tour Packages"
+            subtitle="Perfect Tour Packages"
             title="Special Offers"
             description="Discover Africa’s wonders with our expertly crafted tours. Experience
           captivating landscapes and vibrant cultures on unforgettable journeys."
           />
 
-          <ul className="flex max-md:rounded-full hide-scrollbar gap-3 md:gap-8 p-2 w-full items-end justify-center overflow-x-scroll max-md:bg-slate-100">
+          <ul className="w-full mx-auto flex gap-2 p-2 sm:gap-8 items-center justify-evenly sm:justify-center overflow-x-scroll max-md:bg-slate-100 max-md:rounded-full hide-scrollbar">
             <li
               onClick={() => setActive("Custom Packages")}
               className={`${

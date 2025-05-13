@@ -55,6 +55,17 @@ export type AccommodationType = {
   images: string[];
   lowest_price: number;
   room_types: RoomType[];
+  whatsNearby?: {
+    places: {
+      name: string;
+      distance: string;
+    }[];
+    restaurantsAndCafes: {
+      name: string;
+      distance: string;
+    }[];
+    closestAirports?: { name: string; distance: string }[];
+  };
 };
 
 export type AccommodationResponse = {

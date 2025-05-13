@@ -48,7 +48,7 @@ const TestimonialSection = () => {
             <span className="h-[2px] w-6 block bg-defaultGreen bg-opacity-20"></span>
           </div>
           <h1 className="text-2xl font-bold text-defaultGreen ">
-            Our Guests Says
+            Our Guests Say
           </h1>
           <div className="w-full mt-4">
           <Swiper

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
@@ -8,6 +8,37 @@ import { NavItems } from "../navbar/navbar";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleSubscribe = async () => {
+    if (!email || !email.includes("@")) {
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message || "Something went wrong");
+      setEmail("");
+    } catch (error: any) {
+      setMessage(`❌ ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <motion.div
       initial={{ y: 100, opacity: 0 }}
@@ -24,7 +55,10 @@ const Footer = () => {
               <Image src={"/images/logo.png"} alt="mahali africa" fill={true} />
             </div>
             <div className="flex gap-4">
-              <Link href={"https://www.instagram.com/mahaliafrica/"}>
+              <Link
+                target="_blank"
+                href={"https://www.instagram.com/mahaliafrica/"}
+              >
                 <Icon
                   icon="ri:instagram-fill"
                   width="24"
@@ -33,6 +67,7 @@ const Footer = () => {
                 />
               </Link>
               <Link
+                target="_blank"
                 href={"https://www.facebook.com/profile.php?id=61551684126148"}
               >
                 <Icon
@@ -42,7 +77,7 @@ const Footer = () => {
                   className="hover:text-primaryGreen icon"
                 />
               </Link>
-              <Link href={"#"}>
+              <Link target="_blank" href={"https://x.com/africamaha56161?s=21"}>
                 <Icon
                   icon="prime:twitter"
                   width="24"
@@ -51,12 +86,35 @@ const Footer = () => {
                 />
               </Link>
               <Link
-                href={
-                  "https://www.linkedin.com/company/mahaliafrica/?viewAsMember=true"
-                }
+                target="_blank"
+                href={"https://www.linkedin.com/company/mahaliafrica/"}
               >
                 <Icon
                   icon="mingcute:linkedin-fill"
+                  width="24"
+                  height="24"
+                  className="hover:text-primaryGreen icon"
+                />
+              </Link>
+              <Link
+                target="_blank"
+                href={"https://youtube.com/@mahaliafrica?si=9NnXp5ohh0-WHcMa"}
+              >
+                <Icon
+                  icon="mdi:youtube"
+                  width="24"
+                  height="24"
+                  className="hover:text-primaryGreen icon"
+                />
+              </Link>
+              <Link
+                target="_blank"
+                href={
+                  "https://www.tiktok.com/@mahaliafrica?_t=ZM-8wJgJENUhCZ&_r=1"
+                }
+              >
+                <Icon
+                  icon="hugeicons:tiktok"
                   width="24"
                   height="24"
                   className="hover:text-primaryGreen icon"
@@ -101,7 +159,14 @@ const Footer = () => {
                   height="20"
                   className="text-primaryGreen icon"
                 />
-                <span>+250793898790</span>
+                <a
+                  href="https://wa.me/250793898790?text=Hello%2C%20I%27m%20interested%20in%20learning%20more%20about%20your%20services.%20Could%20you%20please%20assist%20me%3F%20Thank%20you."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primaryGreen hover:underline duration-100 transition"
+                >
+                  +250793898790
+                </a>
               </div>
               <div className="flex gap-2 items-center">
                 <Icon
@@ -110,8 +175,14 @@ const Footer = () => {
                   height="20"
                   className="text-primaryGreen icon"
                 />
-                <span>info@mahaliafrica.com</span>
+                <a
+                  href="mailto:info@mahaliafrica.com"
+                  className="hover:text-primaryGreen hover:underline duration-100 transition"
+                >
+                  info@mahaliafrica.com
+                </a>
               </div>
+
               <div className="flex gap-2 items-center">
                 <Icon
                   icon="mdi:address-marker-outline"
@@ -129,10 +200,16 @@ const Footer = () => {
             </h1>
             <div className="flex gap-2">
               <input
-                type="text"
-                name=""
-                id=""
-                placeholder="enter email"
+                type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value), setMessage("");
+                }}
+                name="email"
+                id="email"
+                autoComplete="off"
+                required
+                placeholder="Enter email"
                 className="p-2 w-full rounded-md focus:outline-none text-slate-700"
               />
               <motion.button
@@ -142,15 +219,22 @@ const Footer = () => {
                   transition: { duration: 0.25 },
                 }}
                 className="p-3 bg-primaryGreen rounded-md"
+                disabled={loading || !email}
+                onClick={handleSubscribe}
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                Subscribe
+                {loading ? "loading..." : "Subscribe"}
               </motion.button>
             </div>
+            {message && (
+              <div className="text-red-500 text-xs pt-2">{message}</div>
+            )}
           </div>
         </div>
         <div className="grid place-content-center border-t border-t-defaultGreen text-primaryGreen font-light text-xs p-4">
           {" "}
-          &copy;{currentYear} mahali africa
+          &copy;{currentYear} Mahali Africa
         </div>
       </div>
     </motion.div>

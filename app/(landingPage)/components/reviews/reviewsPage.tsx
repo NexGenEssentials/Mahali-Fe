@@ -25,7 +25,7 @@ const ReviewsPage = ({
         autoplay={{
           delay: 5000,
         }}
-        slidesPerView={3}
+        slidesPerView={1}
         spaceBetween={5}
         loop={true}
         keyboard={{

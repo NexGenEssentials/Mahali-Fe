@@ -16,7 +16,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
   const [loading, setLoading] = useState(false);
   return (
     <div className="rounded-2xl p-4 transition-all bg-white w-full">
-      <div className="flex justify-between items-center mb-2">
+      <div className="flex justify-between ga-2 items-center mb-2">
         <h3 className="text-xl font-semibold text-gray-800 ">{room?.name}</h3>
         {room?.is_available ? (
           <Badge
@@ -28,7 +28,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
           <Badge
             status="error"
             text="Unavailable"
-            style={{ color: "red", fontWeight: "bold" }}
+            style={{ color: "red", fontWeight: "bold", whiteSpace: "nowrap" }}
           />
         )}
       </div>
@@ -88,15 +88,6 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
             />
           </div>
         ))}
-      </div>
-
-      <div className="w-full p-8 flex flex-col gap-4 items-center justify-center">
-        <button
-          //   onClick={() => }
-          className="mt-6 border w-1/2  border-primaryGreen text-defaultGreen hover:bg-primaryGreen hover:text-white font-bold py-3 rounded-xl transition-all duration-300"
-        >
-          {loading ? "Sending..." : "Equip Room"}
-        </button>
       </div>
     </div>
   );

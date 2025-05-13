@@ -1,8 +1,8 @@
 import { StaticImageData } from "next/image";
 import {
-  Accommodations,
+
   AccountSettingsMenu,
-  PackageList,
+
 } from "../constants/arrays";
 import { CarData } from "../types";
 import {
@@ -12,25 +12,6 @@ import {
   TourPackageType,
 } from "../types/tour";
 import { AccommodationType } from "../types/accommodation";
-
-export const filterPackages = (
-  data: typeof PackageList,
-  filters: { location: string; packageName: string }
-) => {
-  const matchingLocation = data.find(
-    (item) => item.location.toLowerCase() === filters.location.toLowerCase()
-  );
-
-  if (matchingLocation) {
-    const matchingPackage = matchingLocation.package.find((pkg) =>
-      pkg.name.toLowerCase().includes(filters.packageName.toLowerCase())
-    );
-
-    return matchingPackage || null;
-  }
-
-  return null;
-};
 
 export const getCarByName = (searchTerm: string, carList?: CarData[]) => {
   if (!searchTerm.trim()) return carList;
@@ -114,20 +95,6 @@ export type AccommodationDetail = {
       distance: string;
     }[];
   };
-};
-
-export const findAccommodationByName = (
-  accommodationName?: string
-): AccommodationDetail | undefined => {
-  for (const category of Accommodations) {
-    const foundAccommodation = category.details.find(
-      (detail) => detail.name.toLowerCase() === accommodationName?.toLowerCase()
-    );
-    if (foundAccommodation) {
-      return foundAccommodation;
-    }
-  }
-  return undefined;
 };
 
 export const filteredMenuItems = AccountSettingsMenu.flatMap((category) =>

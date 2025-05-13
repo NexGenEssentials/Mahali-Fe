@@ -72,6 +72,7 @@ type WhenToGo = {
 export type highlightsData = {
   title: string;
   description: string;
+  icon: string;
 };
 
 export type CountryType = {
@@ -81,6 +82,7 @@ export type CountryType = {
   name: string;
   image: string | null;
   description: string | null;
+  
 };
 
 export type CountryResponseType = {

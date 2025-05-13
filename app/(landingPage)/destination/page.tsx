@@ -60,7 +60,7 @@ const Destination = () => {
           </div>
 
           {/* Navigation Bar for Destinations */}
-          <ul className="w-full lg:w-3/4 mx-auto flex gap-2 sm:gap-8 items-center justify-evenly sm:justify-center overflow-x-scroll max-md:bg-slate-100 max-md:rounded-full hide-scrollbar py-2">
+          <ul className="w-full lg:w-3/4 mx-auto flex gap-2 sm:gap-8 items-center justify-evenly sm:justify-center overflow-x-scroll max-md:bg-slate-100 max-md:rounded-full hide-scrollbar p-2">
             <li
               onClick={() => {
                 setActive("Custom Package");

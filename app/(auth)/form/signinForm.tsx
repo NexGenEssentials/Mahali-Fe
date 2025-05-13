@@ -119,7 +119,7 @@ const SignInForm = () => {
       <div className="mt-6 flex justify-between flex-wrap space-y-4 items-center">
         <Link href={"/forget-password"}>
           <span className="underline text-primaryGreen font-bold cursor-pointer hover:opacity-60">
-            Forget Password ?
+            Forgot Password ?
           </span>
         </Link>
         <Form.Item>
