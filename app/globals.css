@@ -6,10 +6,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: "#1d2228";
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .spinner {
@@ -38,11 +38,37 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #667c3e !important;
   border-color: #667c3e !important;
 }
-.ant-btn:hover .ant-btn:focus{
+.ant-btn:hover .ant-btn:focus {
   background-color: #667c3e !important;
   border-color: #667c3e !important;
   color: #000 !important;
 }
-.no-scroll{
+.no-scroll {
   overflow: hidden;
 }
+
+.custom-ant-input {
+  width: 100% !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  outline: none !important;
+}
+.custom-ant-input:hover {
+  border: 1px solid #667c3e !important;
+}
+.custom-ant-input:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #667c3e !important;
+}
+
+.custom-ant-radio .ant-radio-wrapper:hover {
+  color: #667c3e !important;
+}
+.custom-ant-radio .ant-radio-wrapper:focus-within {
+  color: #667c3e !important;
+}
+
+.ant-radio{
+  color: #667c3e !important;
+}
+ 

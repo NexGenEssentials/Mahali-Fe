@@ -15,8 +15,9 @@ import Link from "next/link";
 import Loader from "@/app/(landingPage)/components/skeleton/loader";
 import { getCarByName } from "@/app/helpers/filter";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import CarBookingForm from "@/app/(landingPage)/components/service/carRental/bulkCar";
 
-const CarNav = ["All Cars", "Pricing", "Reviews"];
+const CarNav = ["All Cars", "Pricing", "Book Multiple Cars"];
 
 const Columns: TableProps<CarData>["columns"] = [
   {
@@ -284,7 +285,10 @@ const AllCars = () => {
                     <Loader />
                   ) : carParamsList && carParamsList?.length > 0 ? (
                     carParamsList?.map((car) => (
-                      <div className="w-full md:w-[20%] max-lg:min-w-[300px]" key={car.id}>
+                      <div
+                        className="w-full md:w-[20%] max-lg:min-w-[300px]"
+                        key={car.id}
+                      >
                         <CarCard
                           id={car.id}
                           car={car.first_image || ImagePlaceholder}
@@ -322,6 +326,8 @@ const AllCars = () => {
                 />
               </div>
             )}
+
+            {service === "Book Multiple Cars" && <CarBookingForm />}
 
             {service === "Reviews" && (
               <div className="my-8 w-full flex flex-col gap-8 justify-center text-center">

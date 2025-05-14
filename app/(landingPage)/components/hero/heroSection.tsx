@@ -29,7 +29,7 @@ const HeroSection = () => {
         transition={{ duration: 1, ease: "backInOut" }}
         className="absolute top-1/3 xl:left-1/4 p-4 lg:px-8 lg:py-4 text-white flex flex-col items-center justify-center  w-full xl:w-[40%] max-w-[1750px]"
       >
-        <h1 className="text-4xl font-bold">Explore Nature with Us</h1>
+        <h1 className="max-sm:hidden text-4xl font-bold">Explore Nature with Us</h1>
         <p className="text-sm italic">
           &quot; Discover the beauty of untouched landscapes and breathtaking
           views. &quot;

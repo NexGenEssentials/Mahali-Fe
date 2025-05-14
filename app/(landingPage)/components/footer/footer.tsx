@@ -54,7 +54,7 @@ const Footer = () => {
             <div className="max-sm:hidden relative w-[100px] h-[70px] object-cover">
               <Image src={"/images/logo.png"} alt="mahali africa" fill={true} />
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap">
               <Link
                 target="_blank"
                 href={"https://www.instagram.com/mahaliafrica/"}
