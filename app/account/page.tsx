@@ -93,7 +93,7 @@ function AccountPage() {
           )}
 
           {/* card for use information */}
-          <div className="flex gap-4 w-full flex-wrap items-stretch">
+          <div className="flex gap-4 w-full flex-wrap min-h-[50vh] items-stretch">
             {AccountSettingsMenu.map((item) => (
               <div
                 key={item.category}
@@ -104,12 +104,20 @@ function AccountPage() {
                   {item.items.map((subItem, index) => (
                     <div
                       key={index}
-                      className="text-sm hover:text-primaryGreen hover:bg-slate-100 py-2 px-3 rounded-md"
+                      className="text-sm hover:text-primaryGreen hover:bg-slate-100 py-2 px-3 rounded-md cursor-pointer"
                     >
                       <div
-                        onClick={() =>
-                          handleNavigate(subItem.link, subItem.name, subItem.about!)
-                        }
+                        onClick={() => {
+                          if (subItem.about.length > 0) {
+                            handleNavigate(
+                              subItem.link,
+                              subItem.name,
+                              subItem.about!
+                            );
+                          } else {
+                            router.push(subItem.link);
+                          }
+                        }}
                         className="flex items-center justify-between gap-4"
                       >
                         <span className="flex gap-4 items-end text-nowrap">

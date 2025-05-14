@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import LandingPage from "../../landingPageTamplates";
 import PageHero from "../../components/hero/pageHero";
-import gorilla from "@/public/images/burundi.jpg";
+import imisozi from "@/public/images/imisozi.jpg";
 import {
   HeaderSection,
   SingleHeaderSection,
@@ -36,7 +36,7 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
   return (
     <LandingPage>
       <div className="">
-        <PageHero image={gorilla} title="Packages" />
+        <PageHero image={imisozi} title="Packages" />
         <div className="max-w-[1750px] mx-auto p-4 sm:px-16 sm:py-8 flex-col flex gap-8">
           <div className="w-full flex flex-col gap-4">
             <SingleHeaderSection title="Overview" />

@@ -17,7 +17,7 @@ import { getCarByName } from "@/app/helpers/filter";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import CarBookingForm from "@/app/(landingPage)/components/service/carRental/bulkCar";
 
-const CarNav = ["All Cars", "Pricing", "Book Multiple Cars"];
+const CarNav = ["All Cars", "Pricing", "Book In Bulk"];
 
 const Columns: TableProps<CarData>["columns"] = [
   {
@@ -327,7 +327,7 @@ const AllCars = () => {
               </div>
             )}
 
-            {service === "Book Multiple Cars" && <CarBookingForm />}
+            {service === "Book In Bulk" && <CarBookingForm />}
 
             {service === "Reviews" && (
               <div className="my-8 w-full flex flex-col gap-8 justify-center text-center">

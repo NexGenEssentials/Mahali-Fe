@@ -13,7 +13,7 @@ export const NavItems = [
   { item: "Services", link: "service" },
   { item: "Destinations", link: "destination" },
   { item: "Packages", link: "#package" },
-  { item: "Contact Us", link: "#contacts" },
+  { item: "Contact Us", link: "contact-us" },
 ];
 
 const Navbar = () => {

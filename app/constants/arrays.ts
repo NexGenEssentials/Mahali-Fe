@@ -260,7 +260,7 @@ export const StaffList = [
       {
         name: "Jackson Ngabonziza",
         title: "CTO",
-        image: '',
+        image: "",
       },
     ],
   },
@@ -342,23 +342,6 @@ export const CarService = [
 
 export const AccountSettingsMenu = [
   {
-    category: "Payment information",
-    items: [
-      {
-        name: "Rewards & Wallet",
-        link: "account/settings",
-        icon: "mdi:wallet",
-      },
-      {
-        name: "Payment methods",
-        link: "account/my-settings",
-        icon: "mdi:credit-card-outline",
-        about:
-          "Securely add or remove payment methods to make it easier when you book.",
-      },
-    ],
-  },
-  {
     category: "Manage account",
     items: [
       {
@@ -374,43 +357,23 @@ export const AccountSettingsMenu = [
         about:
           "Change your security settings, set up secure authentication or delete your account.",
       },
-      {
-        name: "Other travellers",
-        link: "account/my-settings",
-        icon: "mdi:account-group-outline",
-        about:
-          "Add or edit information about the people you’re travelling with.",
-      },
     ],
   },
-  {
-    category: "Preferences",
-    items: [
-      {
-        name: "Customisation preferences",
-        link: "account/my-settings",
-        icon: "mdi:tune",
-        about: "Personalise your account to suit your needs.",
-      },
-    ],
-  },
+
   {
     category: "Travel activity",
     items: [
       {
         name: "Trips and bookings",
-        link: "account/trips-and-bookings",
+        link: "/account/bookings-trips",
         icon: "mdi:briefcase-outline",
+        about: "",
       },
       {
-        name: "Saved lists",
-        link: "account/saved-lists",
-        icon: "mdi:heart-outline",
-      },
-      {
-        name: "My reviews",
-        link: "account/my-reviews",
-        icon: "mdi:star-outline",
+        name: "Custom Packages",
+        link: "/account/my-packages",
+        icon: "zondicons:travel",
+        about: "",
       },
     ],
   },
@@ -419,18 +382,9 @@ export const AccountSettingsMenu = [
     items: [
       {
         name: "Contact Customer service",
-        link: "account/settings",
+        link: "account/contact-us",
         icon: "mdi:phone-outline",
-      },
-      {
-        name: "Safety resource centre",
-        link: "account/settings",
-        icon: "mdi:shield-check-outline",
-      },
-      {
-        name: "Dispute resolution",
-        link: "account/settings",
-        icon: "game-icons:shaking-hands",
+        about: "",
       },
     ],
   },
@@ -438,26 +392,16 @@ export const AccountSettingsMenu = [
     category: "Legal and privacy",
     items: [
       {
-        name: "Privacy and data management",
-        link: "account/my-settings",
+        name: "Privacy Policy",
+        link: "account/privacy-policy",
         icon: "mdi:lock-outline",
-        about:
-          "Exercise your privacy rights, control your data or export your information.",
+        about: "",
       },
       {
-        name: "Content guidelines",
-        link: "account/content-guidelines",
+        name: "Terms and conditions",
+        link: "account/terms-and-conditions",
         icon: "mdi:file-document-outline",
-      },
-    ],
-  },
-  {
-    category: "Manage your property",
-    items: [
-      {
-        name: "List your property",
-        link: "account/list-your-property",
-        icon: "mdi:home-outline",
+        about: "",
       },
     ],
   },

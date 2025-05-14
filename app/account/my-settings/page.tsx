@@ -27,7 +27,7 @@ function ClientSettings() {
             {filteredMenuItems.map((item, index) => (
               <span
                 onClick={() => {
-                  setActive(item.name), setabout(item.about!);
+                  setActive(item.name), setabout(item?.about!);
                 }}
                 key={index}
                 className={`${

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import LandingPage from "../landingPageTamplates";
 import PageHero from "../components/hero/pageHero";
-import nyungwe from "@/public/images/nyungwe2.jpg";
+import nyungwe from "@/public/images/serengeti.jpg";
 import { HeaderSection } from "../components/headers/header";
 import { ServiceList } from "@/app/constants/arrays";
 import { Icon } from "@iconify/react/dist/iconify.js";

@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { act, useEffect, useState } from "react";
 import LandingPage from "../landingPageTamplates";
 import PageHero from "../components/hero/pageHero";
-import gorilla from "@/public/images/Gorilla2.jpg";
+import gorilla from "@/public/images/destinationProfile.jpg";
 import { HeaderSection } from "../components/headers/header";
 import SingleDestination from "../components/destination/singleDestination";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -18,11 +18,17 @@ const Destination = () => {
   const [activeId, setActiveId] = useState(6);
   const pathname = usePathname();
   const router = useRouter();
-  const { setActiveModalId, isLogin } = useAppContext();
+  const { setActiveModalId, isLogin, activeModalId } = useAppContext();
 
   useEffect(() => {
     getAllCountryDestination();
   }, []);
+
+  useEffect(() => {
+    if (!activeModalId) {
+      setActive(location ? location : "Rwanda");
+    }
+  }, [activeModalId]);
 
   const getAllCountryDestination = async () => {
     try {
@@ -40,6 +46,7 @@ const Destination = () => {
       router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
     }
   };
+  
 
   return (
     <LandingPage>

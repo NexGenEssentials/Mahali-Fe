@@ -233,7 +233,7 @@ function BookingsPage() {
               record.status === "confirmed"
                 ? "bg-blue-300 text-slate-700"
                 : "bg-slate-200 text-slate-400"
-            } p-2 rounded-lg`}
+            } p-2 rounded-lg text-nowrap`}
             disabled={record.status !== "confirmed"}
           >
             Pay Now
@@ -300,7 +300,7 @@ function BookingsPage() {
             </span>
           </div>
         ) : (
-          <div className="overflow-x-auto">
+          <div className="">
             <Table
               columns={columns}
               dataSource={[...filteredBookings]
@@ -312,7 +312,8 @@ function BookingsPage() {
                 .slice((currentPage - 1) * pageSize, currentPage * pageSize)}
               rowKey="id"
               pagination={false}
-              className="w-full"
+              
+              className="w-full hide-scrollbar"
               expandable={{
                 expandedRowKeys,
                 onExpandedRowsChange: (keys) => setExpandedRowKeys([...keys]),

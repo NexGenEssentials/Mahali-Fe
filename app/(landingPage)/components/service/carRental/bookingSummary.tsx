@@ -28,7 +28,7 @@ const BookingConfirmation = ({
   const router = useRouter();
 
   return (
-    <div className="w-full md:w-1/2 mx-auto bg-white shadow-lg rounded-lg p-6">
+    <div className="w-full mx-auto bg-white shadow-lg rounded-lg p-6">
       {/* Success Message */}
       <div className="flex flex-col items-center text-center mb-6">
         <CheckCircleFilled className="text-green-500 text-4xl mb-2" />
