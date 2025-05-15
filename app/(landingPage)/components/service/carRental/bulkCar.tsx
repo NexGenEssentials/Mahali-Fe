@@ -6,6 +6,7 @@ import type { RadioChangeEvent } from "antd";
 import BookingConfirmation, { BookingSummary } from "./bookingSummary";
 import { useAppContext } from "@/app/context";
 import { usePathname, useRouter } from "next/navigation";
+import { carTypesData } from "@/app/constants/arrays";
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
@@ -31,6 +32,12 @@ const CarBookingForm = () => {
     pickupLocation: "",
     additionalNotes: "",
   });
+  const [selectedCars, setSelectedCars] = useState<
+    {
+      carType: string;
+      models: { model: string; quantity: number }[];
+    }[]
+  >([]);
 
   const { isLogin } = useAppContext();
   const router = useRouter();
@@ -65,6 +72,41 @@ const CarBookingForm = () => {
     }, 2000);
   };
 
+  const handleCarTypeChange = (index: number, value: string) => {
+    const updated = [...selectedCars];
+    updated[index].carType = value;
+    updated[index].models = []; // reset models when car type changes
+    setSelectedCars(updated);
+  };
+
+  const handleModelChange = (
+    carIndex: number,
+    modelIndex: number,
+    key: "model" | "quantity",
+    value: any
+  ) => {
+    const updated = [...selectedCars];
+    if (key === "quantity") {
+      updated[carIndex].models[modelIndex].quantity = Number(value);
+    } else {
+      updated[carIndex].models[modelIndex].model = value;
+    }
+    setSelectedCars(updated);
+  };
+
+  const addCarSelection = () => {
+    setSelectedCars([
+      ...selectedCars,
+      { carType: "", models: [{ model: "", quantity: 1 }] },
+    ]);
+  };
+
+  const addModelToCarType = (index: number) => {
+    const updated = [...selectedCars];
+    updated[index].models.push({ model: "", quantity: 1 });
+    setSelectedCars(updated);
+  };
+
   return (
     <div className="w-full md:w-1/2 mx-auto mt-5 bg-white rounded-lg shadow-md">
       {!isSubmitted ? (
@@ -87,23 +129,97 @@ const CarBookingForm = () => {
               </p>
             </div>
 
+            <div className="grid  gap-4">
+              {selectedCars.map((car, index) => (
+                <div key={index} className="p-4 border rounded space-y-2">
+                  <label className="font-semibold pb-2">
+                    Car Type {index + 1}
+                  </label>
+                  <Select
+                    className="w-full mb-4"
+                    placeholder="Select car type"
+                    value={car.carType}
+                    onChange={(value) => handleCarTypeChange(index, value)}
+                    options={carTypesData.car_types.map((type) => ({
+                      label: type.type,
+                      value: type.type,
+                    }))}
+                  />
+
+                  {car.carType && (
+                    <div className="space-y-2 mt-4">
+                      <label className="font-medium">Models</label>
+                      {car.models.map((modelObj, mIndex) => (
+                        <div
+                          key={mIndex}
+                          className="grid grid-cols-2 gap-2 mb-2"
+                        >
+                          <div>
+                            <label
+                              htmlFor="number of cars "
+                              className="text-xs text-gray-500"
+                            >
+                              Car Modal
+                            </label>
+                            <Select
+                              value={modelObj.model}
+                              className="w-full"
+                              placeholder="Select model"
+                              onChange={(val) =>
+                                handleModelChange(index, mIndex, "model", val)
+                              }
+                              options={carTypesData.car_types
+                                .find((ct) => ct.type === car.carType)
+                                ?.models.map((m) => ({ label: m, value: m }))}
+                            />
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="number of Cars"
+                              className="text-xs text-gray-500"
+                            >
+                              Number of cars
+                            </label>
+                            <Input
+                              type="number"
+                              min={1}
+                              value={modelObj.quantity}
+                              onChange={(e) =>
+                                handleModelChange(
+                                  index,
+                                  mIndex,
+                                  "quantity",
+                                  e.target.value
+                                )
+                              }
+                              placeholder="number of cars"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                      <Button
+                        className="mb-2"
+                        type="dashed"
+                        onClick={() => addModelToCarType(index)}
+                        block
+                      >
+                        + Add Another Model
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              <button
+                type="submit"
+                onClick={addCarSelection}
+                className="w-full p-2 border border-dashed rounded text-center"
+              >
+                + Add Car Type
+              </button>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block font-medium mb-1">Car Type</label>
-                <Select
-                  className="w-full"
-                  placeholder="Select car type"
-                  onChange={(value) => handleChange("carType", value)}
-                  options={[
-                    { value: "SUV", label: "SUV" },
-                    { value: "Sedan", label: "Sedan" },
-                    { value: "Van", label: "Van" },
-                  ]}
-                />
-                <p className="text-sm text-gray-500 mt-1">
-                  Choose the type of vehicle you need.
-                </p>
-              </div>
               <div>
                 <label className="block font-medium mb-1">
                   Number of People
@@ -119,6 +235,22 @@ const CarBookingForm = () => {
                 />
                 <p className="text-sm text-gray-500 mt-1">
                   How many passengers will be traveling?
+                </p>
+              </div>
+              <div>
+                <label className="block font-medium mb-1">
+                  Pickup Location
+                </label>
+                <Input
+                  className="custom-ant-input"
+                  placeholder="Enter your pickup address"
+                  value={formData.pickupLocation}
+                  onChange={(e) =>
+                    handleChange("pickupLocation", e.target.value)
+                  }
+                />
+                <p className="text-sm text-gray-500 mt-1">
+                  Please provide the exact address for vehicle pickup.
                 </p>
               </div>
             </div>
@@ -154,19 +286,6 @@ const CarBookingForm = () => {
                   </div>
                 </Radio.Group>
               </div>
-            </div>
-
-            <div>
-              <label className="block font-medium mb-1">Pickup Location</label>
-              <Input
-                className="custom-ant-input"
-                placeholder="Enter your pickup address"
-                value={formData.pickupLocation}
-                onChange={(e) => handleChange("pickupLocation", e.target.value)}
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                Please provide the exact address for vehicle pickup.
-              </p>
             </div>
 
             <div>
