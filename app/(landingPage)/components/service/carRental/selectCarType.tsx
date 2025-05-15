@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { Select, Input, Button } from "antd";
 import { carTypesData } from "@/app/constants/arrays";
+import { CarType } from "./bulkCar";
 
-const CarSelector = () => {
+const CarSelector = ({
+  selectedCars,
+  setSelectedCars,
+}: {
+  selectedCars: CarType[];
+  setSelectedCars: (cars: CarType[]) => void;
+}) => {
   const [carType, setCarType] = useState("");
   const [model, setModel] = useState("");
   const [quantity, setQuantity] = useState<number>(1);
-  const [selectedCars, setSelectedCars] = useState<
-    { carType: string; model: string; quantity: number }[]
-  >([]);
+
   const [editIndex, setEditIndex] = useState<number | null>(null);
 
   const handleAddCar = () => {
@@ -102,17 +107,22 @@ const CarSelector = () => {
                 <th className="px-4 py-2 border-b">#</th>
                 <th className="px-4 py-2 border-b">Car Type</th>
                 <th className="px-4 py-2 border-b">Model</th>
-                <th className="px-4 py-2 border-b">Quantity</th>
+                <th className="px-4 py-2 border-b text-center">Quantity</th>
                 <th className="px-4 py-2 border-b">Actions</th>
               </tr>
             </thead>
             <tbody>
               {selectedCars.map((car, index) => (
-                <tr key={index} className="hover:bg-gray-50 transition">
+                <tr
+                  key={index}
+                  className="hover:bg-gray-50 transition text-slate-500 text-sm"
+                >
                   <td className="px-4 py-2 border-b">{index + 1}</td>
                   <td className="px-4 py-2 border-b">{car.carType}</td>
                   <td className="px-4 py-2 border-b">{car.model}</td>
-                  <td className="px-4 py-2 border-b">{car.quantity}</td>
+                  <td className="px-4 py-2 border-b text-center">
+                    {car.quantity}
+                  </td>
                   <td className="px-4 py-2 border-b space-x-2">
                     <Button size="small" onClick={() => handleEdit(index)}>
                       Edit

@@ -8,10 +8,11 @@ import {
   FileTextOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
+import { CarType } from "./bulkCar";
 
 export type BookingSummary = {
   tripDates: string;
-  carType: string;
+  carType: CarType[];
   driverOption: string;
   numberOfPeople: number;
   tripLocation: string;
@@ -53,15 +54,42 @@ const BookingConfirmation = ({
         </div>
 
         {/* Vehicle Details */}
-        <div className="flex items-start gap-3">
-          <CarOutlined className="text-xl mt-1 text-gray-500" />
-          <div>
+        <div className="flex flex-col items-start mb-4">
+          <div className="flex items-start gap-3">
+            <CarOutlined className="text-xl mt-1 text-gray-500" />
             <p className="font-semibold">Vehicle Details</p>
-            <p className="text-gray-600">
-              • {summaryData?.carType}
-              <br />• {summaryData?.driverOption}
-            </p>
           </div>
+          <p className="text-gray-600 pl-8">• {summaryData?.driverOption}</p>
+
+          {summaryData.carType.length > 0 && (
+            <div className="overflow-x-auto rounded-lg shadow-sm pl-8">
+              <table className="min-w-full table-auto border border-gray-200">
+                <thead>
+                  <tr className="bg-gray-100 text-gray-700 text-left">
+                    <th className="px-4 py-2 border-b">#</th>
+                    <th className="px-4 py-2 border-b">Car Type</th>
+                    <th className="px-4 py-2 border-b">Model</th>
+                    <th className="px-4 py-2 border-b text-center">Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {summaryData.carType.map((car, index) => (
+                    <tr
+                      key={index}
+                      className="hover:bg-gray-50 transition text-slate-500 text-sm"
+                    >
+                      <td className="px-4 py-2 border-b">{index + 1}</td>
+                      <td className="px-4 py-2 border-b">{car.carType}</td>
+                      <td className="px-4 py-2 border-b">{car.model}</td>
+                      <td className="px-4 py-2 border-b text-center">
+                        {car.quantity}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
 
         {/* Passengers */}

@@ -7,9 +7,11 @@ import BookingConfirmation, { BookingSummary } from "./bookingSummary";
 import { useAppContext } from "@/app/context";
 import { usePathname, useRouter } from "next/navigation";
 import CarSelector from "./selectCarType";
+import { Car } from "lucide-react";
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
+export type CarType = { carType: string; model: string; quantity: number };
 
 const CarBookingForm = () => {
   const [formData, setFormData] = useState({
@@ -25,13 +27,14 @@ const CarBookingForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formattedSummary, setFormattedSummary] = useState<BookingSummary>({
     tripDates: "",
-    carType: "",
+    carType: [],
     driverOption: "",
     numberOfPeople: 0,
     tripLocation: "",
     pickupLocation: "",
     additionalNotes: "",
   });
+  const [selectedCars, setSelectedCars] = useState<CarType[]>([]);
 
   const { isLogin } = useAppContext();
   const router = useRouter();
@@ -48,7 +51,7 @@ const CarBookingForm = () => {
     ).format("MMM D, YYYY")}`;
     setFormattedSummary({
       tripDates,
-      carType: formData.carType,
+      carType: selectedCars,
       driverOption: formData.driverOption,
       numberOfPeople: Number(formData.numberOfPeople),
       tripLocation: formData.tripLocation,
@@ -89,7 +92,7 @@ const CarBookingForm = () => {
               </p>
             </div>
 
-            <CarSelector />
+            <CarSelector selectedCars={selectedCars} setSelectedCars={setSelectedCars} />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -179,7 +182,7 @@ const CarBookingForm = () => {
             <Button
               disabled={
                 !formData.dateRange ||
-                !formData.carType ||
+                formData.carType.length>0 ||
                 !formData.pickupLocation ||
                 !formData.numberOfPeople ||
                 !formData.driverOption ||
