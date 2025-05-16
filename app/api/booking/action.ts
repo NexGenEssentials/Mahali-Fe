@@ -4,6 +4,7 @@ import {
   BookingData,
   BookingDetails,
   BookingResponse,
+  BulkBookingResponse,
   CarBookingRequest,
   PaymentResponseType,
 } from "@/app/types";
@@ -146,6 +147,28 @@ export const CreateBulkBooking = async (
       ? { status: "success" }
       : { status: "error" };
   } catch (error) {
+    throw error;
+  }
+};
+
+export const getbulkBookings = async (): Promise<BulkBookingResponse> => {
+  try {
+    const response = await fetch(`${base_url}/bulk-bookings`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      return data;
+    }
+
+    return data;
+  } catch (error) {
+    console.log("Something went wrong", { error });
     throw error;
   }
 };

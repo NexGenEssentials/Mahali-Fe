@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import CenterModal from "@/app/(landingPage)/components/model/centerModel";
 import BookingAction from "../components/card/bookingAction";
+import ListingBulkBooking from "../components/listingBulkBooking";
 
 const { Search } = Input;
 const contentId = process.env.NEXT_PUBLIC_CUSTOM_PACKAGE_ID;
@@ -386,6 +387,8 @@ function BookingsPage() {
             )}
           </>
         )}
+
+        {activeTab === "bulk_bookings" && <ListingBulkBooking />}
       </div>
       <CenterModal
         children={
