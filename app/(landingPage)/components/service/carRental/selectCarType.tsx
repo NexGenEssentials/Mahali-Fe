@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Select, Input, Button } from "antd";
 import { carTypesData } from "@/app/constants/arrays";
-import { CarType } from "./bulkCar";
+import { BulkCarDetail } from "@/app/types";
 
 const CarSelector = ({
   selectedCars,
   setSelectedCars,
 }: {
-  selectedCars: CarType[];
-  setSelectedCars: (cars: CarType[]) => void;
+  selectedCars: BulkCarDetail[];
+  setSelectedCars: (cars: BulkCarDetail[]) => void;
 }) => {
   const [carType, setCarType] = useState("");
   const [model, setModel] = useState("");
@@ -19,7 +19,7 @@ const CarSelector = ({
   const handleAddCar = () => {
     if (!carType || !model || quantity <= 0) return;
 
-    const newEntry = { carType, model, quantity };
+    const newEntry = { car_type: carType, model, quantity };
 
     if (editIndex !== null) {
       const updated = [...selectedCars];
@@ -38,7 +38,7 @@ const CarSelector = ({
 
   const handleEdit = (index: number) => {
     const car = selectedCars[index];
-    setCarType(car.carType);
+    setCarType(car.car_type);
     setModel(car.model);
     setQuantity(car.quantity);
     setEditIndex(index);
@@ -81,6 +81,7 @@ const CarSelector = ({
               .find((t) => t.type === carType)
               ?.models.map((m) => ({ label: m, value: m })) || []
           }
+          
         />
 
         <Input
@@ -118,12 +119,12 @@ const CarSelector = ({
                   className="hover:bg-gray-50 transition text-slate-500 text-sm"
                 >
                   <td className="px-4 py-2 border-b">{index + 1}</td>
-                  <td className="px-4 py-2 border-b">{car.carType}</td>
+                  <td className="px-4 py-2 border-b">{car.car_type}</td>
                   <td className="px-4 py-2 border-b">{car.model}</td>
                   <td className="px-4 py-2 border-b text-center">
                     {car.quantity}
                   </td>
-                  <td className="px-4 py-2 border-b space-x-2">
+                  <td className="px-4 py-2 border-b flex flex-wrap gap-2">
                     <Button size="small" onClick={() => handleEdit(index)}>
                       Edit
                     </Button>

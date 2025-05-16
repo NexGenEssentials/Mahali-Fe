@@ -14,6 +14,17 @@ import BookingAction from "../components/card/bookingAction";
 
 const { Search } = Input;
 const contentId = process.env.NEXT_PUBLIC_CUSTOM_PACKAGE_ID;
+const Tabs = [
+  {
+    id: "bookings",
+    name: "Bookings",
+  },
+  {
+    id: "bulk_bookings",
+    name: "Bulk Bookings",
+  },
+];
+
 function BookingsPage() {
   const [bookings, setBookings] = useState<BookingData[]>([]);
   const [filteredBookings, setFilteredBookings] = useState<BookingData[]>([]);
@@ -27,6 +38,8 @@ function BookingsPage() {
   const pageSize = 10;
   const { setActiveModalId, setBookingData } = useAppContext();
   const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
+  const [activeTab, setActiveTab] = useState("bookings");
+
   useEffect(() => {
     fetchBookings();
   }, []);
@@ -268,83 +281,110 @@ function BookingsPage() {
   return (
     <ClientPageTemplates>
       <div className="flex flex-col gap-6 min-h-screen px-4">
-        <Title name="My Bookings And Trips" icon="material-symbols:book" />
+        <div className="flex items-center justify-between">
+          <Title name="My Bookings And Trips" icon="material-symbols:book" />
 
-        {/* Search Bar */}
-        <div className="flex w-full md:w-1/3 flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 shadow-md rounded-md">
-          <Search
-            placeholder="Search by ID or Type..."
-            allowClear
-            value={searchText}
-            onChange={(e) => handleSearch(e.target.value)}
-            onSearch={handleSearch}
-            className="w-full md:w-1/3"
-          />
+          <div>
+            {Tabs.map((tab) => (
+              <button
+                key={tab.id}
+                className={`${
+                  activeTab === tab.id
+                    ? "bg-primaryGreen text-white"
+                    : "text-gray-700"
+                } mr-4 p-2 rounded-lg font-semibold text-sm`}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                {tab.name}
+              </button>
+            ))}
+          </div>
         </div>
-
-        {loading ? (
-          <div className="flex justify-center items-center h-full">
-            <Loader />
-          </div>
-        ) : filteredBookings.length === 0 ? (
-          <div className="w-full md:w-1/2 self-center h-full md:h-1/2 border flex flex-col items-center justify-center rounded-md p-6">
-            <Icon
-              icon="arcticons:triple-a"
-              width="80"
-              height="80"
-              className="text-primaryGreen"
-            />
-            <span className="font-bold text-lg mt-4">No Bookings Found</span>
-            <span className="text-sm text-slate-500 text-center mt-2">
-              Try searching with different criteria or make a new booking.
-            </span>
-          </div>
-        ) : (
-          <div className="">
-            <Table
-              columns={columns}
-              dataSource={[...filteredBookings]
-                .sort(
-                  (a, b) =>
-                    new Date(b.created_at).getTime() -
-                    new Date(a.created_at).getTime()
-                )
-                .slice((currentPage - 1) * pageSize, currentPage * pageSize)}
-              rowKey="id"
-              pagination={false}
-              
-              className="w-full hide-scrollbar"
-              expandable={{
-                expandedRowKeys,
-                onExpandedRowsChange: (keys) => setExpandedRowKeys([...keys]),
-                expandedRowRender: (record: BookingData) => (
-                  <div className="p-4 bg-gray-100 rounded-md">
-                    <p>
-                      <strong>Traveler Name:</strong> {record.user.full_name}
-                    </p>
-                    <p>
-                      <strong>Email:</strong> {record.user.email}
-                    </p>
-                    <p>
-                      <strong>Notes:</strong>{" "}
-                      {record.note || "No additional notes."}
-                    </p>
-                  </div>
-                ),
-                rowExpandable: (record) => true,
-              }}
-            />
-
-            <div className="flex justify-center mt-4">
-              <Pagination
-                current={currentPage}
-                pageSize={pageSize}
-                total={filteredBookings.length}
-                onChange={(page) => setCurrentPage(page)}
-                showSizeChanger={false}
+        {activeTab === "bookings" && (
+          <>
+            {/* Search Bar */}
+            <div className="flex w-full md:w-1/3 flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 shadow-md rounded-md">
+              <Search
+                placeholder="Search by ID or Type..."
+                allowClear
+                value={searchText}
+                onChange={(e) => handleSearch(e.target.value)}
+                onSearch={handleSearch}
+                className="w-full md:w-1/3"
               />
             </div>
-          </div>
+
+            {loading ? (
+              <div className="flex justify-center items-center h-full">
+                <Loader />
+              </div>
+            ) : filteredBookings.length === 0 ? (
+              <div className="w-full md:w-1/2 self-center h-full md:h-1/2 border flex flex-col items-center justify-center rounded-md p-6">
+                <Icon
+                  icon="arcticons:triple-a"
+                  width="80"
+                  height="80"
+                  className="text-primaryGreen"
+                />
+                <span className="font-bold text-lg mt-4">
+                  No Bookings Found
+                </span>
+                <span className="text-sm text-slate-500 text-center mt-2">
+                  Try searching with different criteria or make a new booking.
+                </span>
+              </div>
+            ) : (
+              <div className="">
+                <Table
+                  columns={columns}
+                  dataSource={[...filteredBookings]
+                    .sort(
+                      (a, b) =>
+                        new Date(b.created_at).getTime() -
+                        new Date(a.created_at).getTime()
+                    )
+                    .slice(
+                      (currentPage - 1) * pageSize,
+                      currentPage * pageSize
+                    )}
+                  rowKey="id"
+                  pagination={false}
+                  className="w-full hide-scrollbar"
+                  expandable={{
+                    expandedRowKeys,
+                    onExpandedRowsChange: (keys) =>
+                      setExpandedRowKeys([...keys]),
+                    expandedRowRender: (record: BookingData) => (
+                      <div className="p-4 bg-gray-100 rounded-md">
+                        <p>
+                          <strong>Traveler Name:</strong>{" "}
+                          {record.user.full_name}
+                        </p>
+                        <p>
+                          <strong>Email:</strong> {record.user.email}
+                        </p>
+                        <p>
+                          <strong>Notes:</strong>{" "}
+                          {record.note || "No additional notes."}
+                        </p>
+                      </div>
+                    ),
+                    rowExpandable: (record) => true,
+                  }}
+                />
+
+                <div className="flex justify-center mt-4">
+                  <Pagination
+                    current={currentPage}
+                    pageSize={pageSize}
+                    total={filteredBookings.length}
+                    onChange={(page) => setCurrentPage(page)}
+                    showSizeChanger={false}
+                  />
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
       <CenterModal

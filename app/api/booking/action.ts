@@ -4,6 +4,7 @@ import {
   BookingData,
   BookingDetails,
   BookingResponse,
+  CarBookingRequest,
   PaymentResponseType,
 } from "@/app/types";
 import { cookies } from "next/headers";
@@ -121,6 +122,29 @@ export const CreatePaymentMethod = async (bookingData: {
     const data = await response.json();
 
     return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const CreateBulkBooking = async (
+  bookingData: CarBookingRequest
+): Promise<{ status: string }> => {
+  try {
+    const response = await fetch(`${base_url}/bookings/bulk/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(bookingData),
+    });
+
+    const data = await response.json();
+   
+    return response.status === 201
+      ? { status: "success" }
+      : { status: "error" };
   } catch (error) {
     throw error;
   }

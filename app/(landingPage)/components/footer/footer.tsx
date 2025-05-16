@@ -1,16 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { NavItems } from "../navbar/navbar";
+import { Subscribe } from "@/app/api/common/action";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMessage("");
+    }, 5000);
+  }, [message]);
 
   const handleSubscribe = async () => {
     if (!email || !email.includes("@")) {
@@ -20,17 +27,14 @@ const Footer = () => {
 
     try {
       setLoading(true);
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+      const res = await Subscribe(email);
+      if (res.status === "error") {
+        setMessage(`❌ Email already exists.`);
+      }
+      if (res.status === "success") {
+        setMessage("✅ Successfully subscribed to our newsletter.");
+      }
 
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.message || "Something went wrong");
       setEmail("");
     } catch (error: any) {
       setMessage(`❌ ${error.message}`);
@@ -228,7 +232,15 @@ const Footer = () => {
               </motion.button>
             </div>
             {message && (
-              <div className="text-red-500 text-xs pt-2">{message}</div>
+              <div
+                className={`${
+                  message.includes("Successfully")
+                    ? "text-green-500"
+                    : "text-red-500"
+                } text-xs pt-2`}
+              >
+                {message}
+              </div>
             )}
           </div>
         </div>

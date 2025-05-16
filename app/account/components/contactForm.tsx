@@ -1,10 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import {
   PhoneOutlined,
   MailOutlined,
   EnvironmentOutlined,
 } from "@ant-design/icons";
+import { ContactUs } from "@/app/api/common/action";
 
 const ContactUsForm = () => {
   const [formData, setFormData] = useState({
@@ -20,6 +21,14 @@ const ContactUsForm = () => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSuccessMessage("");
+      setErrorMessage("");
+      setFormData({ fullName: "", email: "", message: "" });
+    }, 5000);
+  }, [successMessage, errorMessage]);
 
   const validate = () => {
     const newErrors: any = {};
@@ -54,16 +63,15 @@ const ContactUsForm = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+      const res = await ContactUs({
+        full_name: formData.fullName,
+        email: formData.email,
+        message: formData.message,
       });
-
-      if (!res.ok) throw new Error("Something went wrong");
-
+      if (res.status !== "success") {
+        setErrorMessage(res.message);
+        return;
+      }
       setFormData({ fullName: "", email: "", message: "" });
       setSuccessMessage("Your message has been sent successfully!");
     } catch (err) {

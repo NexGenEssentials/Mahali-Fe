@@ -153,3 +153,19 @@ export type PaymentResponseType = {
   tid: string;
   url: string;
 };
+
+export type BulkCarDetail = {
+  car_type: string;
+  model: string;
+  quantity: number;
+};
+
+export type CarBookingRequest = {
+  start_date: string; 
+  end_date: string; 
+  pickup_location: string; 
+  trip_location: string; 
+  driver_option: string; 
+  note: string;
+  car_details: BulkCarDetail[];
+};

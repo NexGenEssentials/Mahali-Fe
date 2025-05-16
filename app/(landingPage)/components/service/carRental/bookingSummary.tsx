@@ -1,4 +1,5 @@
 "use client";
+import { BulkCarDetail } from "@/app/types";
 import {
   CheckCircleFilled,
   CalendarOutlined,
@@ -8,11 +9,11 @@ import {
   FileTextOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
-import { CarType } from "./bulkCar";
+
 
 export type BookingSummary = {
   tripDates: string;
-  carType: CarType[];
+  carType: BulkCarDetail[];
   driverOption: string;
   numberOfPeople: number;
   tripLocation: string;
@@ -79,7 +80,7 @@ const BookingConfirmation = ({
                       className="hover:bg-gray-50 transition text-slate-500 text-sm"
                     >
                       <td className="px-4 py-2 border-b">{index + 1}</td>
-                      <td className="px-4 py-2 border-b">{car.carType}</td>
+                      <td className="px-4 py-2 border-b">{car.car_type}</td>
                       <td className="px-4 py-2 border-b">{car.model}</td>
                       <td className="px-4 py-2 border-b text-center">
                         {car.quantity}
