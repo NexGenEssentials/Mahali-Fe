@@ -22,9 +22,10 @@ export async function POST(req: Request) {
     });
 
     const data = await response.json();
-    
+    const payload = data.access.split(".")[1];
+    const decodedPayload = JSON.parse(atob(payload));
+    const role = decodedPayload.role;
     if (!response.ok) {
-
       return NextResponse.json(
         {
           error: response.statusText,
@@ -33,14 +34,17 @@ export async function POST(req: Request) {
         { status: response.status }
       );
     }
-    if (data.access) {
-      cookies().set("accessToken", data.access);
 
+    if (data.access && role === "customer") {
+      cookies().set("accessToken", data.access);
+      return NextResponse.json(
+        { message: "You have succesfull logged in", user: data },
+        { status: response.status }
+      );
     }
-    
     return NextResponse.json(
-      { message: "You have succesfull logged in", user: data },
-      { status: response.status }
+      { error: "Unauthorized", description: "You are not authorized" },
+      { status: 401 }
     );
   } catch (error) {
     return NextResponse.json(

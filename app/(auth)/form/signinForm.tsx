@@ -17,7 +17,8 @@ const SignInForm = () => {
   const { setIsLogin } = useAppContext();
   const route = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/account";
+  const callback = searchParams.get("callbackUrl");
+  const callbackUrl = callback ? callback : "/account";
 
   const onFinish = async (values: SigninFormData) => {
     setLoading(true);
@@ -34,13 +35,7 @@ const SignInForm = () => {
 
       const user = GetUserInfo(data.user.access);
 
-      if (!res.ok) {
-        notification.error({
-          message: data.error,
-          description: data.description,
-          placement: "topRight",
-        });
-      } else {
+      if (res.ok) {
         notification.success({
           message: "Login",
           description: data.message,
@@ -48,10 +43,16 @@ const SignInForm = () => {
           duration: 1.5,
         });
         setIsLogin(true);
-
+        
         setTimeout(() => {
           route.push(callbackUrl);
         }, 1500);
+      } else {
+        notification.error({
+          message: data.error,
+          description: data.description,
+          placement: "topRight",
+        });
       }
     } catch (error) {
       notification.error({

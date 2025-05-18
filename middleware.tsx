@@ -18,8 +18,6 @@ export function middleware(request: NextRequest) {
     }
 
     const isExpired = decoded.exp * 1000 < Date.now();
-    
-
 
     if (isExpired) {
       request.cookies.delete("accessToken");
@@ -28,19 +26,7 @@ export function middleware(request: NextRequest) {
 
     const pathname = request.nextUrl.pathname;
 
-    if (decoded.role === "admin") {
-      // Allow admin only on admin routes
-      if (
-        pathname.startsWith("/admin") ||
-        pathname.startsWith("/account") ||
-        pathname.startsWith("/service/booking")
-      ) {
-        return NextResponse.next();
-      } else {
-        return NextResponse.redirect(loginUrl);
-      }
-    } else if (decoded.role === "customer") {
-      // Allow customers only on customer routes
+    if (decoded.role === "customer") {
       if (
         pathname.startsWith("/account") ||
         pathname.startsWith("/service/booking")
@@ -49,15 +35,14 @@ export function middleware(request: NextRequest) {
       } else {
         return NextResponse.redirect(loginUrl);
       }
+    } else {
+      return NextResponse.redirect(loginUrl);
     }
-
-    // If role doesn't match expected values, deny access
-    return NextResponse.redirect(loginUrl);
   } catch (error) {
     return NextResponse.redirect(loginUrl);
   }
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/account/:path*", "/service/booking/:path*"],
+  matcher: ["/account/:path*", "/service/booking/:path*"],
 };
