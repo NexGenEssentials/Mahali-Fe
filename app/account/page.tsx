@@ -8,7 +8,7 @@ import { UserProfile } from "@/app/types";
 import { useRouter } from "next/navigation";
 
 function AccountPage() {
-  const [showStatus, setShowStatus] = useState(true);
+  const [showStatus, setShowStatus] = useState(false);
   const [userAccount, setUserAccount] = useState<UserProfile | undefined>(
     undefined
   );

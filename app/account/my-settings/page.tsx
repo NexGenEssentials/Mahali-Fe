@@ -54,6 +54,7 @@ function ClientSettings() {
             <p className="text-sm text-slate-500 ">{about}</p>
 
             {active === "Personal details" && <PersonalDetails />}
+            {active === "Security settings" && <PersonalDetails />}
           </section>
         </div>
       </div>
