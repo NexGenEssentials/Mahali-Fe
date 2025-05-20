@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Select, Space } from "antd";
-import { ServiceOptions } from "@/app/constants/arrays";
+import { PromotionContentMap, ServiceOptions } from "@/app/constants/arrays";
 import {
   AccommodationForm,
   CarRenTalForm,
@@ -50,14 +50,12 @@ const PromotionSection = () => {
   return (
     <section className="max-sm:hidden max-w-[1750px] mx-auto relative w-full md:px-8 flex items-center max-md:my-4 justify-center lg:mb-40 z-40">
       <div className="lg:absolute flex flex-col gap-4 w-full md:w-[90%] bg-primaryGreen md:shadow-md md:shadow-slate-500 text-primaryWhite p-8 rounded-md ">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
           <h1 className="text-3xl font-bold">
-            2025 Great Migration Season is Here!
+            {PromotionContentMap[selectedService]?.title}
           </h1>
-          <p className="text-xs w-full md:3/4 lg:w-1/2 font-extralight leading-relaxed tracking-wide">
-            Book top Mahali Africa Holiday and Tour packages now at special
-            discounted rates – only available for paid reservations made by
-            February 05, 2025.
+          <p className="text-sm w-full md:3/4 lg:w-2/3 font-extralight leading-relaxed tracking-wide">
+            {PromotionContentMap[selectedService]?.description}
           </p>
         </div>
         <div

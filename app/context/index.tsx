@@ -24,7 +24,7 @@ interface ContextValue {
 const AppContext = createContext<ContextValue>({} as ContextValue);
 
 function ContextProvider({ children }: PropsWithChildren) {
-  const [openNavDiscount, setOpenNavDiscount] = useState<boolean>(true);
+  const [openNavDiscount, setOpenNavDiscount] = useState<boolean>(false);
   const [activeModalId, setActiveModalId] = useState<string | null>(null);
   const [isLogin, setIsLogin] = useState(false);
   const [showZoom, setShowZoom] = useState(false);

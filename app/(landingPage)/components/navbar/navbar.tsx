@@ -1,7 +1,9 @@
 "use client";
 import UserProfile from "@/app/(auth)/account/userProfile";
+import { GetRibbon } from "@/app/api/common/action";
 import { useAppContext } from "@/app/context";
 import { IsLoggedIn } from "@/app/helpers/isUserLogedIn";
+import { Ribbon } from "@/app/types";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,15 +24,39 @@ const Navbar = () => {
   const [hideFixedNav, setHideFixedNav] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isMounted, setIsMounted] = useState(false); 
+  const [isMounted, setIsMounted] = useState(false);
   const { openNavDiscount, setOpenNavDiscount, setIsLogin, isLogin } =
     useAppContext();
+  const [advert, setAdvert] = useState<Ribbon>({
+    status: "",
+    message: "",
+    data: {
+      id: 1,
+      description: "",
+      url: "",
+      updated_at: "",
+    },
+  });
 
   useEffect(() => {
+    getRibbonAdvert();
     setIsMounted(true);
   }, []);
 
-  
+  const getRibbonAdvert = async () => {
+    try {
+      const result = await GetRibbon();
+      if (result.status === "success") {
+        setOpenNavDiscount(true);
+        setAdvert(result);
+      } else {
+        setOpenNavDiscount(false);
+      }
+    } catch (error) {
+      console.error("Error fetching ribbon advert:", error);
+    }
+  };
+
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
     setScrollY(currentScrollY);
@@ -142,7 +168,10 @@ const Navbar = () => {
             <div className="max-w-[1750px] mx-auto text-white text-sm font-medium gap-4 flex-wrap flex justify-between items-center px-8 py-3">
               <span>+250793898790</span>
               <span>
-                Get 25% off By selecting a package | <Link href={'/destination'} className="hover:underline">Book now</Link>
+                {advert.data.description} |{" "}
+                <Link href={advert.data.url} className="hover:underline">
+                  Book now
+                </Link>
               </span>
               <span
                 onClick={() => setOpenNavDiscount(false)}

@@ -135,7 +135,7 @@ export type BookingData = {
   updated_at: string;
   booking_reference: string;
   note?: string;
-  payment_status:string;
+  payment_status: string;
 };
 
 export type BookingResponse = {
@@ -161,11 +161,11 @@ export type BulkCarDetail = {
 };
 
 export type CarBookingRequest = {
-  start_date: string; 
-  end_date: string; 
-  pickup_location: string; 
-  trip_location: string; 
-  driver_option: string; 
+  start_date: string;
+  end_date: string;
+  pickup_location: string;
+  trip_location: string;
+  driver_option: string;
   note: string;
   car_details: BulkCarDetail[];
 };
@@ -187,4 +187,15 @@ export interface BulkBookingResponse {
   status: string;
   message: string;
   data: BulkBookingType[];
+}
+
+export interface Ribbon {
+  status: string;
+  message: string;
+  data: {
+    id: number;
+    description: string;
+    url: string;
+    updated_at: string;
+  };
 }

@@ -248,7 +248,7 @@ export const StaffList = [
         image: Giselle,
       },
       {
-        name: "Giselle K. BIGABIRO",
+        name: "Giselle BIGABIRO",
         title: "Travel & Tour Consultant",
         image: rrt,
       },
@@ -668,4 +668,65 @@ export const carTypesData = {
       ],
     },
   ],
+};
+
+export const PromotionContentMap: Record<
+  string,
+  { title: string; description: string }
+> = {
+  "Holiday & Tour Packages": {
+    title: "2025 Great Migration Season is Here!",
+    description:
+      "Book top Mahali Africa Holiday and Tour packages now at special discounted rates and enjoy the best of the Great Migration.",
+  },
+  "Custom Package": {
+    title: "Design Your Dream Adventure!",
+    description:
+      "Create a fully personalized experience with our custom tour package builder—your adventure, your way!",
+  },
+  "Gorilla & Chimpanzee Trekking": {
+    title: "Trek the Wild – Gorillas & Chimps Await!",
+    description:
+      "Explore the heart of Africa with guided Gorilla and Chimpanzee trekking tours. Limited-time offers available now!",
+  },
+  "Game Drive Safaris": {
+    title: "Go Wild with Our Game Drive Safaris!",
+    description:
+      "Embark on thrilling game drives through Africa’s top national parks. Spot lions, elephants, rhinos and more with expert guides.",
+  },
+  "Accommodation Booking": {
+    title: "Stay in Comfort Wherever You Go",
+    description:
+      "Book hotels, lodges, and unique stays across Africa with Mahali Africa. Comfort, convenience, and exclusive deals guaranteed.",
+  },
+  "Car Rentals": {
+    title: "Drive Africa Your Way!",
+    description:
+      "Choose from a fleet of 4x4s, sedans, and luxury vehicles for all terrains. Affordable rates and flexible rental plans available.",
+  },
+  "Airport Transfers": {
+    title: "Seamless Airport Transfers",
+    description:
+      "Arrive or depart stress-free with our reliable airport transfer services. Available 24/7 in major cities and destinations.",
+  },
+  "Air Ticket": {
+    title: "Fly with Confidence",
+    description:
+      "Book domestic and international flights with ease. Competitive rates, flexible dates, and trusted airline partners.",
+  },
+  "Visa Application": {
+    title: "Your Visa, Sorted",
+    description:
+      "Hassle-free visa application assistance for your next adventure. Expert support from start to finish.",
+  },
+  "Events Management": {
+    title: "Make Your Event Unforgettable!",
+    description:
+      "From destination weddings to corporate retreats, we handle every detail to make your event truly special.",
+  },
+  "Photo & Video Coverage": {
+    title: "Capture Every Moment",
+    description:
+      "Professional photography and videography services for tours, events, and personal memories. Preserve your story beautifully.",
+  },
 };
