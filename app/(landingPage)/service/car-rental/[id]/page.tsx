@@ -124,12 +124,12 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
               </span>
             </div>
             <p className="text-black opacity-70 leading-relaxed text-sm mt-5 md:text-center">
-              {/* {carInfo?.description} */}
-              "The Mercedes-Benz E-Class is a symbol of luxury, performance, and
+              {carInfo?.description}
+{/*               "The Mercedes-Benz E-Class is a symbol of luxury, performance, and
               innovation. Renowned for its sophisticated design, this premium
               sedan combines cutting-edge technology with unparalleled comfort
               and advanced safety features. Whether for business or pleasure,
-              the E-Class offers a prestigious driving experience.",
+              the E-Class offers a prestigious driving experience.", */}
             </p>
 
             <div className="max-md:block hidden sm:w-1/2 mx-auto ">
