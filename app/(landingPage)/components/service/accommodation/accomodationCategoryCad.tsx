@@ -18,10 +18,15 @@ const AccommodationCard = ({
     <div className="group flex max-md:flex-wrap gap-4 border p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow bg-white cursor-pointer">
       {/* Image Section */}
       <div className="relative flex-shrink-0 max-md:w-full w-72 h-52 overflow-hidden rounded-lg">
-        <Image
-          src={accomod.first_image || placeHolderimage}
+        {/* <Image
+          src={accomod.first_image || placeHolderimage.src}
           alt={accomod.name}
           fill={true}
+          className="object-cover rounded-md"
+        /> */}
+        <img
+          src={accomod.first_image || placeHolderimage.src || ""}
+          alt={accomod.name}
           className="object-cover rounded-md"
         />
       </div>

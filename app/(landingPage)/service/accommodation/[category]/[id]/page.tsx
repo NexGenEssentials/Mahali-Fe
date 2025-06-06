@@ -401,13 +401,20 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
         {/* Gallery */}
         <div className="w-[98%] h-96 flex gap-2 overflow-hidden justify-between rounded-lg cursor-pointer">
           <div className="w-full md:w-1/2 h-full overflow-hidden">
-            <Image
-              src={AccomDetails.first_image || ImagePlaceholder}
+            <img
+              src={AccomDetails.first_image || ImagePlaceholder.src}
               alt={AccomDetails.name}
               width={800}
               height={600}
               className="object-cover w-full h-full hover:scale-110 hover:duration-700 transition-all"
             />
+            {/* <Image
+              src={AccomDetails.first_image || ImagePlaceholder}
+              alt={AccomDetails.name}
+              width={800}
+              height={600}
+              className="object-cover w-full h-full hover:scale-110 hover:duration-700 transition-all"
+            /> */}
           </div>
           <div className="relative max-md:hidden w-1/2 h-full grid grid-cols-2 gap-2 overflow-hidden">
             {AccomDetails.images &&

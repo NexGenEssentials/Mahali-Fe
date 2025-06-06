@@ -16,7 +16,7 @@ type RelatedPackage = {
   location: string;
   duration_days: number;
   rating: number;
-  main_image: string | null;
+  main_image: string;
 };
 export type TourPackageType = {
   id: number;
@@ -30,14 +30,14 @@ export type TourPackageType = {
   max_people: number;
   rating: number;
   price: string;
-  main_image: StaticImageData | null;
+  main_image: string ;
   is_active: boolean;
   created_at: string;
   updated_at: string;
   country: number;
   tour_plans: TourPlanType[];
   related_packages: RelatedPackage[];
-  images: [];
+  images: string[];
 };
 
 export type SingleTourResponseType = {
@@ -80,7 +80,7 @@ export type CountryType = {
   highlights: highlightsData[];
   when_to_go: WhenToGo[];
   name: string;
-  image: string | null;
+  image: string ;
   description: string | null;
   
 };

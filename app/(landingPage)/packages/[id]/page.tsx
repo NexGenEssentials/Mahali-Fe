@@ -15,7 +15,7 @@ import InquiryForm from "../../components/package/form";
 import { TourPackageType } from "@/app/types/tour";
 import { getSingleTour } from "@/app/api/tour/action";
 import { ExternalServices } from "@/app/constants/arrays";
-import ImagePlaceHolder from'@/public/images/imagePlaceholder.jpg'
+import ImagePlaceHolder from "@/public/images/imagePlaceholder.jpg";
 
 const PackagesPage = ({ params }: { params: { id: string } }) => {
   const [packag, setPackag] = useState<TourPackageType | null>(null);
@@ -141,12 +141,17 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
                             key={idx}
                             className=" w-full md:w-[250px] h-[200px]  bg-primaryGreen overflow-hidden rounded-md grayscale hover:grayscale-0"
                           >
-                            <Image
+                            <img
+                              src={img}
+                              alt={packag?.title}
+                              className="rounded-md w-full h-full hover:scale-110 hover:duration-500 object-cover"
+                            />
+                            {/* <Image
                               src={img || ImagePlaceHolder}
                               alt={packag?.title}
                               fill
                               className="rounded-md w-full h-full hover:scale-110 hover:duration-500 object-cover"
-                            />
+                            /> */}
                           </div>
                         ))}
                     </div>
@@ -208,27 +213,35 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
         </div>
         <div className="max-w-[1750px] mx-auto p-8 flex-col flex gap-4">
           <HeaderSection title="Suggestions" subtitle="Related Tour" />
-          <div className="flex flex-wrap gap-8 items-start  justify-center py-6 ">
-            {packag?.related_packages.map((pack, index) => (
-              <div
-                key={index}
-                className={` "flex flex-wrap gap-8 items-stretch  justify-center py-6 `}
-              >
-                <PackageCard
-                  key={pack.id}
-                  id={pack.id}
-                  location={""}
-                  days={`${pack.min_people}-${pack.max_people}`}
-                  image={pack.main_image || ImagePlaceHolder}
-                  people={`${pack.min_people}-${pack.max_people}`}
-                  rate={pack.rating}
-                  name={pack.title}
-                  route={pack.location}
-                  price={pack.price}
-                />
-              </div>
-            ))}
-          </div>
+          {packag?.related_packages.length ? (
+            <div className="flex flex-wrap gap-8 items-start  justify-center py-6 ">
+              {packag?.related_packages.map((pack, index) => (
+                <div
+                  key={index}
+                  className={` "flex flex-wrap gap-8 items-stretch  justify-center py-6 `}
+                >
+                  <PackageCard
+                    key={pack.id}
+                    id={pack.id}
+                    location={""}
+                    days={`${pack.min_people}-${pack.max_people}`}
+                    image={pack.main_image || ImagePlaceHolder}
+                    people={`${pack.min_people}-${pack.max_people}`}
+                    rate={pack.rating}
+                    name={pack.title}
+                    route={pack.location}
+                    price={pack.price}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex items-center justify-center w-full h-[200px]">
+              <span className="text-2xl font-semibold text-primaryGreen">
+                No Related Packages Available
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </LandingPage>

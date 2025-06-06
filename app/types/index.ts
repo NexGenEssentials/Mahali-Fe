@@ -1,4 +1,4 @@
-import { StaticImageData } from "next/image";
+// import { string } from "next/image";
 import { ReactNode } from "react";
 
 export interface SignupFormValues {
@@ -24,14 +24,14 @@ export type Car = {
   category: string;
   year: number;
   transmission: string;
-  first_image: StaticImageData;
+  first_image: string;
   price_per_day: string;
 };
 
 export type CarData = {
   id: number;
   features: Feature[];
-  first_image: StaticImageData;
+  first_image: string;
   images: string[];
   related_cars: Car[];
   owner: number;
@@ -83,13 +83,13 @@ export type AllFeature = {
 };
 
 export type SingleCarType = {
-  car: StaticImageData;
-  gallery: StaticImageData[] | undefined;
+  car: string;
+  gallery: string[] | undefined;
   spec: any;
   id: number;
   features: Feature[];
-  first_image: StaticImageData;
-  images: StaticImageData[];
+  first_image: string;
+  images: string[];
   related_cars: Car[];
   owner: number;
   name: string;

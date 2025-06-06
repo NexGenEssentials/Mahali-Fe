@@ -65,11 +65,17 @@ const SingleDestination = ({
     <div className="">
       <div key={countryDetails?.id} className={`flex flex-col gap-12 `}>
         <div className="flex items-start justify-center flex-wrap gap-8 ">
-          <div className="relative h-72 max-md:w-full w-2/5 flex items-center justify-center">
-            <Image
-              src={countryDetails?.image || ImagePlaceHolder}
+          <div className="relative h-full max-h-72 overflow-hidden max-md:w-full w-2/5 flex items-center justify-center">
+            {/* <Image
+              src={countryDetails?.image || ImagePlaceHolder.src}
               alt="mahali africa"
               fill
+              className="Object-cover"
+            /> */}
+            <img
+              src={countryDetails?.image || ImagePlaceHolder.src}
+              alt="mahali africa"
+              
               className="Object-cover"
             />
           </div>
@@ -79,7 +85,7 @@ const SingleDestination = ({
               <span className="h-[3px] w-8 block bg-defaultGreen"></span> About{" "}
               <span className="text-primaryGreen">{countryDetails?.name}</span>
             </h1>
-            <span className=" text-black opacity-70 max-w-lg">
+            <span className=" text-black opacity-70 max-w-full">
               {countryDetails?.description}
             </span>
           </div>

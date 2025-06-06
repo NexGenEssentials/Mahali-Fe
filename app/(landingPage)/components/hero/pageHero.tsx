@@ -14,7 +14,7 @@ const PageHero = ({ image, title }: Props) => {
         <Image
           src={image}
           alt={title}
-          fill={true}
+          fill
           className="object-cover opacity-60"
         />
         <div className="absolute top-10 w-full h-full flex flex-col items-center justify-center">

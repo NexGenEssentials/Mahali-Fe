@@ -26,12 +26,17 @@ const Columns: TableProps<CarData>["columns"] = [
     render: (record: CarData) => {
       return (
         <div className=" relative w-44 h-32 overflow-hidden">
-          <Image
+          <img
+            src={record.first_image || ""}
+            alt={`${record.brand} ${record.name}`}
+            className="object-cover"
+          />
+          {/* <Image
             src={record.first_image || ImagePlaceholder}
             fill
             alt={`${record.brand} ${record.name}`}
             className="object-cover"
-          />
+          /> */}
         </div>
       );
     },
@@ -291,7 +296,7 @@ const AllCars = () => {
                       >
                         <CarCard
                           id={car.id}
-                          car={car.first_image || ImagePlaceholder}
+                          car={car.first_image}
                           year={car.year}
                           name={car.name}
                           category={car.category}

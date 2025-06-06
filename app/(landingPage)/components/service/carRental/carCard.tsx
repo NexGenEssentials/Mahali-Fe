@@ -6,7 +6,7 @@ import Link from "next/link";
 interface Props {
   id: number;
   year:number;
-  car: StaticImageData | null;
+  car: string;
   name: string;
   category: string;
   price: string;

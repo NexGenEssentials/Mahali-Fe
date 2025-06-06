@@ -79,8 +79,15 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
       <div className="relative max-md:hidden w-full h-full grid grid-cols-2 gap-2 overflow-hidden">
         {room?.images.map((image, index) => (
           <div key={index} className="w-full h-48 overflow-hidden">
-            <Image
+            {/* <Image
               src={image || ImagePlaceholder}
+              alt={room.name}
+              width={800}
+              height={600}
+              className="object-cover w-full h-full hover:scale-110 hover:duration-700 transition-all"
+            /> */}
+            <img
+              src={image || ImagePlaceholder.src || ""}
               alt={room.name}
               width={800}
               height={600}

@@ -13,7 +13,7 @@ import ZoomableImage from "../../images/zoomImage";
 import ImagePlaceholder from "@/public/images/imagePlaceholder.jpg";
 
 type ThumbsGalleryProps = {
-  images?: StaticImageData[];
+  images?: string[];
 };
 
 const ThumbsGallery: React.FC<ThumbsGalleryProps> = ({ images }) => {
@@ -37,7 +37,7 @@ const ThumbsGallery: React.FC<ThumbsGalleryProps> = ({ images }) => {
           <SwiperSlide key={index}>
             <div className="flex h-full w-full items-center justify-center">
               <ZoomableImage
-                src={image || ImagePlaceholder}
+                src={image}
                 alt={`Image ${index + 1}`}
               />
             </div>
@@ -58,10 +58,9 @@ const ThumbsGallery: React.FC<ThumbsGalleryProps> = ({ images }) => {
         {images?.map((image, index) => (
           <SwiperSlide key={index}>
             <div className="relative flex h-full w-full items-center justify-center">
-              <Image
-                src={image || ImagePlaceholder}
+              <img
+                src={image}
                 alt={`Thumbnail ${index + 1}`}
-                fill
                 className="block h-full w-full object-cover"
               />
               {activeIndex !== index && (

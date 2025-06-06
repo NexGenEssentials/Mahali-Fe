@@ -53,7 +53,7 @@ const CarTypes = ({ featuredCar }: { featuredCar?: Car[] }) => {
               <Link href={"#"}>
                 <CarCard
                   id={car.id}
-                  car={car.first_image || ImagePlaceholder}
+                  car={car.first_image}
                   name={car.name}
                   year={car.year}
                   category={car.category}

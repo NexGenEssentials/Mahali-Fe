@@ -20,12 +20,12 @@ import UserCarBookingInfoForm from "@/app/(landingPage)/components/service/carRe
 const CarDetails = ({ params }: { params: { id: string } }) => {
   const carId = decodeURIComponent(params.id);
   const [carInfo, setCarInfo] = useState<SingleCarType>({
-    car: {} as StaticImageData,
+    car: "" ,
     gallery: undefined,
     spec: null,
     id: 0,
     features: [],
-    first_image: {} as StaticImageData,
+    first_image: "" ,
     images: [],
     related_cars: [],
     owner: 0,
@@ -125,11 +125,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
             </div>
             <p className="text-black opacity-70 leading-relaxed text-sm mt-5 md:text-center">
               {carInfo?.description}
-{/*               "The Mercedes-Benz E-Class is a symbol of luxury, performance, and
-              innovation. Renowned for its sophisticated design, this premium
-              sedan combines cutting-edge technology with unparalleled comfort
-              and advanced safety features. Whether for business or pleasure,
-              the E-Class offers a prestigious driving experience.", */}
+             
             </p>
 
             <div className="max-md:block hidden sm:w-1/2 mx-auto ">
