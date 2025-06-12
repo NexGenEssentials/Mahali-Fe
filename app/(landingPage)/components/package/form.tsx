@@ -10,6 +10,21 @@ import { TourPackageType } from "@/app/types/tour";
 import { CreateBooking } from "@/app/api/booking/action";
 
 const contentId = process.env.NEXT_PUBLIC_TOUR_PACKAGE_ID;
+interface OptionType {
+  label: string;
+  value: string;
+}
+
+export const nationalityOptions: OptionType[] = [
+  { label: "Rwandan", value: "rwandan" },
+  {
+    label: "Foreign Residence in Rwanda",
+    value: "foreign_residence_in_rwanda",
+  },
+  { label: "East African", value: "east_african" },
+  { label: "African", value: "african" },
+  { label: "Other Place", value: "other_place" },
+];
 
 const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
   const [dateSelected, setDateSelected] = useState<DateObject[]>([
@@ -29,6 +44,10 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
   const { isLogin, setActiveModalId, setBookingData } = useAppContext();
   const [loadingpay, setLoadingpay] = useState(false);
   const [buttonType, setButtontype] = useState("booking");
+   const [selectedNationality, setSelectedNationality] = useState<
+     string | undefined
+   >(undefined);
+
 
   const validateForm = () => {
     let isValid = true;
@@ -141,6 +160,24 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
         {errors.dateRange && (
           <p className="text-red-500 text-sm">{errors.dateRange}</p>
         )}
+      </div>
+
+      <div>
+        <Select
+          value={selectedNationality}
+          onChange={setSelectedNationality}
+          placeholder="Select nationality"
+          className="w-full"
+          size="large"
+          showSearch
+          optionFilterProp="label"
+        >
+          {nationalityOptions.map((option) => (
+            <Select.Option key={option.value} value={option.value}>
+              {option.label}
+            </Select.Option>
+          ))}
+        </Select>
       </div>
 
       <div>

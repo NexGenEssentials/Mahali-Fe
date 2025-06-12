@@ -66,7 +66,8 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
                       className="text-primaryGreen"
                     />
                     <h2 className="text-primaryBlue">Duration:</h2>
-                    {packag?.min_people} Days {packag?.duration_nights} Nights
+                    {packag?.duration_days} Days {packag?.duration_nights}{" "}
+                    Nights
                   </span>
                   <span className="flex items-start gap-2">
                     <Icon
@@ -129,7 +130,17 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
           <div className="flex items-stretch justify-center max-lg:flex-wrap gap-8">
             <div className="w-full lg:w-2/3 max-lg:flex-wrap flex flex-col gap-4">
               <SingleHeaderSection title="Tour Plan" />
-              <Accordion items={packag?.tour_plans} />
+              {packag?.tour_plans && packag?.tour_plans.length <= 0 ? (
+                <div>
+                  <div className=" bg-gray-50 rounded-md flex items-center justify-center w-full h-[200px]">
+                    <span className="text-2xl font-semibold text-primaryGreen">
+                      No Tour Plans Available
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <Accordion items={packag?.tour_plans} />
+              )}
               <div>
                 {packag?.images?.length! > 0 && (
                   <div className="flex flex-col gap-8">
@@ -146,12 +157,6 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
                               alt={packag?.title}
                               className="rounded-md w-full h-full hover:scale-110 hover:duration-500 object-cover"
                             />
-                            {/* <Image
-                              src={img || ImagePlaceHolder}
-                              alt={packag?.title}
-                              fill
-                              className="rounded-md w-full h-full hover:scale-110 hover:duration-500 object-cover"
-                            /> */}
                           </div>
                         ))}
                     </div>
