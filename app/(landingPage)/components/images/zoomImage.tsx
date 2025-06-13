@@ -1,14 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
-import Image, { StaticImageData } from "next/image";
 
-const ZoomableImage = ({
-  src,
-  alt,
-}: {
-  src: string | StaticImageData;
-  alt: string;
-}) => {
+const ZoomableImage = ({ src, alt }: { src: string; alt: string }) => {
   const [showZoom, setShowZoom] = useState(false);
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
   const [backgroundPosition, setBackgroundPosition] = useState("0% 0%");
@@ -23,10 +16,10 @@ const ZoomableImage = ({
     const y = ((e.clientY - top) / height) * 100;
 
     setBackgroundPosition(`${x}% ${y}%`);
-    setZoomPosition({
-      x: Math.min(e.clientX - left, width - 200),
-      y: Math.min(e.clientY - top, height - 200),
-    });
+    const clampedX = Math.min(Math.max(e.clientX - left, 0), width - 200);
+    const clampedY = Math.min(Math.max(e.clientY - top, 0), height - 200);
+
+    setZoomPosition({ x: clampedX, y: clampedY });
   };
 
   return (
@@ -38,7 +31,7 @@ const ZoomableImage = ({
         onMouseLeave={() => setShowZoom(false)}
         onMouseMove={handleMouseMove}
       >
-        <Image src={src} alt={alt} fill className="object-cover" />
+        <img src={src} alt={alt} className="w-full h-full object-cover" />
       </div>
 
       {showZoom && (
@@ -49,7 +42,7 @@ const ZoomableImage = ({
             height: "200px",
             left: `${zoomPosition.x}px`,
             top: `${zoomPosition.y}px`,
-            backgroundImage: `url(${typeof src === "string" ? src : src.src})`,
+            backgroundImage: `url(${typeof src === "string" ? src : ""})`,
             backgroundPosition,
             backgroundRepeat: "no-repeat",
             backgroundSize: "400% 400%",
