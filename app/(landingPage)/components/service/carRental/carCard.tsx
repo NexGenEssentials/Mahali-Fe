@@ -5,7 +5,7 @@ import Link from "next/link";
 
 interface Props {
   id: number;
-  year:number;
+  year: number;
   car: string;
   name: string;
   category: string;
@@ -29,10 +29,9 @@ const CarCard = ({
       <div className="bg-white hover:shadow-xl  duration-300 transition shadow-md w-full flex flex-col rounded-lg cursor-pointer">
         <div className="relative h-[200px] w-full flex items-end rounded-lg justify-center overflow-hidden ">
           {car ? (
-            <Image
+            <img
               src={car}
               alt={"car"}
-              fill={true}
               className="object-cover rounded-lg hover:scale-110 hover:duration-300"
             />
           ) : (
@@ -63,10 +62,7 @@ const CarCard = ({
           </div>
           <div className="inline-flex gap-1 text-sm text-slate-400">
             Year:
-            <span className="text-primaryGreen font-semibold">
-              {" "}
-              {year}
-            </span>
+            <span className="text-primaryGreen font-semibold"> {year}</span>
           </div>
           <motion.button
             whileTap={{ scale: 0.9 }}
