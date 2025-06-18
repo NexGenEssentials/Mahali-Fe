@@ -231,7 +231,11 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
                     location={""}
                     days={`${pack.min_people}-${pack.max_people}`}
                     image={pack.main_image || ImagePlaceHolder}
-                    people={`${pack.min_people}-${pack.max_people}`}
+                    people={`${
+                      pack.min_people === pack.max_people
+                        ? ` ${pack.max_people}`
+                        : `${pack.min_people}-${pack.max_people}`
+                    }`}
                     rate={pack.rating}
                     name={pack.title}
                     route={pack.location}

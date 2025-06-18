@@ -12,7 +12,6 @@ import ButtonComponent from "../buttons/buttonIcon";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useAppContext } from "@/app/context";
 
-
 const PackageSection = () => {
   const [active, setActive] = useState("Rwanda");
   const [navnarArr, setNavnarArr] = useState<CountryType[]>([]);
@@ -120,14 +119,18 @@ const PackageSection = () => {
           </div>
         ) : (
           <div className="flex flex-wrap gap-4 items-stretch w-full justify-center">
-            {packageList[`${active}`]?.map((item) => (
+            {packageList[`${active}`].slice(0, 3)?.map((item) => (
               <PackageCard
                 key={item.id}
                 id={item.id}
                 location={active}
                 days={item.duration_days}
                 image={item?.main_image || ImagePlaceholder}
-                people={`${item.min_people}-${item.max_people}`}
+                people={`${
+                  item.min_people === item.max_people
+                    ? ` ${item.max_people}`
+                    : `${item.min_people}-${item.max_people}`
+                }`}
                 rate={item.rating}
                 name={item.title}
                 route={item.location}

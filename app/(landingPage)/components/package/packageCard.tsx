@@ -14,7 +14,7 @@ interface packageType {
   name: string;
   route: string;
   location?: string;
-  price:string;
+  price: string;
 }
 const PackageCard = ({
   id,
@@ -25,7 +25,7 @@ const PackageCard = ({
   rate,
   route,
   location,
-  price
+  price,
 }: packageType) => {
   const router = useRouter();
 
@@ -67,7 +67,7 @@ const PackageCard = ({
               height="16"
               className="text-primaryGreen"
             />{" "}
-            {people} People
+            {people} Person
           </span>
           <span className="flex items-center gap-1 ">
             {" "}

@@ -19,7 +19,7 @@ const SingleDestination = ({
   const [countryDetails, setCountryDetails] = useState<CountryType | null>(
     null
   );
-  const [season, setSeason] = useState(countryDetails?.when_to_go[0].season);
+  const [season, setSeason] = useState(countryDetails?.when_to_go[0]?.season);
   const [countryTours, setCountryTours] = useState<TourPackageType[] | null>(
     null
   );
@@ -75,7 +75,6 @@ const SingleDestination = ({
             <img
               src={countryDetails?.image || ImagePlaceHolder.src}
               alt="mahali africa"
-              
               className="Object-cover"
             />
           </div>
@@ -130,7 +129,7 @@ const SingleDestination = ({
             }
           />
           {countryTours ? (
-            <div className="flex gap-8 items-start flex-wrap justify-center py-6 ">
+            <div className="flex gap-12 items-stretch flex-wrap justify-center py-6 ">
               {countryTours?.map((pack, index) => (
                 <PackageCard
                   key={pack.id}
@@ -138,7 +137,11 @@ const SingleDestination = ({
                   location={countryDetails?.name}
                   days={pack.duration_days}
                   image={pack.main_image || ImagePlaceHolder}
-                  people={`${pack.min_people}-${pack.max_people}`}
+                  people={`${
+                    pack.min_people === pack.max_people
+                      ? ` ${pack.max_people}`
+                      : `${pack.min_people}-${pack.max_people}`
+                  }`}
                   rate={pack.rating}
                   name={pack.title}
                   route={pack.location}
