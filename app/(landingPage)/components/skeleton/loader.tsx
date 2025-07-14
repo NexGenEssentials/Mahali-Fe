@@ -1,5 +1,4 @@
 import { Flex, Spin } from 'antd';
-
 import { LoadingOutlined } from "@ant-design/icons";
 import React from 'react'
 
