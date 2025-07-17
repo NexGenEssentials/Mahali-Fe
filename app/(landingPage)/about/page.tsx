@@ -154,7 +154,6 @@ const About = () => {
           <HeaderSection title="Staff" subtitle="Our Team" />
           <div className="flex flex-col gap-8 ">
             <ul className="w-full sm:w-4/5 md:w-1/3 mx-auto flex items-center justify-evenly gap-2">
-             
               {StaffList.map((cat, index) => (
                 <li
                   onClick={() => setCategory(cat.category)}
@@ -184,20 +183,20 @@ const About = () => {
                     {item.list.map((staff, index) => (
                       <div
                         key={index}
-                        className="relative group w-fit drop-shadow-lg rounded-lg bg-white"
+                        className="relative group w-fit drop-shadow-lg rounded-lg bg-white overflow-hidden"
                       >
-                        <div className="relative w-[250px] h-[250px] overflow-hidden">
+                        <div className="relative w-full h-[250px] overflow-hidden">
                           <Image
                             src={staff.image || guide}
                             alt="our tour guide"
-                            className="object-cover w-full h-full group-hover:scale-105 duration-300 rounded-lg"
+                            className="object-top w-full h-full group-hover:scale-105 duration-300 rounded-lg"
                           />
 
-                          <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-50 duration-300"></div>
+                          <div className="absolute inset-0 bg-black/10 group-hover:bg-black/40 duration-300"></div>
                         </div>
 
                         <div className="absolute top-1/3 w-full hidden group-hover:flex gap-2 items-center text-white justify-center duration-300">
-                          <Link href="https://www.instagram.com/mahaliafrica/">
+                          <Link href="#">
                             <Icon
                               icon="ri:instagram-fill"
                               width="35"
@@ -205,7 +204,7 @@ const About = () => {
                               className="hover:text-primaryGreen icon"
                             />
                           </Link>
-                          <Link href="https://www.facebook.com/profile.php?id=61551684126148">
+                          <Link href="#">
                             <Icon
                               icon="ic:baseline-facebook"
                               width="35"
@@ -221,7 +220,7 @@ const About = () => {
                               className="hover:text-primaryGreen icon"
                             />
                           </Link>
-                          <Link href="https://www.linkedin.com/company/mahaliafrica/?viewAsMember=true">
+                          <Link href="#">
                             <Icon
                               icon="mingcute:linkedin-fill"
                               width="35"

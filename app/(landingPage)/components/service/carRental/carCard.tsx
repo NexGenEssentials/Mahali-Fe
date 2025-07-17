@@ -12,6 +12,7 @@ interface Props {
   price: string;
   period: string;
   transimission: string;
+  location:string;
 }
 
 const CarCard = ({
@@ -23,6 +24,7 @@ const CarCard = ({
   period,
   price,
   transimission,
+  location,
 }: Props) => {
   return (
     <Link href={`/service/car-rental/${id}`}>
@@ -63,6 +65,10 @@ const CarCard = ({
           <div className="inline-flex gap-1 text-sm text-slate-400">
             Year:
             <span className="text-primaryGreen font-semibold"> {year}</span>
+          </div>
+          <div className="inline-flex gap-1 text-sm text-slate-400">
+            Location:
+            <span className="text-primaryGreen font-semibold"> {location}</span>
           </div>
           <motion.button
             whileTap={{ scale: 0.9 }}

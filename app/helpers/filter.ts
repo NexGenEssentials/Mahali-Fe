@@ -151,6 +151,7 @@ export function getAllToursData(data: Record<string, any[]>): TourPackageType[] 
           country: tour.country || 0,
           created_at: tour.created_at,
           updated_at: tour.updated_at,
+          prices: tour.prices || [],
         });
       });
     }

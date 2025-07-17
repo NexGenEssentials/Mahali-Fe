@@ -40,15 +40,16 @@ const PackageCard = ({
       onClick={() => handleNavigation(name)}
       className="group w-[400px] max-w-md min-w-[300px] cursor-pointer h-auto drop-shadow-md border border-opacity-25 bg-gray-100 bg-opacity-20"
     >
-      <div className="relative h-[200px] w-full flex items-end justify-center ">
-        {/* <Image src={image} alt={name} fill={true} className="object-cover" /> */}
-        <img
-          src={typeof image === "string" ? image : ""}
-          alt={name}
-          className="h-[230px] w-full"
-        />
+      <div className="relative h-[200px] w-full flex items-end justify-center  ">
+        <div className="relative w-full h-full overflow-hidden">
+          <img
+            src={typeof image === "string" ? image : ""}
+            alt={name}
+            className="object-cover h-[230px] w-full"
+          />
+        </div>
 
-        <div className="absolute text-sm -bottom-5 grow w-full lg:w-[90%] drop-shadow-md bg-white p-4 flex justify-evenly items-center gap-2">
+        <div className="absolute text-sm -bottom-6 grow w-full lg:w-[90%] drop-shadow-md bg-white p-4 flex justify-evenly items-center gap-2">
           <span className="flex items-center gap-1 ">
             {" "}
             <Icon
@@ -97,6 +98,7 @@ const PackageCard = ({
               ))}
           </div>
           <span className="flex items-start gap-1 font-semibold text-slate-600 text-sm">
+            From:{" "}
             <Icon
               icon="solar:dollar-bold"
               width="20"

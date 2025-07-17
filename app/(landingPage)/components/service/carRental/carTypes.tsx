@@ -60,6 +60,7 @@ const CarTypes = ({ featuredCar }: { featuredCar?: Car[] }) => {
                   price={car.price_per_day}
                   period={"day"}
                   transimission={car.transmission}
+                  location={car.location}
                 />
               </Link>
             </SwiperSlide>

@@ -303,6 +303,7 @@ const AllCars = () => {
                           price={car.price_per_day}
                           period={"Day"}
                           transimission={car.transmission}
+                          location={car.location}
                         />
                       </div>
                     ))

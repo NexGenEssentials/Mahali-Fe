@@ -10,7 +10,6 @@ import {
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Accordion from "../../components/headers/accordion";
 import PackageCard from "../../components/package/packageCard";
-import Image from "next/image";
 import InquiryForm from "../../components/package/form";
 import { TourPackageType } from "@/app/types/tour";
 import { getSingleTour } from "@/app/api/tour/action";
@@ -78,7 +77,7 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
                     />
                     <h2 className="text-primaryBlue">Rates:</h2>
                     <div className="flex gap-1">
-                      {Array(Math.round(Number(packag?.rating || 0)))
+                      {Array(Math.round(Number(packag?.rating || 1)))
                         .fill(null)
                         .map((_, index) => (
                           <Icon
@@ -120,7 +119,7 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
                       height="20"
                       className="text-primaryGreen"
                     />
-                    <h2 className="text-primaryBlue">Price:</h2>$
+                    <h2 className="text-primaryBlue">Price - From:</h2>${" "}
                     {Number(packag?.price).toLocaleString() || 0}
                   </span>
                 </span>
@@ -218,30 +217,25 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
         </div>
         <div className="max-w-[1750px] mx-auto p-8 flex-col flex gap-4">
           <HeaderSection title="Suggestions" subtitle="Related Tour" />
-          {packag?.related_packages.length ? (
-            <div className="flex flex-wrap gap-8 items-start  justify-center py-6 ">
-              {packag?.related_packages.map((pack, index) => (
-                <div
-                  key={index}
-                  className={` "flex flex-wrap gap-8 items-stretch  justify-center py-6 `}
-                >
-                  <PackageCard
-                    key={pack.id}
-                    id={pack.id}
-                    location={""}
-                    days={`${pack.min_people}-${pack.max_people}`}
-                    image={pack.main_image || ImagePlaceHolder}
-                    people={`${
-                      pack.min_people === pack.max_people
-                        ? ` ${pack.max_people}`
-                        : `${pack.min_people}-${pack.max_people}`
-                    }`}
-                    rate={pack.rating}
-                    name={pack.title}
-                    route={pack.location}
-                    price={pack.price}
-                  />
-                </div>
+          {(packag?.related_packages ?? []).length > 0 ? (
+            <div className="flex flex-wrap gap-8 items-stretch  justify-center py-6 ">
+              {packag?.related_packages.map((pack) => (
+                <PackageCard
+                  key={pack.id}
+                  id={pack.id}
+                  location={""}
+                  days={`${pack.min_people}-${pack.max_people}`}
+                  image={pack.main_image || ImagePlaceHolder}
+                  people={`${
+                    pack.min_people === pack.max_people
+                      ? ` ${pack.max_people}`
+                      : `${pack.min_people}-${pack.max_people}`
+                  }`}
+                  rate={pack.rating}
+                  name={pack.title}
+                  route={pack.location}
+                  price={pack.price}
+                />
               ))}
             </div>
           ) : (

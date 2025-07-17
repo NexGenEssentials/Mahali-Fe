@@ -19,6 +19,12 @@ import DanPofile from "@/public/images/dani.jpeg";
 import muhirwa from "@/public/images/muhirwa.png";
 import mahali from "@/public/images/logo.png";
 import rrt from "@/public/images/rrrt.jpg";
+import oscar from "@/public/images/oscar.jpeg";
+import bosco from "@/public/images/bosco.jpeg";
+import kwizera from "@/public/images/kwizera.jpeg";
+import lawrence from "@/public/images/lawrence.jpeg";
+import mugumya from "@/public/images/mugumya.jpeg";
+import rusamaza from "@/public/images/rusamaza.jpeg";
 
 export const Parks = [
   {
@@ -225,15 +231,14 @@ export const StaffList = [
     category: "Board",
     list: [
       {
-        name: "Carolyne Mziray Lawrence",
+        name: "MS. Carolyne Mziray Lawrence",
         title: "Chairperson of the Board",
-        image: "",
+        image: lawrence,
       },
-      { name: "Jackson Mugumya", title: "Board Member", image: "" },
-      { name: "Daniella Rusamaza", title: "Board Member", image: "" },
-      { name: "Egide Rucyaha", title: "Board Member", image: "" },
+      { name: "Jackson MUGUMYA", title: "Board Member", image: mugumya },
+      { name: "Daniella RUSAMAZA", title: "Board Member", image: rusamaza },
       {
-        name: "Dan Rwiyamira",
+        name: "Mr. Dan RWIYAMIRIRA",
         title: "Secretary to the Board",
         image: DanPofile,
       },
@@ -243,18 +248,18 @@ export const StaffList = [
     category: "Management",
     list: [
       {
-        name: "Roy Rugazora Muruta",
+        name: "Ms. Roy Muruta RUGAZORA",
         title: "General Manager",
         image: Giselle,
       },
       {
-        name: "Giselle BIGABIRO",
+        name: "Ms. Giselle K. BIGABIRO",
         title: "Travel & Tour Consultant",
         image: rrt,
       },
       {
-        name: "Nate Muhirwa",
-        title: "Digital Creative Manager",
+        name: "Mr. Nathaniel Muhirwa",
+        title: "Brand Creative Manager",
         image: muhirwa,
       },
       {
@@ -267,10 +272,21 @@ export const StaffList = [
   {
     category: "Guides",
     list: [
-      { name: "Paul Mugisha", title: "Guide", image: "" },
-      { name: "Joe Smith", title: "Guide", image: "" },
-      { name: "Luke Otota", title: "Guide", image: "" },
-      { name: "Jackson Emma", title: "Guide", image: "" },
+      {
+        name: "Mr. Oscar KABERA",
+        title: "Professional Tour Guide",
+        image: oscar,
+      },
+      {
+        name: "Mr. Germain KWIZERA",
+        title: "Professional Safari Guide",
+        image: kwizera,
+      },
+      {
+        name: "Mr. Jean Bosco IRADUKUNDA",
+        title: "Professional Driver Guide",
+        image: bosco,
+      },
     ],
   },
 ];

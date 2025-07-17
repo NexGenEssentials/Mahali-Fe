@@ -30,7 +30,8 @@ export type TourPackageType = {
   max_people: number;
   rating: number;
   price: string;
-  main_image: string ;
+  prices: [];
+  main_image: string;
   is_active: boolean;
   created_at: string;
   updated_at: string;

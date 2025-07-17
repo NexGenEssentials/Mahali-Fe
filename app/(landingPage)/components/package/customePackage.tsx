@@ -13,6 +13,8 @@ import { getSelectedCategories } from "@/app/helpers/filter";
 import { useRouter } from "next/navigation";
 
 import { motion } from "motion/react";
+import Select from "antd/es/select";
+import { nationalityOptions } from "./form";
 
 const accommodations = ["Budget", "Mid-range", "Luxury"];
 const transportOptions = ["Self-drive", "Mid-range", "Luxury", "Land", "Air"];
@@ -52,6 +54,10 @@ export default function CustomTourPackage() {
   const { setActiveModalId } = useAppContext();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [name, setName] = useState("");
+
+  const [selectedNationality, setSelectedNationality] = useState<
+    string | undefined
+  >(undefined);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -116,7 +122,7 @@ export default function CustomTourPackage() {
   useEffect(() => {
     getCategoryList();
     getDestinationList();
-  }, []);
+  }, [selectedNationality]);
 
   const getCategoryList = async () => {
     setLoading(true);
@@ -170,7 +176,7 @@ export default function CustomTourPackage() {
       }
     } catch (error) {}
   };
-
+  console.log({ CategoryList });
   return (
     <>
       {packageStatus || loading ? (
@@ -188,7 +194,7 @@ export default function CustomTourPackage() {
             <div className="flex-1 gap-2 ">
               <input
                 type="text"
-                placeholder="create a package name"
+                placeholder="package name..."
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="outline-none p-3 border rounded-lg w-full"
@@ -196,26 +202,45 @@ export default function CustomTourPackage() {
             </div>
           </div>
 
+          {/* location */}
+          <div className={`${style.section}`}>
+            <h1 className={`${style.title}`}>Select Nationality:</h1>
+            <Select
+              value={selectedNationality}
+              onChange={setSelectedNationality}
+              placeholder="Select nationality"
+              className="w-full"
+              size="large"
+              showSearch
+              optionFilterProp="label"
+            >
+              {nationalityOptions.map((option) => (
+                <Select.Option key={option.value} value={option.value}>
+                  {option.label}
+                </Select.Option>
+              ))}
+            </Select>
+          </div>
+
           {/* Destination Selection */}
           <div className={`${style.section}`}>
             <h1 className={`${style.title}`}>Select Destination:</h1>
             <div className="flex flex-col gap-2 ">
-              <select
-                className={`${style.items}`}
+              <Select
                 value={selectedDestination}
-                onChange={(e) => setSelectedDestination(e.target.value)}
+                onChange={setSelectedDestination}
+                placeholder="Select Destination"
+                className="w-full"
+                size="large"
+                showSearch
+                optionFilterProp="label"
               >
-                <option value="">-- Select --</option>
                 {destinations.map((dest) => (
-                  <option
-                    className={`${style.selectedItem}`}
-                    key={dest.id}
-                    value={dest.name}
-                  >
+                  <Select.Option key={dest.id} value={dest.name}>
                     {dest.name}
-                  </option>
+                  </Select.Option>
                 ))}
-              </select>
+              </Select>
               {selectedDestination && (
                 <span className="p-2 rounded-lg bg-slate-200 font-semibold w-fit text-sm ">
                   {" "}
@@ -247,13 +272,12 @@ export default function CustomTourPackage() {
                             className={`${style.selectedItem} mr-2 accent-primaryGreen`}
                             checked={selectedCategory.includes(category.name)}
                             onChange={(e) => {
-                              setSelectedCategory(
-                                (prev) =>
-                                  e.target.checked
-                                    ? [...prev, category.name] // Add category if checked
-                                    : prev.filter(
-                                        (item) => item !== category.name
-                                      ) // Remove category if unchecked
+                              setSelectedCategory((prev) =>
+                                e.target.checked
+                                  ? [...prev, category.name]
+                                  : prev.filter(
+                                      (item) => item !== category.name
+                                    )
                               );
                             }}
                           />
@@ -322,43 +346,41 @@ export default function CustomTourPackage() {
           {/* Accommodation Selection */}
           <div className={`${style.section}`}>
             <h1 className={`${style.title}`}>Select Accommodation:</h1>
-            <select
-              className={`${style.items}`}
+            <Select
               value={selectedAccommodation}
-              onChange={(e) => setSelectedAccommodation(e.target.value)}
+              onChange={setSelectedAccommodation}
+              placeholder="Select Accommodation"
+              className="w-full"
+              size="large"
+              showSearch
+              optionFilterProp="label"
             >
-              <option value="">-- Select --</option>
               {accommodations.map((acc) => (
-                <option
-                  className={`${style.selectedItem}`}
-                  key={acc}
-                  value={acc}
-                >
+                <Select.Option key={acc} value={acc}>
                   {acc}
-                </option>
+                </Select.Option>
               ))}
-            </select>
+            </Select>
           </div>
 
           {/* Transport Selection */}
           <div className={`${style.section}`}>
             <h1 className={`${style.title}`}>Select Transport:</h1>
-            <select
-              className={`${style.items}`}
+            <Select
+              className="w-full"
               value={selectedTransport}
-              onChange={(e) => setSelectedTransport(e.target.value)}
+              size="large"
+              placeholder="Select Transport"
+              showSearch
+              onChange={setSelectedTransport}
+              optionFilterProp="label"
             >
-              <option value="">-- Select --</option>
               {transportOptions.map((transport) => (
-                <option
-                  className={`${style.selectedItem}`}
-                  key={transport}
-                  value={transport}
-                >
+                <Select.Option key={transport} value={transport}>
                   {transport}
-                </option>
+                </Select.Option>
               ))}
-            </select>
+            </Select>
           </div>
 
           {/* People Selection */}
@@ -372,18 +394,6 @@ export default function CustomTourPackage() {
               onChange={(e) => setSelectedPeople(Number(e.target.value))}
             />
           </div>
-
-          {/* Duration Selection
-          <div className={`${style.section}`}>
-            <h1 className={`${style.title}`}>Duration (Days):</h1>
-            <input
-              type="number"
-              className={`${style.items}`}
-              value={duration}
-              min={1}
-              onChange={(e) => setDuration(Number(e.target.value))}
-            />
-          </div> */}
 
           {/* inquire Selection */}
           <div className={`${style.section}`}>

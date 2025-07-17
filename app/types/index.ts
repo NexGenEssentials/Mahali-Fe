@@ -26,6 +26,7 @@ export type Car = {
   transmission: string;
   first_image: string;
   price_per_day: string;
+  location: string;
 };
 
 export type CarData = {
@@ -46,6 +47,7 @@ export type CarData = {
   luggage_capacity: number;
   price_per_day: string;
   is_available: boolean;
+  location:string;
 };
 
 export type CarResponse = {
@@ -105,6 +107,7 @@ export type SingleCarType = {
   is_available: boolean;
   status: string;
   description: string;
+  location: string;
 };
 
 export interface BookingDetails {

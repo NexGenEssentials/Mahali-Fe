@@ -42,6 +42,7 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
     is_available: false,
     status: "",
     description: "",
+    location:""
   });
   const [loading, setloading] = useState(true);
   const [feature, setFeature] = useState<AllFeature[]>([]);
@@ -108,18 +109,23 @@ const CarDetails = ({ params }: { params: { id: string } }) => {
             <ThumbsGallery images={carInfo?.images} />
           </div>
           <div className="flex flex-col md:items-center w-full md:w-1/2 p-2">
-            <div className="flex lg:justify-center items-end lg:w-3/5 gap-4">
-              <div className="flex flex-col">
+            <div className="flex lg:justify-center items-center flex-wrap lg:w-3/5 gap-2">
+              {/* <div className="flex flex-col"> */}
                 <span className="text-slate-400 text-lg font-semibold uppercase">
                   {carInfo?.category}
                 </span>
-                <span className="text-primaryGreen text-2xl font-semibold">
+                <span className="text-primaryGreen text-nowrap text-2xl font-semibold">
                   {carInfo?.name}
                 </span>
-              </div>
+              {/* </div> */}
               <span className="inline-flex">
                 <strong className="text-primaryGreen text-xl">
                   $<span className="">{carInfo.price_per_day}</span>/{"day"}
+                </strong>
+              </span>
+              <span className="inline-flex">
+                <strong className="text-primaryGreen text-xl">
+                  <span className="">({carInfo.location})</span>
                 </strong>
               </span>
             </div>
