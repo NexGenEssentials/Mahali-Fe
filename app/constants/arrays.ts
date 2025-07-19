@@ -746,3 +746,30 @@ export const PromotionContentMap: Record<
       "Professional photography and videography services for tours, events, and personal memories. Preserve your story beautifully.",
   },
 };
+
+export const bookings = [
+  {
+    name: "John Smith",
+    service: "Premium Spa Package",
+    date: "2025-01-15",
+    status: "confirmed",
+    amount: 450,
+    commission: 36,
+  },
+  {
+    name: "Sarah Johnson",
+    service: "Business Consultation",
+    date: "2025-01-14",
+    status: "pending",
+    amount: 250,
+    commission: 20,
+  },
+  {
+    name: "Mike Davis",
+    service: "Photography Session",
+    date: "2025-01-13",
+    status: "completed",
+    amount: 350,
+    commission: 28,
+  },
+];
