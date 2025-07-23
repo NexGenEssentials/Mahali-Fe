@@ -14,7 +14,7 @@ interface packageType {
   name: string;
   route: string;
   location?: string;
-  price: string;
+  price: number;
 }
 const PackageCard = ({
   id,
@@ -105,7 +105,7 @@ const PackageCard = ({
               height="20"
               className="text-primaryGreen"
             />
-            {Number(price).toLocaleString() || 0}
+            {price?.toLocaleString() || 0}
           </span>
         </div>
 

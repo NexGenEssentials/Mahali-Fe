@@ -12,7 +12,8 @@ type RelatedPackage = {
   min_people: number;
   max_people: number;
   country: number;
-  price: string;
+  prices: PriceItem[];
+  price: number;
   location: string;
   duration_days: number;
   rating: number;
@@ -30,7 +31,7 @@ export type TourPackageType = {
   max_people: number;
   rating: number;
   price: string;
-  prices: [];
+  prices: PriceItem[];
   main_image: string;
   is_active: boolean;
   created_at: string;
@@ -81,9 +82,8 @@ export type CountryType = {
   highlights: highlightsData[];
   when_to_go: WhenToGo[];
   name: string;
-  image: string ;
+  image: string;
   description: string | null;
-  
 };
 
 export type CountryResponseType = {
@@ -154,4 +154,9 @@ export type CustomPackagesResponse = {
   success: true;
   message: string;
   data: CustomPackageData[];
+};
+
+export type PriceItem = {
+  nationality_type: string;
+  price: number;
 };

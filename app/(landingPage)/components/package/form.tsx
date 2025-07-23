@@ -44,10 +44,9 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
   const { isLogin, setActiveModalId, setBookingData } = useAppContext();
   const [loadingpay, setLoadingpay] = useState(false);
   const [buttonType, setButtontype] = useState("booking");
-   const [selectedNationality, setSelectedNationality] = useState<
-     string | undefined
-   >(undefined);
-
+  const [selectedNationality, setSelectedNationality] = useState<
+    string | undefined
+  >(undefined);
 
   const validateForm = () => {
     let isValid = true;
@@ -123,7 +122,7 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
     e.preventDefault();
     handleBooking();
   };
-
+  console.log(tour);
   return (
     <form
       onSubmit={handleSubmit}
@@ -173,8 +172,13 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
           optionFilterProp="label"
         >
           {nationalityOptions.map((option) => (
-            <Select.Option key={option.value} value={option.value}>
-              {option.label}
+            <Select.Option
+              key={option.value}
+              value={option.value}
+              className="flex items-center justify-between"
+            >
+              <span>{option.label}</span>
+              {/* <span>{option.price}</span> */}
             </Select.Option>
           ))}
         </Select>

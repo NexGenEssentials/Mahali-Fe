@@ -59,6 +59,7 @@ const SingleDestination = ({
       setLoading(false);
     }
   };
+  console.log({ countryTours });
 
   if (loading) return <Loading />;
   return (
@@ -145,7 +146,7 @@ const SingleDestination = ({
                   rate={pack.rating}
                   name={pack.title}
                   route={pack.location}
-                  price={pack.price}
+                  price={Number(pack.price)}
                 />
               ))}
             </div>

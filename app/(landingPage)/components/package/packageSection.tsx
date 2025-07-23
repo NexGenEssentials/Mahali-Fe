@@ -134,7 +134,7 @@ const PackageSection = () => {
                 rate={item.rating}
                 name={item.title}
                 route={item.location}
-                price={item.price}
+                price={item.prices[0]?.price}
               />
             ))}
             <div className="text-white w-full flex items-center justify-center">
