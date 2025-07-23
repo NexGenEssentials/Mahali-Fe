@@ -1,13 +1,14 @@
 "use client";
 
 import { useAppContext } from "@/app/context";
-import { Space, Select } from "antd";
+import { Space, Select, message } from "antd";
 import { motion } from "motion/react";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import DatePicker, { DateObject, Value } from "react-multi-date-picker";
 import { TourPackageType } from "@/app/types/tour";
 import { CreateBooking } from "@/app/api/booking/action";
+import { convertNation } from "@/app/helpers/formatNation";
 
 const contentId = process.env.NEXT_PUBLIC_TOUR_PACKAGE_ID;
 interface OptionType {
@@ -16,14 +17,14 @@ interface OptionType {
 }
 
 export const nationalityOptions: OptionType[] = [
-  { label: "Rwandan", value: "rwandan" },
+  { label: "rwanda", value: "Rwandan" },
   {
-    label: "Foreign Residence in Rwanda",
-    value: "foreign_residence_in_rwanda",
+    label: "FOREIGN_RESIDENCE_RW",
+    value: "Foreign Residence In Rwanda",
   },
-  { label: "East African", value: "east_african" },
-  { label: "African", value: "african" },
-  { label: "Other Place", value: "other_place" },
+  { label: "EAST_AFRICA", value: "East african" },
+  { label: "african", value: "African" },
+  { label: "international", value: "International" },
 ];
 
 const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
@@ -52,7 +53,7 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
     let isValid = true;
     const newErrors = { people: "", dateRange: "", inquiry: "" };
 
-    if (people < 1) {
+    if (people <= 1) {
       newErrors.people = "Number of people must be at least 1.";
       isValid = false;
     }
@@ -75,7 +76,9 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
   };
 
   const handleBooking = async () => {
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      message.warning("Your form is not valid");
+    }
     if (buttonType === "booking") {
       setLoading(true);
     } else {
@@ -94,7 +97,7 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
             ? dateSelected[1].format("YYYY-MM-DD")
             : "",
           guests: people,
-          total_price: Number(tour?.price),
+          total_price: Number(selectedNationality),
           note: inquiry.trim(),
         };
 
@@ -122,7 +125,7 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
     e.preventDefault();
     handleBooking();
   };
-  console.log(tour);
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -171,14 +174,12 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
           showSearch
           optionFilterProp="label"
         >
-          {nationalityOptions.map((option) => (
-            <Select.Option
-              key={option.value}
-              value={option.value}
-              className="flex items-center justify-between"
-            >
-              <span>{option.label}</span>
-              {/* <span>{option.price}</span> */}
+          {tour?.prices.map((option) => (
+            <Select.Option key={option.nationality_type} value={option.price}>
+              <div className="flex items-center justify-between">
+                <span>{String(convertNation(option.nationality_type))}</span>
+                <span className="font-semibold">${option.price}</span>
+              </div>
             </Select.Option>
           ))}
         </Select>
@@ -201,7 +202,10 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
         whileTap={{ scale: 0.9 }}
         transition={{ duration: 0.1 }}
         type="submit"
-        onClick={() => setButtontype("booking")}
+        onClick={() => {
+          // handleBooking();
+          setButtontype("booking");
+        }}
         className="p-3 w-2/4 mx-auto bg-primaryGreen text-white font-semibold rounded-md"
       >
         {loading ? "Sending..." : "Book Tour"}
@@ -209,7 +213,10 @@ const InquiryForm = ({ tour }: { tour: TourPackageType | null }) => {
 
       <div className="w-full flex justify-center">
         <button
-          onClick={() => setButtontype("pay")}
+          onClick={() => {
+            // handleBooking();
+            setButtontype("pay");
+          }}
           type="submit"
           className="w-2/4 mx-auto px-2 py-3 border mt-4 bg-blue-200 text-slate-800 border-blue-400 hover:bg-blue-300 duration-300  font-semibold rounded-lg"
         >

@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 
 import { motion } from "motion/react";
 import { style } from "@/app/(landingPage)/components/package/style";
+import Select from "antd/es/select";
+import { nationalityOptions } from "@/app/(landingPage)/components/package/form";
 
 export interface SelectedActivityType {
   activity_id: number;
@@ -45,6 +47,10 @@ export default function AddActivities({
   const [loading, setLoading] = useState(false);
   const { setActiveModalId } = useAppContext();
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const [selectedNationality, setSelectedNationality] = useState<
+    string | undefined
+  >(nationalityOptions[0].label);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -218,33 +224,43 @@ export default function AddActivities({
                       {category.name}
                     </div>
                     <div className="p-3 rounded-b-lg space-y-2">
-                      {category.activities.map((activity) => (
-                        <div key={activity.id} className="flex items-center">
-                          <input
-                            type="checkbox"
-                            className={`${style.selectedItem} mr-2 accent-primaryGreen`}
-                            checked={selectedActivities.some(
-                              (a) => a.activity_id === activity.id
-                            )}
-                            onChange={() =>
-                              toggleActivity(
-                                activity.id,
-                                activity.name,
-                                Number(activity.price_per_day),
-                                1
-                              )
-                            }
-                          />
-                          <div>
-                            <span className="text-sm text-slate-500">
-                              {activity.name}{" "}
-                              <span className="font-semibold text-slate-700">
-                                ${Number(activity.price_per_day).toFixed(0)}/day
+                      {category.activities.map((activity) => {
+                        const priceObj = activity.prices.find(
+                          (p) =>
+                            p.nationality_type.toLocaleLowerCase() ===
+                            selectedNationality?.toLocaleLowerCase()
+                        );
+                        const price_per_day = priceObj?.price_per_day;
+
+                        return (
+                          <div key={activity.id} className="flex items-center">
+                            <input
+                              type="checkbox"
+                              className={`${style.selectedItem} mr-2 accent-primaryGreen`}
+                              checked={selectedActivities.some(
+                                (a) => a.activity_id === activity.id
+                              )}
+                              onChange={() =>
+                                toggleActivity(
+                                  activity.id,
+                                  activity.name,
+                                  price_per_day || 0,
+                                  1
+                                )
+                              }
+                            />
+                            <div>
+                              <span className="text-sm text-slate-500">
+                                {activity.name}{" "}
+                                <span className="font-semibold text-slate-700">
+                                  ${price_per_day || 0}
+                                  /day
+                                </span>
                               </span>
-                            </span>
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 ))}
@@ -262,6 +278,26 @@ export default function AddActivities({
               min={1}
               onChange={(e) => setSelectedPeople(Number(e.target.value))}
             />
+          </div>
+
+          {/* location */}
+          <div className={`${style.section}`}>
+            <h1 className={`${style.title}`}>Select Nationality:</h1>
+            <Select
+              value={selectedNationality}
+              onChange={setSelectedNationality}
+              placeholder="Select nationality"
+              className="w-full"
+              size="large"
+              showSearch
+              optionFilterProp="label"
+            >
+              {nationalityOptions.map((option) => (
+                <Select.Option key={option.value} value={option.label}>
+                  {option.value}
+                </Select.Option>
+              ))}
+            </Select>
           </div>
 
           {/* tour Package Breakdown */}

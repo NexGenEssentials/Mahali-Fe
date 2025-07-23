@@ -197,10 +197,10 @@ export const DeleteActivityPackage = async (
 
 export const AddNewActivities = async (
   data: AddActivityTourPackageType,
-  packageId?: number,
+  packageId?: number
 ): Promise<CategoriesResponse> => {
-
   try {
+    // console.log({ data, packageId });
     const response = await fetch(
       `${base_url}/packages/${packageId}/add-activity/`,
       {
@@ -213,8 +213,9 @@ export const AddNewActivities = async (
       }
     );
 
+    // console.log(response);
+    
     const result = await response.json();
-
     return result;
   } catch (error) {
     throw error;

@@ -57,7 +57,7 @@ export default function CustomTourPackage() {
 
   const [selectedNationality, setSelectedNationality] = useState<
     string | undefined
-  >(undefined);
+  >(nationalityOptions[0].label);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -108,7 +108,6 @@ export default function CustomTourPackage() {
       (acc, activity) => acc + activity.price * activity.days * selectedPeople,
       0
     );
-
     setPrice(activitiesCost);
   }, [
     selectedActivities,
@@ -122,7 +121,7 @@ export default function CustomTourPackage() {
   useEffect(() => {
     getCategoryList();
     getDestinationList();
-  }, [selectedNationality]);
+  }, []);
 
   const getCategoryList = async () => {
     setLoading(true);
@@ -176,7 +175,7 @@ export default function CustomTourPackage() {
       }
     } catch (error) {}
   };
-  console.log({ CategoryList });
+
   return (
     <>
       {packageStatus || loading ? (
@@ -215,8 +214,8 @@ export default function CustomTourPackage() {
               optionFilterProp="label"
             >
               {nationalityOptions.map((option) => (
-                <Select.Option key={option.value} value={option.value}>
-                  {option.label}
+                <Select.Option key={option.value} value={option.label}>
+                  {option.value}
                 </Select.Option>
               ))}
             </Select>
@@ -309,33 +308,42 @@ export default function CustomTourPackage() {
                       {category.name}
                     </div>
                     <div className="p-3 rounded-b-lg space-y-2">
-                      {category.activities.map((activity) => (
-                        <div key={activity.id} className="flex items-center">
-                          <input
-                            type="checkbox"
-                            className={`${style.selectedItem} mr-2 accent-primaryGreen`}
-                            checked={selectedActivities.some(
-                              (a) => a.activity_id === activity.id
-                            )}
-                            onChange={() =>
-                              toggleActivity(
-                                activity.id,
-                                activity.name,
-                                Number(activity.price_per_day),
-                                1
-                              )
-                            }
-                          />
-                          <div>
-                            <span className="text-sm text-slate-500">
-                              {activity.name}{" "}
-                              <span className="font-semibold text-slate-700">
-                                ${Number(activity.price_per_day).toFixed(0)}/day
+                      {category.activities.map((activity) => {
+                        const priceObj = activity.prices.find(
+                          (p) =>
+                            p.nationality_type.toLocaleLowerCase() ===
+                            selectedNationality?.toLocaleLowerCase()
+                        );
+                        const price_per_day = priceObj?.price_per_day;
+
+                        return (
+                          <div key={activity.id} className="flex items-center">
+                            <input
+                              type="checkbox"
+                              className={`${style.selectedItem} mr-2 accent-primaryGreen`}
+                              checked={selectedActivities.some(
+                                (a) => a.activity_id === activity.id
+                              )}
+                              onChange={() =>
+                                toggleActivity(
+                                  activity.id,
+                                  activity.name,
+                                  price_per_day || 0,
+                                  1
+                                )
+                              }
+                            />
+                            <div>
+                              <span className="text-sm text-slate-500">
+                                {activity.name}{" "}
+                                <span className="font-semibold text-slate-700">
+                                  ${price_per_day || 0}/day
+                                </span>
                               </span>
-                            </span>
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 ))}
@@ -445,7 +453,10 @@ export default function CustomTourPackage() {
                           <span className="text-green-600">✔</span>
                           <span>{item.name}</span>
                           <span className="font-bold">
-                            ${(item.price * item.days).toLocaleString()}
+                            $
+                            {Number(
+                              item.price * item.days || 0
+                            ).toLocaleString()}
                           </span>
                         </div>
                         <div className="flex items-stretch rounded-full overflow-hidden cursor-pointer">

@@ -97,7 +97,7 @@ export type Activity = {
   name: string;
   description: string | null;
   location: string;
-  price_per_day: string;
+  prices: PriceItem[];
   category: number;
 };
 
@@ -159,4 +159,5 @@ export type CustomPackagesResponse = {
 export type PriceItem = {
   nationality_type: string;
   price: number;
+  price_per_day:number
 };

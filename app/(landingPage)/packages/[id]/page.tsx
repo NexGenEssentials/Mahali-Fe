@@ -120,7 +120,7 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
                       className="text-primaryGreen"
                     />
                     <h2 className="text-primaryBlue">Price - From:</h2>${" "}
-                    {Number(packag?.price).toLocaleString() || 0}
+                    {packag?.prices[0]?.price.toLocaleString() || 0}
                   </span>
                 </span>
               </div>
@@ -234,7 +234,7 @@ const PackagesPage = ({ params }: { params: { id: string } }) => {
                   rate={pack.rating}
                   name={pack.title}
                   route={pack.location}
-                  price={pack.price}
+                  price={pack?.price}
                 />
               ))}
             </div>
