@@ -77,8 +77,9 @@ export type AccommodationResponse = {
 export type SingleAccommodationResponse = {
   success: boolean;
   message: string;
-  data: {
-    accommodation: AccommodationType;
-    room_types: RoomType[];
-  };
+  data: AccommodationType;
+  // data: {
+  //   accommodation: AccommodationType;
+  //   room_types: RoomType[];
+  // };
 };

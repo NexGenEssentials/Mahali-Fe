@@ -100,10 +100,10 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
     try {
       const result = await getAccommodation( Number(accomId) );
       if (result.success) {
-        setAccomDetails(result.data.accommodation);
+        setAccomDetails(result.data);
         setRoomData(result.data.room_types);
        
-        setAccomDetailData(result.data.accommodation);
+        setAccomDetailData(result.data);
         setLoading(false);
       }
     } catch (error) {
