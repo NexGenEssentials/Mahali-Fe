@@ -29,7 +29,7 @@ const PaymentMethodModel: React.FC<Props> = () => {
       booking_id: bookingData?.id || bookingData.booking_id,
       pmethod: method,
       amount: Number(bookingData?.total_price),
-      redirect_url: "http://localhost:3000/account/bookings-trips",
+      redirect_url: "https://mahaliafrica.com/account/bookings-trips",
     };
  
     try {
