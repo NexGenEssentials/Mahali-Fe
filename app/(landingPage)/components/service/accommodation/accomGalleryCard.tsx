@@ -12,7 +12,7 @@ import { Icon } from "@iconify/react";
 import ImagePlaceHolder from "@/public/images/imagePlaceholder.jpg";
 
 interface AccomGalleryCardProps {
-  Gallery: string[] | StaticImageData[];
+  Gallery: string[];
 }
 
 const AccomGalleryCard: React.FC<AccomGalleryCardProps> = ({ Gallery }) => {
@@ -34,12 +34,11 @@ const AccomGalleryCard: React.FC<AccomGalleryCardProps> = ({ Gallery }) => {
       >
         {Gallery.map((image, index) => (
           <SwiperSlide key={index} className="flex items-center justify-center">
-            <div className="relative w-full h-[250px] border justify-center rounded-lg">
-              <Image
+            <div className="relative w-full h-full  border justify-center rounded-lg">
+              <img
                 src={image}
                 alt={`Accommodation Image ${index + 1}`}
-                fill={true}
-                className="object-cover rounded-md"
+                className="object-cover h-full w-full rounded-md"
               />
             </div>
           </SwiperSlide>

@@ -55,7 +55,7 @@ const AccommodationService = () => {
     <LandingPage>
       {/* Hero Section */}
       <ServicePageHero
-        image={accom}
+        image={accom.src as string}
         service="Accommodation"
         title="Where Every Stay Is Extraordinary"
         desc="Discover the perfect blend of luxury, comfort, and convenience at Mahali. Nestled in the heart of Africa, our hotel is your gateway to an unforgettable experience."
@@ -140,7 +140,7 @@ const AccommodationService = () => {
                     Gallery={
                       accommodation.images && accommodation.images?.length > 0
                         ? accommodation.images
-                        : [ImagePlaceHolder]
+                        : [""]
                     }
                   />
                   <Link

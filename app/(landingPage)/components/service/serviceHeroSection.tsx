@@ -3,7 +3,7 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import React from "react";
 type Props = {
-  image: StaticImageData |string;
+  image: string;
   title: string;
   desc: string;
   service: string;
@@ -13,10 +13,9 @@ const ServicePageHero = ({ image, service, title, desc }: Props) => {
     <div className="w-full">
       <div className="relative h-[500px] w-full  text-primaryWhite bg-black">
         {image && (
-          <Image
+          <img
             src={image}
             alt={title}
-            fill
             className="object-cover opacity-60"
           />
         )}

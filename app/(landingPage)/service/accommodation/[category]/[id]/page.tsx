@@ -98,11 +98,11 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
   const HandleGetAccommodation = async () => {
     setLoading(true);
     try {
-      const result = await getAccommodation( Number(accomId) );
+      const result = await getAccommodation(Number(accomId));
       if (result.success) {
         setAccomDetails(result.data);
         setRoomData(result.data.room_types);
-       
+
         setAccomDetailData(result.data);
         setLoading(false);
       }
@@ -156,7 +156,6 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
           text: "Check out Mahali Africa!",
           url: window.location.href,
         });
-       
       } catch (error) {
         console.error("Error sharing:", error);
       }
@@ -420,8 +419,8 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
             {AccomDetails.images &&
               AccomDetails.images.map((image, index) => (
                 <div key={index} className="w-full h-48 overflow-hidden">
-                  <Image
-                    src={image || ImagePlaceholder}
+                  <img
+                    src={image}
                     alt={AccomDetails.name}
                     width={800}
                     height={600}
@@ -429,10 +428,12 @@ const accommodationName = ({ params }: { params: { id: string } }) => {
                   />
                 </div>
               ))}
-            <div className="absolute flex items-center gap-1 bg-primaryGreen text-white font-semibold p-2 bottom-3 right-5 text-sm rounded-md hover:scale-90 hover:duration-300 cursor-pointer">
-              <Icon icon="line-md:grid-3-filled" width="16" height="16" /> Show
-              All photos
-            </div>
+            {AccomDetails.images.length > 5 && (
+              <div className="absolute flex items-center gap-1 bg-primaryGreen text-white font-semibold p-2 bottom-3 right-5 text-sm rounded-md hover:scale-90 hover:duration-300 cursor-pointer">
+                <Icon icon="line-md:grid-3-filled" width="16" height="16" />{" "}
+                Show All photos
+              </div>
+            )}
           </div>
         </div>
 

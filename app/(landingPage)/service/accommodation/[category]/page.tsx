@@ -73,7 +73,7 @@ const AccommodationCategory = ({
   return (
     <LandingPage>
       <ServicePageHero
-        image={accom1}
+        image={accom1.src as string}
         service={`accommodation/${category}`}
         title="Where Every Stay Is Extraordinary"
         desc="Discover the perfect blend of luxury, comfort, and convenience at Mahali. Nestled in the heart of Africa, our hotel is your gateway to an unforgettable experience."

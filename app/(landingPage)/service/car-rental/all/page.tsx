@@ -169,7 +169,7 @@ const AllCars = () => {
     <LandingPage>
       <div>
         <ServicePageHero
-          image={car}
+          image={car.src as string}
           service="All Cars"
           title="Fast & Easy Way To Rent A Car"
           desc="Experience the fastest and easiest way to rent a car. Reliable, affordable, and tailored to your journey—book your ride in just a few clicks!"
