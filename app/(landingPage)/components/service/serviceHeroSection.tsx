@@ -16,7 +16,7 @@ const ServicePageHero = ({ image, service, title, desc }: Props) => {
           <img
             src={image}
             alt={title}
-            className="object-cover opacity-60"
+            className="object-cover h-full w-full opacity-60"
           />
         )}
         <div className="absolute max-md:px-4 gap-6 top-0  w-full h-full flex flex-col items-center justify-center">
