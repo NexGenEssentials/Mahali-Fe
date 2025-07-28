@@ -122,6 +122,32 @@ export const CreatePaymentMethod = async (bookingData: {
     });
     const data = await response.json();
 
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const StatusPaymentMethod = async (
+  rfid: string
+): Promise<{
+  status: string;
+  data: {
+    refid: string;
+    booking_id: number;
+    amount: number;
+    payment_status: string;
+    transaction_id: string;
+  };
+}> => {
+  try {
+    const response = await fetch(`${base_url}/payment/status/?refid=${rfid}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const data = await response.json();
 
     return data;
   } catch (error) {

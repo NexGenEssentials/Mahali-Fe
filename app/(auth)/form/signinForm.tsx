@@ -43,10 +43,14 @@ const SignInForm = () => {
           duration: 1.5,
         });
         setIsLogin(true);
-        
-        setTimeout(() => {
-          route.push(callbackUrl);
-        }, 1500);
+        console.log("User Role:", user);
+        if (user && user.role === "agent") {
+          route.push("/agent");
+        } else if (user && user.role === "customer") {
+          setTimeout(() => {
+            route.push(callbackUrl);
+          }, 1500);
+        }
       } else {
         notification.error({
           message: data.error,

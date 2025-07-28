@@ -35,7 +35,7 @@ export async function POST(req: Request) {
       );
     }
 
-    if (data.access && role === "customer") {
+    if (data.access && role === "customer" || role === "agent") {
       cookies().set("accessToken", data.access);
       return NextResponse.json(
         { message: "You have succesfull logged in", user: data },

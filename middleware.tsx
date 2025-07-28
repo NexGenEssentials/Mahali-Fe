@@ -25,16 +25,16 @@ export function middleware(request: NextRequest) {
     }
 
     const pathname = request.nextUrl.pathname;
-    // if( decoded.role === "agent") {
-    //   if (
-    //     pathname.startsWith("/agent") ||
-    //     pathname.startsWith("/service/booking")
-    //   ) {
-    //     return NextResponse.next();
-    //   } else {
-    //     return NextResponse.redirect(loginUrl);
-    //   }
-    // }
+    if( decoded.role === "agent") {
+      if (
+        pathname.startsWith("/agent") ||
+        pathname.startsWith("/service/booking")
+      ) {
+        return NextResponse.next();
+      } else {
+        return NextResponse.redirect(loginUrl);
+      }
+    }
 
     if (decoded.role === "customer") {
       if (
@@ -54,5 +54,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/account/:path*", "/service/booking/:path*"],
+  matcher: ["/account/:path*", "/service/booking/:path*", "/agent/:path*"],
 };

@@ -191,11 +191,13 @@ const BookingSection = () => {
             className={`${
               data.payment_status === "pending"
                 ? " text-yellow-400"
-                : data.payment_status === "confirmed"
+                : data.payment_status === "completed"
                 ? "text-green-400"
-                : " text-red-400"
+                : data.payment_status === "failed"
+                ? " text-red-400"
+                : "text-blue-400"
             } p-2 rounded-lg capitalize font-semibold`}
-            disabled={data.status !== "confirmed"}
+            disabled={data.status !== "completed"}
           >
             {data.payment_status ? data.payment_status : "Not paid"}
           </button>
