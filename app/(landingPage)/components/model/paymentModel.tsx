@@ -136,7 +136,7 @@ const PaymentMethodModel: React.FC<Props> = () => {
         onClick={handleSelect}
         className="mt-6 w-full bg-blue-200 text-slate-700 py-3 font-bold duration-300 rounded-lg hover:bg-blue-300 transition"
       >
-        {loading ? "Creating..." : "Continue"}
+        {loading ? "Initiating payment..." : "Continue"}
       </button>
     </div>
   );
