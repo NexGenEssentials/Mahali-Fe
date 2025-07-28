@@ -109,6 +109,7 @@ export const CreatePaymentMethod = async (bookingData: {
   pmethod?: string;
   amount: number;
   redirect_url: string;
+  phone?: string;
 }): Promise<PaymentResponseType> => {
   try {
     const response = await fetch(`${base_url}/payment/initiate/`, {
@@ -119,8 +120,8 @@ export const CreatePaymentMethod = async (bookingData: {
       },
       body: JSON.stringify(bookingData),
     });
-
     const data = await response.json();
+
 
     return data;
   } catch (error) {
@@ -142,7 +143,7 @@ export const CreateBulkBooking = async (
     });
 
     const data = await response.json();
-   
+
     return response.status === 201
       ? { status: "success" }
       : { status: "error" };

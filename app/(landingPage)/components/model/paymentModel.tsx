@@ -4,6 +4,9 @@ import { useAppContext } from "@/app/context";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import Image from "next/image";
+import mtn from "@/public/images/mtn-momo.png";
+import airtel from "@/public/images/airtel-momo.png";
 
 type PaymentMethod = "card" | "mobile";
 
@@ -18,7 +21,7 @@ const PaymentMethodModel: React.FC<Props> = () => {
 
   const handleSelect = async () => {
     let method;
-    if (activeTab === "mobile" && phoneNumber.trim() === "") {
+    if (activeTab === "mobile" && phoneNumber.trim() !== "") {
       method = "mm";
     }
     if (activeTab === "card") {
@@ -30,8 +33,9 @@ const PaymentMethodModel: React.FC<Props> = () => {
       pmethod: method,
       amount: Number(bookingData?.total_price),
       redirect_url: "https://mahaliafrica.com/account/bookings-trips",
+      phone: activeTab === "mobile" ? `+25${phoneNumber}` : "",
     };
- 
+
     try {
       setLoading(true);
       const result = await CreatePaymentMethod(formData);
@@ -89,11 +93,34 @@ const PaymentMethodModel: React.FC<Props> = () => {
 
         {activeTab === "mobile" && (
           <div className="space-y-2">
-            <label className="block text-sm text-gray-600">Mobile Number</label>
+            <div className="flex justify-center items-center mb-4">
+              <Image
+                src={mtn}
+                alt="MTN Mobile Money"
+                width={100}
+                height={50}
+                className="w-24 h-12 object-contain"
+              />
+              or
+              <Image
+                src={airtel}
+                alt="Airtel Money"
+                width={100}
+                height={50}
+                className="w-24 h-12 object-contain"
+              />
+            </div>
+            <label className="block text-sm text-gray-600">
+              Enter Mobile Number
+            </label>
             <input
               type="tel"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
+              maxLength={10}
+              pattern="[0-9]{10}"
+              required
+              title="Please enter a valid 10-digit mobile number"
               placeholder="Enter mobile money number"
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
