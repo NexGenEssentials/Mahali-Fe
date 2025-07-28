@@ -22,7 +22,7 @@ const PaymentMethodModel: React.FC<Props> = () => {
   const handleSelect = async () => {
     let method;
     if (activeTab === "mobile" && phoneNumber.trim() !== "") {
-      method = "mom";
+      method = "momo";
     }
     if (activeTab === "card") {
       method = "cc";
