@@ -16,13 +16,13 @@ const PaymentMethodModel: React.FC<Props> = () => {
   const [activeTab, setActiveTab] = useState<PaymentMethod>("card");
   const [phoneNumber, setPhoneNumber] = useState("");
   const router = useRouter();
-  const { bookingData } = useAppContext();
+  const { bookingData, setActiveModalId } = useAppContext();
   const [loading, setLoading] = useState(false);
 
   const handleSelect = async () => {
     let method;
     if (activeTab === "mobile" && phoneNumber.trim() !== "") {
-      method = "mm";
+      method = "mom";
     }
     if (activeTab === "card") {
       method = "cc";
@@ -42,6 +42,10 @@ const PaymentMethodModel: React.FC<Props> = () => {
 
       if (result.url) {
         router.push(`${result.url}`);
+      } else {
+        setLoading(false);
+        setActiveModalId(null);
+        return;
       }
     } catch (error) {
       console.log("error", error);
