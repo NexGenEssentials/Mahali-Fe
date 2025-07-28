@@ -234,6 +234,22 @@ const SignupForm = () => {
             />
           </Form.Item>
         </div>
+        <div className="flex gap-2">
+          <Checkbox
+            // onChange={() => setChecked((prev) => !prev)}
+            className={
+              checked
+                ? "ant-checkbox-checked ant-checkbox-inner"
+                : "ant-checkbox ant-checkbox-inner"
+            }
+          ></Checkbox>
+          <div>
+            <span className="text-primaryBlue text-sm pr-1">
+              I want to be an Agent
+            </span>
+            
+          </div>
+        </div>
       </div>
       <div className="mt-6 flex justify-between items-center flex-wrap gap-4 ">
         <div className="flex gap-2">
