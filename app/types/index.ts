@@ -155,6 +155,11 @@ export type PaymentResponseType = {
   success: number;
   tid: string;
   url: string;
+  action: string;
+  initime: string;
+  statusdesc: string;
+  statusmsg: string;
+  useurl: string;
 };
 
 export type BulkCarDetail = {

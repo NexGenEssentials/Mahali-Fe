@@ -36,7 +36,7 @@ const PaymentMethodModel: React.FC<Props> = () => {
     const checkPaymentStatus = async () => {
       try {
         const response = await StatusPaymentMethod(paymentStatus.refid);
-
+       
         if (
           response.data.payment_status.toLocaleLowerCase() === "completed" ||
           response.data.payment_status.toLocaleLowerCase() === "failed"
@@ -59,7 +59,7 @@ const PaymentMethodModel: React.FC<Props> = () => {
     };
 
     checkPaymentStatus();
-  }, [paymentStatus.initiated]);
+  }, [paymentStatus.initiated === true]);
 
   const handleSelect = async () => {
     let method;
@@ -81,11 +81,20 @@ const PaymentMethodModel: React.FC<Props> = () => {
     try {
       setLoading(true);
       const result = await CreatePaymentMethod(formData);
-
       if (result.url) {
         router.push(`${result.url}`);
       }
-      if (activeTab === "mobile") {
+      
+     
+      if (activeTab === "mobile" && result.success === 0) {
+        setPaymentStatus({
+          initiated: false,
+          is_paid: true,
+          status: "failed",
+          refid: result.refid,
+        });
+      }
+      else if(activeTab === "mobile" ) {
         setPaymentStatus({
           initiated: true,
           is_paid: false,
@@ -97,6 +106,7 @@ const PaymentMethodModel: React.FC<Props> = () => {
       console.log("error", error);
     }
   };
+
 
   return (
     <div className="w-full max-w-lg min-w-[400px] mx-auto bg-white p-6 rounded-xl shadow-md">
@@ -162,7 +172,7 @@ const PaymentMethodModel: React.FC<Props> = () => {
               </h1>
               <p className="text-gray-400">
                 Unfortunately, your payment did not go through. Please try again
-                or contact support.
+                or contact support. <span className="font-semibold text-primaryGreen">+250793898790</span>
               </p>
               <a
                 onClick={handleClose}
