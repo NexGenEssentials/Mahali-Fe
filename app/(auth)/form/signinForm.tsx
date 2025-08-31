@@ -43,7 +43,6 @@ const SignInForm = () => {
           duration: 1.5,
         });
         setIsLogin(true);
-        console.log("User Role:", user);
         if (user && user.role === "agent") {
           route.push("/agent");
         } else if (user && user.role === "customer") {

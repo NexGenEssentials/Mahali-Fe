@@ -92,7 +92,6 @@ const PaymentMethodModel: React.FC<Props> = () => {
       if (result.url) {
         router.push(`${result.url}`);
       }
-      console.log("result", result);
 
       if (activeTab === "mobile" && result.success === 0) {
         setPaymentStatus({
@@ -182,7 +181,7 @@ const PaymentMethodModel: React.FC<Props> = () => {
                 {paymentStatus.message
                   ? paymentStatus.message
                   : ` Unfortunately, your payment did not go through. Please try again
-                or contact support. <span className="font-semibold text-primaryGreen">+250793898790</span>`}
+                or contact support.${<span className="font-semibold text-primaryGreen">+250793898790</span>}`}
               </p>
               <a
                 onClick={handleClose}
