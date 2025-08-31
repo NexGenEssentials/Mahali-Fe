@@ -178,11 +178,12 @@ const PaymentMethodModel: React.FC<Props> = () => {
                 Payment Failed
               </h1>
               <p className="text-gray-400">
-                { (
+                {paymentStatus.message ? (
+                  paymentStatus.message
+                ) : (
                   <span>
                     Unfortunately, your payment did not go through. Please try
-                    again or contact support.
-
+                    again or contact support. 
                     <span className="font-semibold underline text-primaryGreen">
                       +250793898790
                     </span>
