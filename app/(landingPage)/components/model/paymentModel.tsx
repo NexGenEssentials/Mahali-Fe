@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import mtn from "@/public/images/mtn-momo.png";
 import airtel from "@/public/images/airtel-momo.png";
+import { message } from "antd";
 
 type PaymentMethod = "card" | "mobile";
 
@@ -21,11 +22,18 @@ const PaymentMethodModel: React.FC<Props> = () => {
   const router = useRouter();
   const { bookingData, setActiveModalId } = useAppContext();
   const [loading, setLoading] = useState(false);
-  const [paymentStatus, setPaymentStatus] = useState({
+  const [paymentStatus, setPaymentStatus] = useState<{
+    initiated: boolean;
+    is_paid: boolean;
+    status: string;
+    refid: string;
+    message?: string;
+  }>({
     initiated: false,
     is_paid: false,
     status: "",
     refid: "",
+    message: "",
   });
 
   const handleClose = () => {
@@ -36,7 +44,7 @@ const PaymentMethodModel: React.FC<Props> = () => {
     const checkPaymentStatus = async () => {
       try {
         const response = await StatusPaymentMethod(paymentStatus.refid);
-       
+
         if (
           response.data.payment_status.toLocaleLowerCase() === "completed" ||
           response.data.payment_status.toLocaleLowerCase() === "failed"
@@ -84,29 +92,29 @@ const PaymentMethodModel: React.FC<Props> = () => {
       if (result.url) {
         router.push(`${result.url}`);
       }
-      
-     
+      console.log("result", result);
+
       if (activeTab === "mobile" && result.success === 0) {
         setPaymentStatus({
           initiated: false,
           is_paid: true,
           status: "failed",
           refid: result.refid,
+          message: result.statusmsg,
         });
-      }
-      else if(activeTab === "mobile" ) {
+      } else if (activeTab === "mobile") {
         setPaymentStatus({
           initiated: true,
           is_paid: false,
           status: "pending",
           refid: result.refid,
+          message: result.statusmsg,
         });
       }
     } catch (error) {
       console.log("error", error);
     }
   };
-
 
   return (
     <div className="w-full max-w-lg min-w-[400px] mx-auto bg-white p-6 rounded-xl shadow-md">
@@ -171,8 +179,10 @@ const PaymentMethodModel: React.FC<Props> = () => {
                 Payment Failed
               </h1>
               <p className="text-gray-400">
-                Unfortunately, your payment did not go through. Please try again
-                or contact support. <span className="font-semibold text-primaryGreen">+250793898790</span>
+                {paymentStatus.message
+                  ? paymentStatus.message
+                  : ` Unfortunately, your payment did not go through. Please try again
+                or contact support. <span className="font-semibold text-primaryGreen">+250793898790</span>`}
               </p>
               <a
                 onClick={handleClose}
